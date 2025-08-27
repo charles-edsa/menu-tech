@@ -1528,9 +1528,22 @@
                 return `
                     <div class="flex items-center justify-between px-4 py-3 border-b border-slate-200 bg-white rounded-t-2xl">
                         <h2 class="text-base font-semibold text-slate-900">Sobre o Restaurante</h2>
-                        <button class="text-slate-400 hover:text-slate-600 transition-colors p-1 hover:bg-slate-100 rounded-lg" onclick="app.closeRestaurantModal()">
-                            <i class="fas fa-times text-base"></i>
-                        </button>
+                        <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-2">
+                                <a href="https://instagram.com/${data.social.instagram.replace('@', '')}" class="flex items-center justify-center w-7 h-7 text-slate-400 hover:text-pink-500 transition-colors">
+                                    <i class="fab fa-instagram text-sm"></i>
+                                </a>
+                                <a href="https://facebook.com/${data.social.facebook}" class="flex items-center justify-center w-7 h-7 text-slate-400 hover:text-blue-600 transition-colors">
+                                    <i class="fab fa-facebook-f text-sm"></i>
+                                </a>
+                                <a href="https://wa.me/${data.social.whatsapp.replace(/\D/g, '')}" class="flex items-center justify-center w-7 h-7 text-slate-400 hover:text-green-500 transition-colors">
+                                    <i class="fab fa-whatsapp text-sm"></i>
+                                </a>
+                            </div>
+                            <button class="text-slate-400 hover:text-slate-600 transition-colors p-1 hover:bg-slate-100 rounded-lg" onclick="app.closeRestaurantModal()">
+                                <i class="fas fa-times text-base"></i>
+                            </button>
+                        </div>
                     </div>
                     
                     <div class="flex-1 overflow-y-auto">
@@ -1546,19 +1559,6 @@
                                     <span class="text-xs font-semibold text-slate-900">${data.rating}</span>
                                     <span class="text-xs text-slate-500">• ${data.reviewCount} avaliações</span>
                                 </div>
-                            </div>
-                            
-                            <!-- Redes Sociais -->
-                            <div class="flex justify-center space-x-4">
-                                <a href="https://instagram.com/${data.social.instagram.replace('@', '')}" class="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl text-white hover:scale-105 transition-transform shadow-sm">
-                                    <i class="fab fa-instagram text-sm"></i>
-                                </a>
-                                <a href="https://facebook.com/${data.social.facebook}" class="flex items-center justify-center w-10 h-10 bg-blue-600 rounded-xl text-white hover:scale-105 transition-transform shadow-sm">
-                                    <i class="fab fa-facebook-f text-sm"></i>
-                                </a>
-                                <a href="https://wa.me/${data.social.whatsapp.replace(/\D/g, '')}" class="flex items-center justify-center w-10 h-10 bg-green-500 rounded-xl text-white hover:scale-105 transition-transform shadow-sm">
-                                    <i class="fab fa-whatsapp text-sm"></i>
-                                </a>
                             </div>
                             
                             <!-- Descrição -->
@@ -1592,9 +1592,22 @@
                 return `
                     <div class="flex items-center justify-between p-6 border-b border-slate-200">
                         <h2 class="text-xl font-semibold text-slate-900">Sobre o Restaurante</h2>
-                        <button class="text-slate-400 hover:text-slate-600 transition-colors p-2 hover:bg-slate-100 rounded-lg" onclick="app.closeRestaurantModal()">
-                            <i class="fas fa-times text-base"></i>
-                        </button>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-3">
+                                <a href="https://instagram.com/${data.social.instagram.replace('@', '')}" class="flex items-center justify-center w-8 h-8 text-slate-400 hover:text-pink-500 transition-colors">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://facebook.com/${data.social.facebook}" class="flex items-center justify-center w-8 h-8 text-slate-400 hover:text-blue-600 transition-colors">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://wa.me/${data.social.whatsapp.replace(/\D/g, '')}" class="flex items-center justify-center w-8 h-8 text-slate-400 hover:text-green-500 transition-colors">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+                            <button class="text-slate-400 hover:text-slate-600 transition-colors p-2 hover:bg-slate-100 rounded-lg" onclick="app.closeRestaurantModal()">
+                                <i class="fas fa-times text-base"></i>
+                            </button>
+                        </div>
                     </div>
                     
                     <div class="flex-1 overflow-y-auto p-6 custom-scrollbar">
@@ -1612,19 +1625,6 @@
                                         <span class="text-sm font-semibold text-slate-900">${data.rating}</span>
                                         <span class="text-sm text-slate-500">• ${data.reviewCount} avaliações</span>
                                     </div>
-                                </div>
-                                
-                                <!-- Redes Sociais -->
-                                <div class="flex justify-center space-x-4">
-                                    <a href="https://instagram.com/${data.social.instagram.replace('@', '')}" class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl text-white hover:scale-105 transition-transform shadow-sm">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                    <a href="https://facebook.com/${data.social.facebook}" class="flex items-center justify-center w-12 h-12 bg-blue-600 rounded-xl text-white hover:scale-105 transition-transform shadow-sm">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                    <a href="https://wa.me/${data.social.whatsapp.replace(/\D/g, '')}" class="flex items-center justify-center w-12 h-12 bg-green-500 rounded-xl text-white hover:scale-105 transition-transform shadow-sm">
-                                        <i class="fab fa-whatsapp"></i>
-                                    </a>
                                 </div>
                                 
                                 <!-- Descrição -->
@@ -1680,15 +1680,14 @@
 
             generatePhotosGrid(isMobile) {
                 const photos = this.restaurantData.photos;
-                const gridClass = isMobile ? 'grid-cols-2' : 'grid-cols-2';
                 const aspectClass = 'aspect-[4/3]';
                 
                 return `
-                    <div class="grid ${gridClass} gap-3">
+                    <div class="flex space-x-3 overflow-x-auto pb-2 category-scroll">
                         ${photos.map(photo => `
-                            <div class="bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg ${aspectClass} flex items-center justify-center border border-slate-200 hover:scale-105 transition-transform cursor-pointer">
+                            <div class="bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg ${aspectClass} flex items-center justify-center border border-slate-200 hover:scale-105 transition-transform cursor-pointer flex-shrink-0 w-24">
                                 <div class="text-center">
-                                    <div class="text-2xl mb-1">${photo.emoji}</div>
+                                    <div class="text-xl mb-1">${photo.emoji}</div>
                                     <div class="text-xs text-slate-600 font-medium">${photo.description}</div>
                                 </div>
                             </div>
@@ -1709,20 +1708,48 @@
                     sunday: 'Domingo'
                 };
                 
+                const shortDayNames = {
+                    monday: 'Segunda',
+                    tuesday: 'Terça',
+                    wednesday: 'Quarta',
+                    thursday: 'Quinta',
+                    friday: 'Sexta',
+                    saturday: 'Sábado',
+                    sunday: 'Domingo'
+                };
+                
                 const today = new Date().getDay();
                 const dayKeys = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-                const todayKey = dayKeys[today];
+                
+                // Reorganize days starting from today
+                const orderedDays = [];
+                for (let i = 0; i < 7; i++) {
+                    const dayIndex = (today + i) % 7;
+                    const dayKey = dayKeys[dayIndex];
+                    orderedDays.push(dayKey);
+                }
                 
                 return `
                     <div class="space-y-2">
-                        ${Object.entries(hours).map(([day, schedule]) => {
-                            const isToday = day === todayKey;
+                        ${orderedDays.map((day, index) => {
+                            const schedule = hours[day];
+                            const isToday = index === 0;
+                            const isTomorrow = index === 1;
                             const isOpen = !schedule.closed;
                             
+                            let displayName;
+                            if (isToday) {
+                                displayName = 'Hoje';
+                            } else if (isTomorrow) {
+                                displayName = 'Amanhã';
+                            } else {
+                                displayName = shortDayNames[day];
+                            }
+                            
                             return `
-                                <div class="flex justify-between items-center py-2 px-3 rounded-lg ${isToday ? 'bg-orange-50 border border-orange-200' : 'bg-slate-50'}">
-                                    <span class="text-xs font-medium ${isToday ? 'text-orange-900' : 'text-slate-900'}">${dayNames[day]}</span>
-                                    <span class="text-xs ${isToday ? 'text-orange-700 font-semibold' : 'text-slate-600'}">
+                                <div class="flex justify-between items-center py-2 px-3 rounded-lg ${isToday ? 'bg-blue-50 border border-blue-200' : 'bg-slate-50'}">
+                                    <span class="text-xs font-medium ${isToday ? 'text-blue-900' : 'text-slate-900'}">${displayName}</span>
+                                    <span class="text-xs ${isToday ? 'text-blue-700 font-semibold' : 'text-slate-600'}">
                                         ${isOpen ? `${schedule.open} - ${schedule.close}` : 'Fechado'}
                                     </span>
                                 </div>
@@ -2362,5 +2389,5 @@
         // Initialize app
         const app = new MenuApp();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'975e43b57430772a',t:'MTc1NjMyNTk3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'975ea8a162008461',t:'MTc1NjMzMDEwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
