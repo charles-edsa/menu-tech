@@ -419,7 +419,8 @@
                     currentSearchTerm: '',
                     currentProduct: null,
                     modalSelections: { quantity: 1 },
-                    isCartOpen: false
+                    isCartOpen: false,
+                    editingCartItemId: null
                 };
 
                 this.categories = [
@@ -887,6 +888,7 @@
             openProductModal(item) {
                 this.state.currentProduct = item;
                 this.state.modalSelections = { quantity: 1 };
+                this.state.editingCartItemId = null;
                 
                 // Initialize default selections for required options
                 if (item.options) {
@@ -938,6 +940,7 @@
 
             generateMobileModalContent(item) {
                 const optionsHtml = this.generateProductOptions(item);
+                const buttonText = this.state.editingCartItemId ? 'Atualizar' : 'Adicionar';
                 
                 return `
                     <div class="flex items-center justify-between px-4 py-3 border-b border-slate-200 bg-white rounded-t-2xl">
@@ -987,7 +990,7 @@
                         </div>
                         
                         <button class="w-full btn-primary text-white font-medium py-2.5 rounded-lg transition-all shadow-sm text-sm" onclick="app.addToCart()">
-                            <i class="fas fa-shopping-cart mr-2 text-xs"></i>Adicionar • <span id="total-price">R$ ${this.formatPrice(item.price)}</span>
+                            <i class="fas fa-shopping-cart mr-2 text-xs"></i>${buttonText} • <span id="total-price">R$ ${this.formatPrice(item.price)}</span>
                         </button>
                     </div>
                 `;
@@ -995,6 +998,7 @@
 
             generateDesktopModalContent(item) {
                 const optionsHtml = this.generateProductOptions(item);
+                const buttonText = this.state.editingCartItemId ? 'Atualizar' : 'Adicionar';
                 
                 return `
                     <div class="w-2/5 bg-white border-r border-slate-100 flex flex-col">
@@ -1034,7 +1038,7 @@
                             </div>
                             
                             <button class="w-full btn-primary text-white font-medium py-2.5 rounded-xl transition-all shadow-sm text-sm" onclick="app.addToCart()">
-                                <i class="fas fa-shopping-cart mr-2 text-xs"></i>Adicionar • <span id="total-price">R$ ${this.formatPrice(item.price)}</span>
+                                <i class="fas fa-shopping-cart mr-2 text-xs"></i>${buttonText} • <span id="total-price">R$ ${this.formatPrice(item.price)}</span>
                             </button>
                         </div>
                     </div>
@@ -1067,6 +1071,7 @@
                 }
                 
                 this.state.currentProduct = null;
+                this.state.editingCartItemId = null;
             }
 
             updateQuantity(change) {
@@ -1186,23 +1191,115 @@
                 const unitPrice = basePrice + optionsPrice;
                 const finalPrice = unitPrice * this.state.modalSelections.quantity;
                 
-                const cartItem = {
-                    id: Date.now(),
-                    productId: this.state.currentProduct.id,
-                    name: this.state.currentProduct.name,
-                    basePrice: this.state.currentProduct.price,
-                    unitPrice: unitPrice,
-                    quantity: this.state.modalSelections.quantity,
-                    totalPrice: finalPrice,
-                    icon: this.state.currentProduct.icon,
-                    options: optionsDescription.length > 0 ? optionsDescription : null,
-                    selections: { ...this.state.modalSelections }
-                };
+                // Check if we're editing an existing item
+                if (this.state.editingCartItemId) {
+                    // Update existing item
+                    const itemIndex = this.state.cart.findIndex(item => item.id === this.state.editingCartItemId);
+                    if (itemIndex !== -1) {
+                        this.state.cart[itemIndex] = {
+                            id: this.state.editingCartItemId,
+                            productId: this.state.currentProduct.id,
+                            name: this.state.currentProduct.name,
+                            basePrice: this.state.currentProduct.price,
+                            unitPrice: unitPrice,
+                            quantity: this.state.modalSelections.quantity,
+                            totalPrice: finalPrice,
+                            icon: this.state.currentProduct.icon,
+                            options: optionsDescription.length > 0 ? optionsDescription : null,
+                            selections: { ...this.state.modalSelections }
+                        };
+                        this.showToast('Produto atualizado no carrinho!', 'success');
+                    }
+                    this.state.editingCartItemId = null;
+                } else {
+                    // Add new item
+                    const cartItem = {
+                        id: Date.now(),
+                        productId: this.state.currentProduct.id,
+                        name: this.state.currentProduct.name,
+                        basePrice: this.state.currentProduct.price,
+                        unitPrice: unitPrice,
+                        quantity: this.state.modalSelections.quantity,
+                        totalPrice: finalPrice,
+                        icon: this.state.currentProduct.icon,
+                        options: optionsDescription.length > 0 ? optionsDescription : null,
+                        selections: { ...this.state.modalSelections }
+                    };
+                    
+                    this.state.cart.push(cartItem);
+                    this.showToast('Produto adicionado ao carrinho!', 'success');
+                }
                 
-                this.state.cart.push(cartItem);
                 this.updateCartDisplay();
                 this.closeProductModal();
-                this.showToast('Produto adicionado ao carrinho!', 'success');
+            }
+
+            // Edit cart item
+            editCartItem(itemId) {
+                const cartItem = this.state.cart.find(item => item.id === itemId);
+                if (!cartItem) return;
+                
+                // Find the original product
+                const allItems = Object.values(this.menuData).flat();
+                const originalProduct = allItems.find(item => item.id === cartItem.productId);
+                if (!originalProduct) return;
+                
+                // Set current product and restore selections
+                this.state.currentProduct = originalProduct;
+                this.state.modalSelections = { ...cartItem.selections };
+                this.state.editingCartItemId = itemId;
+                
+                const modal = document.getElementById('product-modal');
+                if (!modal) return;
+                
+                const isMobile = window.innerWidth < 640;
+                
+                if (isMobile) {
+                    this.showMobileModal(originalProduct);
+                } else {
+                    this.showDesktopModal(originalProduct);
+                }
+                
+                modal.classList.remove('hidden');
+                
+                // Update the modal after it's rendered
+                setTimeout(() => {
+                    this.restoreModalSelections();
+                    this.updatePriceSummary();
+                }, 100);
+            }
+
+            restoreModalSelections() {
+                if (!this.state.currentProduct || !this.state.modalSelections) return;
+                
+                // Restore quantity
+                const quantityDisplay = document.getElementById('quantity-display');
+                if (quantityDisplay) quantityDisplay.textContent = this.state.modalSelections.quantity;
+                
+                // Restore option selections
+                Object.entries(this.state.modalSelections).forEach(([key, value]) => {
+                    if (key === 'quantity') return;
+                    
+                    if (Array.isArray(value)) {
+                        // Checkbox options
+                        value.forEach(selectedValue => {
+                            const input = document.querySelector(`input[data-option-key="${key}"][value="${selectedValue}"]`);
+                            if (input) {
+                                input.checked = true;
+                                const optionItem = input.closest('.option-item');
+                                if (optionItem) optionItem.classList.add('selected');
+                            }
+                        });
+                    } else {
+                        // Radio options
+                        const input = document.querySelector(`input[data-option-key="${key}"][value="${value}"]`);
+                        if (input) {
+                            input.checked = true;
+                            const optionItem = input.closest('.option-item');
+                            if (optionItem) optionItem.classList.add('selected');
+                        }
+                    }
+                });
             }
 
             // Restaurant Modal
@@ -1552,29 +1649,29 @@
 
             createCartItemElement(item) {
                 const optionsText = item.options && item.options.length > 0 
-                    ? `<div class="text-xs text-slate-500 mt-1">${item.options.join(', ')}</div>` 
+                    ? `<div class="text-xs text-slate-500 mt-1 leading-relaxed break-words">${item.options.join(', ')}</div>` 
                     : '';
                 
                 return `
-                    <div class="relative p-3 bg-slate-50 rounded-lg border border-slate-100">
+                    <div class="relative p-3 bg-slate-50 rounded-lg border border-slate-100 cursor-pointer hover:bg-slate-100 transition-colors" onclick="app.editCartItem(${item.id})">
                         <div class="flex items-start space-x-3">
                             <div class="w-14 h-14 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
                                 <span class="text-2xl">${item.icon}</span>
                             </div>
-                            <div class="flex-1 min-w-0 pr-8">
-                                <div class="flex items-center space-x-1.5 text-xs font-semibold text-slate-900 mb-1">
+                            <div class="flex-1 min-w-0 pr-20">
+                                <div class="flex flex-wrap items-center gap-1.5 text-xs font-semibold text-slate-900 mb-1">
                                     <span>${item.quantity}</span>
                                     <span class="text-slate-300">•</span>
-                                    <span>${item.name}</span>
+                                    <span class="break-words">${item.name}</span>
                                     <span class="text-slate-300">•</span>
-                                    <span class="text-slate-600 font-medium">R$ ${this.formatPrice(item.unitPrice)}</span>
+                                    <span class="text-slate-600 font-medium whitespace-nowrap">R$ ${this.formatPrice(item.unitPrice)}</span>
                                 </div>
                                 ${optionsText}
                             </div>
                         </div>
                         
                         <!-- Botão remover no canto superior direito -->
-                        <button class="absolute top-2 right-2 flex items-center space-x-1 text-red-500 hover:text-red-700 transition-colors px-2 py-1 border border-red-200 hover:border-red-300 rounded-md hover:bg-red-50" onclick="app.removeFromCart(${item.id})">
+                        <button class="absolute top-2 right-2 flex items-center space-x-1 text-red-500 hover:text-red-700 transition-colors px-2 py-1 border border-red-200 hover:border-red-300 rounded-md hover:bg-red-50 z-10" onclick="event.stopPropagation(); app.removeFromCart(${item.id})">
                             <span class="text-xs font-medium">Remover</span>
                             <i class="fas fa-trash text-xs"></i>
                         </button>
@@ -1657,5 +1754,5 @@
         // Initialize the app
         const app = new MenuApp();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97605294b01564bd',t:'MTc1NjM0NzU1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97606a6105ba64f9',t:'MTc1NjM0ODUyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
