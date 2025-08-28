@@ -78,9 +78,9 @@
         }
 
         .option-item.selected {
-            border-color: #3b82f6;
-            background: #eff6ff;
-            box-shadow: 0 0 0 1px #3b82f6;
+            border-color: #8b5cf6;
+            background: #f3f4f6;
+            box-shadow: 0 0 0 1px #8b5cf6;
         }
 
         .custom-scrollbar::-webkit-scrollbar {
@@ -119,15 +119,15 @@
 
         .delivery-option:has(input:checked),
         .payment-option:has(input:checked) {
-            border-color: #f97316;
-            background-color: #fff7ed;
-            box-shadow: 0 0 0 1px #f97316;
+            border-color: #8b5cf6;
+            background-color: #f3f4f6;
+            box-shadow: 0 0 0 1px #8b5cf6;
         }
 
         .delivery-option:has(input:checked) input,
         .payment-option:has(input:checked) input {
-            border-color: #f97316;
-            background-color: #f97316;
+            border-color: #8b5cf6;
+            background-color: #8b5cf6;
         }
     </style>
 </head>
@@ -1557,9 +1557,9 @@
                     }
                     
                     return `
-                        <div class="flex items-center justify-between py-2 px-3 rounded-lg ${isToday ? 'bg-orange-50 border border-orange-200' : 'bg-slate-50'}">
-                            <span class="text-xs font-medium ${isToday ? 'text-orange-900' : 'text-slate-900'}">${dayName}</span>
-                            <span class="text-xs ${isToday ? 'text-orange-700 font-semibold' : 'text-slate-600'}">${dayData.open} - ${dayData.close}</span>
+                        <div class="flex items-center justify-between py-2 px-3 rounded-lg ${isToday ? 'bg-violet-50 border border-violet-200' : 'bg-slate-50'}">
+                            <span class="text-xs font-medium ${isToday ? 'text-violet-900' : 'text-slate-900'}">${dayName}</span>
+                            <span class="text-xs ${isToday ? 'text-violet-700 font-semibold' : 'text-slate-600'}">${dayData.open} - ${dayData.close}</span>
                         </div>
                     `;
                 }).join('');
@@ -1797,25 +1797,25 @@
                                     Como quer receber?
                                 </h3>
                                 <div class="space-y-2">
-                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="deliveryMethod" value="delivery" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <input type="radio" name="deliveryMethod" value="delivery" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Entrega • <span class="text-slate-500">Receba em casa</span></div>
                                             </div>
                                         </div>
                                     </label>
-                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="deliveryMethod" value="pickup" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <input type="radio" name="deliveryMethod" value="pickup" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Retirada • <span class="text-slate-500">Busque no balcão</span></div>
                                             </div>
                                         </div>
                                     </label>
-                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="deliveryMethod" value="dine-in" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <input type="radio" name="deliveryMethod" value="dine-in" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">No local • <span class="text-slate-500">Consumir no estabelecimento</span></div>
                                             </div>
@@ -1831,33 +1831,33 @@
                                     Como quer pagar?
                                 </h3>
                                 <div class="space-y-2">
-                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="paymentMethod" value="pix" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <input type="radio" name="paymentMethod" value="pix" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Pix • <span class="text-slate-500">Online e instantâneo</span></div>
                                             </div>
                                         </div>
                                     </label>
-                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="paymentMethod" value="card-online" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <input type="radio" name="paymentMethod" value="card-online" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Cartão online • <span class="text-slate-500">Instantâneo e seguro</span></div>
                                             </div>
                                         </div>
                                     </label>
-                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="paymentMethod" value="cash" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <input type="radio" name="paymentMethod" value="cash" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Dinheiro • <span class="text-slate-500">Em espécie</span></div>
                                             </div>
                                         </div>
                                     </label>
-                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="paymentMethod" value="card-machine" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <input type="radio" name="paymentMethod" value="card-machine" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Maquininha • <span class="text-slate-500">Débito ou crédito</span></div>
                                             </div>
@@ -1942,25 +1942,25 @@
                                         Como quer receber?
                                     </h3>
                                     <div class="space-y-3">
-                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="deliveryMethod" value="delivery" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <input type="radio" name="deliveryMethod" value="delivery" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                                 <div>
                                                     <div class="font-medium text-slate-900">Entrega • <span class="text-slate-500">Receba em casa</span></div>
                                                 </div>
                                             </div>
                                         </label>
-                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="deliveryMethod" value="pickup" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <input type="radio" name="deliveryMethod" value="pickup" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                                 <div>
                                                     <div class="font-medium text-slate-900">Retirada • <span class="text-slate-500">Busque no balcão</span></div>
                                                 </div>
                                             </div>
                                         </label>
-                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="deliveryMethod" value="dine-in" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <input type="radio" name="deliveryMethod" value="dine-in" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                                 <div>
                                                     <div class="font-medium text-slate-900">No local • <span class="text-slate-500">Consumir no estabelecimento</span></div>
                                                 </div>
@@ -1976,33 +1976,33 @@
                                         Como quer pagar?
                                     </h3>
                                     <div class="space-y-3">
-                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="paymentMethod" value="pix" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <input type="radio" name="paymentMethod" value="pix" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                                 <div>
                                                     <div class="font-medium text-slate-900">Pix • <span class="text-slate-500">Online e instantâneo</span></div>
                                                 </div>
                                             </div>
                                         </label>
-                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="paymentMethod" value="card-online" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <input type="radio" name="paymentMethod" value="card-online" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                                 <div>
                                                     <div class="font-medium text-slate-900">Cartão online • <span class="text-slate-500">Instantâneo e seguro</span></div>
                                                 </div>
                                             </div>
                                         </label>
-                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="paymentMethod" value="cash" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <input type="radio" name="paymentMethod" value="cash" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                                 <div>
                                                     <div class="font-medium text-slate-900">Dinheiro • <span class="text-slate-500">Em espécie</span></div>
                                                 </div>
                                             </div>
                                         </label>
-                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="paymentMethod" value="card-machine" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <input type="radio" name="paymentMethod" value="card-machine" class="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-500/20">
                                                 <div>
                                                     <div class="font-medium text-slate-900">💳 Maquininha</div>
                                                     <div class="text-sm text-slate-500">Débito ou crédito</div>
@@ -2213,5 +2213,5 @@
         // Initialize the app
         const app = new MenuApp();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9763920d440fe29f',t:'MTc1NjM4MTYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9763b64ed6f6e12e',t:'MTc1NjM4MzA5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
