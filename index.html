@@ -139,7 +139,7 @@
                 <input 
                     type="text" 
                     id="search-input"
-                    placeholder="Buscar produto..." 
+                    placeholder="Buscar hambúrguer..." 
                     class="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm bg-slate-50/50"
                     oninput="handleSearch()"
                 >
@@ -147,17 +147,11 @@
         </div>
     </div>
 
-    <!-- Categories -->
-    <div class="bg-white border-b border-slate-100 sticky top-[6.75rem] z-30">
-        <div class="max-w-7xl mx-auto px-4 py-3">
-            <div class="flex space-x-2 overflow-x-auto pb-1 scrollbar-hide" id="categories">
-                <!-- Categories will be populated by JavaScript -->
-            </div>
-        </div>
-    </div>
-
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 py-5">
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold text-slate-800 mb-4">🍔 Nossos Hambúrguers</h2>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="menu-items">
             <!-- Menu items will be populated by JavaScript -->
         </div>
@@ -269,33 +263,6 @@
                         </div>
                     </div>
 
-                    <!-- Nosso Estabelecimento -->
-                    <div>
-                        <h4 class="text-sm font-medium text-slate-900 mb-3">Nosso Estabelecimento</h4>
-                        <div class="flex space-x-4 overflow-x-auto scrollbar-hide" style="scrollbar-width: none; -ms-overflow-style: none;">
-                            <div class="flex-shrink-0 w-40 h-36 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
-                                <i class="fas fa-utensils text-slate-500 text-xl mb-2"></i>
-                                <span class="text-xs text-slate-600">Salão Principal</span>
-                            </div>
-                            <div class="flex-shrink-0 w-40 h-36 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
-                                <i class="fas fa-fire text-slate-500 text-xl mb-2"></i>
-                                <span class="text-xs text-slate-600">Cozinha</span>
-                            </div>
-                            <div class="flex-shrink-0 w-40 h-36 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
-                                <i class="fas fa-leaf text-slate-500 text-xl mb-2"></i>
-                                <span class="text-xs text-slate-600">Área Externa</span>
-                            </div>
-                            <div class="flex-shrink-0 w-40 h-36 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
-                                <i class="fas fa-wine-glass text-slate-500 text-xl mb-2"></i>
-                                <span class="text-xs text-slate-600">Bar</span>
-                            </div>
-                            <div class="flex-shrink-0 w-40 h-36 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
-                                <i class="fas fa-users text-slate-500 text-xl mb-2"></i>
-                                <span class="text-xs text-slate-600">Área VIP</span>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Horários de Funcionamento -->
                     <div>
                         <h4 class="text-sm font-medium text-slate-900 mb-3">Horários de Funcionamento</h4>
@@ -319,18 +286,6 @@
                                 <span class="text-xs text-slate-600">Segunda-feira</span>
                                 <span class="text-xs text-red-500">Fechado</span>
                             </div>
-                            <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
-                                <span class="text-xs text-slate-600">Terça-feira</span>
-                                <span class="text-xs text-slate-900">11:00 - 22:00</span>
-                            </div>
-                            <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
-                                <span class="text-xs text-slate-600">Quarta-feira</span>
-                                <span class="text-xs text-slate-900">11:00 - 22:00</span>
-                            </div>
-                            <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
-                                <span class="text-xs text-slate-600">Quinta-feira</span>
-                                <span class="text-xs text-slate-900">11:00 - 22:00</span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -350,7 +305,6 @@
         // Global state
         let state = {
             cart: [],
-            currentCategory: 'all',
             currentSearchTerm: '',
             currentProduct: null,
             modalQuantity: 1,
@@ -358,520 +312,124 @@
             selectedOptionalOptions: []
         };
 
-        // Menu data - Agora com 6 produtos em cada categoria
-        const menuData = {
-            burgers: [
-                { 
-                    id: 1, 
-                    name: "X-Salada", 
-                    description: "Hambúrguer bovino, queijo, alface, tomate, cebola e maionese", 
-                    price: 18.90, 
-                    icon: "🥗", 
-                    category: "burgers",
-                    requiredOptions: [
-                        {
-                            name: "Ponto da Carne",
-                            options: [
-                                { name: "Mal passado", price: 0 },
-                                { name: "Ao ponto", price: 0 },
-                                { name: "Bem passado", price: 0 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Bacon extra", price: 3.50 },
-                        { name: "Queijo extra", price: 2.50 },
-                        { name: "Batata frita", price: 5.90 },
-                        { name: "Molho especial", price: 1.50 }
-                    ]
-                },
-                { 
-                    id: 2, 
-                    name: "X-Bacon", 
-                    description: "Hambúrguer bovino, queijo, bacon crocante, alface, tomate e maionese", 
-                    price: 22.90, 
-                    icon: "🥓", 
-                    category: "burgers",
-                    requiredOptions: [
-                        {
-                            name: "Ponto da Carne",
-                            options: [
-                                { name: "Mal passado", price: 0 },
-                                { name: "Ao ponto", price: 0 },
-                                { name: "Bem passado", price: 0 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Bacon extra", price: 3.50 },
-                        { name: "Queijo extra", price: 2.50 },
-                        { name: "Batata frita", price: 5.90 },
-                        { name: "Ovo frito", price: 2.00 }
-                    ]
-                },
-                { 
-                    id: 3, 
-                    name: "X-Egg", 
-                    description: "Hambúrguer bovino, queijo, ovo frito, alface, tomate e maionese", 
-                    price: 20.90, 
-                    icon: "🍳", 
-                    category: "burgers",
-                    requiredOptions: [
-                        {
-                            name: "Ponto da Carne",
-                            options: [
-                                { name: "Mal passado", price: 0 },
-                                { name: "Ao ponto", price: 0 },
-                                { name: "Bem passado", price: 0 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Bacon", price: 3.50 },
-                        { name: "Queijo extra", price: 2.50 },
-                        { name: "Batata frita", price: 5.90 }
-                    ]
-                },
-                { 
-                    id: 4, 
-                    name: "X-Tudo", 
-                    description: "Hambúrguer bovino, queijo, bacon, ovo, alface, tomate, cebola e maionese", 
-                    price: 26.90, 
-                    icon: "🍔", 
-                    category: "burgers",
-                    requiredOptions: [
-                        {
-                            name: "Ponto da Carne",
-                            options: [
-                                { name: "Mal passado", price: 0 },
-                                { name: "Ao ponto", price: 0 },
-                                { name: "Bem passado", price: 0 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Batata frita", price: 5.90 },
-                        { name: "Molho especial", price: 1.50 },
-                        { name: "Cebola caramelizada", price: 2.00 }
-                    ]
-                },
-                { 
-                    id: 5, 
-                    name: "X-Frango", 
-                    description: "Peito de frango grelhado, queijo, alface, tomate e maionese", 
-                    price: 19.90, 
-                    icon: "🐔", 
-                    category: "burgers",
-                    optionalOptions: [
-                        { name: "Bacon", price: 3.50 },
-                        { name: "Queijo extra", price: 2.50 },
-                        { name: "Batata frita", price: 5.90 },
-                        { name: "Molho barbecue", price: 1.50 }
-                    ]
-                },
-                { 
-                    id: 6, 
-                    name: "X-Vegano", 
-                    description: "Hambúrguer de grão-de-bico, queijo vegano, alface, tomate e molho especial", 
-                    price: 21.90, 
-                    icon: "🌱", 
-                    category: "burgers",
-                    optionalOptions: [
-                        { name: "Queijo vegano extra", price: 3.00 },
-                        { name: "Batata doce frita", price: 6.50 },
-                        { name: "Molho tahine", price: 2.00 },
-                        { name: "Rúcula", price: 1.50 }
-                    ]
-                }
-            ],
-            pizzas: [
-                { 
-                    id: 7, 
-                    name: "Pizza Margherita", 
-                    description: "Molho de tomate, mussarela, tomate e manjericão fresco", 
-                    price: 28.90, 
-                    icon: "🍕", 
-                    category: "pizzas",
-                    requiredOptions: [
-                        {
-                            name: "Tamanho",
-                            options: [
-                                { name: "Pequena (4 fatias)", price: 0 },
-                                { name: "Média (6 fatias)", price: 8.00 },
-                                { name: "Grande (8 fatias)", price: 15.00 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Borda recheada", price: 6.50 },
-                        { name: "Queijo extra", price: 4.00 },
-                        { name: "Azeitona", price: 2.50 },
-                        { name: "Orégano extra", price: 0.50 }
-                    ]
-                },
-                { 
-                    id: 8, 
-                    name: "Pizza Calabresa", 
-                    description: "Molho de tomate, mussarela, calabresa e cebola", 
-                    price: 32.90, 
-                    icon: "🍕", 
-                    category: "pizzas",
-                    requiredOptions: [
-                        {
-                            name: "Tamanho",
-                            options: [
-                                { name: "Pequena (4 fatias)", price: 0 },
-                                { name: "Média (6 fatias)", price: 8.00 },
-                                { name: "Grande (8 fatias)", price: 15.00 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Borda recheada", price: 6.50 },
-                        { name: "Calabresa extra", price: 5.00 },
-                        { name: "Cebola extra", price: 2.00 },
-                        { name: "Pimenta", price: 1.00 }
-                    ]
-                },
-                { 
-                    id: 9, 
-                    name: "Pizza Portuguesa", 
-                    description: "Molho de tomate, mussarela, presunto, ovos, cebola, azeitona e orégano", 
-                    price: 35.90, 
-                    icon: "🍕", 
-                    category: "pizzas",
-                    requiredOptions: [
-                        {
-                            name: "Tamanho",
-                            options: [
-                                { name: "Pequena (4 fatias)", price: 0 },
-                                { name: "Média (6 fatias)", price: 8.00 },
-                                { name: "Grande (8 fatias)", price: 15.00 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Borda recheada", price: 6.50 },
-                        { name: "Presunto extra", price: 4.50 },
-                        { name: "Ovo extra", price: 3.00 }
-                    ]
-                },
-                { 
-                    id: 10, 
-                    name: "Pizza Quatro Queijos", 
-                    description: "Molho de tomate, mussarela, gorgonzola, parmesão e catupiry", 
-                    price: 38.90, 
-                    icon: "🧀", 
-                    category: "pizzas",
-                    requiredOptions: [
-                        {
-                            name: "Tamanho",
-                            options: [
-                                { name: "Pequena (4 fatias)", price: 0 },
-                                { name: "Média (6 fatias)", price: 8.00 },
-                                { name: "Grande (8 fatias)", price: 15.00 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Borda recheada", price: 6.50 },
-                        { name: "Queijo extra", price: 5.00 },
-                        { name: "Mel", price: 2.50 }
-                    ]
-                },
-                { 
-                    id: 11, 
-                    name: "Pizza Pepperoni", 
-                    description: "Molho de tomate, mussarela e pepperoni em fatias generosas", 
-                    price: 34.90, 
-                    icon: "🍕", 
-                    category: "pizzas",
-                    requiredOptions: [
-                        {
-                            name: "Tamanho",
-                            options: [
-                                { name: "Pequena (4 fatias)", price: 0 },
-                                { name: "Média (6 fatias)", price: 8.00 },
-                                { name: "Grande (8 fatias)", price: 15.00 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Borda recheada", price: 6.50 },
-                        { name: "Pepperoni extra", price: 6.00 },
-                        { name: "Pimenta calabresa", price: 1.50 }
-                    ]
-                },
-                { 
-                    id: 12, 
-                    name: "Pizza Vegetariana", 
-                    description: "Molho de tomate, mussarela, abobrinha, berinjela, pimentão e rúcula", 
-                    price: 31.90, 
-                    icon: "🥬", 
-                    category: "pizzas",
-                    requiredOptions: [
-                        {
-                            name: "Tamanho",
-                            options: [
-                                { name: "Pequena (4 fatias)", price: 0 },
-                                { name: "Média (6 fatias)", price: 8.00 },
-                                { name: "Grande (8 fatias)", price: 15.00 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Borda recheada", price: 6.50 },
-                        { name: "Rúcula extra", price: 3.00 },
-                        { name: "Tomate seco", price: 4.00 },
-                        { name: "Azeite trufado", price: 3.50 }
-                    ]
-                }
-            ],
-            drinks: [
-                { 
-                    id: 13, 
-                    name: "Coca-Cola", 
-                    description: "Refrigerante Coca-Cola gelado - lata 350ml", 
-                    price: 4.90, 
-                    icon: "🥤", 
-                    category: "drinks",
-                    requiredOptions: [
-                        {
-                            name: "Tamanho",
-                            options: [
-                                { name: "Lata 350ml", price: 0 },
-                                { name: "Garrafa 600ml", price: 2.00 },
-                                { name: "Garrafa 1L", price: 4.50 }
-                            ]
-                        }
-                    ]
-                },
-                { 
-                    id: 14, 
-                    name: "Suco de Laranja", 
-                    description: "Suco natural de laranja feito na hora - 300ml", 
-                    price: 7.90, 
-                    icon: "🧃", 
-                    category: "drinks",
-                    requiredOptions: [
-                        {
-                            name: "Tamanho",
-                            options: [
-                                { name: "Copo 300ml", price: 0 },
-                                { name: "Jarra 500ml", price: 4.00 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Gelo", price: 0 },
-                        { name: "Açúcar", price: 0 },
-                        { name: "Adoçante", price: 0 }
-                    ]
-                },
-                { 
-                    id: 15, 
-                    name: "Água Mineral", 
-                    description: "Água mineral gelada - garrafa 500ml", 
-                    price: 2.90, 
-                    icon: "💧", 
-                    category: "drinks",
-                    requiredOptions: [
-                        {
-                            name: "Tipo",
-                            options: [
-                                { name: "Sem gás", price: 0 },
-                                { name: "Com gás", price: 0.50 }
-                            ]
-                        }
-                    ]
-                },
-                { 
-                    id: 16, 
-                    name: "Suco de Limão", 
-                    description: "Suco natural de limão com hortelã - 300ml", 
-                    price: 6.90, 
-                    icon: "🍋", 
-                    category: "drinks",
-                    requiredOptions: [
-                        {
-                            name: "Tamanho",
-                            options: [
-                                { name: "Copo 300ml", price: 0 },
-                                { name: "Jarra 500ml", price: 3.50 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Hortelã extra", price: 1.00 },
-                        { name: "Açúcar", price: 0 },
-                        { name: "Adoçante", price: 0 }
-                    ]
-                },
-                { 
-                    id: 17, 
-                    name: "Refrigerante Guaraná", 
-                    description: "Guaraná Antarctica gelado - lata 350ml", 
-                    price: 4.90, 
-                    icon: "🥤", 
-                    category: "drinks",
-                    requiredOptions: [
-                        {
-                            name: "Tamanho",
-                            options: [
-                                { name: "Lata 350ml", price: 0 },
-                                { name: "Garrafa 600ml", price: 2.00 },
-                                { name: "Garrafa 1L", price: 4.50 }
-                            ]
-                        }
-                    ]
-                },
-                { 
-                    id: 18, 
-                    name: "Chá Gelado", 
-                    description: "Chá gelado de pêssego com limão - 400ml", 
-                    price: 5.90, 
-                    icon: "🧊", 
-                    category: "drinks",
-                    optionalOptions: [
-                        { name: "Limão extra", price: 1.00 },
-                        { name: "Açúcar", price: 0 },
-                        { name: "Adoçante", price: 0 }
-                    ]
-                }
-            ],
-            desserts: [
-                { 
-                    id: 19, 
-                    name: "Cookie de Chocolate", 
-                    description: "Cookie artesanal de chocolate crocante por fora e macio por dentro", 
-                    price: 5.90, 
-                    icon: "🍪", 
-                    category: "desserts",
-                    optionalOptions: [
-                        { name: "Sorvete de baunilha", price: 3.50 },
-                        { name: "Calda de chocolate", price: 2.00 },
-                        { name: "Chantilly", price: 2.50 }
-                    ]
-                },
-                { 
-                    id: 20, 
-                    name: "Brownie com Sorvete", 
-                    description: "Brownie de chocolate com nozes servido quente com sorvete de baunilha", 
-                    price: 12.90, 
-                    icon: "🍫", 
-                    category: "desserts",
-                    requiredOptions: [
-                        {
-                            name: "Sabor do Sorvete",
-                            options: [
-                                { name: "Baunilha", price: 0 },
-                                { name: "Chocolate", price: 0 },
-                                { name: "Morango", price: 0 },
-                                { name: "Pistache", price: 2.00 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Calda extra", price: 2.50 },
-                        { name: "Nozes extras", price: 3.00 },
-                        { name: "Chantilly", price: 2.50 }
-                    ]
-                },
-                { 
-                    id: 21, 
-                    name: "Pudim de Leite", 
-                    description: "Pudim de leite condensado com calda de caramelo", 
-                    price: 7.90, 
-                    icon: "🍮", 
-                    category: "desserts",
-                    optionalOptions: [
-                        { name: "Calda extra", price: 1.50 },
-                        { name: "Chantilly", price: 2.50 },
-                        { name: "Frutas vermelhas", price: 4.00 }
-                    ]
-                },
-                { 
-                    id: 22, 
-                    name: "Torta de Limão", 
-                    description: "Torta cremosa de limão com merengue e base de biscoito", 
-                    price: 9.90, 
-                    icon: "🥧", 
-                    category: "desserts",
-                    optionalOptions: [
-                        { name: "Sorvete de limão", price: 3.50 },
-                        { name: "Raspas de limão", price: 1.00 },
-                        { name: "Chantilly", price: 2.50 }
-                    ]
-                },
-                { 
-                    id: 23, 
-                    name: "Sorvete Artesanal", 
-                    description: "Duas bolas de sorvete artesanal - sabores: chocolate, baunilha ou morango", 
-                    price: 8.90, 
-                    icon: "🍨", 
-                    category: "desserts",
-                    requiredOptions: [
-                        {
-                            name: "Primeiro Sabor",
-                            options: [
-                                { name: "Chocolate", price: 0 },
-                                { name: "Baunilha", price: 0 },
-                                { name: "Morango", price: 0 },
-                                { name: "Pistache", price: 2.00 },
-                                { name: "Coco", price: 1.50 }
-                            ]
-                        },
-                        {
-                            name: "Segundo Sabor",
-                            options: [
-                                { name: "Chocolate", price: 0 },
-                                { name: "Baunilha", price: 0 },
-                                { name: "Morango", price: 0 },
-                                { name: "Pistache", price: 2.00 },
-                                { name: "Coco", price: 1.50 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Calda de chocolate", price: 2.00 },
-                        { name: "Calda de morango", price: 2.00 },
-                        { name: "Granulado", price: 1.50 },
-                        { name: "Chantilly", price: 2.50 }
-                    ]
-                },
-                { 
-                    id: 24, 
-                    name: "Petit Gateau", 
-                    description: "Bolinho de chocolate quente com sorvete de baunilha e calda", 
-                    price: 14.90, 
-                    icon: "🧁", 
-                    category: "desserts",
-                    requiredOptions: [
-                        {
-                            name: "Sabor do Sorvete",
-                            options: [
-                                { name: "Baunilha", price: 0 },
-                                { name: "Chocolate", price: 0 },
-                                { name: "Morango", price: 0 },
-                                { name: "Pistache", price: 2.00 }
-                            ]
-                        }
-                    ],
-                    optionalOptions: [
-                        { name: "Calda extra", price: 2.50 },
-                        { name: "Frutas vermelhas", price: 4.00 },
-                        { name: "Chantilly", price: 2.50 }
-                    ]
-                }
-            ]
-        };
-
-        const categories = [
-            { key: 'all', name: 'Todos', icon: 'fas fa-th-large' },
-            { key: 'burgers', name: 'Hambúrguers', emoji: '🍔' },
-            { key: 'pizzas', name: 'Pizzas', emoji: '🍕' },
-            { key: 'drinks', name: 'Bebidas', emoji: '🥤' },
-            { key: 'desserts', name: 'Sobremesas', emoji: '🍰' }
+        // Menu data - Apenas hambúrguers
+        const menuData = [
+            { 
+                id: 1, 
+                name: "X-Salada", 
+                description: "Hambúrguer bovino, queijo, alface, tomate, cebola e maionese", 
+                price: 18.90, 
+                icon: "🥗",
+                requiredOptions: [
+                    {
+                        name: "Ponto da Carne",
+                        options: [
+                            { name: "Mal passado", price: 0 },
+                            { name: "Ao ponto", price: 0 },
+                            { name: "Bem passado", price: 0 }
+                        ]
+                    }
+                ],
+                optionalOptions: [
+                    { name: "Bacon extra", price: 3.50 },
+                    { name: "Queijo extra", price: 2.50 },
+                    { name: "Batata frita", price: 5.90 },
+                    { name: "Molho especial", price: 1.50 }
+                ]
+            },
+            { 
+                id: 2, 
+                name: "X-Bacon", 
+                description: "Hambúrguer bovino, queijo, bacon crocante, alface, tomate e maionese", 
+                price: 22.90, 
+                icon: "🥓",
+                requiredOptions: [
+                    {
+                        name: "Ponto da Carne",
+                        options: [
+                            { name: "Mal passado", price: 0 },
+                            { name: "Ao ponto", price: 0 },
+                            { name: "Bem passado", price: 0 }
+                        ]
+                    }
+                ],
+                optionalOptions: [
+                    { name: "Bacon extra", price: 3.50 },
+                    { name: "Queijo extra", price: 2.50 },
+                    { name: "Batata frita", price: 5.90 },
+                    { name: "Ovo frito", price: 2.00 }
+                ]
+            },
+            { 
+                id: 3, 
+                name: "X-Egg", 
+                description: "Hambúrguer bovino, queijo, ovo frito, alface, tomate e maionese", 
+                price: 20.90, 
+                icon: "🍳",
+                requiredOptions: [
+                    {
+                        name: "Ponto da Carne",
+                        options: [
+                            { name: "Mal passado", price: 0 },
+                            { name: "Ao ponto", price: 0 },
+                            { name: "Bem passado", price: 0 }
+                        ]
+                    }
+                ],
+                optionalOptions: [
+                    { name: "Bacon", price: 3.50 },
+                    { name: "Queijo extra", price: 2.50 },
+                    { name: "Batata frita", price: 5.90 }
+                ]
+            },
+            { 
+                id: 4, 
+                name: "X-Tudo", 
+                description: "Hambúrguer bovino, queijo, bacon, ovo, alface, tomate, cebola e maionese", 
+                price: 26.90, 
+                icon: "🍔",
+                requiredOptions: [
+                    {
+                        name: "Ponto da Carne",
+                        options: [
+                            { name: "Mal passado", price: 0 },
+                            { name: "Ao ponto", price: 0 },
+                            { name: "Bem passado", price: 0 }
+                        ]
+                    }
+                ],
+                optionalOptions: [
+                    { name: "Batata frita", price: 5.90 },
+                    { name: "Molho especial", price: 1.50 },
+                    { name: "Cebola caramelizada", price: 2.00 }
+                ]
+            },
+            { 
+                id: 5, 
+                name: "X-Frango", 
+                description: "Peito de frango grelhado, queijo, alface, tomate e maionese", 
+                price: 19.90, 
+                icon: "🐔",
+                optionalOptions: [
+                    { name: "Bacon", price: 3.50 },
+                    { name: "Queijo extra", price: 2.50 },
+                    { name: "Batata frita", price: 5.90 },
+                    { name: "Molho barbecue", price: 1.50 }
+                ]
+            },
+            { 
+                id: 6, 
+                name: "X-Vegano", 
+                description: "Hambúrguer de grão-de-bico, queijo vegano, alface, tomate e molho especial", 
+                price: 21.90, 
+                icon: "🌱",
+                optionalOptions: [
+                    { name: "Queijo vegano extra", price: 3.00 },
+                    { name: "Batata doce frita", price: 6.50 },
+                    { name: "Molho tahine", price: 2.00 },
+                    { name: "Rúcula", price: 1.50 }
+                ]
+            }
         ];
 
         // Utility functions
@@ -898,47 +456,12 @@
             renderMenuItems();
         }
 
-        // Category filtering
-        function filterCategory(category) {
-            state.currentCategory = category;
-            renderCategories();
-            renderMenuItems();
-        }
-
         // Render functions
-        function renderCategories() {
-            const container = document.getElementById('categories');
-            container.innerHTML = '';
-            
-            categories.forEach(category => {
-                const button = document.createElement('button');
-                const isActive = state.currentCategory === category.key;
-                
-                button.className = `flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium transition-all duration-200 ${
-                    isActive 
-                        ? 'bg-orange-500 text-white shadow-sm' 
-                        : 'text-slate-700 bg-slate-100 hover:bg-orange-100 hover:text-orange-600'
-                }`;
-                
-                const iconHtml = category.icon 
-                    ? `<i class="${category.icon} mr-1.5 text-xs"></i>`
-                    : category.emoji 
-                        ? `<span class="mr-1.5 text-xs">${category.emoji}</span>`
-                        : '';
-                
-                button.innerHTML = `${iconHtml}${category.name}`;
-                button.onclick = () => filterCategory(category.key);
-                
-                container.appendChild(button);
-            });
-        }
-
         function renderMenuItems() {
             const container = document.getElementById('menu-items');
             container.innerHTML = '';
             
-            const allItems = Object.values(menuData).flat();
-            let itemsToShow = state.currentCategory === 'all' ? allItems : (menuData[state.currentCategory] || []);
+            let itemsToShow = menuData;
             
             if (state.currentSearchTerm) {
                 itemsToShow = itemsToShow.filter(item => 
@@ -947,41 +470,8 @@
                 );
             }
 
-            if (state.currentCategory === 'all' && !state.currentSearchTerm) {
-                // Render with category sections
-                renderAllCategories(container);
-            } else {
-                // Render filtered items
-                itemsToShow.forEach(item => {
-                    container.appendChild(createItemElement(item));
-                });
-            }
-        }
-
-        function renderAllCategories(container) {
-            const categoryOrder = [
-                { key: 'burgers', name: '🍔 Hambúrguers', items: menuData.burgers },
-                { key: 'pizzas', name: '🍕 Pizzas', items: menuData.pizzas },
-                { key: 'drinks', name: '🥤 Bebidas', items: menuData.drinks },
-                { key: 'desserts', name: '🍰 Sobremesas', items: menuData.desserts }
-            ];
-
-            categoryOrder.forEach(category => {
-                // Create section header
-                const headerElement = document.createElement('div');
-                headerElement.className = 'col-span-full mb-4';
-                headerElement.innerHTML = `
-                    <div class="flex items-center mt-6">
-                        <h2 class="text-lg font-semibold text-slate-800">${category.name}</h2>
-                        <div class="flex-1 h-px bg-gradient-to-r from-slate-200 to-transparent ml-4"></div>
-                    </div>
-                `;
-                container.appendChild(headerElement);
-
-                // Add category items
-                category.items.forEach(item => {
-                    container.appendChild(createItemElement(item));
-                });
+            itemsToShow.forEach(item => {
+                container.appendChild(createItemElement(item));
             });
         }
 
@@ -1024,64 +514,45 @@
             const modal = document.getElementById('product-modal');
             const modalContent = document.getElementById('modal-content');
             
-            const isMobile = window.innerWidth < 768;
-            
             modalContent.innerHTML = `
-                <div class="flex items-center justify-between p-4 border-b border-slate-100">
-                    <h2 class="text-base font-semibold text-slate-900">${item.name}</h2>
-                    <button onclick="closeProductModal()" class="text-slate-400 hover:text-slate-600 transition-colors p-1.5 hover:bg-slate-100 rounded-lg">
-                        <i class="fas fa-times text-sm"></i>
+                <!-- Large product image -->
+                <div class="relative">
+                    <div class="w-full h-48 bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center rounded-t-2xl">
+                        <span class="text-6xl">${item.icon}</span>
+                    </div>
+                    <button onclick="closeProductModal()" class="absolute top-4 right-4 w-8 h-8 bg-white/90 backdrop-blur-sm hover:bg-white rounded-full flex items-center justify-center transition-all shadow-sm">
+                        <i class="fas fa-times text-sm text-slate-600"></i>
                     </button>
                 </div>
                 
-                <div class="flex-1 overflow-y-auto">
-                    ${isMobile ? `
-                        <!-- Mobile Layout -->
-                        <div class="p-4">
-                            <div class="flex space-x-3 mb-4">
-                                <div class="w-20 h-20 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <span class="text-3xl">${item.icon}</span>
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center space-x-2 mb-1">
-                                        <span class="text-base font-semibold text-slate-900">${item.name}</span>
-                                    </div>
-                                    <div class="text-lg font-bold text-orange-600 mb-2">R$ ${formatPrice(item.price)}</div>
-                                    <p class="text-slate-600 text-xs leading-relaxed">${item.description}</p>
-                                </div>
-                            </div>
-                        </div>
-                    ` : `
-                        <!-- Desktop Layout -->
-                        <div class="p-5">
-                            <div class="w-full aspect-[5/2] bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center mb-4">
-                                <span class="text-5xl">${item.icon}</span>
-                            </div>
-                            <p class="text-slate-600 text-sm leading-relaxed mb-4">${item.description}</p>
-                        </div>
-                    `}
+                <!-- Content -->
+                <div class="p-6 space-y-6">
+                    <!-- Product info -->
+                    <div class="text-center">
+                        <h2 class="text-xl font-semibold text-slate-900 mb-2">${item.name}</h2>
+                        <p class="text-sm text-slate-600 mb-3">${item.description}</p>
+                        <div class="text-lg font-bold text-slate-900">R$ ${formatPrice(item.price)}</div>
+                    </div>
                     
-                    <div class="px-4 pb-4 space-y-4">
-                        ${renderProductOptions(item)}
-                        
-                        <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                            <span class="text-sm font-medium text-slate-900">Quantidade:</span>
-                            <div class="flex items-center space-x-3">
-                                <button onclick="updateQuantity(-1)" class="w-8 h-8 bg-slate-200 hover:bg-slate-300 rounded-full flex items-center justify-center transition-all">
-                                    <i class="fas fa-minus text-xs text-slate-600"></i>
-                                </button>
-                                <span id="quantity-display" class="text-sm font-semibold text-slate-900 w-6 text-center">${state.modalQuantity}</span>
-                                <button onclick="updateQuantity(1)" class="w-8 h-8 bg-orange-500 hover:bg-orange-600 text-white rounded-full flex items-center justify-center transition-all">
-                                    <i class="fas fa-plus text-xs"></i>
-                                </button>
-                            </div>
+                    ${renderProductOptions(item)}
+                    
+                    <!-- Quantity -->
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-slate-700">Quantidade</span>
+                        <div class="flex items-center space-x-3">
+                            <button onclick="updateQuantity(-1)" class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded-md hover:bg-slate-50 transition-colors">
+                                <i class="fas fa-minus text-xs text-slate-600"></i>
+                            </button>
+                            <span id="quantity-display" class="text-base font-medium text-slate-900 min-w-[2rem] text-center">${state.modalQuantity}</span>
+                            <button onclick="updateQuantity(1)" class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded-md hover:bg-slate-50 transition-colors">
+                                <i class="fas fa-plus text-xs text-slate-600"></i>
+                            </button>
                         </div>
                     </div>
-                </div>
-                
-                <div class="border-t border-slate-100 p-4 bg-slate-50/50">
-                    <button onclick="addToCart()" id="add-to-cart-btn" class="w-full btn-primary text-white font-medium py-3 rounded-lg shadow-sm text-sm">
-                        <i class="fas fa-shopping-cart mr-2 text-xs"></i>Adicionar • R$ ${formatPrice(calculateTotalPrice())}
+                    
+                    <!-- Add button -->
+                    <button onclick="addToCart()" id="add-to-cart-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 rounded-lg transition-colors">
+                        Adicionar • R$ ${formatPrice(calculateTotalPrice())}
                     </button>
                 </div>
             `;
@@ -1096,22 +567,19 @@
             if (item.requiredOptions && item.requiredOptions.length > 0) {
                 item.requiredOptions.forEach((group, groupIndex) => {
                     optionsHtml += `
-                        <div class="space-y-2">
-                            <div class="flex items-center space-x-2">
-                                <h4 class="text-sm font-medium text-slate-900">${group.name}</h4>
-                                <span class="text-xs text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">Obrigatório</span>
-                            </div>
-                            <div class="space-y-2">
+                        <div class="space-y-3">
+                            <h4 class="text-sm font-medium text-slate-900">${group.name}</h4>
+                            <div class="space-y-1">
                                 ${group.options.map((option, optionIndex) => `
-                                    <label class="flex items-center justify-between p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 transition-colors">
+                                    <label class="flex items-center justify-between py-2 cursor-pointer">
                                         <div class="flex items-center space-x-3">
                                             <input type="radio" name="required-${groupIndex}" value="${optionIndex}" 
                                                    ${state.selectedRequiredOptions[groupIndex] === optionIndex ? 'checked' : ''}
                                                    onchange="selectRequiredOption(${groupIndex}, ${optionIndex})"
-                                                   class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                            <span class="text-sm text-slate-900">${option.name}</span>
+                                                   class="w-4 h-4 text-orange-600 border-slate-300">
+                                            <span class="text-sm text-slate-700">${option.name}</span>
                                         </div>
-                                        ${option.price > 0 ? `<span class="text-xs text-slate-600">+R$ ${formatPrice(option.price)}</span>` : ''}
+                                        ${option.price > 0 ? `<span class="text-sm text-slate-600">+R$ ${formatPrice(option.price)}</span>` : ''}
                                     </label>
                                 `).join('')}
                             </div>
@@ -1123,21 +591,19 @@
             // Optional Options
             if (item.optionalOptions && item.optionalOptions.length > 0) {
                 optionsHtml += `
-                    <div class="space-y-2">
-                        <div class="flex items-center space-x-2">
-                            <h4 class="text-sm font-medium text-slate-900">Adicionais</h4>
-                            <span class="text-xs text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full">Opcional</span>
-                        </div>
-                        <div class="space-y-2">
+                    <div class="space-y-3">
+                        <h4 class="text-sm font-medium text-slate-900">Adicionais</h4>
+                        <div class="space-y-1">
                             ${item.optionalOptions.map((option, optionIndex) => `
-                                <label class="flex items-center justify-between p-2 bg-white border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 transition-colors">
+                                <label class="flex items-center justify-between py-2 cursor-pointer">
                                     <div class="flex items-center space-x-3">
                                         <input type="checkbox" value="${optionIndex}" 
+                                               ${state.selectedOptionalOptions.includes(optionIndex) ? 'checked' : ''}
                                                onchange="toggleOptionalOption(${optionIndex})"
-                                               class="option-checkbox">
-                                        <span class="text-sm text-slate-900">${option.name}</span>
+                                               class="w-4 h-4 text-orange-600 border-slate-300 rounded">
+                                        <span class="text-sm text-slate-700">${option.name}</span>
                                     </div>
-                                    ${option.price > 0 ? `<span class="text-xs text-slate-600">+R$ ${formatPrice(option.price)}</span>` : ''}
+                                    <span class="text-sm text-slate-600">+R$ ${formatPrice(option.price)}</span>
                                 </label>
                             `).join('')}
                         </div>
@@ -1194,7 +660,7 @@
             const addButton = document.getElementById('add-to-cart-btn');
             if (addButton) {
                 const totalPrice = calculateTotalPrice();
-                addButton.innerHTML = `<i class="fas fa-shopping-cart mr-2 text-xs"></i>Adicionar • R$ ${formatPrice(totalPrice)}`;
+                addButton.textContent = `Adicionar • R$ ${formatPrice(totalPrice)}`;
             }
         }
 
@@ -1370,7 +836,6 @@
 
         // Initialize the app
         function init() {
-            renderCategories();
             renderMenuItems();
             updateCartDisplay();
         }
@@ -1378,5 +843,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97661faad77adf3a',t:'MTc1NjQwODM4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97666be4353964cf',t:'MTc1NjQxMTUwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
