@@ -177,57 +177,56 @@
     <!-- Restaurant Modal -->
     <div id="restaurant-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
         <div class="flex items-center justify-center p-4 h-full">
-            <div class="bg-white rounded-2xl w-full max-w-3xl shadow-2xl max-h-[90vh] flex flex-col">
+            <div class="bg-white rounded-xl w-full max-w-2xl shadow-lg max-h-[85vh] flex flex-col">
                 <!-- Header -->
-                <div class="flex items-center justify-between p-6 border-b border-slate-100">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center">
-                            <span class="text-xl">🍽️</span>
+                <div class="flex items-center justify-between p-5 border-b border-slate-100">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
+                            <span class="text-lg">🍽️</span>
                         </div>
                         <div>
-                            <h2 class="text-xl font-semibold text-slate-900">Restaurante Sabor</h2>
-                            <div class="flex items-center space-x-3 mt-1">
+                            <h2 class="text-base font-medium text-slate-900">Restaurante Sabor</h2>
+                            <div class="flex items-center space-x-2 mt-0.5">
                                 <div class="flex items-center space-x-1">
-                                    <span class="text-sm font-medium text-slate-900">4.8</span>
-                                    <div class="flex">
-                                        <i class="fas fa-star text-slate-900 text-xs"></i>
-                                        <i class="fas fa-star text-slate-900 text-xs"></i>
-                                        <i class="fas fa-star text-slate-900 text-xs"></i>
-                                        <i class="fas fa-star text-slate-900 text-xs"></i>
-                                        <i class="fas fa-star text-slate-900 text-xs"></i>
+                                    <span class="text-xs text-slate-600">4.8</span>
+                                    <div class="flex space-x-0.5">
+                                        <i class="fas fa-star text-slate-400 text-xs"></i>
+                                        <i class="fas fa-star text-slate-400 text-xs"></i>
+                                        <i class="fas fa-star text-slate-400 text-xs"></i>
+                                        <i class="fas fa-star text-slate-400 text-xs"></i>
+                                        <i class="fas fa-star text-slate-400 text-xs"></i>
                                     </div>
                                 </div>
+                                <span class="text-xs text-slate-400">•</span>
                                 <span class="text-xs text-slate-500">324 avaliações</span>
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <div class="flex items-center space-x-2">
-                            <a href="#" class="w-9 h-9 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors">
-                                <i class="fab fa-instagram text-slate-700 text-sm"></i>
-                            </a>
-                            <a href="#" class="w-9 h-9 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors">
-                                <i class="fab fa-facebook text-slate-700 text-sm"></i>
-                            </a>
-                            <a href="#" class="w-9 h-9 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors">
-                                <i class="fab fa-whatsapp text-slate-700 text-sm"></i>
-                            </a>
-                        </div>
-                        <button onclick="closeRestaurantModal()" class="w-9 h-9 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors">
-                            <i class="fas fa-times text-slate-600 text-sm"></i>
+                    <div class="flex items-center space-x-2">
+                        <a href="#" class="w-8 h-8 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fab fa-instagram text-slate-500 text-xs"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fab fa-facebook text-slate-500 text-xs"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fab fa-whatsapp text-slate-500 text-xs"></i>
+                        </a>
+                        <button onclick="closeRestaurantModal()" class="w-8 h-8 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors ml-2">
+                            <i class="fas fa-times text-slate-500 text-xs"></i>
                         </button>
                     </div>
                 </div>
                 
-                <div class="flex-1 overflow-y-auto p-6 min-h-0 space-y-8">
+                <div class="flex-1 overflow-y-auto p-5 min-h-0 space-y-6">
                     <!-- Sobre Nós -->
                     <div>
-                        <h4 class="text-lg font-medium text-slate-900 mb-4">Sobre Nós</h4>
-                        <div class="space-y-3 text-slate-600 text-sm leading-relaxed">
-                            <p>
+                        <h4 class="text-sm font-medium text-slate-900 mb-3">Sobre Nós</h4>
+                        <div class="bg-slate-50 rounded-lg p-4 space-y-2">
+                            <p class="text-xs text-slate-600 leading-relaxed">
                                 Há mais de 15 anos, o Restaurante Sabor tem sido o ponto de encontro favorito da cidade para quem busca sabores únicos e experiências inesquecíveis. Nossa paixão pela culinária se reflete em cada prato, preparado com ingredientes frescos e selecionados.
                             </p>
-                            <p>
+                            <p class="text-xs text-slate-600 leading-relaxed">
                                 Nosso compromisso é oferecer não apenas uma refeição, mas uma experiência completa, onde cada cliente se sente em casa. Venha descobrir por que somos a escolha número 1 da região.
                             </p>
                         </div>
@@ -235,57 +234,57 @@
 
                     <!-- Nosso Estabelecimento -->
                     <div>
-                        <h4 class="text-lg font-medium text-slate-900 mb-4">Nosso Estabelecimento</h4>
-                        <div class="flex space-x-3 overflow-x-auto pb-2">
-                            <div class="flex-shrink-0 w-36 h-28 bg-slate-100 rounded-xl flex flex-col items-center justify-center border border-slate-200 hover:border-slate-300 transition-colors">
-                                <i class="fas fa-utensils text-slate-600 text-lg mb-2"></i>
-                                <span class="text-xs font-medium text-slate-700">Salão Principal</span>
+                        <h4 class="text-sm font-medium text-slate-900 mb-3">Nosso Estabelecimento</h4>
+                        <div class="flex space-x-2 overflow-x-auto pb-1">
+                            <div class="flex-shrink-0 w-24 h-20 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
+                                <i class="fas fa-utensils text-slate-500 text-sm mb-1"></i>
+                                <span class="text-xs text-slate-600">Salão</span>
                             </div>
-                            <div class="flex-shrink-0 w-36 h-28 bg-slate-100 rounded-xl flex flex-col items-center justify-center border border-slate-200 hover:border-slate-300 transition-colors">
-                                <i class="fas fa-fire text-slate-600 text-lg mb-2"></i>
-                                <span class="text-xs font-medium text-slate-700">Cozinha</span>
+                            <div class="flex-shrink-0 w-24 h-20 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
+                                <i class="fas fa-fire text-slate-500 text-sm mb-1"></i>
+                                <span class="text-xs text-slate-600">Cozinha</span>
                             </div>
-                            <div class="flex-shrink-0 w-36 h-28 bg-slate-100 rounded-xl flex flex-col items-center justify-center border border-slate-200 hover:border-slate-300 transition-colors">
-                                <i class="fas fa-leaf text-slate-600 text-lg mb-2"></i>
-                                <span class="text-xs font-medium text-slate-700">Área Externa</span>
+                            <div class="flex-shrink-0 w-24 h-20 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
+                                <i class="fas fa-leaf text-slate-500 text-sm mb-1"></i>
+                                <span class="text-xs text-slate-600">Externa</span>
                             </div>
-                            <div class="flex-shrink-0 w-36 h-28 bg-slate-100 rounded-xl flex flex-col items-center justify-center border border-slate-200 hover:border-slate-300 transition-colors">
-                                <i class="fas fa-wine-glass text-slate-600 text-lg mb-2"></i>
-                                <span class="text-xs font-medium text-slate-700">Bar</span>
+                            <div class="flex-shrink-0 w-24 h-20 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
+                                <i class="fas fa-wine-glass text-slate-500 text-sm mb-1"></i>
+                                <span class="text-xs text-slate-600">Bar</span>
                             </div>
-                            <div class="flex-shrink-0 w-36 h-28 bg-slate-100 rounded-xl flex flex-col items-center justify-center border border-slate-200 hover:border-slate-300 transition-colors">
-                                <i class="fas fa-users text-slate-600 text-lg mb-2"></i>
-                                <span class="text-xs font-medium text-slate-700">Área VIP</span>
+                            <div class="flex-shrink-0 w-24 h-20 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
+                                <i class="fas fa-users text-slate-500 text-sm mb-1"></i>
+                                <span class="text-xs text-slate-600">VIP</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Horários de Funcionamento -->
                     <div>
-                        <h4 class="text-lg font-medium text-slate-900 mb-4">Horários de Funcionamento</h4>
+                        <h4 class="text-sm font-medium text-slate-900 mb-3">Horários de Funcionamento</h4>
                         <div class="space-y-2">
-                            <div class="flex justify-between items-center p-4 bg-slate-900 text-white rounded-xl">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-2 h-2 bg-white rounded-full"></div>
-                                    <span class="text-sm font-medium">Hoje (Sexta-feira)</span>
+                            <div class="flex justify-between items-center p-3 bg-slate-900 text-white rounded-lg">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                                    <span class="text-xs font-medium">Hoje (Sexta-feira)</span>
                                 </div>
-                                <span class="text-sm font-medium">11:00 - 23:00</span>
+                                <span class="text-xs">11:00 - 23:00</span>
                             </div>
-                            <div class="flex justify-between items-center p-4 border border-slate-200 rounded-xl">
-                                <span class="text-sm text-slate-700">Amanhã (Sábado)</span>
-                                <span class="text-sm font-medium text-slate-900">11:00 - 00:00</span>
+                            <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                                <span class="text-xs text-slate-600">Amanhã (Sábado)</span>
+                                <span class="text-xs text-slate-900">11:00 - 00:00</span>
                             </div>
-                            <div class="flex justify-between items-center p-4 border border-slate-200 rounded-xl">
-                                <span class="text-sm text-slate-700">Domingo</span>
-                                <span class="text-sm font-medium text-slate-900">12:00 - 22:00</span>
+                            <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                                <span class="text-xs text-slate-600">Domingo</span>
+                                <span class="text-xs text-slate-900">12:00 - 22:00</span>
                             </div>
-                            <div class="flex justify-between items-center p-4 border border-slate-200 rounded-xl">
-                                <span class="text-sm text-slate-700">Segunda-feira</span>
-                                <span class="text-sm text-slate-500">Fechado</span>
+                            <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                                <span class="text-xs text-slate-600">Segunda-feira</span>
+                                <span class="text-xs text-red-500">Fechado</span>
                             </div>
-                            <div class="flex justify-between items-center p-4 border border-slate-200 rounded-xl">
-                                <span class="text-sm text-slate-700">Terça a Quinta</span>
-                                <span class="text-sm font-medium text-slate-900">11:00 - 22:00</span>
+                            <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                                <span class="text-xs text-slate-600">Terça a Quinta</span>
+                                <span class="text-xs text-slate-900">11:00 - 22:00</span>
                             </div>
                         </div>
                     </div>
@@ -676,5 +675,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9765cac812150c10',t:'MTc1NjQwNDkwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9765d928c7566493',t:'MTc1NjQwNTQ5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
