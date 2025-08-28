@@ -57,14 +57,23 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #f97316;
+            border: 1px solid #f97316;
+            color: white;
+            font-weight: 500;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 8px 16px -4px rgba(249, 115, 22, 0.3);
+            background: #ea580c;
+            border-color: #ea580c;
+        }
+
+        .btn-primary:active {
+            background: #ea580c;
+            border-color: #ea580c;
         }
 
         .option-item {
@@ -73,8 +82,8 @@
         }
 
         .option-item:hover {
-            border-color: #d1d5db;
-            background: #fafafa;
+            border-color: #8b5cf6;
+            background: #f3f4f6;
         }
 
         .option-item.selected {
@@ -115,6 +124,16 @@
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
+        }
+
+        .delivery-option:hover {
+            border-color: #8b5cf6 !important;
+            background-color: #f3f4f6 !important;
+        }
+
+        .payment-option:hover {
+            border-color: #8b5cf6 !important;
+            background-color: #f3f4f6 !important;
         }
 
         .delivery-option:has(input:checked),
@@ -187,7 +206,7 @@
                 </button>
                 
                 <div class="flex items-center">
-                    <button class="relative btn-primary text-white px-3 py-2 rounded-lg text-sm font-medium shadow-sm" id="cart-btn-mobile">
+                    <button class="relative btn-primary text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm" id="cart-btn-mobile">
                         <i class="fas fa-shopping-cart mr-1.5 text-xs"></i>
                         Carrinho
                         <span id="cart-count-mobile" class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center hidden font-semibold">0</span>
@@ -264,7 +283,7 @@
                     
                     <!-- Cart Button -->
                     <div class="pt-4 border-t border-slate-200">
-                        <button class="w-full relative btn-primary text-white px-3 py-2.5 rounded-lg font-medium shadow-sm text-sm" id="cart-btn-desktop">
+                        <button class="w-full relative btn-primary text-white px-4 py-2.5 rounded-lg font-medium shadow-sm text-sm" id="cart-btn-desktop">
                             <i class="fas fa-shopping-cart mr-2 text-xs"></i>
                             Ver Carrinho
                             <span id="cart-count-desktop" class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center hidden font-semibold">0</span>
@@ -319,7 +338,7 @@
                         <span class="text-slate-900">Total:</span>
                         <span id="cart-total-desktop" class="text-orange-600">R$ 0,00</span>
                     </div>
-                    <button class="w-full btn-primary text-white py-2.5 rounded-xl font-medium shadow-sm text-sm" id="checkout-btn-desktop">
+                    <button class="w-full btn-primary text-white py-2.5 rounded-lg font-medium shadow-sm text-sm" id="checkout-btn-desktop">
                         <i class="fas fa-credit-card mr-2 text-xs"></i>Finalizar Pedido
                     </button>
                 </div>
@@ -354,7 +373,7 @@
                     <span class="text-slate-900">Total:</span>
                     <span id="cart-total-mobile" class="text-orange-600">R$ 0,00</span>
                 </div>
-                <button class="w-full btn-primary text-white py-2.5 rounded-xl font-medium shadow-sm text-sm" id="checkout-btn-mobile">
+                <button class="w-full btn-primary text-white py-2.5 rounded-lg font-medium shadow-sm text-sm" id="checkout-btn-mobile">
                     <i class="fas fa-credit-card mr-2 text-xs"></i>Finalizar Pedido
                 </button>
             </div>
@@ -897,7 +916,7 @@
                                         value="${optionItem.id}" 
                                         data-price="${optionItem.price}"
                                         data-option-key="${optionKey}"
-                                        class="w-3.5 h-3.5 border-slate-300 focus:ring-violet-500/20 focus:ring-2"
+                                        class="w-3.5 h-3.5 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:ring-2 focus:border-violet-500"
                                         onchange="app.updateOptionSelection()"
                                         ${isDefaultSelected ? 'checked' : ''}
                                     >
@@ -1031,7 +1050,7 @@
                             </div>
                         </div>
                         
-                        <button class="w-full btn-primary text-white font-medium py-2.5 rounded-lg transition-all shadow-sm text-sm" onclick="app.addToCart()">
+                        <button class="w-full btn-primary text-white font-medium py-2.5 rounded-lg shadow-sm text-sm" onclick="app.addToCart()">
                             <i class="fas fa-shopping-cart mr-2 text-xs"></i>${buttonText} • <span id="total-price">R$ ${this.formatPrice(item.price)}</span>
                         </button>
                     </div>
@@ -1079,7 +1098,7 @@
                                 </div>
                             </div>
                             
-                            <button class="w-full btn-primary text-white font-medium py-2.5 rounded-xl transition-all shadow-sm text-sm" onclick="app.addToCart()">
+                            <button class="w-full btn-primary text-white font-medium py-2.5 rounded-lg shadow-sm text-sm" onclick="app.addToCart()">
                                 <i class="fas fa-shopping-cart mr-2 text-xs"></i>${buttonText} • <span id="total-price">R$ ${this.formatPrice(item.price)}</span>
                             </button>
                         </div>
@@ -1826,25 +1845,25 @@
                                     Como quer receber?
                                 </h3>
                                 <div class="space-y-2">
-                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="deliveryMethod" value="delivery" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                            <input type="radio" name="deliveryMethod" value="delivery" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Entrega • <span class="text-slate-500">Receba em casa</span></div>
                                             </div>
                                         </div>
                                     </label>
-                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="deliveryMethod" value="pickup" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                            <input type="radio" name="deliveryMethod" value="pickup" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Retirada • <span class="text-slate-500">Busque no balcão</span></div>
                                             </div>
                                         </div>
                                     </label>
-                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="deliveryMethod" value="dine-in" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                            <input type="radio" name="deliveryMethod" value="dine-in" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">No local • <span class="text-slate-500">Consumir no estabelecimento</span></div>
                                             </div>
@@ -1860,33 +1879,33 @@
                                     Como quer pagar?
                                 </h3>
                                 <div class="space-y-2">
-                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="paymentMethod" value="pix" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                            <input type="radio" name="paymentMethod" value="pix" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Pix • <span class="text-slate-500">Online e instantâneo</span></div>
                                             </div>
                                         </div>
                                     </label>
-                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="paymentMethod" value="card-online" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                            <input type="radio" name="paymentMethod" value="card-online" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Cartão online • <span class="text-slate-500">Instantâneo e seguro</span></div>
                                             </div>
                                         </div>
                                     </label>
-                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="paymentMethod" value="cash" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                            <input type="radio" name="paymentMethod" value="cash" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Dinheiro • <span class="text-slate-500">Em espécie</span></div>
                                             </div>
                                         </div>
                                     </label>
-                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer transition-all">
                                         <div class="flex items-center space-x-3">
-                                            <input type="radio" name="paymentMethod" value="card-machine" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                            <input type="radio" name="paymentMethod" value="card-machine" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                             <div>
                                                 <div class="text-sm font-medium text-slate-900">Maquininha • <span class="text-slate-500">Débito ou crédito</span></div>
                                             </div>
@@ -1924,7 +1943,7 @@
                     </div>
                     
                     <div class="border-t border-slate-200 p-4 bg-slate-50/50">
-                        <button type="submit" form="checkout-form" class="w-full btn-primary text-white font-medium py-3 rounded-lg transition-all shadow-sm text-sm" onclick="app.submitOrder(event)">
+                        <button type="submit" form="checkout-form" class="w-full btn-primary text-white font-medium py-3 rounded-lg shadow-sm text-sm" onclick="app.submitOrder(event)">
                             <i class="fas fa-check mr-2 text-xs"></i>Confirmar Pedido • R$ ${this.formatPrice(totalPrice)}
                         </button>
                     </div>
@@ -1971,25 +1990,25 @@
                                         Como quer receber?
                                     </h3>
                                     <div class="space-y-3">
-                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="deliveryMethod" value="delivery" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                                <input type="radio" name="deliveryMethod" value="delivery" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                                 <div>
                                                     <div class="font-medium text-slate-900">Entrega • <span class="text-slate-500">Receba em casa</span></div>
                                                 </div>
                                             </div>
                                         </label>
-                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="deliveryMethod" value="pickup" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                                <input type="radio" name="deliveryMethod" value="pickup" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                                 <div>
                                                     <div class="font-medium text-slate-900">Retirada • <span class="text-slate-500">Busque no balcão</span></div>
                                                 </div>
                                             </div>
                                         </label>
-                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="deliveryMethod" value="dine-in" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                                <input type="radio" name="deliveryMethod" value="dine-in" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                                 <div>
                                                     <div class="font-medium text-slate-900">No local • <span class="text-slate-500">Consumir no estabelecimento</span></div>
                                                 </div>
@@ -2005,33 +2024,33 @@
                                         Como quer pagar?
                                     </h3>
                                     <div class="space-y-3">
-                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="paymentMethod" value="pix" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                                <input type="radio" name="paymentMethod" value="pix" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                                 <div>
                                                     <div class="font-medium text-slate-900">Pix • <span class="text-slate-500">Online e instantâneo</span></div>
                                                 </div>
                                             </div>
                                         </label>
-                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="paymentMethod" value="card-online" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                                <input type="radio" name="paymentMethod" value="card-online" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                                 <div>
                                                     <div class="font-medium text-slate-900">Cartão online • <span class="text-slate-500">Instantâneo e seguro</span></div>
                                                 </div>
                                             </div>
                                         </label>
-                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="paymentMethod" value="cash" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                                <input type="radio" name="paymentMethod" value="cash" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                                 <div>
                                                     <div class="font-medium text-slate-900">Dinheiro • <span class="text-slate-500">Em espécie</span></div>
                                                 </div>
                                             </div>
                                         </label>
-                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-violet-300 hover:bg-violet-50/50 transition-all">
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer transition-all">
                                             <div class="flex items-center space-x-4">
-                                                <input type="radio" name="paymentMethod" value="card-machine" class="w-4 h-4 border-slate-300 focus:ring-violet-500/20">
+                                                <input type="radio" name="paymentMethod" value="card-machine" class="w-4 h-4 border-slate-300 text-violet-600 focus:ring-violet-500/20 focus:border-violet-500">
                                                 <div>
                                                     <div class="font-medium text-slate-900">Maquininha • <span class="text-slate-500">Débito ou crédito</span></div>
                                                 </div>
@@ -2068,7 +2087,7 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" form="checkout-form" class="w-full btn-primary text-white font-medium py-4 rounded-xl transition-all shadow-sm" onclick="app.submitOrder(event)">
+                                <button type="submit" form="checkout-form" class="w-full btn-primary text-white font-medium py-2.5 rounded-lg shadow-sm" onclick="app.submitOrder(event)">
                                     <i class="fas fa-check mr-2"></i>Confirmar Pedido • R$ ${this.formatPrice(totalPrice)}
                                 </button>
                             </div>
@@ -2241,5 +2260,5 @@
         // Initialize the app
         const app = new MenuApp();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9764dd57b124978d',t:'MTc1NjM5NTE4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97651db884b1e119',t:'MTc1NjM5NzgxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
