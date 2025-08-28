@@ -116,6 +116,19 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
         }
+
+        .delivery-option:has(input:checked),
+        .payment-option:has(input:checked) {
+            border-color: #f97316;
+            background-color: #fff7ed;
+            box-shadow: 0 0 0 1px #f97316;
+        }
+
+        .delivery-option:has(input:checked) input,
+        .payment-option:has(input:checked) input {
+            border-color: #f97316;
+            background-color: #f97316;
+        }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen">
@@ -1701,11 +1714,466 @@
                     return;
                 }
                 
-                this.showToast('Funcionalidade de checkout em desenvolvimento', 'info');
+                // Close cart first
+                if (this.state.isCartOpen) {
+                    this.toggleCart();
+                }
+                
+                const modal = document.getElementById('checkout-modal');
+                if (!modal) return;
+                
+                const isMobile = window.innerWidth < 640;
+                
+                if (isMobile) {
+                    this.showMobileCheckoutModal();
+                } else {
+                    this.showDesktopCheckoutModal();
+                }
+                
+                modal.classList.remove('hidden');
+            }
+
+            showMobileCheckoutModal() {
+                const mobileModal = document.getElementById('checkout-modal-mobile');
+                const desktopModal = document.getElementById('checkout-modal-desktop');
+                const modalContent = document.getElementById('checkout-content-mobile');
+                
+                if (mobileModal) mobileModal.classList.remove('hidden');
+                if (desktopModal) desktopModal.classList.add('hidden');
+                if (modalContent) modalContent.innerHTML = this.generateMobileCheckoutContent();
+                
+                setTimeout(() => {
+                    const mobileContent = document.getElementById('checkout-modal-content-mobile');
+                    if (mobileContent) mobileContent.classList.remove('translate-y-full');
+                }, 10);
+            }
+
+            showDesktopCheckoutModal() {
+                const mobileModal = document.getElementById('checkout-modal-mobile');
+                const desktopModal = document.getElementById('checkout-modal-desktop');
+                const modalContent = document.getElementById('checkout-content-desktop');
+                
+                if (mobileModal) mobileModal.classList.add('hidden');
+                if (desktopModal) desktopModal.classList.remove('hidden');
+                if (modalContent) modalContent.innerHTML = this.generateDesktopCheckoutContent();
+            }
+
+            generateMobileCheckoutContent() {
+                const orderSummary = this.generateOrderSummary();
+                const totalPrice = this.state.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+                
+                return `
+                    <div class="flex items-center justify-between px-4 py-3 border-b border-slate-200 bg-white rounded-t-2xl">
+                        <h2 class="text-base font-semibold text-slate-900">Finalizar Pedido</h2>
+                        <button class="text-slate-400 hover:text-slate-600 transition-colors p-1 hover:bg-slate-100 rounded-lg" onclick="app.closeCheckoutModal()">
+                            <i class="fas fa-times text-base"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="flex-1 overflow-y-auto">
+                        <form id="checkout-form" class="px-4 py-4 space-y-5">
+                            <!-- Dados do Cliente -->
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-3 flex items-center">
+                                    <i class="fas fa-user text-orange-500 mr-2 text-xs"></i>
+                                    Seus dados
+                                </h3>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-700 mb-1">Nome completo *</label>
+                                        <input type="text" name="customerName" required class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm" placeholder="Digite seu nome">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-700 mb-1">Telefone para contato *</label>
+                                        <input type="tel" name="customerPhone" required class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm" placeholder="(11) 99999-9999">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Forma de Recebimento -->
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-3 flex items-center">
+                                    <i class="fas fa-truck text-orange-500 mr-2 text-xs"></i>
+                                    Como quer receber?
+                                </h3>
+                                <div class="space-y-2">
+                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="deliveryMethod" value="delivery" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <div>
+                                                <div class="text-sm font-medium text-slate-900">🚚 Entrega</div>
+                                                <div class="text-xs text-slate-500">Receba em casa</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="deliveryMethod" value="pickup" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <div>
+                                                <div class="text-sm font-medium text-slate-900">🏪 Retirada</div>
+                                                <div class="text-xs text-slate-500">Busque no balcão</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="delivery-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="deliveryMethod" value="dine-in" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <div>
+                                                <div class="text-sm font-medium text-slate-900">🍽️ No local</div>
+                                                <div class="text-xs text-slate-500">Consumir no estabelecimento</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Forma de Pagamento -->
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-3 flex items-center">
+                                    <i class="fas fa-credit-card text-orange-500 mr-2 text-xs"></i>
+                                    Como quer pagar?
+                                </h3>
+                                <div class="space-y-2">
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="paymentMethod" value="pix" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <div>
+                                                <div class="text-sm font-medium text-slate-900">💳 Pix</div>
+                                                <div class="text-xs text-slate-500">Online e instantâneo</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="paymentMethod" value="card-online" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <div>
+                                                <div class="text-sm font-medium text-slate-900">💻 Cartão online</div>
+                                                <div class="text-xs text-slate-500">Instantâneo e seguro</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="paymentMethod" value="cash" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <div>
+                                                <div class="text-sm font-medium text-slate-900">💵 Dinheiro</div>
+                                                <div class="text-xs text-slate-500">Em espécie</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="payment-option flex items-center justify-between p-3 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="radio" name="paymentMethod" value="card-machine" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                            <div>
+                                                <div class="text-sm font-medium text-slate-900">💳 Maquininha</div>
+                                                <div class="text-xs text-slate-500">Débito ou crédito</div>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Resumo do Pedido -->
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-3 flex items-center">
+                                    <i class="fas fa-receipt text-orange-500 mr-2 text-xs"></i>
+                                    Resumo do pedido
+                                </h3>
+                                <div class="bg-slate-50 rounded-lg p-3 border border-slate-200">
+                                    ${orderSummary}
+                                    <div class="border-t border-slate-200 pt-2 mt-2">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-semibold text-slate-900">Total:</span>
+                                            <span class="text-sm font-bold text-orange-600">R$ ${this.formatPrice(totalPrice)}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Observações -->
+                            <div>
+                                <h3 class="text-sm font-semibold text-slate-900 mb-3 flex items-center">
+                                    <i class="fas fa-comment text-orange-500 mr-2 text-xs"></i>
+                                    Alguma observação?
+                                </h3>
+                                <textarea name="observations" rows="3" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm resize-none" placeholder="Ex: Sem cebola, ponto da carne, etc..."></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="border-t border-slate-200 p-4 bg-slate-50/50">
+                        <button type="submit" form="checkout-form" class="w-full btn-primary text-white font-medium py-3 rounded-lg transition-all shadow-sm text-sm" onclick="app.submitOrder(event)">
+                            <i class="fas fa-check mr-2 text-xs"></i>Confirmar Pedido • R$ ${this.formatPrice(totalPrice)}
+                        </button>
+                    </div>
+                `;
+            }
+
+            generateDesktopCheckoutContent() {
+                const orderSummary = this.generateOrderSummary();
+                const totalPrice = this.state.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+                
+                return `
+                    <div class="flex items-center justify-between p-6 border-b border-slate-200">
+                        <h2 class="text-xl font-semibold text-slate-900">Finalizar Pedido</h2>
+                        <button class="text-slate-400 hover:text-slate-600 transition-colors p-2 hover:bg-slate-100 rounded-lg" onclick="app.closeCheckoutModal()">
+                            <i class="fas fa-times text-base"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="flex-1 overflow-y-auto p-6 custom-scrollbar">
+                        <form id="checkout-form" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div class="space-y-6">
+                                <!-- Dados do Cliente -->
+                                <div>
+                                    <h3 class="text-base font-semibold text-slate-900 mb-4 flex items-center">
+                                        <i class="fas fa-user text-orange-500 mr-2"></i>
+                                        Seus dados
+                                    </h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate-700 mb-2">Nome completo *</label>
+                                            <input type="text" name="customerName" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all" placeholder="Digite seu nome">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate-700 mb-2">Telefone para contato *</label>
+                                            <input type="tel" name="customerPhone" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all" placeholder="(11) 99999-9999">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Forma de Recebimento -->
+                                <div>
+                                    <h3 class="text-base font-semibold text-slate-900 mb-4 flex items-center">
+                                        <i class="fas fa-truck text-orange-500 mr-2"></i>
+                                        Como quer receber?
+                                    </h3>
+                                    <div class="space-y-3">
+                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                            <div class="flex items-center space-x-4">
+                                                <input type="radio" name="deliveryMethod" value="delivery" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <div>
+                                                    <div class="font-medium text-slate-900">🚚 Entrega</div>
+                                                    <div class="text-sm text-slate-500">Receba em casa</div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                            <div class="flex items-center space-x-4">
+                                                <input type="radio" name="deliveryMethod" value="pickup" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <div>
+                                                    <div class="font-medium text-slate-900">🏪 Retirada</div>
+                                                    <div class="text-sm text-slate-500">Busque no balcão</div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <label class="delivery-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                            <div class="flex items-center space-x-4">
+                                                <input type="radio" name="deliveryMethod" value="dine-in" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <div>
+                                                    <div class="font-medium text-slate-900">🍽️ No local</div>
+                                                    <div class="text-sm text-slate-500">Consumir no estabelecimento</div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Forma de Pagamento -->
+                                <div>
+                                    <h3 class="text-base font-semibold text-slate-900 mb-4 flex items-center">
+                                        <i class="fas fa-credit-card text-orange-500 mr-2"></i>
+                                        Como quer pagar?
+                                    </h3>
+                                    <div class="space-y-3">
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                            <div class="flex items-center space-x-4">
+                                                <input type="radio" name="paymentMethod" value="pix" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <div>
+                                                    <div class="font-medium text-slate-900">💳 Pix</div>
+                                                    <div class="text-sm text-slate-500">Online e instantâneo</div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                            <div class="flex items-center space-x-4">
+                                                <input type="radio" name="paymentMethod" value="card-online" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <div>
+                                                    <div class="font-medium text-slate-900">💻 Cartão online</div>
+                                                    <div class="text-sm text-slate-500">Instantâneo e seguro</div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                            <div class="flex items-center space-x-4">
+                                                <input type="radio" name="paymentMethod" value="cash" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <div>
+                                                    <div class="font-medium text-slate-900">💵 Dinheiro</div>
+                                                    <div class="text-sm text-slate-500">Em espécie</div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                        <label class="payment-option flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-300 hover:bg-orange-50/50 transition-all">
+                                            <div class="flex items-center space-x-4">
+                                                <input type="radio" name="paymentMethod" value="card-machine" class="w-4 h-4 text-orange-500 border-slate-300 focus:ring-orange-500/20">
+                                                <div>
+                                                    <div class="font-medium text-slate-900">💳 Maquininha</div>
+                                                    <div class="text-sm text-slate-500">Débito ou crédito</div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Observações -->
+                                <div>
+                                    <h3 class="text-base font-semibold text-slate-900 mb-4 flex items-center">
+                                        <i class="fas fa-comment text-orange-500 mr-2"></i>
+                                        Alguma observação?
+                                    </h3>
+                                    <textarea name="observations" rows="4" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all resize-none" placeholder="Ex: Sem cebola, ponto da carne, etc..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <!-- Resumo do Pedido -->
+                                <div>
+                                    <h3 class="text-base font-semibold text-slate-900 mb-4 flex items-center">
+                                        <i class="fas fa-receipt text-orange-500 mr-2"></i>
+                                        Resumo do pedido
+                                    </h3>
+                                    <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                                        ${orderSummary}
+                                        <div class="border-t border-slate-200 pt-3 mt-3">
+                                            <div class="flex justify-between items-center">
+                                                <span class="font-semibold text-slate-900">Total:</span>
+                                                <span class="text-lg font-bold text-orange-600">R$ ${this.formatPrice(totalPrice)}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" form="checkout-form" class="w-full btn-primary text-white font-medium py-4 rounded-xl transition-all shadow-sm" onclick="app.submitOrder(event)">
+                                    <i class="fas fa-check mr-2"></i>Confirmar Pedido • R$ ${this.formatPrice(totalPrice)}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                `;
+            }
+
+            generateOrderSummary() {
+                return this.state.cart.map(item => {
+                    const optionsText = item.options && item.options.length > 0 
+                        ? `<div class="text-xs text-slate-500 mt-1">${item.options.join(', ')}</div>` 
+                        : '';
+                    
+                    return `
+                        <div class="flex justify-between items-start py-2">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 text-sm">
+                                    <span class="font-medium text-slate-900">${item.quantity}x</span>
+                                    <span class="text-slate-900">${item.name}</span>
+                                </div>
+                                ${optionsText}
+                            </div>
+                            <div class="text-sm font-semibold text-slate-900 ml-3">
+                                R$ ${this.formatPrice(item.totalPrice)}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            submitOrder(event) {
+                event.preventDefault();
+                
+                const form = document.getElementById('checkout-form');
+                const formData = new FormData(form);
+                
+                // Validate required fields
+                const customerName = formData.get('customerName');
+                const customerPhone = formData.get('customerPhone');
+                const deliveryMethod = formData.get('deliveryMethod');
+                const paymentMethod = formData.get('paymentMethod');
+                
+                if (!customerName || !customerPhone || !deliveryMethod || !paymentMethod) {
+                    this.showToast('Por favor, preencha todos os campos obrigatórios', 'warning');
+                    return;
+                }
+                
+                // Create order object
+                const order = {
+                    id: Date.now(),
+                    customer: {
+                        name: customerName,
+                        phone: customerPhone
+                    },
+                    delivery: {
+                        method: deliveryMethod,
+                        methodName: this.getDeliveryMethodName(deliveryMethod)
+                    },
+                    payment: {
+                        method: paymentMethod,
+                        methodName: this.getPaymentMethodName(paymentMethod)
+                    },
+                    items: [...this.state.cart],
+                    total: this.state.cart.reduce((sum, item) => sum + item.totalPrice, 0),
+                    observations: formData.get('observations') || '',
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Simulate order processing
+                this.processOrder(order);
+            }
+
+            getDeliveryMethodName(method) {
+                const methods = {
+                    'delivery': 'Entrega',
+                    'pickup': 'Retirada',
+                    'dine-in': 'No local'
+                };
+                return methods[method] || method;
+            }
+
+            getPaymentMethodName(method) {
+                const methods = {
+                    'pix': 'Pix',
+                    'card-online': 'Cartão online',
+                    'cash': 'Dinheiro',
+                    'card-machine': 'Maquininha'
+                };
+                return methods[method] || method;
+            }
+
+            processOrder(order) {
+                // Show success message
+                this.showToast('Pedido enviado com sucesso!', 'success');
+                
+                // Clear cart
+                this.state.cart = [];
+                this.updateCartDisplay();
+                
+                // Close modal
+                this.closeCheckoutModal();
+                
+                // In a real app, you would send this to your backend
+                console.log('Order processed:', order);
             }
 
             closeCheckoutModal() {
-                // Placeholder for checkout modal close
+                const modal = document.getElementById('checkout-modal');
+                if (!modal) return;
+                
+                const isMobile = window.innerWidth < 640;
+                
+                if (isMobile) {
+                    const mobileContent = document.getElementById('checkout-modal-content-mobile');
+                    if (mobileContent) mobileContent.classList.add('translate-y-full');
+                    setTimeout(() => modal.classList.add('hidden'), 300);
+                } else {
+                    modal.classList.add('hidden');
+                }
             }
 
             // Toast notifications
@@ -1758,5 +2226,5 @@
         // Initialize the app
         const app = new MenuApp();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97607a11d01a210d',t:'MTc1NjM0OTE3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976088390015e109',t:'MTc1NjM0OTc1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
