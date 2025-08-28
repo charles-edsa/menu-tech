@@ -43,6 +43,15 @@
             background: #ea580c;
             border-color: #ea580c;
         }
+        
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen">
@@ -181,48 +190,48 @@
                 <!-- Header -->
                 <div class="flex items-center justify-between p-5 border-b border-slate-100">
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                            <span class="text-lg">🍽️</span>
-                        </div>
-                        <div>
-                            <h2 class="text-base font-medium text-slate-900">Restaurante Sabor</h2>
-                            <div class="flex items-center space-x-2 mt-0.5">
-                                <div class="flex items-center space-x-1">
-                                    <span class="text-xs text-slate-600">4.8</span>
-                                    <div class="flex space-x-0.5">
-                                        <i class="fas fa-star text-slate-400 text-xs"></i>
-                                        <i class="fas fa-star text-slate-400 text-xs"></i>
-                                        <i class="fas fa-star text-slate-400 text-xs"></i>
-                                        <i class="fas fa-star text-slate-400 text-xs"></i>
-                                        <i class="fas fa-star text-slate-400 text-xs"></i>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-slate-400">•</span>
-                                <span class="text-xs text-slate-500">324 avaliações</span>
-                            </div>
+                        <h2 class="text-base font-medium text-slate-900">Restaurante Sabor</h2>
+                        <span class="text-slate-300">•</span>
+                        <div class="flex items-center space-x-2">
+                            <a href="#" class="text-slate-500 hover:text-slate-700 transition-colors">
+                                <i class="fab fa-instagram text-sm"></i>
+                            </a>
+                            <a href="#" class="text-slate-500 hover:text-slate-700 transition-colors">
+                                <i class="fab fa-facebook text-sm"></i>
+                            </a>
+                            <a href="#" class="text-slate-500 hover:text-slate-700 transition-colors">
+                                <i class="fab fa-whatsapp text-sm"></i>
+                            </a>
                         </div>
                     </div>
-                    <div class="flex items-center space-x-2">
-                        <a href="#" class="w-8 h-8 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors">
-                            <i class="fab fa-instagram text-slate-500 text-xs"></i>
-                        </a>
-                        <a href="#" class="w-8 h-8 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors">
-                            <i class="fab fa-facebook text-slate-500 text-xs"></i>
-                        </a>
-                        <a href="#" class="w-8 h-8 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors">
-                            <i class="fab fa-whatsapp text-slate-500 text-xs"></i>
-                        </a>
-                        <button onclick="closeRestaurantModal()" class="w-8 h-8 bg-slate-50 hover:bg-slate-100 rounded-lg flex items-center justify-center transition-colors ml-2">
-                            <i class="fas fa-times text-slate-500 text-xs"></i>
-                        </button>
-                    </div>
+                    <button onclick="closeRestaurantModal()" class="text-slate-400 hover:text-slate-600 transition-colors p-1 hover:bg-slate-100 rounded-lg">
+                        <i class="fas fa-times text-sm"></i>
+                    </button>
                 </div>
                 
                 <div class="flex-1 overflow-y-auto p-5 min-h-0 space-y-6">
+                    <!-- Logo e Avaliações -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center shadow-sm">
+                            <i class="fas fa-utensils text-white text-xs"></i>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <span class="text-xs text-slate-600">4.8</span>
+                            <div class="flex space-x-0.5">
+                                <i class="fas fa-star text-slate-400 text-xs"></i>
+                                <i class="fas fa-star text-slate-400 text-xs"></i>
+                                <i class="fas fa-star text-slate-400 text-xs"></i>
+                                <i class="fas fa-star text-slate-400 text-xs"></i>
+                                <i class="fas fa-star text-slate-400 text-xs"></i>
+                            </div>
+                        </div>
+                        <div class="text-xs text-slate-500">324 avaliações</div>
+                    </div>
+
                     <!-- Sobre Nós -->
                     <div>
                         <h4 class="text-sm font-medium text-slate-900 mb-3">Sobre Nós</h4>
-                        <div class="bg-slate-50 rounded-lg p-4 space-y-2">
+                        <div class="space-y-2">
                             <p class="text-xs text-slate-600 leading-relaxed">
                                 Há mais de 15 anos, o Restaurante Sabor tem sido o ponto de encontro favorito da cidade para quem busca sabores únicos e experiências inesquecíveis. Nossa paixão pela culinária se reflete em cada prato, preparado com ingredientes frescos e selecionados.
                             </p>
@@ -235,26 +244,26 @@
                     <!-- Nosso Estabelecimento -->
                     <div>
                         <h4 class="text-sm font-medium text-slate-900 mb-3">Nosso Estabelecimento</h4>
-                        <div class="flex space-x-2 overflow-x-auto pb-1">
-                            <div class="flex-shrink-0 w-24 h-20 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
-                                <i class="fas fa-utensils text-slate-500 text-sm mb-1"></i>
-                                <span class="text-xs text-slate-600">Salão</span>
+                        <div class="flex space-x-3 overflow-x-auto scrollbar-hide" style="scrollbar-width: none; -ms-overflow-style: none;">
+                            <div class="flex-shrink-0 w-32 h-28 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
+                                <i class="fas fa-utensils text-slate-500 text-lg mb-2"></i>
+                                <span class="text-xs text-slate-600">Salão Principal</span>
                             </div>
-                            <div class="flex-shrink-0 w-24 h-20 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
-                                <i class="fas fa-fire text-slate-500 text-sm mb-1"></i>
+                            <div class="flex-shrink-0 w-32 h-28 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
+                                <i class="fas fa-fire text-slate-500 text-lg mb-2"></i>
                                 <span class="text-xs text-slate-600">Cozinha</span>
                             </div>
-                            <div class="flex-shrink-0 w-24 h-20 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
-                                <i class="fas fa-leaf text-slate-500 text-sm mb-1"></i>
-                                <span class="text-xs text-slate-600">Externa</span>
+                            <div class="flex-shrink-0 w-32 h-28 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
+                                <i class="fas fa-leaf text-slate-500 text-lg mb-2"></i>
+                                <span class="text-xs text-slate-600">Área Externa</span>
                             </div>
-                            <div class="flex-shrink-0 w-24 h-20 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
-                                <i class="fas fa-wine-glass text-slate-500 text-sm mb-1"></i>
+                            <div class="flex-shrink-0 w-32 h-28 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
+                                <i class="fas fa-wine-glass text-slate-500 text-lg mb-2"></i>
                                 <span class="text-xs text-slate-600">Bar</span>
                             </div>
-                            <div class="flex-shrink-0 w-24 h-20 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
-                                <i class="fas fa-users text-slate-500 text-sm mb-1"></i>
-                                <span class="text-xs text-slate-600">VIP</span>
+                            <div class="flex-shrink-0 w-32 h-28 bg-slate-50 rounded-lg flex flex-col items-center justify-center border border-slate-100 hover:border-slate-200 transition-colors">
+                                <i class="fas fa-users text-slate-500 text-lg mb-2"></i>
+                                <span class="text-xs text-slate-600">Área VIP</span>
                             </div>
                         </div>
                     </div>
@@ -263,12 +272,12 @@
                     <div>
                         <h4 class="text-sm font-medium text-slate-900 mb-3">Horários de Funcionamento</h4>
                         <div class="space-y-2">
-                            <div class="flex justify-between items-center p-3 bg-slate-900 text-white rounded-lg">
+                            <div class="flex justify-between items-center p-3 border-l-2 border-orange-500 bg-orange-50/50 rounded-lg">
                                 <div class="flex items-center space-x-2">
-                                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
-                                    <span class="text-xs font-medium">Hoje (Sexta-feira)</span>
+                                    <div class="w-1.5 h-1.5 bg-orange-500 rounded-full"></div>
+                                    <span class="text-xs font-medium text-slate-900">Hoje (Sexta-feira)</span>
                                 </div>
-                                <span class="text-xs">11:00 - 23:00</span>
+                                <span class="text-xs font-medium text-slate-900">11:00 - 23:00</span>
                             </div>
                             <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
                                 <span class="text-xs text-slate-600">Amanhã (Sábado)</span>
@@ -675,5 +684,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9765d928c7566493',t:'MTc1NjQwNTQ5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9765efe9a348e01b',t:'MTc1NjQwNjQyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
