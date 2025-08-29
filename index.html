@@ -204,10 +204,10 @@
 
     <!-- Profile Modal -->
     <div id="profile-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform translate-y-full transition-all duration-300" id="profile-modal-content" style="max-height: 85vh;">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl transform translate-y-full transition-all duration-300" id="profile-modal-content" style="max-height: 85vh;">
             
             <!-- Fixed Header -->
-            <div class="px-6 py-4 border-b border-slate-100 bg-white">
+            <div class="px-6 py-3 border-b border-slate-100 bg-white rounded-t-3xl">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
                         <h2 class="text-lg font-semibold text-slate-900">Restaurante Sabor</h2>
@@ -264,20 +264,20 @@
                         <div>
                             <h3 class="text-base font-semibold text-slate-900 mb-3">Nosso estabelecimento</h3>
                             <div class="flex space-x-3 overflow-x-auto scrollbar-hide pb-2">
-                                <div class="w-32 h-24 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex-shrink-0 flex items-center justify-center">
-                                    <span class="text-2xl">🏪</span>
+                                <div class="w-40 h-30 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                    <span class="text-3xl">🏪</span>
                                 </div>
-                                <div class="w-32 h-24 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex-shrink-0 flex items-center justify-center">
-                                    <span class="text-2xl">🍽️</span>
+                                <div class="w-40 h-30 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                    <span class="text-3xl">🍽️</span>
                                 </div>
-                                <div class="w-32 h-24 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex-shrink-0 flex items-center justify-center">
-                                    <span class="text-2xl">🌿</span>
+                                <div class="w-40 h-30 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                    <span class="text-3xl">🌿</span>
                                 </div>
-                                <div class="w-32 h-24 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex-shrink-0 flex items-center justify-center">
-                                    <span class="text-2xl">✨</span>
+                                <div class="w-40 h-30 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                    <span class="text-3xl">✨</span>
                                 </div>
-                                <div class="w-32 h-24 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex-shrink-0 flex items-center justify-center">
-                                    <span class="text-2xl">🎵</span>
+                                <div class="w-40 h-30 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                    <span class="text-3xl">🎵</span>
                                 </div>
                             </div>
                         </div>
@@ -307,7 +307,7 @@
             </div>
             
             <!-- Cart Items -->
-            <div id="cart-items" class="px-6 py-4 overflow-y-auto" style="max-height: calc(85vh - 140px);">
+            <div id="cart-items" class="px-6 py-4 overflow-y-auto" style="max-height: calc(85vh - 200px);">
                 <div class="text-center py-12">
                     <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-shopping-cart text-slate-400 text-xl"></i>
@@ -324,6 +324,7 @@
                     <span class="text-lg font-bold text-orange-600" id="cart-total">R$ 0,00</span>
                 </div>
                 <button id="checkout-btn" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled onclick="openCheckoutModal()">
+                    <i class="fas fa-credit-card mr-2"></i>
                     Finalizar Pedido
                 </button>
             </div>
@@ -332,10 +333,10 @@
 
     <!-- Product Modal -->
     <div id="product-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform translate-y-full transition-all duration-300" id="product-modal-content" style="max-height: 90vh;">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl transform translate-y-full transition-all duration-300" id="product-modal-content" style="max-height: 90vh;">
             
             <!-- Fixed Header -->
-            <div class="px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
+            <div class="px-6 py-3 border-b border-slate-100 bg-white sticky top-0 z-10 rounded-t-3xl">
                 <div class="flex items-center justify-between">
                     <h2 id="product-name" class="text-lg font-semibold text-slate-900">Nome do Produto</h2>
                     <button onclick="closeProductModal()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
@@ -404,10 +405,10 @@
 
     <!-- Checkout Modal -->
     <div id="checkout-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform translate-y-full transition-all duration-300" id="checkout-modal-content" style="max-height: 90vh;">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl transform translate-y-full transition-all duration-300" id="checkout-modal-content" style="max-height: 90vh;">
             
             <!-- Fixed Header -->
-            <div class="px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
+            <div class="px-6 py-3 border-b border-slate-100 bg-white sticky top-0 z-10 rounded-t-3xl">
                 <div class="flex items-center justify-between">
                     <h2 class="text-lg font-semibold text-slate-900">Finalizar Pedido</h2>
                     <button onclick="closeCheckoutModal()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
@@ -435,7 +436,7 @@
                             
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 mb-1">Telefone para contato *</label>
-                                <input type="tel" id="customer-phone" placeholder="(11) 98411-2233" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm">
+                                <input type="tel" id="customer-phone" placeholder="(11) 98411-2233" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm" oninput="formatPhoneNumber(this)">
                             </div>
                         </div>
                     </div>
@@ -749,6 +750,22 @@
             return price.toFixed(2).replace('.', ',');
         }
 
+        function formatPhoneNumber(input) {
+            let value = input.value.replace(/\D/g, '');
+            
+            if (value.length <= 11) {
+                if (value.length <= 2) {
+                    value = value.replace(/(\d{0,2})/, '($1');
+                } else if (value.length <= 7) {
+                    value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+                } else {
+                    value = value.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+                }
+            }
+            
+            input.value = value;
+        }
+
         function showToast(message) {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toast-message');
@@ -946,7 +963,7 @@
             // Opening hours for each day (0 = Sunday, 6 = Saturday)
             const hours = {
                 0: '12h às 22h', // Sunday
-                1: '18h às 23h', // Monday
+                1: 'Fechado', // Monday
                 2: '18h às 23h', // Tuesday
                 3: '18h às 23h', // Wednesday
                 4: '18h às 23h', // Thursday
@@ -1368,10 +1385,9 @@
                 optionElement.innerHTML = `
                     <div class="flex items-center space-x-3">
                         <input type="checkbox" id="optional-checkbox-${optionIndex}" class="option-checkbox" onchange="toggleOptional(${optionIndex})">
-                        <span class="text-sm font-medium text-slate-900">${option.name}</span>
+                        <span class="text-sm font-medium text-slate-900">${option.name} • <span class="text-orange-600">R$ ${formatPrice(option.price)}</span></span>
                     </div>
                     <div class="flex items-center space-x-3">
-                        <span class="text-sm font-medium text-orange-600">R$ ${formatPrice(option.price)}</span>
                         <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 hidden">
                             <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
                                 <i class="fas fa-minus text-slate-600 text-xs"></i>
@@ -1427,10 +1443,9 @@
                 optionElement.innerHTML = `
                     <div class="flex items-center space-x-3">
                         <input type="checkbox" id="optional-checkbox-${optionIndex}" class="option-checkbox" onchange="toggleOptional(${optionIndex})" ${isSelected ? 'checked' : ''}>
-                        <span class="text-sm font-medium text-slate-900">${option.name}</span>
+                        <span class="text-sm font-medium text-slate-900">${option.name} • <span class="text-orange-600">R$ ${formatPrice(option.price)}</span></span>
                     </div>
                     <div class="flex items-center space-x-3">
-                        <span class="text-sm font-medium text-orange-600">R$ ${formatPrice(option.price)}</span>
                         <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 ${isSelected ? '' : 'hidden'}">
                             <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
                                 <i class="fas fa-minus text-slate-600 text-xs"></i>
@@ -1868,5 +1883,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976e606ce2e86505',t:'MTc1NjQ5NDkyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976e8e2ab139e2b1',t:'MTc1NjQ5Njc5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
