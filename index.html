@@ -875,21 +875,82 @@
                 state.cart.forEach((item, index) => {
                     total += item.price * item.quantity;
                     
+                    // Build configuration text
+                    let configText = '';
+                    
+                    // Add required options to config text
+                    if (state.currentProduct && state.currentProduct.requiredOptions) {
+                        const product = menuData[Object.keys(menuData).find(cat => 
+                            menuData[cat].some(p => p.id === item.id)
+                        )].find(p => p.id === item.id);
+                        
+                        if (product && product.requiredOptions) {
+                            product.requiredOptions.forEach((optionGroup, groupIndex) => {
+                                const selectedOptionIndex = item.selectedRequiredOptions[groupIndex];
+                                if (selectedOptionIndex !== undefined) {
+                                    const selectedOption = optionGroup.options[selectedOptionIndex];
+                                    if (configText) configText += ' • ';
+                                    configText += selectedOption.name;
+                                }
+                            });
+                        }
+                    }
+                    
+                    // Add optional options to config text
+                    if (item.selectedOptionalOptions) {
+                        const product = menuData[Object.keys(menuData).find(cat => 
+                            menuData[cat].some(p => p.id === item.id)
+                        )].find(p => p.id === item.id);
+                        
+                        if (product && product.optionalOptions) {
+                            Object.keys(item.selectedOptionalOptions).forEach(optionIndex => {
+                                const quantity = item.selectedOptionalOptions[optionIndex];
+                                if (quantity > 0) {
+                                    const option = product.optionalOptions[optionIndex];
+                                    if (configText) configText += ' • ';
+                                    configText += `${option.name}${quantity > 1 ? ` (${quantity}x)` : ''}`;
+                                }
+                            });
+                        }
+                    }
+                    
                     const itemElement = document.createElement('div');
-                    itemElement.className = 'flex items-center justify-between py-3 border-b border-slate-100 last:border-b-0';
+                    itemElement.className = 'flex items-start space-x-4 py-4 border-b border-slate-100 last:border-b-0 cursor-pointer hover:bg-slate-50 transition-colors rounded-lg';
+                    itemElement.onclick = () => editCartItem(index);
                     itemElement.innerHTML = `
-                        <div class="flex items-center space-x-3">
-                            <span class="text-lg">${item.icon}</span>
-                            <div>
-                                <p class="text-sm font-medium text-slate-900">${item.name}</p>
-                                <p class="text-xs text-slate-600">R$ ${formatPrice(item.price)}</p>
-                            </div>
+                        <!-- Product Image -->
+                        <div class="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl">${item.icon}</span>
                         </div>
-                        <div class="flex items-center space-x-3">
-                            <span class="text-sm text-slate-600">${item.quantity}x</span>
-                            <button onclick="removeFromCart(${index})" class="w-7 h-7 rounded-full bg-red-100 hover:bg-red-200 flex items-center justify-center transition-colors">
-                                <i class="fas fa-times text-red-600 text-xs"></i>
+                        
+                        <!-- Product Details -->
+                        <div class="flex-1 min-w-0">
+                            <!-- Main product info -->
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="text-sm font-semibold text-slate-900">${item.quantity}</span>
+                                <span class="text-slate-400">•</span>
+                                <span class="text-sm font-semibold text-slate-900">${item.name}</span>
+                                <span class="text-slate-400">•</span>
+                                <span class="text-sm font-semibold text-slate-900">R$ ${formatPrice(item.price)}</span>
+                            </div>
+                            
+                            <!-- Configuration -->
+                            ${configText ? `<p class="text-xs text-slate-400 leading-relaxed">${configText}</p>` : ''}
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="flex flex-col items-end space-y-2">
+                            <!-- Remove button -->
+                            <button onclick="event.stopPropagation(); removeFromCart(${index})" class="flex items-center space-x-2 px-3 py-1.5 border border-red-200 rounded-lg hover:bg-red-50 transition-colors group">
+                                <i class="fas fa-trash text-red-500 text-xs"></i>
+                                <span class="text-xs font-medium text-red-500">Remover</span>
                             </button>
+                            
+                            <!-- Total value -->
+                            <div class="text-right">
+                                <span class="text-xs text-slate-500">Valor: </span>
+                                <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price * item.quantity)}</span>
+                            </div>
                         </div>
                     `;
                     cartItems.appendChild(itemElement);
@@ -905,6 +966,54 @@
             state.cart.splice(index, 1);
             updateCartDisplay();
             updateCartCount();
+        }
+
+        function editCartItem(index) {
+            const cartItem = state.cart[index];
+            
+            // Find the original product data
+            const product = findProductById(cartItem.id);
+            if (!product) return;
+            
+            // Store the cart item index for updating later
+            state.editingCartIndex = index;
+            
+            // Set up the modal with the cart item's configuration
+            state.currentProduct = product;
+            state.modalQuantity = cartItem.quantity;
+            state.selectedRequiredOptions = {...cartItem.selectedRequiredOptions};
+            state.selectedOptionalOptions = {...cartItem.selectedOptionalOptions};
+            
+            const modal = document.getElementById('product-modal');
+            const content = document.getElementById('product-modal-content');
+            
+            // Populate modal content
+            document.getElementById('product-icon').textContent = product.icon;
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-description').textContent = product.description;
+            document.getElementById('modal-quantity').textContent = state.modalQuantity;
+            
+            // Populate required options with saved selections
+            populateRequiredOptionsWithSelection(product);
+            
+            // Populate optional options with saved selections
+            populateOptionalOptionsWithSelection(product);
+            
+            // Update total price
+            updateModalTotalPrice();
+            
+            // Show modal
+            modal.classList.remove('pointer-events-none');
+            modal.classList.remove('opacity-0');
+            content.style.transform = 'translateY(0)';
+        }
+
+        function findProductById(id) {
+            for (const categoryName of Object.keys(menuData)) {
+                const product = menuData[categoryName].find(p => p.id === id);
+                if (product) return product;
+            }
+            return null;
         }
 
         function updateCartCount() {
@@ -954,6 +1063,9 @@
             
             modal.classList.add('opacity-0');
             content.style.transform = 'translateY(100%)';
+            
+            // Clear editing state
+            state.editingCartIndex = undefined;
             
             setTimeout(() => {
                 modal.classList.add('pointer-events-none');
@@ -1009,6 +1121,56 @@
             });
         }
 
+        function populateRequiredOptionsWithSelection(product) {
+            const container = document.getElementById('required-options-container');
+            container.innerHTML = '';
+            
+            if (!product.requiredOptions || product.requiredOptions.length === 0) {
+                return;
+            }
+            
+            product.requiredOptions.forEach((optionGroup, groupIndex) => {
+                const groupElement = document.createElement('div');
+                groupElement.className = 'space-y-3';
+                
+                groupElement.innerHTML = `
+                    <h3 class="text-base font-semibold text-slate-900">${optionGroup.name} <span class="text-red-500">*</span></h3>
+                    <div class="space-y-2" id="required-group-${groupIndex}">
+                    </div>
+                `;
+                
+                const optionsContainer = groupElement.querySelector(`#required-group-${groupIndex}`);
+                
+                optionGroup.options.forEach((option, optionIndex) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'flex items-center justify-between p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
+                    
+                    const priceText = option.price > 0 ? ` (+R$ ${formatPrice(option.price)})` : '';
+                    const isSelected = state.selectedRequiredOptions[groupIndex] === optionIndex;
+                    
+                    optionElement.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <input type="radio" name="required-${groupIndex}" value="${optionIndex}" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500" onchange="selectRequiredOption(${groupIndex}, ${optionIndex})" ${isSelected ? 'checked' : ''}>
+                            <span class="text-sm font-medium text-slate-900">${option.name}</span>
+                        </div>
+                        ${option.price > 0 ? `<span class="text-sm font-medium text-orange-600">${priceText}</span>` : ''}
+                    `;
+                    
+                    optionElement.onclick = (e) => {
+                        if (e.target.type !== 'radio') {
+                            const radio = optionElement.querySelector('input[type="radio"]');
+                            radio.checked = true;
+                            selectRequiredOption(groupIndex, optionIndex);
+                        }
+                    };
+                    
+                    optionsContainer.appendChild(optionElement);
+                });
+                
+                container.appendChild(groupElement);
+            });
+        }
+
         function populateOptionalOptions(product) {
             const container = document.getElementById('optional-options-container');
             container.innerHTML = '';
@@ -1044,6 +1206,65 @@
                                 <i class="fas fa-minus text-slate-600 text-xs"></i>
                             </button>
                             <span id="optional-quantity-${optionIndex}" class="text-sm font-semibold text-slate-900 min-w-[1rem] text-center">1</span>
+                            <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-7 h-7 rounded-full bg-orange-600 hover:bg-orange-700 flex items-center justify-center transition-colors">
+                                <i class="fas fa-plus text-white text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                optionElement.onclick = (e) => {
+                    if (e.target.type !== 'checkbox' && !e.target.closest('button')) {
+                        const checkbox = optionElement.querySelector('input[type="checkbox"]');
+                        checkbox.checked = !checkbox.checked;
+                        toggleOptional(optionIndex);
+                    }
+                };
+                
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            container.appendChild(groupElement);
+        }
+
+        function populateOptionalOptionsWithSelection(product) {
+            const container = document.getElementById('optional-options-container');
+            container.innerHTML = '';
+            
+            if (!product.optionalOptions || product.optionalOptions.length === 0) {
+                return;
+            }
+            
+            const groupElement = document.createElement('div');
+            groupElement.className = 'space-y-3';
+            
+            groupElement.innerHTML = `
+                <h3 class="text-base font-semibold text-slate-900">Opcionais</h3>
+                <div class="space-y-2" id="optional-options">
+                </div>
+            `;
+            
+            const optionsContainer = groupElement.querySelector('#optional-options');
+            
+            product.optionalOptions.forEach((option, optionIndex) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'flex items-center justify-between p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
+                
+                const savedQuantity = state.selectedOptionalOptions[optionIndex] || 0;
+                const isSelected = savedQuantity > 0;
+                
+                optionElement.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" id="optional-checkbox-${optionIndex}" class="option-checkbox" onchange="toggleOptional(${optionIndex})" ${isSelected ? 'checked' : ''}>
+                        <span class="text-sm font-medium text-slate-900">${option.name}</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-medium text-orange-600">R$ ${formatPrice(option.price)}</span>
+                        <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 ${isSelected ? '' : 'hidden'}">
+                            <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
+                                <i class="fas fa-minus text-slate-600 text-xs"></i>
+                            </button>
+                            <span id="optional-quantity-${optionIndex}" class="text-sm font-semibold text-slate-900 min-w-[1rem] text-center">${savedQuantity || 1}</span>
                             <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-7 h-7 rounded-full bg-orange-600 hover:bg-orange-700 flex items-center justify-center transition-colors">
                                 <i class="fas fa-plus text-white text-xs"></i>
                             </button>
@@ -1194,12 +1415,21 @@
                 selectedOptionalOptions: {...state.selectedOptionalOptions}
             };
             
-            // Add to cart
-            state.cart.push(cartItem);
+            // Check if we're editing an existing item
+            if (state.editingCartIndex !== undefined) {
+                // Update existing item
+                state.cart[state.editingCartIndex] = cartItem;
+                state.editingCartIndex = undefined;
+                showToast('Produto atualizado no carrinho!');
+            } else {
+                // Add new item to cart
+                state.cart.push(cartItem);
+                showToast('Produto adicionado ao carrinho!');
+            }
             
             // Update UI
             updateCartCount();
-            showToast('Produto adicionado ao carrinho!');
+            updateCartDisplay();
             closeProductModal();
         }
 
@@ -1231,5 +1461,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d78d90701dd50',t:'MTc1NjQ4NTQzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d9406a16a64f3',t:'MTc1NjQ4NjU0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
