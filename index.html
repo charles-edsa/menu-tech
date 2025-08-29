@@ -1,1 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante Sabor - Cardápio Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .premium-card {
+            transition: all 0.3s ease;
+        }
+        
+        .premium-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: #f97316;
+            border: 1px solid #f97316;
+            color: white;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #ea580c;
+            border-color: #ea580c;
+        }
+        
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .option-checkbox {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option-checkbox:checked {
+            background: #f97316;
+            border-color: #f97316;
+        }
+        
+        .option-checkbox:checked::after {
+            content: '✓';
+            display: block;
+            color: white;
+            font-size: 12px;
+            text-align: center;
+            line-height: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <!-- Hero Section -->
+    <div class="relative h-44 sm:h-56 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center text-white px-4">
+                <div class="text-4xl sm:text-5xl mb-3">🍽️</div>
+                <h1 class="text-xl sm:text-2xl font-semibold mb-1">Restaurante Sabor</h1>
+                <p class="text-xs sm:text-sm text-slate-200">Sabores únicos, experiências inesquecíveis</p>
+            </div>
+        </div>
+    </div>
 
+    <!-- Status Bar -->
+    <div class="bg-gradient-to-r from-emerald-50 to-green-50 border-b border-emerald-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center py-2.5">
+                <div class="flex items-center space-x-2">
+                    <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
+                    <span class="text-xs text-emerald-700 font-medium">Aberto agora - Pedidos até 23h</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-40 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-14">
+                <button class="flex items-center space-x-3 hover:bg-slate-50 rounded-lg p-2 -m-2 transition-colors">
+                    <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center shadow-sm">
+                        <i class="fas fa-utensils text-white text-xs"></i>
+                    </div>
+                    <div class="text-left">
+                        <h1 class="text-base font-semibold text-slate-900">Restaurante Sabor</h1>
+                        <p class="text-xs text-slate-500">Delivery • Local • Retirada</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-slate-400 text-xs ml-2"></i>
+                </button>
+                
+                <button class="relative btn-primary px-4 py-2 rounded-lg text-sm font-medium shadow-sm">
+                    <i class="fas fa-shopping-cart mr-1.5 text-xs"></i>
+                    Carrinho
+                    <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center hidden font-semibold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="bg-white border-b border-slate-100 px-4 py-3 sticky top-14 z-30">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-slate-400 text-sm"></i>
+                </div>
+                <input 
+                    type="text" 
+                    id="search-input"
+                    placeholder="Buscar hambúrguer..." 
+                    class="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm bg-slate-50/50"
+                    oninput="handleSearch()"
+                >
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-5">
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold text-slate-800 mb-4">🍔 Nossos Hambúrguers</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="menu-items">
+            <!-- Menu items will be populated by JavaScript -->
+        </div>
+    </main>
+
+
+
+
+
+
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 translate-y-[calc(100%+2rem)] bg-gray-900 text-white px-6 py-3 rounded-xl shadow-2xl transition-all duration-300 z-50">
+        <div class="flex items-center space-x-3">
+            <i class="fas fa-check-circle text-green-400"></i>
+            <span id="toast-message" class="font-medium">Produto adicionado ao carrinho!</span>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let state = {
+            cart: [],
+            currentSearchTerm: '',
+            currentProduct: null,
+            modalQuantity: 1,
+            selectedRequiredOptions: {},
+            selectedOptionalOptions: []
+        };
+
+        // Menu data - Apenas hambúrguers
+        const menuData = [
+            { 
+                id: 1, 
+                name: "X-Salada", 
+                description: "Hambúrguer bovino, queijo, alface, tomate, cebola e maionese", 
+                price: 18.90, 
+                icon: "🥗",
+                requiredOptions: [
+                    {
+                        name: "Ponto da Carne",
+                        options: [
+                            { name: "Mal passado", price: 0 },
+                            { name: "Ao ponto", price: 0 },
+                            { name: "Bem passado", price: 0 }
+                        ]
+                    }
+                ],
+                optionalOptions: [
+                    { name: "Bacon extra", price: 3.50 },
+                    { name: "Queijo extra", price: 2.50 },
+                    { name: "Batata frita", price: 5.90 },
+                    { name: "Molho especial", price: 1.50 }
+                ]
+            },
+            { 
+                id: 2, 
+                name: "X-Bacon", 
+                description: "Hambúrguer bovino, queijo, bacon crocante, alface, tomate e maionese", 
+                price: 22.90, 
+                icon: "🥓",
+                requiredOptions: [
+                    {
+                        name: "Ponto da Carne",
+                        options: [
+                            { name: "Mal passado", price: 0 },
+                            { name: "Ao ponto", price: 0 },
+                            { name: "Bem passado", price: 0 }
+                        ]
+                    }
+                ],
+                optionalOptions: [
+                    { name: "Bacon extra", price: 3.50 },
+                    { name: "Queijo extra", price: 2.50 },
+                    { name: "Batata frita", price: 5.90 },
+                    { name: "Ovo frito", price: 2.00 }
+                ]
+            },
+            { 
+                id: 3, 
+                name: "X-Egg", 
+                description: "Hambúrguer bovino, queijo, ovo frito, alface, tomate e maionese", 
+                price: 20.90, 
+                icon: "🍳",
+                requiredOptions: [
+                    {
+                        name: "Ponto da Carne",
+                        options: [
+                            { name: "Mal passado", price: 0 },
+                            { name: "Ao ponto", price: 0 },
+                            { name: "Bem passado", price: 0 }
+                        ]
+                    }
+                ],
+                optionalOptions: [
+                    { name: "Bacon", price: 3.50 },
+                    { name: "Queijo extra", price: 2.50 },
+                    { name: "Batata frita", price: 5.90 }
+                ]
+            },
+            { 
+                id: 4, 
+                name: "X-Tudo", 
+                description: "Hambúrguer bovino, queijo, bacon, ovo, alface, tomate, cebola e maionese", 
+                price: 26.90, 
+                icon: "🍔",
+                requiredOptions: [
+                    {
+                        name: "Ponto da Carne",
+                        options: [
+                            { name: "Mal passado", price: 0 },
+                            { name: "Ao ponto", price: 0 },
+                            { name: "Bem passado", price: 0 }
+                        ]
+                    }
+                ],
+                optionalOptions: [
+                    { name: "Batata frita", price: 5.90 },
+                    { name: "Molho especial", price: 1.50 },
+                    { name: "Cebola caramelizada", price: 2.00 }
+                ]
+            },
+            { 
+                id: 5, 
+                name: "X-Frango", 
+                description: "Peito de frango grelhado, queijo, alface, tomate e maionese", 
+                price: 19.90, 
+                icon: "🐔",
+                optionalOptions: [
+                    { name: "Bacon", price: 3.50 },
+                    { name: "Queijo extra", price: 2.50 },
+                    { name: "Batata frita", price: 5.90 },
+                    { name: "Molho barbecue", price: 1.50 }
+                ]
+            },
+            { 
+                id: 6, 
+                name: "X-Vegano", 
+                description: "Hambúrguer de grão-de-bico, queijo vegano, alface, tomate e molho especial", 
+                price: 21.90, 
+                icon: "🌱",
+                optionalOptions: [
+                    { name: "Queijo vegano extra", price: 3.00 },
+                    { name: "Batata doce frita", price: 6.50 },
+                    { name: "Molho tahine", price: 2.00 },
+                    { name: "Rúcula", price: 1.50 }
+                ]
+            }
+        ];
+
+        // Utility functions
+        function formatPrice(price) {
+            return price.toFixed(2).replace('.', ',');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+            
+            setTimeout(() => {
+                toast.style.transform = 'translateX(-50%) translateY(calc(100% + 2rem))';
+            }, 3000);
+        }
+
+        // Search functionality
+        function handleSearch() {
+            const searchInput = document.getElementById('search-input');
+            state.currentSearchTerm = searchInput.value.trim().toLowerCase();
+            renderMenuItems();
+        }
+
+        // Render functions
+        function renderMenuItems() {
+            const container = document.getElementById('menu-items');
+            container.innerHTML = '';
+            
+            let itemsToShow = menuData;
+            
+            if (state.currentSearchTerm) {
+                itemsToShow = itemsToShow.filter(item => 
+                    item.name.toLowerCase().includes(state.currentSearchTerm) ||
+                    item.description.toLowerCase().includes(state.currentSearchTerm)
+                );
+            }
+
+            itemsToShow.forEach(item => {
+                container.appendChild(createItemElement(item));
+            });
+        }
+
+        function createItemElement(item) {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'bg-white rounded-xl shadow-sm premium-card cursor-pointer fade-in border border-slate-100';
+            // Product modal removed - click disabled for now
+
+            itemElement.innerHTML = `
+                <div class="p-4">
+                    <div class="w-full aspect-[5/2] bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg overflow-hidden mb-3 flex items-center justify-center">
+                        <span class="text-4xl">${item.icon}</span>
+                    </div>
+                    <div class="mb-2">
+                        <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
+                        <span class="text-slate-300 mx-2">•</span>
+                        <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                    </div>
+                    <p class="text-slate-600 text-xs leading-relaxed">${item.description}</p>
+                </div>
+            `;
+
+            return itemElement;
+        }
+
+
+
+
+
+
+
+        // Initialize the app
+        function init() {
+            renderMenuItems();
+        }
+
+        // Start the app when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976c2a1ce4f83ea7',t:'MTc1NjQ3MTcyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
