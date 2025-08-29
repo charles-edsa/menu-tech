@@ -78,6 +78,45 @@
             line-height: 14px;
             font-weight: bold;
         }
+
+        .category-btn {
+            transition: all 0.2s ease;
+            scroll-snap-align: start;
+            border-radius: 9999px;
+        }
+        
+        .category-btn.active {
+            background: #f97316;
+            color: white;
+            box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+            border: 1px solid #f97316;
+        }
+        
+        .category-btn:not(.active) {
+            background: white;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .category-btn:not(.active):hover {
+            background: #fef7f0;
+            color: #f97316;
+            border-color: #fed7aa;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .text-orange-600 {
+            color: #f97316 !important;
+        }
+        
+        .focus\:ring-orange-500\/20:focus {
+            --tw-ring-color: rgba(249, 115, 22, 0.2);
+        }
+        
+        .focus\:border-orange-500:focus {
+            border-color: #f97316;
+        }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen">
@@ -139,7 +178,7 @@
                 <input 
                     type="text" 
                     id="search-input"
-                    placeholder="Buscar hambúrguer..." 
+                    placeholder="Buscar hambúrguer, pizza..." 
                     class="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm bg-slate-50/50"
                     oninput="handleSearch()"
                 >
@@ -147,21 +186,21 @@
         </div>
     </div>
 
+    <!-- Category Navigation -->
+    <div class="bg-white border-b border-slate-100 sticky top-28 z-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex space-x-1 py-3 overflow-x-auto scrollbar-hide" id="category-nav">
+                <!-- Category buttons will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 py-5">
-        <div class="mb-6">
-            <h2 class="text-lg font-semibold text-slate-800 mb-4">🍔 Nossos Hambúrguers</h2>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="menu-items">
-            <!-- Menu items will be populated by JavaScript -->
+        <div id="menu-categories">
+            <!-- Categories will be populated by JavaScript -->
         </div>
     </main>
-
-
-
-
-
-
 
     <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 translate-y-[calc(100%+2rem)] bg-gray-900 text-white px-6 py-3 rounded-xl shadow-2xl transition-all duration-300 z-50">
@@ -179,128 +218,160 @@
             currentProduct: null,
             modalQuantity: 1,
             selectedRequiredOptions: {},
-            selectedOptionalOptions: []
+            selectedOptionalOptions: [],
+            activeCategory: null
         };
 
-        // Menu data - Apenas hambúrguers
-        const menuData = [
-            { 
-                id: 1, 
-                name: "X-Salada", 
-                description: "Hambúrguer bovino, queijo, alface, tomate, cebola e maionese", 
-                price: 18.90, 
-                icon: "🥗",
-                requiredOptions: [
-                    {
-                        name: "Ponto da Carne",
-                        options: [
-                            { name: "Mal passado", price: 0 },
-                            { name: "Ao ponto", price: 0 },
-                            { name: "Bem passado", price: 0 }
-                        ]
-                    }
-                ],
-                optionalOptions: [
-                    { name: "Bacon extra", price: 3.50 },
-                    { name: "Queijo extra", price: 2.50 },
-                    { name: "Batata frita", price: 5.90 },
-                    { name: "Molho especial", price: 1.50 }
-                ]
-            },
-            { 
-                id: 2, 
-                name: "X-Bacon", 
-                description: "Hambúrguer bovino, queijo, bacon crocante, alface, tomate e maionese", 
-                price: 22.90, 
-                icon: "🥓",
-                requiredOptions: [
-                    {
-                        name: "Ponto da Carne",
-                        options: [
-                            { name: "Mal passado", price: 0 },
-                            { name: "Ao ponto", price: 0 },
-                            { name: "Bem passado", price: 0 }
-                        ]
-                    }
-                ],
-                optionalOptions: [
-                    { name: "Bacon extra", price: 3.50 },
-                    { name: "Queijo extra", price: 2.50 },
-                    { name: "Batata frita", price: 5.90 },
-                    { name: "Ovo frito", price: 2.00 }
-                ]
-            },
-            { 
-                id: 3, 
-                name: "X-Egg", 
-                description: "Hambúrguer bovino, queijo, ovo frito, alface, tomate e maionese", 
-                price: 20.90, 
-                icon: "🍳",
-                requiredOptions: [
-                    {
-                        name: "Ponto da Carne",
-                        options: [
-                            { name: "Mal passado", price: 0 },
-                            { name: "Ao ponto", price: 0 },
-                            { name: "Bem passado", price: 0 }
-                        ]
-                    }
-                ],
-                optionalOptions: [
-                    { name: "Bacon", price: 3.50 },
-                    { name: "Queijo extra", price: 2.50 },
-                    { name: "Batata frita", price: 5.90 }
-                ]
-            },
-            { 
-                id: 4, 
-                name: "X-Tudo", 
-                description: "Hambúrguer bovino, queijo, bacon, ovo, alface, tomate, cebola e maionese", 
-                price: 26.90, 
-                icon: "🍔",
-                requiredOptions: [
-                    {
-                        name: "Ponto da Carne",
-                        options: [
-                            { name: "Mal passado", price: 0 },
-                            { name: "Ao ponto", price: 0 },
-                            { name: "Bem passado", price: 0 }
-                        ]
-                    }
-                ],
-                optionalOptions: [
-                    { name: "Batata frita", price: 5.90 },
-                    { name: "Molho especial", price: 1.50 },
-                    { name: "Cebola caramelizada", price: 2.00 }
-                ]
-            },
-            { 
-                id: 5, 
-                name: "X-Frango", 
-                description: "Peito de frango grelhado, queijo, alface, tomate e maionese", 
-                price: 19.90, 
-                icon: "🐔",
-                optionalOptions: [
-                    { name: "Bacon", price: 3.50 },
-                    { name: "Queijo extra", price: 2.50 },
-                    { name: "Batata frita", price: 5.90 },
-                    { name: "Molho barbecue", price: 1.50 }
-                ]
-            },
-            { 
-                id: 6, 
-                name: "X-Vegano", 
-                description: "Hambúrguer de grão-de-bico, queijo vegano, alface, tomate e molho especial", 
-                price: 21.90, 
-                icon: "🌱",
-                optionalOptions: [
-                    { name: "Queijo vegano extra", price: 3.00 },
-                    { name: "Batata doce frita", price: 6.50 },
-                    { name: "Molho tahine", price: 2.00 },
-                    { name: "Rúcula", price: 1.50 }
-                ]
-            }
-        ];
+        // Menu data organized by categories
+        const menuData = {
+            "Hambúrgueres": [
+                { 
+                    id: 1, 
+                    name: "X-Salada", 
+                    description: "Hambúrguer bovino, queijo, alface, tomate, cebola e maionese", 
+                    price: 18.90, 
+                    icon: "🥗",
+                    requiredOptions: [
+                        {
+                            name: "Ponto da Carne",
+                            options: [
+                                { name: "Mal passado", price: 0 },
+                                { name: "Ao ponto", price: 0 },
+                                { name: "Bem passado", price: 0 }
+                            ]
+                        }
+                    ],
+                    optionalOptions: [
+                        { name: "Bacon extra", price: 3.50 },
+                        { name: "Queijo extra", price: 2.50 },
+                        { name: "Batata frita", price: 5.90 },
+                        { name: "Molho especial", price: 1.50 }
+                    ]
+                },
+                { 
+                    id: 2, 
+                    name: "X-Bacon", 
+                    description: "Hambúrguer bovino, queijo, bacon crocante, alface, tomate e maionese", 
+                    price: 22.90, 
+                    icon: "🥓",
+                    requiredOptions: [
+                        {
+                            name: "Ponto da Carne",
+                            options: [
+                                { name: "Mal passado", price: 0 },
+                                { name: "Ao ponto", price: 0 },
+                                { name: "Bem passado", price: 0 }
+                            ]
+                        }
+                    ],
+                    optionalOptions: [
+                        { name: "Bacon extra", price: 3.50 },
+                        { name: "Queijo extra", price: 2.50 },
+                        { name: "Batata frita", price: 5.90 },
+                        { name: "Ovo frito", price: 2.00 }
+                    ]
+                },
+                { 
+                    id: 3, 
+                    name: "X-Tudo", 
+                    description: "Hambúrguer bovino, queijo, bacon, ovo, alface, tomate, cebola e maionese", 
+                    price: 26.90, 
+                    icon: "🍔",
+                    requiredOptions: [
+                        {
+                            name: "Ponto da Carne",
+                            options: [
+                                { name: "Mal passado", price: 0 },
+                                { name: "Ao ponto", price: 0 },
+                                { name: "Bem passado", price: 0 }
+                            ]
+                        }
+                    ],
+                    optionalOptions: [
+                        { name: "Batata frita", price: 5.90 },
+                        { name: "Molho especial", price: 1.50 },
+                        { name: "Cebola caramelizada", price: 2.00 }
+                    ]
+                }
+            ],
+            "Pizzas": [
+                { 
+                    id: 4, 
+                    name: "Pizza Pequena", 
+                    description: "Pizza tradicional com molho de tomate, queijo mussarela e orégano", 
+                    price: 25.90, 
+                    icon: "🍕",
+                    requiredOptions: [
+                        {
+                            name: "Sabor",
+                            options: [
+                                { name: "Margherita", price: 0 },
+                                { name: "Calabresa", price: 2.00 },
+                                { name: "Portuguesa", price: 3.00 },
+                                { name: "Frango com Catupiry", price: 4.00 }
+                            ]
+                        }
+                    ],
+                    optionalOptions: [
+                        { name: "Borda recheada", price: 5.00 },
+                        { name: "Queijo extra", price: 3.00 },
+                        { name: "Azeitona", price: 2.00 }
+                    ]
+                },
+                { 
+                    id: 5, 
+                    name: "Pizza Média", 
+                    description: "Pizza tradicional com molho de tomate, queijo mussarela e orégano", 
+                    price: 35.90, 
+                    icon: "🍕",
+                    requiredOptions: [
+                        {
+                            name: "Sabor",
+                            options: [
+                                { name: "Margherita", price: 0 },
+                                { name: "Calabresa", price: 3.00 },
+                                { name: "Portuguesa", price: 4.00 },
+                                { name: "Frango com Catupiry", price: 5.00 },
+                                { name: "Quatro Queijos", price: 6.00 }
+                            ]
+                        }
+                    ],
+                    optionalOptions: [
+                        { name: "Borda recheada", price: 7.00 },
+                        { name: "Queijo extra", price: 4.00 },
+                        { name: "Azeitona", price: 2.50 },
+                        { name: "Rúcula", price: 3.00 }
+                    ]
+                },
+                { 
+                    id: 6, 
+                    name: "Pizza Grande", 
+                    description: "Pizza tradicional com molho de tomate, queijo mussarela e orégano", 
+                    price: 45.90, 
+                    icon: "🍕",
+                    requiredOptions: [
+                        {
+                            name: "Sabor",
+                            options: [
+                                { name: "Margherita", price: 0 },
+                                { name: "Calabresa", price: 4.00 },
+                                { name: "Portuguesa", price: 5.00 },
+                                { name: "Frango com Catupiry", price: 6.00 },
+                                { name: "Quatro Queijos", price: 7.00 },
+                                { name: "Especial da Casa", price: 8.00 }
+                            ]
+                        }
+                    ],
+                    optionalOptions: [
+                        { name: "Borda recheada", price: 9.00 },
+                        { name: "Queijo extra", price: 5.00 },
+                        { name: "Azeitona", price: 3.00 },
+                        { name: "Rúcula", price: 3.50 },
+                        { name: "Tomate seco", price: 4.00 }
+                    ]
+                }
+            ]
+        };
 
         // Utility functions
         function formatPrice(price) {
@@ -323,32 +394,128 @@
         function handleSearch() {
             const searchInput = document.getElementById('search-input');
             state.currentSearchTerm = searchInput.value.trim().toLowerCase();
-            renderMenuItems();
+            
+            // Reset to "Todos" when searching
+            if (state.currentSearchTerm) {
+                state.activeCategory = 'Todos';
+            }
+            
+            renderCategoryNavigation();
+            renderMenuCategories();
+        }
+
+        // Category navigation
+        function selectCategory(categoryName) {
+            state.activeCategory = categoryName;
+            renderCategoryNavigation();
+            renderMenuCategories();
+            
+            // Scroll to top of menu when filtering
+            if (categoryName !== 'Todos') {
+                const menuElement = document.getElementById('menu-categories');
+                if (menuElement) {
+                    const headerHeight = 140; // Approximate height of sticky headers
+                    const elementPosition = menuElement.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
         }
 
         // Render functions
-        function renderMenuItems() {
-            const container = document.getElementById('menu-items');
+        function renderCategoryNavigation() {
+            const container = document.getElementById('category-nav');
             container.innerHTML = '';
             
-            let itemsToShow = menuData;
+            // Always show "Todos" button first
+            const allButton = document.createElement('button');
+            allButton.className = `category-btn px-4 py-2 text-sm font-medium whitespace-nowrap flex items-center space-x-2 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
+            allButton.innerHTML = `<span>🔥</span><span>Todos</span>`;
+            allButton.onclick = () => selectCategory('Todos');
+            container.appendChild(allButton);
             
-            if (state.currentSearchTerm) {
-                itemsToShow = itemsToShow.filter(item => 
-                    item.name.toLowerCase().includes(state.currentSearchTerm) ||
-                    item.description.toLowerCase().includes(state.currentSearchTerm)
-                );
-            }
-
-            itemsToShow.forEach(item => {
-                container.appendChild(createItemElement(item));
+            Object.keys(menuData).forEach(categoryName => {
+                let itemsToShow = menuData[categoryName];
+                
+                // Filter items based on search term
+                if (state.currentSearchTerm) {
+                    itemsToShow = itemsToShow.filter(item => 
+                        item.name.toLowerCase().includes(state.currentSearchTerm) ||
+                        item.description.toLowerCase().includes(state.currentSearchTerm)
+                    );
+                }
+                
+                // Only show category button if it has items to display
+                if (itemsToShow.length > 0) {
+                    const categoryIcon = categoryName === 'Hambúrgueres' ? '🍔' : '🍕';
+                    const button = document.createElement('button');
+                    button.className = `category-btn px-4 py-2 text-sm font-medium whitespace-nowrap flex items-center space-x-2 ${state.activeCategory === categoryName ? 'active' : ''}`;
+                    button.innerHTML = `<span>${categoryIcon}</span><span>${categoryName}</span>`;
+                    button.onclick = () => selectCategory(categoryName);
+                    container.appendChild(button);
+                }
             });
+        }
+
+        function renderMenuCategories() {
+            const container = document.getElementById('menu-categories');
+            container.innerHTML = '';
+            
+            Object.keys(menuData).forEach(categoryName => {
+                // Skip category if filtering and it's not the selected one
+                if (state.activeCategory && state.activeCategory !== 'Todos' && state.activeCategory !== categoryName) {
+                    return;
+                }
+                
+                let itemsToShow = menuData[categoryName];
+                
+                // Filter items based on search term
+                if (state.currentSearchTerm) {
+                    itemsToShow = itemsToShow.filter(item => 
+                        item.name.toLowerCase().includes(state.currentSearchTerm) ||
+                        item.description.toLowerCase().includes(state.currentSearchTerm)
+                    );
+                }
+                
+                // Only show category if it has items to display
+                if (itemsToShow.length > 0) {
+                    const categorySection = createCategorySection(categoryName, itemsToShow);
+                    container.appendChild(categorySection);
+                }
+            });
+        }
+        
+        function createCategorySection(categoryName, items) {
+            const section = document.createElement('div');
+            section.className = 'mb-8';
+            section.id = `category-${categoryName.toLowerCase().replace(/\s+/g, '-')}`;
+            
+            const categoryIcon = categoryName === 'Hambúrgueres' ? '🍔' : '🍕';
+            
+            section.innerHTML = `
+                <div class="mb-6">
+                    <div class="flex items-center mb-4">
+                        <h2 class="text-lg font-semibold text-slate-800 mr-4">${categoryIcon} ${categoryName}</h2>
+                        <div class="flex-1 h-px bg-gradient-to-r from-amber-300 to-transparent opacity-60"></div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="items-${categoryName.toLowerCase()}">
+                </div>
+            `;
+            
+            const itemsContainer = section.querySelector(`#items-${categoryName.toLowerCase()}`);
+            items.forEach(item => {
+                itemsContainer.appendChild(createItemElement(item));
+            });
+            
+            return section;
         }
 
         function createItemElement(item) {
             const itemElement = document.createElement('div');
             itemElement.className = 'bg-white rounded-xl shadow-sm premium-card cursor-pointer fade-in border border-slate-100';
-            // Product modal removed - click disabled for now
 
             itemElement.innerHTML = `
                 <div class="p-4">
@@ -367,19 +534,16 @@
             return itemElement;
         }
 
-
-
-
-
-
-
         // Initialize the app
         function init() {
-            renderMenuItems();
+            // Set "Todos" as active by default
+            state.activeCategory = 'Todos';
+            renderCategoryNavigation();
+            renderMenuCategories();
         }
 
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976c2a1ce4f83ea7',t:'MTc1NjQ3MTcyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d0cda11a550ef',t:'MTc1NjQ4MTAxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
