@@ -270,55 +270,36 @@
     </div>
 
     <!-- Cart Modal -->
-    <div id="cart-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full transform scale-95 transition-all duration-300" id="cart-modal-content">
-                <div class="p-6">
-                    <!-- Header -->
-                    <div class="flex items-center justify-between mb-6">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-shopping-cart text-white text-sm"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-xl font-semibold text-slate-900">Seu Carrinho</h2>
-                                <p class="text-sm text-slate-500" id="cart-items-count">0 itens</p>
-                            </div>
-                        </div>
-                        <button onclick="closeCartModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
-                            <i class="fas fa-times text-slate-600 text-sm"></i>
-                        </button>
+    <div id="cart-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform translate-y-full transition-all duration-300" id="cart-modal-content" style="max-height: 85vh;">
+            <!-- Header -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+                <h2 class="text-lg font-semibold text-slate-900">Seu pedido</h2>
+                <button onclick="closeCartModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
+                    <i class="fas fa-times text-slate-600 text-sm"></i>
+                </button>
+            </div>
+            
+            <!-- Cart Items -->
+            <div id="cart-items" class="px-6 py-4 overflow-y-auto" style="max-height: calc(85vh - 140px);">
+                <div class="text-center py-12">
+                    <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shopping-cart text-slate-400 text-xl"></i>
                     </div>
-                    
-                    <!-- Cart Items -->
-                    <div id="cart-items" class="space-y-3 mb-6 max-h-60 overflow-y-auto">
-                        <div class="text-center py-8">
-                            <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <i class="fas fa-shopping-cart text-slate-400 text-xl"></i>
-                            </div>
-                            <p class="text-slate-500 text-sm">Seu carrinho está vazio</p>
-                            <p class="text-slate-400 text-xs mt-1">Adicione alguns itens deliciosos!</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Total -->
-                    <div class="border-t border-slate-100 pt-4 mb-4" id="cart-total-section" style="display: none;">
-                        <div class="flex justify-between items-center">
-                            <span class="text-lg font-semibold text-slate-900">Total</span>
-                            <span class="text-lg font-bold text-orange-600" id="cart-total">R$ 0,00</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Actions -->
-                    <div class="space-y-2">
-                        <button id="checkout-btn" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                            Finalizar Pedido
-                        </button>
-                        <button onclick="closeCartModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-3 rounded-lg transition-colors">
-                            Continuar Comprando
-                        </button>
-                    </div>
+                    <p class="text-slate-500 text-sm">Seu carrinho está vazio</p>
+                    <p class="text-slate-400 text-xs mt-1">Adicione alguns itens deliciosos!</p>
                 </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="px-6 py-4 border-t border-slate-100 bg-white" id="cart-footer" style="display: none;">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-lg font-semibold text-slate-900">Total</span>
+                    <span class="text-lg font-bold text-orange-600" id="cart-total">R$ 0,00</span>
+                </div>
+                <button id="checkout-btn" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    Finalizar Pedido
+                </button>
             </div>
         </div>
     </div>
@@ -685,8 +666,7 @@
             
             modal.classList.remove('pointer-events-none');
             modal.classList.remove('opacity-0');
-            content.classList.remove('scale-95');
-            content.classList.add('scale-100');
+            content.style.transform = 'translateY(0)';
             
             updateCartDisplay();
         }
@@ -696,8 +676,7 @@
             const content = document.getElementById('cart-modal-content');
             
             modal.classList.add('opacity-0');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
+            content.style.transform = 'translateY(100%)';
             
             setTimeout(() => {
                 modal.classList.add('pointer-events-none');
@@ -706,23 +685,21 @@
 
         function updateCartDisplay() {
             const cartItems = document.getElementById('cart-items');
-            const cartItemsCount = document.getElementById('cart-items-count');
             const cartTotal = document.getElementById('cart-total');
-            const cartTotalSection = document.getElementById('cart-total-section');
+            const cartFooter = document.getElementById('cart-footer');
             const checkoutBtn = document.getElementById('checkout-btn');
             
             if (state.cart.length === 0) {
                 cartItems.innerHTML = `
-                    <div class="text-center py-8">
-                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <div class="text-center py-12">
+                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-shopping-cart text-slate-400 text-xl"></i>
                         </div>
                         <p class="text-slate-500 text-sm">Seu carrinho está vazio</p>
                         <p class="text-slate-400 text-xs mt-1">Adicione alguns itens deliciosos!</p>
                     </div>
                 `;
-                cartItemsCount.textContent = '0 itens';
-                cartTotalSection.style.display = 'none';
+                cartFooter.style.display = 'none';
                 checkoutBtn.disabled = true;
             } else {
                 let total = 0;
@@ -732,7 +709,7 @@
                     total += item.price * item.quantity;
                     
                     const itemElement = document.createElement('div');
-                    itemElement.className = 'flex items-center justify-between p-3 bg-slate-50 rounded-lg';
+                    itemElement.className = 'flex items-center justify-between py-3 border-b border-slate-100 last:border-b-0';
                     itemElement.innerHTML = `
                         <div class="flex items-center space-x-3">
                             <span class="text-lg">${item.icon}</span>
@@ -741,9 +718,9 @@
                                 <p class="text-xs text-slate-600">R$ ${formatPrice(item.price)}</p>
                             </div>
                         </div>
-                        <div class="flex items-center space-x-2">
+                        <div class="flex items-center space-x-3">
                             <span class="text-sm text-slate-600">${item.quantity}x</span>
-                            <button onclick="removeFromCart(${index})" class="w-6 h-6 rounded-full bg-red-100 hover:bg-red-200 flex items-center justify-center transition-colors">
+                            <button onclick="removeFromCart(${index})" class="w-7 h-7 rounded-full bg-red-100 hover:bg-red-200 flex items-center justify-center transition-colors">
                                 <i class="fas fa-times text-red-600 text-xs"></i>
                             </button>
                         </div>
@@ -751,9 +728,8 @@
                     cartItems.appendChild(itemElement);
                 });
                 
-                cartItemsCount.textContent = `${state.cart.length} ${state.cart.length === 1 ? 'item' : 'itens'}`;
                 cartTotal.textContent = `R$ ${formatPrice(total)}`;
-                cartTotalSection.style.display = 'block';
+                cartFooter.style.display = 'block';
                 checkoutBtn.disabled = false;
             }
         }
@@ -798,5 +774,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d1c24f474caa3',t:'MTc1NjQ4MTYzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d2952d450caa7',t:'MTc1NjQ4MjE3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
