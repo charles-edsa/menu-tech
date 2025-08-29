@@ -205,64 +205,92 @@
     <!-- Profile Modal -->
     <div id="profile-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full transform scale-95 transition-all duration-300" id="profile-modal-content">
-                <div class="p-6">
-                    <!-- Header -->
-                    <div class="flex items-center justify-between mb-6">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-hidden transform scale-95 transition-all duration-300" id="profile-modal-content">
+                
+                <!-- Fixed Header -->
+                <div class="px-6 py-4 border-b border-slate-100 bg-white">
+                    <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-                                <i class="fas fa-utensils text-white text-lg"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-xl font-semibold text-slate-900">Restaurante Sabor</h2>
-                                <p class="text-sm text-slate-500">Informações do estabelecimento</p>
+                            <h2 class="text-lg font-semibold text-slate-900">Restaurante Sabor</h2>
+                            <span class="text-slate-400">•</span>
+                            <div class="flex items-center space-x-2">
+                                <a href="#" class="w-7 h-7 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center hover:scale-105 transition-transform">
+                                    <i class="fab fa-instagram text-white text-xs"></i>
+                                </a>
+                                <a href="#" class="w-7 h-7 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center hover:scale-105 transition-transform">
+                                    <i class="fab fa-facebook-f text-white text-xs"></i>
+                                </a>
+                                <a href="#" class="w-7 h-7 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center hover:scale-105 transition-transform">
+                                    <i class="fab fa-whatsapp text-white text-xs"></i>
+                                </a>
                             </div>
                         </div>
-                        <button onclick="closeProfileModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
-                            <i class="fas fa-times text-slate-600 text-sm"></i>
+                        <button onclick="closeProfileModal()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
+                            <i class="fas fa-times text-slate-600 text-lg"></i>
                         </button>
                     </div>
-                    
-                    <!-- Content -->
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg">
-                            <i class="fas fa-map-marker-alt text-orange-600"></i>
-                            <div>
-                                <p class="text-sm font-medium text-slate-900">Endereço</p>
-                                <p class="text-xs text-slate-600">Rua das Delícias, 123 - Centro</p>
-                            </div>
-                        </div>
+                </div>
+
+                <!-- Scrollable Content -->
+                <div class="overflow-y-auto" style="max-height: calc(90vh - 80px);">
+                    <div class="p-6 space-y-6">
                         
-                        <div class="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg">
-                            <i class="fas fa-clock text-orange-600"></i>
-                            <div>
-                                <p class="text-sm font-medium text-slate-900">Horário de Funcionamento</p>
-                                <p class="text-xs text-slate-600">Segunda a Domingo: 18h às 23h</p>
+                        <!-- Logo and Rating -->
+                        <div class="flex items-start space-x-4">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                                <i class="fas fa-utensils text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-1 mb-1">
+                                    <span class="text-yellow-400 text-lg">★</span>
+                                    <span class="text-yellow-400 text-lg">★</span>
+                                    <span class="text-yellow-400 text-lg">★</span>
+                                    <span class="text-yellow-400 text-lg">★</span>
+                                    <span class="text-yellow-400 text-lg">★</span>
+                                    <span class="text-sm font-semibold text-slate-900 ml-2">4.8</span>
+                                </div>
+                                <p class="text-xs text-slate-500">1.247 avaliações</p>
                             </div>
                         </div>
-                        
-                        <div class="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg">
-                            <i class="fas fa-phone text-orange-600"></i>
-                            <div>
-                                <p class="text-sm font-medium text-slate-900">Contato</p>
-                                <p class="text-xs text-slate-600">(11) 99999-9999</p>
+
+                        <!-- About Section -->
+                        <div>
+                            <h3 class="text-base font-semibold text-slate-900 mb-3">Sobre nós</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Há mais de 15 anos servindo os melhores hambúrgueres e pizzas da cidade. Nossa paixão pela gastronomia e ingredientes frescos nos tornou referência em sabor e qualidade. Cada prato é preparado com carinho e dedicação para proporcionar uma experiência única aos nossos clientes.
+                            </p>
+                        </div>
+
+                        <!-- Restaurant Photos -->
+                        <div>
+                            <h3 class="text-base font-semibold text-slate-900 mb-3">Nosso estabelecimento</h3>
+                            <div class="flex space-x-3 overflow-x-auto scrollbar-hide pb-2">
+                                <div class="w-32 h-24 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                    <span class="text-2xl">🏪</span>
+                                </div>
+                                <div class="w-32 h-24 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                    <span class="text-2xl">🍽️</span>
+                                </div>
+                                <div class="w-32 h-24 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                    <span class="text-2xl">🌿</span>
+                                </div>
+                                <div class="w-32 h-24 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                    <span class="text-2xl">✨</span>
+                                </div>
+                                <div class="w-32 h-24 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                    <span class="text-2xl">🎵</span>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg">
-                            <i class="fas fa-star text-orange-600"></i>
-                            <div>
-                                <p class="text-sm font-medium text-slate-900">Avaliação</p>
-                                <p class="text-xs text-slate-600">4.8 ⭐ (1.2k avaliações)</p>
+
+                        <!-- Opening Hours -->
+                        <div>
+                            <h3 class="text-base font-semibold text-slate-900 mb-3">Horários de funcionamento</h3>
+                            <div class="space-y-2" id="opening-hours">
+                                <!-- Hours will be populated by JavaScript -->
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Footer -->
-                    <div class="mt-6 pt-4 border-t border-slate-100">
-                        <p class="text-xs text-slate-500 text-center">
-                            Sabores únicos, experiências inesquecíveis
-                        </p>
+
                     </div>
                 </div>
             </div>
@@ -645,6 +673,57 @@
             modal.classList.remove('opacity-0');
             content.classList.remove('scale-95');
             content.classList.add('scale-100');
+            
+            // Populate opening hours
+            populateOpeningHours();
+        }
+
+        function populateOpeningHours() {
+            const container = document.getElementById('opening-hours');
+            const today = new Date();
+            const days = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            
+            // Opening hours for each day (0 = Sunday, 6 = Saturday)
+            const hours = {
+                0: '12h às 22h', // Sunday
+                1: '18h às 23h', // Monday
+                2: '18h às 23h', // Tuesday
+                3: '18h às 23h', // Wednesday
+                4: '18h às 23h', // Thursday
+                5: '18h às 00h', // Friday
+                6: '12h às 00h'  // Saturday
+            };
+            
+            container.innerHTML = '';
+            
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                const dayOfWeek = date.getDay();
+                
+                let dayLabel;
+                if (i === 0) dayLabel = 'Hoje';
+                else if (i === 1) dayLabel = 'Amanhã';
+                else dayLabel = days[dayOfWeek];
+                
+                const isToday = i === 0;
+                const currentHour = today.getHours();
+                const isOpen = currentHour >= 18 && currentHour < 23;
+                
+                const hourElement = document.createElement('div');
+                hourElement.className = `flex items-center justify-between py-2 px-3 rounded-lg ${isToday ? 'bg-orange-50 border border-orange-100' : 'bg-slate-50'}`;
+                
+                hourElement.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-medium text-slate-900">${dayLabel}</span>
+                        ${isToday && isOpen ? '<span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">Aberto</span>' : ''}
+                        ${isToday && !isOpen ? '<span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-medium">Fechado</span>' : ''}
+                    </div>
+                    <span class="text-sm text-slate-600">${hours[dayOfWeek]}</span>
+                `;
+                
+                container.appendChild(hourElement);
+            }
         }
 
         function closeProfileModal() {
@@ -774,5 +853,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d3155d353cb51',t:'MTc1NjQ4MjUwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d44d747f0e013',t:'MTc1NjQ4MzMwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
