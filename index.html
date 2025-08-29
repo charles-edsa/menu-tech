@@ -203,37 +203,36 @@
     </main>
 
     <!-- Profile Modal -->
-    <div id="profile-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-hidden transform scale-95 transition-all duration-300" id="profile-modal-content">
-                
-                <!-- Fixed Header -->
-                <div class="px-6 py-4 border-b border-slate-100 bg-white">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <h2 class="text-lg font-semibold text-slate-900">Restaurante Sabor</h2>
-                            <span class="text-slate-400">•</span>
-                            <div class="flex items-center space-x-2">
-                                <a href="#" class="w-7 h-7 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center hover:scale-105 transition-transform">
-                                    <i class="fab fa-instagram text-white text-xs"></i>
-                                </a>
-                                <a href="#" class="w-7 h-7 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center hover:scale-105 transition-transform">
-                                    <i class="fab fa-facebook-f text-white text-xs"></i>
-                                </a>
-                                <a href="#" class="w-7 h-7 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center hover:scale-105 transition-transform">
-                                    <i class="fab fa-whatsapp text-white text-xs"></i>
-                                </a>
-                            </div>
+    <div id="profile-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform translate-y-full transition-all duration-300" id="profile-modal-content" style="max-height: 85vh;">
+            
+            <!-- Fixed Header -->
+            <div class="px-6 py-4 border-b border-slate-100 bg-white">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <h2 class="text-lg font-semibold text-slate-900">Restaurante Sabor</h2>
+                        <span class="text-slate-400">•</span>
+                        <div class="flex items-center space-x-2">
+                            <a href="#" class="w-8 h-8 border border-slate-200 rounded-lg flex items-center justify-center hover:border-pink-300 hover:bg-pink-50 transition-all group">
+                                <i class="fab fa-instagram text-slate-600 group-hover:text-pink-600 text-sm transition-colors"></i>
+                            </a>
+                            <a href="#" class="w-8 h-8 border border-slate-200 rounded-lg flex items-center justify-center hover:border-blue-300 hover:bg-blue-50 transition-all group">
+                                <i class="fab fa-facebook-f text-slate-600 group-hover:text-blue-600 text-sm transition-colors"></i>
+                            </a>
+                            <a href="#" class="w-8 h-8 border border-slate-200 rounded-lg flex items-center justify-center hover:border-green-300 hover:bg-green-50 transition-all group">
+                                <i class="fab fa-whatsapp text-slate-600 group-hover:text-green-600 text-sm transition-colors"></i>
+                            </a>
                         </div>
-                        <button onclick="closeProfileModal()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
-                            <i class="fas fa-times text-slate-600 text-lg"></i>
-                        </button>
                     </div>
+                    <button onclick="closeProfileModal()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
+                        <i class="fas fa-times text-slate-600 text-lg"></i>
+                    </button>
                 </div>
+            </div>
 
-                <!-- Scrollable Content -->
-                <div class="overflow-y-auto" style="max-height: calc(90vh - 80px);">
-                    <div class="p-6 space-y-6">
+            <!-- Scrollable Content -->
+            <div class="overflow-y-auto px-6 py-6" style="max-height: calc(85vh - 80px);">
+                <div class="space-y-6">
                         
                         <!-- Logo and Rating -->
                         <div class="flex items-start space-x-4">
@@ -295,7 +294,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
     <!-- Cart Modal -->
     <div id="cart-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
@@ -671,8 +669,7 @@
             
             modal.classList.remove('pointer-events-none');
             modal.classList.remove('opacity-0');
-            content.classList.remove('scale-95');
-            content.classList.add('scale-100');
+            content.style.transform = 'translateY(0)';
             
             // Populate opening hours
             populateOpeningHours();
@@ -731,8 +728,7 @@
             const content = document.getElementById('profile-modal-content');
             
             modal.classList.add('opacity-0');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
+            content.style.transform = 'translateY(100%)';
             
             setTimeout(() => {
                 modal.classList.add('pointer-events-none');
@@ -853,5 +849,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d44d747f0e013',t:'MTc1NjQ4MzMwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d4ee6b7ee64f9',t:'MTc1NjQ4MzcxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
