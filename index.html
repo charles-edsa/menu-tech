@@ -323,7 +323,7 @@
                     <span class="text-lg font-semibold text-slate-900">Total</span>
                     <span class="text-lg font-bold text-orange-600" id="cart-total">R$ 0,00</span>
                 </div>
-                <button id="checkout-btn" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                <button id="checkout-btn" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled onclick="openCheckoutModal()">
                     Finalizar Pedido
                 </button>
             </div>
@@ -397,6 +397,177 @@
                     <i class="fas fa-shopping-cart mr-2"></i>
                     <span>Adicionar ao carrinho • </span>
                     <span id="modal-total-price" class="font-bold">R$ 0,00</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform translate-y-full transition-all duration-300" id="checkout-modal-content" style="max-height: 90vh;">
+            
+            <!-- Fixed Header -->
+            <div class="px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-slate-900">Finalizar Pedido</h2>
+                    <button onclick="closeCheckoutModal()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
+                        <i class="fas fa-times text-slate-600 text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="overflow-y-auto" style="max-height: calc(90vh - 200px);">
+                <div class="px-6 py-6 space-y-6">
+                    
+                    <!-- Customer Info -->
+                    <div class="space-y-4">
+                        <h3 class="text-base font-semibold text-slate-900 flex items-center">
+                            <i class="fas fa-user text-orange-600 mr-2"></i>
+                            Seus dados
+                        </h3>
+                        
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Nome completo *</label>
+                                <input type="text" id="customer-name" placeholder="João Da Silva" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Telefone para contato *</label>
+                                <input type="tel" id="customer-phone" placeholder="(11) 98411-2233" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Method -->
+                    <div class="space-y-4">
+                        <h3 class="text-base font-semibold text-slate-900 flex items-center">
+                            <i class="fas fa-truck text-orange-600 mr-2"></i>
+                            Como deseja receber?
+                        </h3>
+                        
+                        <div class="space-y-2">
+                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('delivery')">
+                                <input type="radio" name="delivery-method" value="delivery" id="delivery-delivery" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <span class="text-sm font-medium text-slate-900">Entrega • <span class="text-slate-500">Receba em casa</span></span>
+                                        </div>
+                                        <span class="text-sm font-medium text-orange-600">+ R$ 5,00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('pickup')">
+                                <input type="radio" name="delivery-method" value="pickup" id="delivery-pickup" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <span class="text-sm font-medium text-slate-900">Retirada • <span class="text-slate-500">Retire no balcão</span></span>
+                                        </div>
+                                        <span class="text-sm font-medium text-green-600">Grátis</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('dine-in')">
+                                <input type="radio" name="delivery-method" value="dine-in" id="delivery-dine-in" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <span class="text-sm font-medium text-slate-900">No local • <span class="text-slate-500">Comer no restaurante</span></span>
+                                        </div>
+                                        <span class="text-sm font-medium text-green-600">Grátis</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Address field (shown only for delivery) -->
+                        <div id="address-field" class="hidden">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Endereço para entrega *</label>
+                            <textarea id="delivery-address" placeholder="Rua, número, bairro, complemento..." class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm resize-none" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="space-y-4">
+                        <h3 class="text-base font-semibold text-slate-900 flex items-center">
+                            <i class="fas fa-credit-card text-orange-600 mr-2"></i>
+                            Como deseja pagar?
+                        </h3>
+                        
+                        <div class="space-y-2">
+                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('pix')">
+                                <input type="radio" name="payment-method" value="pix" id="payment-pix" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-3 flex-1">
+                                    <span class="text-sm font-medium text-slate-900">Pix automatizado • <span class="text-slate-500">Pagamento instantâneo</span></span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('card-online')">
+                                <input type="radio" name="payment-method" value="card-online" id="payment-card-online" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-3 flex-1">
+                                    <span class="text-sm font-medium text-slate-900">Cartão online • <span class="text-slate-500">Débito ou crédito</span></span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('cash')">
+                                <input type="radio" name="payment-method" value="cash" id="payment-cash" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-3 flex-1">
+                                    <span class="text-sm font-medium text-slate-900">Dinheiro • <span class="text-slate-500">Pagamento na entrega/retirada</span></span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('card-machine')">
+                                <input type="radio" name="payment-method" value="card-machine" id="payment-card-machine" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-3 flex-1">
+                                    <span class="text-sm font-medium text-slate-900">Maquininha • <span class="text-slate-500">Cartão na entrega/retirada</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Cash change field (shown only for cash payment) -->
+                        <div id="cash-change-field" class="hidden">
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Troco para quanto?</label>
+                            <input type="text" id="cash-change" placeholder="Ex: R$ 50,00" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm">
+                            <p class="text-xs text-slate-500 mt-1">Deixe em branco se não precisar de troco</p>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="space-y-4">
+                        <h3 class="text-base font-semibold text-slate-900 flex items-center">
+                            <i class="fas fa-receipt text-orange-600 mr-2"></i>
+                            Resumo do pedido
+                        </h3>
+                        
+                        <div class="bg-slate-50 rounded-lg p-4" id="checkout-order-summary">
+                            <!-- Order items will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Observations -->
+                    <div class="space-y-4">
+                        <h3 class="text-base font-semibold text-slate-900 flex items-center">
+                            <i class="fas fa-comment text-orange-600 mr-2"></i>
+                            Observações
+                        </h3>
+                        
+                        <div>
+                            <textarea id="order-observations" placeholder="Alguma observação especial? (opcional)" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm resize-none" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fixed Footer -->
+            <div class="px-6 py-4 border-t border-slate-100 bg-white sticky bottom-0">
+                <button onclick="confirmOrder()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 rounded-lg transition-colors">
+                    <i class="fas fa-check mr-2"></i>
+                    Confirmar Pedido
                 </button>
             </div>
         </div>
@@ -1433,11 +1604,244 @@
             closeProductModal();
         }
 
+        // Checkout modal functions
+        function openCheckoutModal() {
+            if (state.cart.length === 0) {
+                showToast('Seu carrinho está vazio!');
+                return;
+            }
+            
+            const modal = document.getElementById('checkout-modal');
+            const content = document.getElementById('checkout-modal-content');
+            
+            // Populate order summary
+            populateCheckoutOrderSummary();
+            
+            // Show modal
+            modal.classList.remove('pointer-events-none');
+            modal.classList.remove('opacity-0');
+            content.style.transform = 'translateY(0)';
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkout-modal');
+            const content = document.getElementById('checkout-modal-content');
+            
+            modal.classList.add('opacity-0');
+            content.style.transform = 'translateY(100%)';
+            
+            setTimeout(() => {
+                modal.classList.add('pointer-events-none');
+            }, 300);
+        }
+
+        function selectDeliveryMethod(method) {
+            const radio = document.getElementById(`delivery-${method}`);
+            radio.checked = true;
+            
+            const addressField = document.getElementById('address-field');
+            const deliveryFeeRow = document.getElementById('delivery-fee-row');
+            
+            if (method === 'delivery') {
+                addressField.classList.remove('hidden');
+                deliveryFeeRow.style.display = 'flex';
+            } else {
+                addressField.classList.add('hidden');
+                deliveryFeeRow.style.display = 'none';
+            }
+            
+            updateCheckoutTotal();
+        }
+
+        function selectPaymentMethod(method) {
+            const radio = document.getElementById(`payment-${method}`);
+            radio.checked = true;
+            
+            const cashChangeField = document.getElementById('cash-change-field');
+            
+            if (method === 'cash') {
+                cashChangeField.classList.remove('hidden');
+            } else {
+                cashChangeField.classList.add('hidden');
+            }
+        }
+
+        function populateCheckoutOrderSummary() {
+            const container = document.getElementById('checkout-order-summary');
+            container.innerHTML = '';
+            
+            let subtotal = 0;
+            
+            state.cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+                
+                // Build configuration text
+                let configText = '';
+                
+                // Add required options to config text
+                const product = findProductById(item.id);
+                if (product && product.requiredOptions) {
+                    product.requiredOptions.forEach((optionGroup, groupIndex) => {
+                        const selectedOptionIndex = item.selectedRequiredOptions[groupIndex];
+                        if (selectedOptionIndex !== undefined) {
+                            const selectedOption = optionGroup.options[selectedOptionIndex];
+                            if (configText) configText += ' • ';
+                            configText += selectedOption.name;
+                        }
+                    });
+                }
+                
+                // Add optional options to config text
+                if (item.selectedOptionalOptions && product && product.optionalOptions) {
+                    Object.keys(item.selectedOptionalOptions).forEach(optionIndex => {
+                        const quantity = item.selectedOptionalOptions[optionIndex];
+                        if (quantity > 0) {
+                            const option = product.optionalOptions[optionIndex];
+                            if (configText) configText += ' • ';
+                            configText += `${option.name}${quantity > 1 ? ` (${quantity}x)` : ''}`;
+                        }
+                    });
+                }
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = 'flex items-start justify-between mb-3';
+                itemElement.innerHTML = `
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-2 mb-1">
+                            <span class="text-sm font-semibold text-slate-900">${item.quantity} • ${item.name}</span>
+                        </div>
+                        ${configText ? `<p class="text-xs text-slate-500">${configText}</p>` : ''}
+                    </div>
+                    <span class="text-sm font-semibold text-slate-900">R$ ${formatPrice(item.price * item.quantity)}</span>
+                `;
+                container.appendChild(itemElement);
+            });
+            
+            // Add delivery fee if applicable
+            const deliveryRadio = document.getElementById('delivery-delivery');
+            let total = subtotal;
+            if (deliveryRadio && deliveryRadio.checked) {
+                total += 5.00;
+                const deliveryElement = document.createElement('div');
+                deliveryElement.className = 'flex items-start justify-between mb-3';
+                deliveryElement.innerHTML = `
+                    <div class="flex-1">
+                        <span class="text-sm font-semibold text-slate-900">Taxa de entrega</span>
+                    </div>
+                    <span class="text-sm font-semibold text-slate-900">R$ 5,00</span>
+                `;
+                container.appendChild(deliveryElement);
+            }
+            
+            // Add total with divider
+            const totalElement = document.createElement('div');
+            totalElement.className = 'flex items-center justify-between pt-3 border-t border-slate-200';
+            totalElement.innerHTML = `
+                <span class="text-sm font-semibold text-slate-900">Total</span>
+                <span class="text-sm font-semibold text-orange-600" id="checkout-final-total">R$ ${formatPrice(total)}</span>
+            `;
+            container.appendChild(totalElement);
+        }
+
+        function updateCheckoutTotal() {
+            // Recalculate and repopulate the entire summary
+            populateCheckoutOrderSummary();
+        }
+
+        function confirmOrder() {
+            // Validate required fields
+            const customerName = document.getElementById('customer-name').value.trim();
+            const customerPhone = document.getElementById('customer-phone').value.trim();
+            const deliveryMethod = document.querySelector('input[name="delivery-method"]:checked');
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked');
+            
+            if (!customerName) {
+                showToast('Por favor, informe seu nome');
+                return;
+            }
+            
+            if (!customerPhone) {
+                showToast('Por favor, informe seu telefone');
+                return;
+            }
+            
+            if (!deliveryMethod) {
+                showToast('Por favor, selecione como deseja receber');
+                return;
+            }
+            
+            if (!paymentMethod) {
+                showToast('Por favor, selecione a forma de pagamento');
+                return;
+            }
+            
+            // Validate address for delivery
+            if (deliveryMethod.value === 'delivery') {
+                const address = document.getElementById('delivery-address').value.trim();
+                if (!address) {
+                    showToast('Por favor, informe o endereço para entrega');
+                    return;
+                }
+            }
+            
+            // Collect order data
+            const orderData = {
+                customer: {
+                    name: customerName,
+                    phone: customerPhone
+                },
+                delivery: {
+                    method: deliveryMethod.value,
+                    address: deliveryMethod.value === 'delivery' ? document.getElementById('delivery-address').value.trim() : null
+                },
+                payment: {
+                    method: paymentMethod.value,
+                    cashChange: paymentMethod.value === 'cash' ? document.getElementById('cash-change').value.trim() : null
+                },
+                items: state.cart,
+                observations: document.getElementById('order-observations').value.trim(),
+                total: document.getElementById('checkout-final-total').textContent
+            };
+            
+            // Simulate order confirmation
+            showToast('Pedido confirmado com sucesso! 🎉');
+            
+            // Clear cart and close modals
+            state.cart = [];
+            updateCartCount();
+            updateCartDisplay();
+            closeCheckoutModal();
+            closeCartModal();
+            
+            // Reset form
+            resetCheckoutForm();
+            
+            console.log('Pedido confirmado:', orderData);
+        }
+
+        function resetCheckoutForm() {
+            document.getElementById('customer-name').value = '';
+            document.getElementById('customer-phone').value = '';
+            document.getElementById('delivery-address').value = '';
+            document.getElementById('cash-change').value = '';
+            document.getElementById('order-observations').value = '';
+            
+            // Uncheck all radio buttons
+            document.querySelectorAll('input[name="delivery-method"]').forEach(radio => radio.checked = false);
+            document.querySelectorAll('input[name="payment-method"]').forEach(radio => radio.checked = false);
+            
+            // Hide conditional fields
+            document.getElementById('address-field').classList.add('hidden');
+            document.getElementById('cash-change-field').classList.add('hidden');
+            document.getElementById('delivery-fee-row').style.display = 'none';
+        }
+
         // Close modals when clicking outside
         document.addEventListener('click', function(e) {
             const profileModal = document.getElementById('profile-modal');
             const cartModal = document.getElementById('cart-modal');
             const productModal = document.getElementById('product-modal');
+            const checkoutModal = document.getElementById('checkout-modal');
             
             if (e.target === profileModal) {
                 closeProfileModal();
@@ -1447,6 +1851,9 @@
             }
             if (e.target === productModal) {
                 closeProductModal();
+            }
+            if (e.target === checkoutModal) {
+                closeCheckoutModal();
             }
         });
 
@@ -1461,5 +1868,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d9406a16a64f3',t:'MTc1NjQ4NjU0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976e606ce2e86505',t:'MTc1NjQ5NDkyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
