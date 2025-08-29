@@ -330,6 +330,78 @@
         </div>
     </div>
 
+    <!-- Product Modal -->
+    <div id="product-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform translate-y-full transition-all duration-300" id="product-modal-content" style="max-height: 90vh;">
+            
+            <!-- Fixed Header -->
+            <div class="px-6 py-4 border-b border-slate-100 bg-white sticky top-0 z-10">
+                <div class="flex items-center justify-between">
+                    <h2 id="product-name" class="text-lg font-semibold text-slate-900">Nome do Produto</h2>
+                    <button onclick="closeProductModal()" class="p-2 hover:bg-slate-100 rounded-lg transition-colors">
+                        <i class="fas fa-times text-slate-600 text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="overflow-y-auto" style="max-height: calc(90vh - 200px);">
+                
+                <!-- Product Image -->
+                <div class="px-6 pt-6 pb-4">
+                    <div class="w-full h-48 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center">
+                        <span id="product-icon" class="text-6xl">🍔</span>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="px-6 pb-6">
+                    <p id="product-description" class="text-sm text-slate-600 leading-relaxed">Descrição do produto...</p>
+                </div>
+
+                <!-- Required Options -->
+                <div id="required-options-container" class="px-6 space-y-6">
+                    <!-- Required options will be populated by JavaScript -->
+                </div>
+
+                <!-- Optional Options -->
+                <div id="optional-options-container" class="px-6 mt-6 pb-6">
+                    <!-- Optional options will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Fixed Footer -->
+            <div class="px-6 py-4 border-t border-slate-100 bg-white sticky bottom-0">
+                <div class="flex items-center justify-between mb-4">
+                    <!-- Quantity on left -->
+                    <div class="flex items-center space-x-3">
+                        <span class="text-base font-medium text-slate-900">Quantidade:</span>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="updateQuantity(-1)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
+                                <i class="fas fa-minus text-slate-600 text-xs"></i>
+                            </button>
+                            <span id="modal-quantity" class="text-base font-semibold text-slate-900 min-w-[1.5rem] text-center">1</span>
+                            <button onclick="updateQuantity(1)" class="w-8 h-8 rounded-full bg-orange-600 hover:bg-orange-700 flex items-center justify-center transition-colors">
+                                <i class="fas fa-plus text-white text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Unit price on right -->
+                    <div class="text-right">
+                        <span class="text-base font-medium text-slate-900">Valor: </span>
+                        <span id="modal-unit-price" class="text-base font-bold text-orange-600">R$ 0,00</span>
+                    </div>
+                </div>
+                <button onclick="addToCart()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 rounded-lg transition-colors">
+                    <i class="fas fa-shopping-cart mr-2"></i>
+                    <span>Adicionar ao carrinho • </span>
+                    <span id="modal-total-price" class="font-bold">R$ 0,00</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 translate-y-[calc(100%+2rem)] bg-gray-900 text-white px-6 py-3 rounded-xl shadow-2xl transition-all duration-300 z-50">
         <div class="flex items-center space-x-3">
@@ -346,7 +418,7 @@
             currentProduct: null,
             modalQuantity: 1,
             selectedRequiredOptions: {},
-            selectedOptionalOptions: [],
+            selectedOptionalOptions: {},
             activeCategory: null
         };
 
@@ -647,17 +719,37 @@
 
             itemElement.innerHTML = `
                 <div class="p-4">
-                    <div class="w-full aspect-[5/2] bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg overflow-hidden mb-3 flex items-center justify-center">
-                        <span class="text-4xl">${item.icon}</span>
+                    <!-- Mobile Layout -->
+                    <div class="sm:hidden flex space-x-3">
+                        <div class="w-20 h-20 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl">${item.icon}</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="mb-1">
+                                <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
+                                <span class="text-slate-300 mx-2">•</span>
+                                <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                            </div>
+                            <p class="text-slate-600 text-xs leading-relaxed">${item.description}</p>
+                        </div>
                     </div>
-                    <div class="mb-2">
-                        <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
-                        <span class="text-slate-300 mx-2">•</span>
-                        <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                    
+                    <!-- Desktop Layout -->
+                    <div class="hidden sm:block">
+                        <div class="w-full aspect-[5/2] bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg overflow-hidden mb-3 flex items-center justify-center">
+                            <span class="text-4xl">${item.icon}</span>
+                        </div>
+                        <div class="mb-2">
+                            <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
+                            <span class="text-slate-300 mx-2">•</span>
+                            <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                        </div>
+                        <p class="text-slate-600 text-xs leading-relaxed">${item.description}</p>
                     </div>
-                    <p class="text-slate-600 text-xs leading-relaxed">${item.description}</p>
                 </div>
             `;
+
+            itemElement.onclick = () => openProductModal(item);
 
             return itemElement;
         }
@@ -825,16 +917,306 @@
             }
         }
 
+        // Product modal functions
+        function openProductModal(product) {
+            state.currentProduct = product;
+            state.modalQuantity = 1;
+            state.selectedRequiredOptions = {};
+            state.selectedOptionalOptions = {};
+            
+            const modal = document.getElementById('product-modal');
+            const content = document.getElementById('product-modal-content');
+            
+            // Populate modal content
+            document.getElementById('product-icon').textContent = product.icon;
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-description').textContent = product.description;
+            document.getElementById('modal-quantity').textContent = state.modalQuantity;
+            
+            // Populate required options
+            populateRequiredOptions(product);
+            
+            // Populate optional options
+            populateOptionalOptions(product);
+            
+            // Update total price
+            updateModalTotalPrice();
+            
+            // Show modal
+            modal.classList.remove('pointer-events-none');
+            modal.classList.remove('opacity-0');
+            content.style.transform = 'translateY(0)';
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            const content = document.getElementById('product-modal-content');
+            
+            modal.classList.add('opacity-0');
+            content.style.transform = 'translateY(100%)';
+            
+            setTimeout(() => {
+                modal.classList.add('pointer-events-none');
+            }, 300);
+        }
+
+        function populateRequiredOptions(product) {
+            const container = document.getElementById('required-options-container');
+            container.innerHTML = '';
+            
+            if (!product.requiredOptions || product.requiredOptions.length === 0) {
+                return;
+            }
+            
+            product.requiredOptions.forEach((optionGroup, groupIndex) => {
+                const groupElement = document.createElement('div');
+                groupElement.className = 'space-y-3';
+                
+                groupElement.innerHTML = `
+                    <h3 class="text-base font-semibold text-slate-900">${optionGroup.name} <span class="text-red-500">*</span></h3>
+                    <div class="space-y-2" id="required-group-${groupIndex}">
+                    </div>
+                `;
+                
+                const optionsContainer = groupElement.querySelector(`#required-group-${groupIndex}`);
+                
+                optionGroup.options.forEach((option, optionIndex) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'flex items-center justify-between p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
+                    
+                    const priceText = option.price > 0 ? ` (+R$ ${formatPrice(option.price)})` : '';
+                    
+                    optionElement.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <input type="radio" name="required-${groupIndex}" value="${optionIndex}" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500" onchange="selectRequiredOption(${groupIndex}, ${optionIndex})">
+                            <span class="text-sm font-medium text-slate-900">${option.name}</span>
+                        </div>
+                        ${option.price > 0 ? `<span class="text-sm font-medium text-orange-600">${priceText}</span>` : ''}
+                    `;
+                    
+                    optionElement.onclick = (e) => {
+                        if (e.target.type !== 'radio') {
+                            const radio = optionElement.querySelector('input[type="radio"]');
+                            radio.checked = true;
+                            selectRequiredOption(groupIndex, optionIndex);
+                        }
+                    };
+                    
+                    optionsContainer.appendChild(optionElement);
+                });
+                
+                container.appendChild(groupElement);
+            });
+        }
+
+        function populateOptionalOptions(product) {
+            const container = document.getElementById('optional-options-container');
+            container.innerHTML = '';
+            
+            if (!product.optionalOptions || product.optionalOptions.length === 0) {
+                return;
+            }
+            
+            const groupElement = document.createElement('div');
+            groupElement.className = 'space-y-3';
+            
+            groupElement.innerHTML = `
+                <h3 class="text-base font-semibold text-slate-900">Opcionais</h3>
+                <div class="space-y-2" id="optional-options">
+                </div>
+            `;
+            
+            const optionsContainer = groupElement.querySelector('#optional-options');
+            
+            product.optionalOptions.forEach((option, optionIndex) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'flex items-center justify-between p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
+                
+                optionElement.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" id="optional-checkbox-${optionIndex}" class="option-checkbox" onchange="toggleOptional(${optionIndex})">
+                        <span class="text-sm font-medium text-slate-900">${option.name}</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-medium text-orange-600">R$ ${formatPrice(option.price)}</span>
+                        <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 hidden">
+                            <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
+                                <i class="fas fa-minus text-slate-600 text-xs"></i>
+                            </button>
+                            <span id="optional-quantity-${optionIndex}" class="text-sm font-semibold text-slate-900 min-w-[1rem] text-center">1</span>
+                            <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-7 h-7 rounded-full bg-orange-600 hover:bg-orange-700 flex items-center justify-center transition-colors">
+                                <i class="fas fa-plus text-white text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                optionElement.onclick = (e) => {
+                    if (e.target.type !== 'checkbox' && !e.target.closest('button')) {
+                        const checkbox = optionElement.querySelector('input[type="checkbox"]');
+                        checkbox.checked = !checkbox.checked;
+                        toggleOptional(optionIndex);
+                    }
+                };
+                
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            container.appendChild(groupElement);
+        }
+
+        function selectRequiredOption(groupIndex, optionIndex) {
+            state.selectedRequiredOptions[groupIndex] = optionIndex;
+            updateModalTotalPrice();
+        }
+
+        function toggleOptional(optionIndex) {
+            const checkbox = document.getElementById(`optional-checkbox-${optionIndex}`);
+            const multiplier = document.getElementById(`optional-multiplier-${optionIndex}`);
+            
+            if (checkbox.checked) {
+                // Show multiplier and set quantity to 1
+                multiplier.classList.remove('hidden');
+                state.selectedOptionalOptions[optionIndex] = 1;
+                document.getElementById(`optional-quantity-${optionIndex}`).textContent = '1';
+            } else {
+                // Hide multiplier and set quantity to 0
+                multiplier.classList.add('hidden');
+                state.selectedOptionalOptions[optionIndex] = 0;
+            }
+            
+            updateModalTotalPrice();
+        }
+
+        function updateOptionalQuantity(optionIndex, change) {
+            if (!state.selectedOptionalOptions[optionIndex]) {
+                state.selectedOptionalOptions[optionIndex] = 1;
+            }
+            
+            const newQuantity = state.selectedOptionalOptions[optionIndex] + change;
+            if (newQuantity >= 1) {
+                state.selectedOptionalOptions[optionIndex] = newQuantity;
+                document.getElementById(`optional-quantity-${optionIndex}`).textContent = newQuantity;
+                updateModalTotalPrice();
+            } else if (newQuantity === 0) {
+                // Uncheck the checkbox and hide multiplier
+                const checkbox = document.getElementById(`optional-checkbox-${optionIndex}`);
+                const multiplier = document.getElementById(`optional-multiplier-${optionIndex}`);
+                checkbox.checked = false;
+                multiplier.classList.add('hidden');
+                state.selectedOptionalOptions[optionIndex] = 0;
+                updateModalTotalPrice();
+            }
+        }
+
+        function updateQuantity(change) {
+            const newQuantity = state.modalQuantity + change;
+            if (newQuantity >= 1) {
+                state.modalQuantity = newQuantity;
+                document.getElementById('modal-quantity').textContent = state.modalQuantity;
+                updateModalTotalPrice();
+            }
+        }
+
+        function updateModalTotalPrice() {
+            if (!state.currentProduct) return;
+            
+            let unitPrice = state.currentProduct.price;
+            
+            // Add required options prices
+            if (state.currentProduct.requiredOptions) {
+                state.currentProduct.requiredOptions.forEach((optionGroup, groupIndex) => {
+                    const selectedOptionIndex = state.selectedRequiredOptions[groupIndex];
+                    if (selectedOptionIndex !== undefined) {
+                        unitPrice += optionGroup.options[selectedOptionIndex].price;
+                    }
+                });
+            }
+            
+            // Add optional options prices
+            if (state.currentProduct.optionalOptions) {
+                state.currentProduct.optionalOptions.forEach((option, optionIndex) => {
+                    const quantity = state.selectedOptionalOptions[optionIndex] || 0;
+                    unitPrice += option.price * quantity;
+                });
+            }
+            
+            // Calculate total price (unit price * quantity)
+            const totalPrice = unitPrice * state.modalQuantity;
+            
+            // Update both unit price and total price displays
+            document.getElementById('modal-unit-price').textContent = `R$ ${formatPrice(unitPrice)}`;
+            document.getElementById('modal-total-price').textContent = `R$ ${formatPrice(totalPrice)}`;
+        }
+
+        function addToCart() {
+            if (!state.currentProduct) return;
+            
+            // Check if all required options are selected
+            if (state.currentProduct.requiredOptions) {
+                for (let i = 0; i < state.currentProduct.requiredOptions.length; i++) {
+                    if (state.selectedRequiredOptions[i] === undefined) {
+                        showToast('Por favor, selecione todas as opções obrigatórias');
+                        return;
+                    }
+                }
+            }
+            
+            // Calculate final unit price
+            let finalPrice = state.currentProduct.price;
+            
+            // Add required options prices
+            if (state.currentProduct.requiredOptions) {
+                state.currentProduct.requiredOptions.forEach((optionGroup, groupIndex) => {
+                    const selectedOptionIndex = state.selectedRequiredOptions[groupIndex];
+                    if (selectedOptionIndex !== undefined) {
+                        finalPrice += optionGroup.options[selectedOptionIndex].price;
+                    }
+                });
+            }
+            
+            // Add optional options prices
+            if (state.currentProduct.optionalOptions) {
+                state.currentProduct.optionalOptions.forEach((option, optionIndex) => {
+                    const quantity = state.selectedOptionalOptions[optionIndex] || 0;
+                    finalPrice += option.price * quantity;
+                });
+            }
+            
+            // Create cart item
+            const cartItem = {
+                id: state.currentProduct.id,
+                name: state.currentProduct.name,
+                icon: state.currentProduct.icon,
+                price: finalPrice,
+                quantity: state.modalQuantity,
+                selectedRequiredOptions: {...state.selectedRequiredOptions},
+                selectedOptionalOptions: {...state.selectedOptionalOptions}
+            };
+            
+            // Add to cart
+            state.cart.push(cartItem);
+            
+            // Update UI
+            updateCartCount();
+            showToast('Produto adicionado ao carrinho!');
+            closeProductModal();
+        }
+
         // Close modals when clicking outside
         document.addEventListener('click', function(e) {
             const profileModal = document.getElementById('profile-modal');
             const cartModal = document.getElementById('cart-modal');
+            const productModal = document.getElementById('product-modal');
             
             if (e.target === profileModal) {
                 closeProfileModal();
             }
             if (e.target === cartModal) {
                 closeCartModal();
+            }
+            if (e.target === productModal) {
+                closeProductModal();
             }
         });
 
@@ -849,5 +1231,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d4ee6b7ee64f9',t:'MTc1NjQ4MzcxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d78d90701dd50',t:'MTc1NjQ4NTQzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
