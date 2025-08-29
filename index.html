@@ -575,10 +575,10 @@
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 translate-y-[calc(100%+2rem)] bg-gray-900 text-white px-6 py-3 rounded-xl shadow-2xl transition-all duration-300 z-50">
-        <div class="flex items-center space-x-3">
-            <i class="fas fa-check-circle text-green-400"></i>
-            <span id="toast-message" class="font-medium">Produto adicionado ao carrinho!</span>
+    <div id="toast" class="fixed top-20 right-6 transform translate-x-[calc(100%+2rem)] transition-all duration-500 ease-out z-50">
+        <div id="toast-content" class="flex items-center space-x-3 px-5 py-3 rounded-2xl shadow-lg backdrop-blur-sm border">
+            <i id="toast-icon" class="text-sm"></i>
+            <span id="toast-message" class="font-medium text-sm whitespace-nowrap">Produto adicionado ao carrinho!</span>
         </div>
     </div>
 
@@ -766,15 +766,30 @@
             input.value = value;
         }
 
-        function showToast(message) {
+        function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
+            const toastContent = document.getElementById('toast-content');
+            const toastIcon = document.getElementById('toast-icon');
             const toastMessage = document.getElementById('toast-message');
             
+            // Set message
             toastMessage.textContent = message;
-            toast.style.transform = 'translateX(-50%) translateY(0)';
             
+            // Configure appearance based on type
+            if (type === 'success') {
+                toastContent.className = 'flex items-center space-x-3 px-5 py-3 rounded-2xl shadow-lg backdrop-blur-sm border bg-gradient-to-r from-emerald-50 to-green-50 border-emerald-200 text-emerald-800';
+                toastIcon.className = 'fas fa-check text-sm text-emerald-600';
+            } else if (type === 'error') {
+                toastContent.className = 'flex items-center space-x-3 px-5 py-3 rounded-2xl shadow-lg backdrop-blur-sm border bg-gradient-to-r from-red-50 to-rose-50 border-red-200 text-red-800';
+                toastIcon.className = 'fas fa-times text-sm text-red-600';
+            }
+            
+            // Show toast
+            toast.style.transform = 'translateX(0)';
+            
+            // Hide toast after 3 seconds
             setTimeout(() => {
-                toast.style.transform = 'translateX(-50%) translateY(calc(100% + 2rem))';
+                toast.style.transform = 'translateX(calc(100% + 2rem))';
             }, 3000);
         }
 
@@ -1154,6 +1169,7 @@
             state.cart.splice(index, 1);
             updateCartDisplay();
             updateCartCount();
+            showToast('Produto removido do carrinho', 'error');
         }
 
         function editCartItem(index) {
@@ -1563,7 +1579,7 @@
             if (state.currentProduct.requiredOptions) {
                 for (let i = 0; i < state.currentProduct.requiredOptions.length; i++) {
                     if (state.selectedRequiredOptions[i] === undefined) {
-                        showToast('Por favor, selecione todas as opções obrigatórias');
+                        showToast('Por favor, selecione todas as opções obrigatórias', 'error');
                         return;
                     }
                 }
@@ -1622,7 +1638,7 @@
         // Checkout modal functions
         function openCheckoutModal() {
             if (state.cart.length === 0) {
-                showToast('Seu carrinho está vazio!');
+                showToast('Seu carrinho está vazio!', 'error');
                 return;
             }
             
@@ -1771,22 +1787,22 @@
             const paymentMethod = document.querySelector('input[name="payment-method"]:checked');
             
             if (!customerName) {
-                showToast('Por favor, informe seu nome');
+                showToast('Por favor, informe seu nome', 'error');
                 return;
             }
             
             if (!customerPhone) {
-                showToast('Por favor, informe seu telefone');
+                showToast('Por favor, informe seu telefone', 'error');
                 return;
             }
             
             if (!deliveryMethod) {
-                showToast('Por favor, selecione como deseja receber');
+                showToast('Por favor, selecione como deseja receber', 'error');
                 return;
             }
             
             if (!paymentMethod) {
-                showToast('Por favor, selecione a forma de pagamento');
+                showToast('Por favor, selecione a forma de pagamento', 'error');
                 return;
             }
             
@@ -1794,7 +1810,7 @@
             if (deliveryMethod.value === 'delivery') {
                 const address = document.getElementById('delivery-address').value.trim();
                 if (!address) {
-                    showToast('Por favor, informe o endereço para entrega');
+                    showToast('Por favor, informe o endereço para entrega', 'error');
                     return;
                 }
             }
@@ -1883,5 +1899,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976e8e2ab139e2b1',t:'MTc1NjQ5Njc5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976eaf5b461ee012',t:'MTc1NjQ5ODE1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
