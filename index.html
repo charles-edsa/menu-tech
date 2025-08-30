@@ -14,34 +14,31 @@
         }
         
         .fade-in {
-            animation: fadeIn 0.4s ease-out;
+            animation: fadeIn 0.3s ease-out;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .premium-card {
-            transition: all 0.3s ease;
+        .card-hover {
+            transition: all 0.2s ease;
         }
         
-        .premium-card:hover {
+        .card-hover:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
         
         .btn-primary {
-            background: #f97316;
-            border: 1px solid #f97316;
-            color: white;
-            font-weight: 500;
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
             transition: all 0.2s ease;
         }
         
         .btn-primary:hover {
-            background: #ea580c;
-            border-color: #ea580c;
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+            transform: translateY(-1px);
         }
         
         .scrollbar-hide {
@@ -53,174 +50,91 @@
             display: none;
         }
         
-        .option-checkbox {
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border: 2px solid #e2e8f0;
-            border-radius: 4px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .option-checkbox:checked {
-            background: #f97316;
-            border-color: #f97316;
-        }
-        
-        .option-checkbox:checked::after {
-            content: '✓';
-            display: block;
-            color: white;
-            font-size: 12px;
-            text-align: center;
-            line-height: 14px;
-            font-weight: bold;
-        }
-
         .category-btn {
             transition: all 0.2s ease;
-            scroll-snap-align: start;
-            border-radius: 9999px;
-            font-size: 0.625rem;
         }
         
         .category-btn.active {
             background: #f97316;
             color: white;
-            box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
-            border: 1px solid #f97316;
         }
         
         .category-btn:not(.active) {
-            background: white;
-            color: #64748b;
-            border: 1px solid #e2e8f0;
+            background: #f9fafb;
+            color: #6b7280;
         }
         
         .category-btn:not(.active):hover {
-            background: #fef7f0;
-            color: #f97316;
-            border-color: #fed7aa;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        
-        .text-orange-600 {
-            color: #f97316 !important;
-        }
-        
-        .focus\:ring-orange-500\/20:focus {
-            --tw-ring-color: rgba(249, 115, 22, 0.2);
-        }
-        
-        .focus\:border-orange-500:focus {
-            border-color: #f97316;
+            background: #f3f4f6;
+            color: #374151;
         }
 
-        .badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 9px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            z-index: 10;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            transition: all 0.2s ease;
+        /* Custom radio and checkbox styles */
+        input[type="radio"], input[type="checkbox"] {
+            accent-color: #f97316;
         }
 
-        .badge:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .badge-promocao {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .badge-preferido {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .badge-sugestao {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.3);
+        input[type="radio"]:focus, input[type="checkbox"]:focus {
+            outline: 2px solid #f97316;
+            outline-offset: 2px;
         }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen">
-    <!-- Hero Section -->
-    <div class="relative h-36 sm:h-44 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-        <div class="absolute inset-0 flex items-center justify-center">
-            <div class="text-center text-white px-4">
-                <div class="text-3xl sm:text-4xl mb-2">🍽️</div>
-                <h1 class="text-xl font-semibold mb-1">Restaurante Sabor</h1>
-                <p class="text-sm text-slate-200">Sabores únicos, experiências inesquecíveis</p>
-            </div>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Hero Section with Cover Image -->
+    <div class="relative h-32 bg-gray-900 overflow-hidden">
+        <!-- Content -->
+        <div class="relative z-10 h-full flex flex-col justify-center items-center text-white px-4">
+            <h1 class="text-2xl font-semibold text-center mb-1">Restaurante Sabor</h1>
+            <p class="text-gray-300 text-sm text-center">Gastronomia de qualidade desde 2008</p>
         </div>
     </div>
 
     <!-- Status Bar -->
-    <div class="bg-gradient-to-r from-emerald-50 to-green-50 border-b border-emerald-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-center py-1.5">
-                <div class="flex items-center space-x-1.5">
-                    <div class="w-1 h-1 bg-emerald-500 rounded-full"></div>
-                    <span class="text-xs text-emerald-700 font-medium">Aberto agora - Pedidos até 23h</span>
-                </div>
-            </div>
+    <div class="bg-green-50 border-b border-green-200 py-2 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 flex items-center justify-center">
+            <span class="text-sm text-green-700">Aberto • Pedidos até 23h</span>
         </div>
     </div>
 
     <!-- Header -->
-    <header class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-40 border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-12">
-                <button onclick="openProfileModal()" class="flex items-center space-x-2 hover:bg-slate-50 rounded-lg p-1.5 -m-1.5 transition-colors">
-                    <div class="w-7 h-7 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center shadow-sm">
-                        <i class="fas fa-utensils text-white text-xs"></i>
+    <header class="bg-white border-b border-gray-200 sticky top-8 z-40 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center h-16">
+                <button onclick="openProfileModal()" class="flex items-center space-x-3 hover:bg-gray-50 rounded-lg p-2 transition-colors">
+                    <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-utensils text-white text-sm"></i>
                     </div>
                     <div class="text-left">
-                        <h1 class="text-sm font-semibold text-slate-900">Restaurante Sabor</h1>
-                        <p class="text-xs text-slate-500">Delivery • Local • Retirada</p>
+                        <h2 class="text-lg font-semibold text-gray-900">Menu Digital</h2>
+                        <div class="flex items-center space-x-1 text-xs text-gray-500">
+                            <i class="fas fa-motorcycle mr-1"></i>
+                            <span>Delivery • Retirada • No local</span>
+                        </div>
                     </div>
-                    <i class="fas fa-chevron-right text-slate-400 text-xs ml-1"></i>
                 </button>
                 
-                <button onclick="openCartModal()" class="relative btn-primary px-2.5 py-1 rounded-lg text-sm font-medium shadow-sm">
-                    <i class="fas fa-shopping-cart mr-1 text-xs"></i>
+                <button onclick="openCartModal()" class="relative btn-primary px-4 py-2 rounded-lg text-white font-medium text-sm shadow-lg">
+                    <i class="fas fa-shopping-cart mr-2"></i>
                     Carrinho
-                    <span id="cart-count" class="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-xs rounded-full w-3.5 h-3.5 flex items-center justify-center hidden font-semibold">0</span>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium">0</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Search Bar -->
-    <div class="bg-white border-b border-slate-100 px-4 py-2 sticky top-12 z-30">
-        <div class="max-w-7xl mx-auto">
+    <div class="bg-white border-b border-gray-200 px-4 py-4 sticky top-24 z-30">
+        <div class="max-w-4xl mx-auto">
             <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                    <i class="fas fa-search text-slate-400 text-xs"></i>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-gray-400"></i>
                 </div>
                 <input 
                     type="text" 
                     id="search-input"
-                    placeholder="Buscar hambúrguer, pizza..." 
-                    class="w-full pl-7 pr-2.5 py-1.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs bg-slate-50/50"
+                    placeholder="Buscar no cardápio..." 
+                    class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                     oninput="handleSearch()"
                 >
             </div>
@@ -228,144 +142,105 @@
     </div>
 
     <!-- Category Navigation -->
-    <div class="bg-white border-b border-slate-100 sticky top-24 z-20">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex space-x-1 py-2 overflow-x-auto scrollbar-hide" id="category-nav">
+    <div class="bg-white border-b border-gray-200 sticky top-36 z-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex space-x-2 py-4 overflow-x-auto scrollbar-hide" id="category-nav">
                 <!-- Category buttons will be populated by JavaScript -->
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 py-4">
+    <main class="max-w-4xl mx-auto px-4 py-6">
         <div id="menu-categories">
             <!-- Categories will be populated by JavaScript -->
         </div>
     </main>
 
     <!-- Profile Modal -->
-    <div id="profile-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl transform translate-y-full transition-all duration-300" id="profile-modal-content" style="max-height: 85vh;">
+    <div id="profile-modal" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="profile-modal-content" style="max-height: 80vh;">
             
-            <!-- Fixed Header -->
-            <div class="px-5 py-2.5 border-b border-slate-100 bg-white rounded-t-3xl">
+            <!-- Header -->
+            <div class="px-6 py-4 border-b border-gray-200">
                 <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-2.5">
-                        <h2 class="text-xl font-semibold text-slate-900">Restaurante Sabor</h2>
-                        <span class="text-slate-400">•</span>
-                        <div class="flex items-center space-x-1.5">
-                            <a href="#" class="w-7 h-7 border border-slate-200 rounded-lg flex items-center justify-center hover:border-pink-300 hover:bg-pink-50 transition-all group">
-                                <i class="fab fa-instagram text-slate-600 group-hover:text-pink-600 text-sm transition-colors"></i>
-                            </a>
-                            <a href="#" class="w-7 h-7 border border-slate-200 rounded-lg flex items-center justify-center hover:border-blue-300 hover:bg-blue-50 transition-all group">
-                                <i class="fab fa-facebook-f text-slate-600 group-hover:text-blue-600 text-sm transition-colors"></i>
-                            </a>
-                            <a href="#" class="w-7 h-7 border border-slate-200 rounded-lg flex items-center justify-center hover:border-green-300 hover:bg-green-50 transition-all group">
-                                <i class="fab fa-whatsapp text-slate-600 group-hover:text-green-600 text-sm transition-colors"></i>
-                            </a>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-utensils text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-900">Restaurante Sabor</h2>
+                            <p class="text-sm text-gray-500">Gastronomia de qualidade</p>
                         </div>
                     </div>
-                    <button onclick="closeProfileModal()" class="p-1.5 hover:bg-slate-100 rounded-lg transition-colors">
-                        <i class="fas fa-times text-slate-600 text-lg"></i>
+                    <button onclick="closeProfileModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        <i class="fas fa-times text-gray-500"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Scrollable Content -->
-            <div class="overflow-y-auto px-5 py-5" style="max-height: calc(85vh - 70px);">
-                <div class="space-y-5">
-                        
-                        <!-- Logo and Rating -->
-                        <div class="flex items-start space-x-3">
-                            <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
-                                <i class="fas fa-utensils text-white text-lg"></i>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center space-x-1 mb-1">
-                                    <span class="text-yellow-400 text-lg">★</span>
-                                    <span class="text-yellow-400 text-lg">★</span>
-                                    <span class="text-yellow-400 text-lg">★</span>
-                                    <span class="text-yellow-400 text-lg">★</span>
-                                    <span class="text-yellow-400 text-lg">★</span>
-                                    <span class="text-base font-semibold text-slate-900 ml-1.5">4.8</span>
-                                </div>
-                                <p class="text-sm text-slate-500">1.247 avaliações</p>
-                            </div>
+            <!-- Content -->
+            <div class="overflow-y-auto px-6 py-4" style="max-height: calc(80vh - 100px);">
+                <div class="space-y-6">
+                    
+                    <!-- Rating -->
+                    <div class="flex items-center space-x-2">
+                        <div class="flex items-center">
+                            <span class="text-yellow-400">★★★★★</span>
                         </div>
-
-                        <!-- About Section -->
-                        <div>
-                            <h3 class="text-base font-semibold text-slate-900 mb-2.5">Sobre nós</h3>
-                            <p class="text-base text-slate-600 leading-relaxed">
-                                Há mais de 15 anos servindo os melhores hambúrgueres e pizzas da cidade. Nossa paixão pela gastronomia e ingredientes frescos nos tornou referência em sabor e qualidade. Cada prato é preparado com carinho e dedicação para proporcionar uma experiência única aos nossos clientes.
-                            </p>
-                        </div>
-
-                        <!-- Restaurant Photos -->
-                        <div>
-                            <h3 class="text-sm font-semibold text-slate-900 mb-2.5">Nosso estabelecimento</h3>
-                            <div class="flex space-x-2.5 overflow-x-auto scrollbar-hide pb-2">
-                                <div class="w-36 h-24 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex-shrink-0 flex items-center justify-center">
-                                    <span class="text-2xl">🏪</span>
-                                </div>
-                                <div class="w-36 h-24 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex-shrink-0 flex items-center justify-center">
-                                    <span class="text-2xl">🍽️</span>
-                                </div>
-                                <div class="w-36 h-24 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex-shrink-0 flex items-center justify-center">
-                                    <span class="text-2xl">🌿</span>
-                                </div>
-                                <div class="w-36 h-24 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex-shrink-0 flex items-center justify-center">
-                                    <span class="text-2xl">✨</span>
-                                </div>
-                                <div class="w-36 h-24 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex-shrink-0 flex items-center justify-center">
-                                    <span class="text-2xl">🎵</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Opening Hours -->
-                        <div>
-                            <h3 class="text-sm font-semibold text-slate-900 mb-2.5">Horários de funcionamento</h3>
-                            <div class="space-y-1.5" id="opening-hours">
-                                <!-- Hours will be populated by JavaScript -->
-                            </div>
-                        </div>
-
+                        <span class="font-semibold text-gray-900">4.8</span>
+                        <span class="text-gray-500">• 1.247 avaliações</span>
                     </div>
+
+                    <!-- About -->
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Sobre nós</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Há mais de 15 anos servindo os melhores hambúrgueres e pizzas da cidade. Nossa paixão pela gastronomia e ingredientes frescos nos tornou referência em sabor e qualidade.
+                        </p>
+                    </div>
+
+                    <!-- Hours -->
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-3">Horários de funcionamento</h3>
+                        <div class="space-y-2" id="opening-hours">
+                            <!-- Hours will be populated by JavaScript -->
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+    </div>
 
     <!-- Cart Modal -->
-    <div id="cart-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-2xl transform translate-y-full transition-all duration-300" id="cart-modal-content" style="max-height: 85vh;">
+    <div id="cart-modal" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="cart-modal-content" style="max-height: 80vh;">
             <!-- Header -->
-            <div class="flex items-center justify-between px-5 py-3 border-b border-slate-100">
-                <h2 class="text-base font-semibold text-slate-900">Seu pedido</h2>
-                <button onclick="closeCartModal()" class="p-1.5 hover:bg-slate-100 rounded-lg transition-colors">
-                    <i class="fas fa-times text-slate-600 text-base"></i>
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-900">Seu Carrinho</h2>
+                <button onclick="closeCartModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i class="fas fa-times text-gray-500"></i>
                 </button>
             </div>
             
-            <!-- Cart Items -->
-            <div id="cart-items" class="px-5 py-3 overflow-y-auto" style="max-height: calc(85vh - 180px);">
-                <div class="text-center py-10">
-                    <div class="w-14 h-14 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-shopping-cart text-slate-400 text-lg"></i>
+            <!-- Items -->
+            <div id="cart-items" class="px-6 py-4 overflow-y-auto" style="max-height: calc(80vh - 160px);">
+                <div class="text-center py-12">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-shopping-cart text-gray-400 text-xl"></i>
                     </div>
-                    <p class="text-slate-500 text-sm">Seu carrinho está vazio</p>
-                    <p class="text-slate-400 text-xs mt-1">Adicione alguns itens deliciosos!</p>
+                    <p class="text-gray-500">Seu carrinho está vazio</p>
                 </div>
             </div>
             
             <!-- Footer -->
-            <div class="px-5 py-3 border-t border-slate-100 bg-white" id="cart-footer">
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-base font-semibold text-slate-900">Total</span>
-                    <span class="text-base font-bold text-orange-600" id="cart-total">R$ 0,00</span>
+            <div class="px-6 py-4 border-t border-gray-200" id="cart-footer">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold text-gray-900">Total</span>
+                    <span class="text-xl font-bold text-gray-900" id="cart-total">R$ 0,00</span>
                 </div>
-                <button id="checkout-btn" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2.5 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled onclick="openCheckoutModal()">
-                    <i class="fas fa-credit-card mr-1.5"></i>
+                <button id="checkout-btn" class="w-full btn-primary text-white font-medium py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed" disabled onclick="openCheckoutModal()">
                     Finalizar Pedido
                 </button>
             </div>
@@ -373,246 +248,190 @@
     </div>
 
     <!-- Product Modal -->
-    <div id="product-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl transform translate-y-full transition-all duration-300" id="product-modal-content" style="max-height: 90vh;">
+    <div id="product-modal" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="product-modal-content" style="max-height: 85vh;">
             
-            <!-- Fixed Header -->
-            <div class="px-5 py-2.5 border-b border-slate-100 bg-white sticky top-0 z-10 rounded-t-3xl">
+            <!-- Header -->
+            <div class="px-6 py-4 border-b border-gray-200">
                 <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                        <h2 id="product-name" class="text-base font-semibold text-slate-900">Nome do Produto</h2>
-                        <span id="product-badge-separator" class="text-slate-300 mx-1.5 hidden">•</span>
-                        <span id="product-badge-header" class="text-base font-semibold px-1.5 py-0.5 rounded border hidden"></span>
-                    </div>
-                    <button onclick="closeProductModal()" class="p-1.5 hover:bg-slate-100 rounded-lg transition-colors">
-                        <i class="fas fa-times text-slate-600 text-lg"></i>
+                    <h2 id="product-name" class="text-xl font-semibold text-gray-900">Nome do Produto</h2>
+                    <button onclick="closeProductModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        <i class="fas fa-times text-gray-500"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Content -->
-            <div class="overflow-y-auto" style="max-height: calc(90vh - 200px);">
+            <div class="overflow-y-auto" style="max-height: calc(85vh - 180px);">
                 
                 <!-- Product Image -->
-                <div class="px-5 pt-5 pb-3">
-                    <div class="w-full h-40 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center">
+                <div class="px-6 pt-4 pb-3">
+                    <div class="w-full h-40 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center">
                         <span id="product-icon" class="text-5xl">🍔</span>
                     </div>
                 </div>
 
                 <!-- Description -->
-                <div class="px-5 pb-5">
-                    <p id="product-description" class="text-sm text-slate-600 leading-relaxed">Descrição do produto...</p>
+                <div class="px-6 pb-4">
+                    <p id="product-description" class="text-gray-600 leading-relaxed">Descrição do produto...</p>
                 </div>
 
                 <!-- Required Options -->
-                <div id="required-options-container" class="px-5 space-y-5">
+                <div id="required-options-container" class="px-6 space-y-6">
                     <!-- Required options will be populated by JavaScript -->
                 </div>
 
                 <!-- Optional Options -->
-                <div id="optional-options-container" class="px-5 mt-5 pb-5">
+                <div id="optional-options-container" class="px-6 mt-6 pb-6">
                     <!-- Optional options will be populated by JavaScript -->
                 </div>
             </div>
 
-            <!-- Fixed Footer -->
-            <div class="px-5 py-3 border-t border-slate-100 bg-white sticky bottom-0">
-                <div class="flex items-center justify-between mb-3">
-                    <!-- Quantity on left -->
-                    <div class="flex items-center space-x-2.5">
-                        <span class="text-sm font-medium text-slate-900">Quantidade:</span>
-                        <div class="flex items-center space-x-1.5">
-                            <button onclick="updateQuantity(-1)" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
-                                <i class="fas fa-minus text-slate-600 text-xs"></i>
+            <!-- Footer -->
+            <div class="px-6 py-4 border-t border-gray-200">
+                <div class="flex items-center justify-between mb-4">
+                    <!-- Quantity -->
+                    <div class="flex items-center space-x-3">
+                        <span class="text-gray-600 font-medium">Quantidade</span>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="updateQuantity(-1)" class="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <i class="fas fa-minus text-gray-600 text-sm"></i>
                             </button>
-                            <span id="modal-quantity" class="text-sm font-semibold text-slate-900 min-w-[1.25rem] text-center">1</span>
-                            <button onclick="updateQuantity(1)" class="w-7 h-7 rounded-full bg-orange-600 hover:bg-orange-700 flex items-center justify-center transition-colors">
-                                <i class="fas fa-plus text-white text-xs"></i>
+                            <span id="modal-quantity" class="text-lg font-semibold text-gray-900 min-w-[2rem] text-center">1</span>
+                            <button onclick="updateQuantity(1)" class="w-8 h-8 rounded-lg btn-primary flex items-center justify-center transition-colors">
+                                <i class="fas fa-plus text-white text-sm"></i>
                             </button>
                         </div>
                     </div>
                     
-                    <!-- Unit price on right -->
+                    <!-- Price -->
                     <div class="text-right">
-                        <span class="text-sm font-medium text-slate-900">Valor: </span>
-                        <span id="modal-unit-price" class="text-sm font-bold text-orange-600">R$ 0,00</span>
+                        <span class="text-sm text-gray-500">Preço unitário</span>
+                        <div id="modal-unit-price" class="text-lg font-semibold text-gray-900">R$ 0,00</div>
                     </div>
                 </div>
-                <button onclick="addToCart()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2.5 rounded-lg transition-colors">
-                    <i class="fas fa-shopping-cart mr-1.5"></i>
-                    <span>Adicionar ao carrinho • </span>
-                    <span id="modal-total-price" class="font-bold">R$ 0,00</span>
+                <button onclick="addToCart()" class="w-full btn-primary text-white font-medium py-3 rounded-lg transition-all">
+                    <span>Adicionar ao Carrinho • </span>
+                    <span id="modal-total-price" class="font-semibold">R$ 0,00</span>
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Checkout Modal -->
-    <div id="checkout-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl transform translate-y-full transition-all duration-300" id="checkout-modal-content" style="max-height: 90vh;">
+    <div id="checkout-modal" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="checkout-modal-content" style="max-height: 85vh;">
             
-            <!-- Fixed Header -->
-            <div class="px-5 py-2.5 border-b border-slate-100 bg-white sticky top-0 z-10 rounded-t-3xl">
+            <!-- Header -->
+            <div class="px-6 py-4 border-b border-gray-200">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-base font-semibold text-slate-900">Finalizar Pedido</h2>
-                    <button onclick="closeCheckoutModal()" class="p-1.5 hover:bg-slate-100 rounded-lg transition-colors">
-                        <i class="fas fa-times text-slate-600 text-lg"></i>
+                    <h2 class="text-xl font-semibold text-gray-900">Finalizar Pedido</h2>
+                    <button onclick="closeCheckoutModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        <i class="fas fa-times text-gray-500"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Content -->
-            <div class="overflow-y-auto" style="max-height: calc(90vh - 200px);">
-                <div class="px-6 py-6 space-y-6">
+            <div class="overflow-y-auto" style="max-height: calc(85vh - 180px);">
+                <div class="px-6 py-4 space-y-6">
                     
                     <!-- Customer Info -->
                     <div class="space-y-3">
-                        <h3 class="text-sm font-semibold text-slate-900 flex items-center">
-                            <i class="fas fa-user text-orange-600 mr-1.5 text-xs"></i>
-                            Seus dados
-                        </h3>
+                        <h3 class="font-semibold text-gray-900">Seus dados</h3>
                         
-                        <div class="space-y-2.5">
-                            <div>
-                                <label class="block text-xs font-medium text-slate-700 mb-0.5">Nome completo *</label>
-                                <input type="text" id="customer-name" placeholder="João Da Silva" class="w-full px-2.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs">
-                            </div>
-                            
-                            <div>
-                                <label class="block text-xs font-medium text-slate-700 mb-0.5">Telefone para contato *</label>
-                                <input type="tel" id="customer-phone" placeholder="(11) 98411-2233" class="w-full px-2.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs" oninput="formatPhoneNumber(this)">
-                            </div>
+                        <div class="space-y-3">
+                            <input type="text" id="customer-name" placeholder="Nome completo" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
+                            <input type="tel" id="customer-phone" placeholder="Telefone" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" oninput="formatPhoneNumber(this)">
                         </div>
                     </div>
 
                     <!-- Delivery Method -->
                     <div class="space-y-3">
-                        <h3 class="text-sm font-semibold text-slate-900 flex items-center">
-                            <i class="fas fa-truck text-orange-600 mr-1.5 text-xs"></i>
-                            Como deseja receber?
-                        </h3>
+                        <h3 class="font-semibold text-gray-900">Tipo de entrega</h3>
                         
-                        <div class="space-y-1.5">
-                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('delivery')">
-                                <input type="radio" name="delivery-method" value="delivery" id="delivery-delivery" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-2.5 flex-1">
+                        <div class="space-y-2">
+                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('delivery')">
+                                <input type="radio" name="delivery-method" value="delivery" id="delivery-delivery" class="mr-3">
+                                <div class="flex-1">
                                     <div class="flex items-center justify-between">
-                                        <div>
-                                            <span class="text-xs font-medium text-slate-900">Entrega • <span class="text-slate-500">Receba em casa</span></span>
-                                        </div>
-                                        <span class="text-xs font-medium text-orange-600">+ R$ 5,00</span>
+                                        <span class="font-medium text-gray-900">Delivery</span>
+                                        <span class="font-semibold text-gray-900">+ R$ 5,00</span>
                                     </div>
+                                    <p class="text-sm text-gray-500">Entrega em até 45 minutos</p>
                                 </div>
                             </div>
                             
-                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('pickup')">
-                                <input type="radio" name="delivery-method" value="pickup" id="delivery-pickup" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-2.5 flex-1">
+                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('pickup')">
+                                <input type="radio" name="delivery-method" value="pickup" id="delivery-pickup" class="mr-3">
+                                <div class="flex-1">
                                     <div class="flex items-center justify-between">
-                                        <div>
-                                            <span class="text-xs font-medium text-slate-900">Retirada • <span class="text-slate-500">Retire no balcão</span></span>
-                                        </div>
-                                        <span class="text-xs font-medium text-green-600">Grátis</span>
+                                        <span class="font-medium text-gray-900">Retirada no local</span>
+                                        <span class="font-semibold text-green-600">Grátis</span>
                                     </div>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('dine-in')">
-                                <input type="radio" name="delivery-method" value="dine-in" id="delivery-dine-in" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-2.5 flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <span class="text-xs font-medium text-slate-900">No local • <span class="text-slate-500">Comer no restaurante</span></span>
-                                        </div>
-                                        <span class="text-xs font-medium text-green-600">Grátis</span>
-                                    </div>
+                                    <p class="text-sm text-gray-500">Pronto em 30 minutos</p>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Address field (shown only for delivery) -->
+                        <!-- Address field -->
                         <div id="address-field" class="hidden">
-                            <label class="block text-xs font-medium text-slate-700 mb-0.5">Endereço para entrega *</label>
-                            <textarea id="delivery-address" placeholder="Rua, número, bairro, complemento..." class="w-full px-2.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs resize-none" rows="2"></textarea>
+                            <textarea id="delivery-address" placeholder="Endereço completo com número, bairro e ponto de referência..." class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none" rows="3"></textarea>
                         </div>
                     </div>
 
                     <!-- Payment Method -->
                     <div class="space-y-3">
-                        <h3 class="text-sm font-semibold text-slate-900 flex items-center">
-                            <i class="fas fa-credit-card text-orange-600 mr-1.5 text-xs"></i>
-                            Como deseja pagar?
-                        </h3>
+                        <h3 class="font-semibold text-gray-900">Forma de pagamento</h3>
                         
-                        <div class="space-y-1.5">
-                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('pix')">
-                                <input type="radio" name="payment-method" value="pix" id="payment-pix" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-2.5 flex-1">
-                                    <span class="text-xs font-medium text-slate-900">Pix automatizado • <span class="text-slate-500">Pagamento instantâneo</span></span>
-                                </div>
+                        <div class="space-y-2">
+                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('pix')">
+                                <input type="radio" name="payment-method" value="pix" id="payment-pix" class="mr-3">
+                                <i class="fas fa-qrcode text-orange-600 mr-3"></i>
+                                <span class="font-medium text-gray-900">Pix</span>
                             </div>
                             
-                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('card-online')">
-                                <input type="radio" name="payment-method" value="card-online" id="payment-card-online" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-2.5 flex-1">
-                                    <span class="text-xs font-medium text-slate-900">Cartão online • <span class="text-slate-500">Débito ou crédito</span></span>
-                                </div>
+                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('card')">
+                                <input type="radio" name="payment-method" value="card" id="payment-card" class="mr-3">
+                                <i class="fas fa-credit-card text-orange-600 mr-3"></i>
+                                <span class="font-medium text-gray-900">Cartão de Crédito/Débito</span>
                             </div>
                             
-                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('cash')">
-                                <input type="radio" name="payment-method" value="cash" id="payment-cash" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-2.5 flex-1">
-                                    <span class="text-xs font-medium text-slate-900">Dinheiro • <span class="text-slate-500">Pagamento na entrega/retirada</span></span>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('card-machine')">
-                                <input type="radio" name="payment-method" value="card-machine" id="payment-card-machine" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-2.5 flex-1">
-                                    <span class="text-xs font-medium text-slate-900">Maquininha • <span class="text-slate-500">Cartão na entrega/retirada</span></span>
-                                </div>
+                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('cash')">
+                                <input type="radio" name="payment-method" value="cash" id="payment-cash" class="mr-3">
+                                <i class="fas fa-money-bill-wave text-orange-600 mr-3"></i>
+                                <span class="font-medium text-gray-900">Dinheiro</span>
                             </div>
                         </div>
                         
-                        <!-- Cash change field (shown only for cash payment) -->
+                        <!-- Cash change field -->
                         <div id="cash-change-field" class="hidden">
-                            <label class="block text-xs font-medium text-slate-700 mb-0.5">Troco para quanto?</label>
-                            <input type="text" id="cash-change" placeholder="Ex: R$ 50,00" class="w-full px-2.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs">
-                            <p class="text-xs text-slate-500 mt-0.5">Deixe em branco se não precisar de troco</p>
+                            <input type="text" id="cash-change" placeholder="Troco para quanto? (Ex: R$ 50,00)" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
                         </div>
                     </div>
 
                     <!-- Order Summary -->
                     <div class="space-y-3">
-                        <h3 class="text-sm font-semibold text-slate-900 flex items-center">
-                            <i class="fas fa-receipt text-orange-600 mr-1.5 text-xs"></i>
-                            Resumo do pedido
-                        </h3>
+                        <h3 class="font-semibold text-gray-900">Resumo do pedido</h3>
                         
-                        <div class="bg-slate-50 rounded-lg p-3" id="checkout-order-summary">
+                        <div class="bg-orange-50 rounded-lg p-4 border border-orange-200" id="checkout-order-summary">
                             <!-- Order items will be populated here -->
                         </div>
                     </div>
 
                     <!-- Observations -->
                     <div class="space-y-3">
-                        <h3 class="text-sm font-semibold text-slate-900 flex items-center">
-                            <i class="fas fa-comment text-orange-600 mr-1.5 text-xs"></i>
-                            Observações
-                        </h3>
+                        <h3 class="font-semibold text-gray-900">Observações</h3>
                         
-                        <div>
-                            <textarea id="order-observations" placeholder="Alguma observação especial? (opcional)" class="w-full px-2.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs resize-none" rows="2"></textarea>
-                        </div>
+                        <textarea id="order-observations" placeholder="Alguma observação especial? (opcional)" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none" rows="3"></textarea>
                     </div>
                 </div>
             </div>
 
-            <!-- Fixed Footer -->
-            <div class="px-5 py-3 border-t border-slate-100 bg-white sticky bottom-0">
-                <button onclick="confirmOrder()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2.5 rounded-lg transition-colors text-sm">
-                    <i class="fas fa-check mr-1.5 text-xs"></i>
+            <!-- Footer -->
+            <div class="px-6 py-4 border-t border-gray-200">
+                <button onclick="confirmOrder()" class="w-full btn-primary text-white font-medium py-3 rounded-lg transition-all shadow-lg">
+                    <i class="fas fa-check mr-2"></i>
                     Confirmar Pedido
                 </button>
             </div>
@@ -620,10 +439,10 @@
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 left-5 transform translate-x-[-200px] opacity-0 transition-all duration-500 ease-out z-50">
-        <div id="toast-content" class="flex items-center space-x-2.5 px-4 py-3 rounded-2xl shadow-xl backdrop-blur-sm border">
-            <i id="toast-icon" class="text-sm"></i>
-            <span id="toast-message" class="font-medium text-xs whitespace-nowrap">Produto adicionado ao carrinho!</span>
+    <div id="toast" class="fixed bottom-6 left-6 transform translate-x-[-300px] opacity-0 transition-all duration-300 z-50">
+        <div id="toast-content" class="flex items-center space-x-3 px-4 py-3 rounded-lg shadow-lg border">
+            <i id="toast-icon" class="text-lg"></i>
+            <span id="toast-message" class="font-medium">Produto adicionado!</span>
         </div>
     </div>
 
@@ -639,7 +458,7 @@
             activeCategory: null
         };
 
-        // Menu data organized by categories
+        // Menu data
         const menuData = {
             "Hambúrgueres": [
                 { 
@@ -648,7 +467,6 @@
                     description: "Hambúrguer bovino, queijo, alface, tomate, cebola e maionese", 
                     price: 18.90, 
                     icon: "🥗",
-                    badge: { type: "promocao", text: "Promoção" },
                     requiredOptions: [
                         {
                             name: "Ponto da Carne",
@@ -662,8 +480,7 @@
                     optionalOptions: [
                         { name: "Bacon extra", price: 3.50 },
                         { name: "Queijo extra", price: 2.50 },
-                        { name: "Batata frita", price: 5.90 },
-                        { name: "Molho especial", price: 1.50 }
+                        { name: "Batata frita", price: 5.90 }
                     ]
                 },
                 { 
@@ -672,7 +489,6 @@
                     description: "Hambúrguer bovino, queijo, bacon crocante, alface, tomate e maionese", 
                     price: 22.90, 
                     icon: "🥓",
-                    badge: { type: "preferido", text: "Preferido" },
                     requiredOptions: [
                         {
                             name: "Ponto da Carne",
@@ -686,8 +502,7 @@
                     optionalOptions: [
                         { name: "Bacon extra", price: 3.50 },
                         { name: "Queijo extra", price: 2.50 },
-                        { name: "Batata frita", price: 5.90 },
-                        { name: "Ovo frito", price: 2.00 }
+                        { name: "Batata frita", price: 5.90 }
                     ]
                 },
                 { 
@@ -696,7 +511,6 @@
                     description: "Hambúrguer bovino, queijo, bacon, ovo, alface, tomate, cebola e maionese", 
                     price: 26.90, 
                     icon: "🍔",
-                    badge: { type: "sugestao", text: "Sugestão" },
                     requiredOptions: [
                         {
                             name: "Ponto da Carne",
@@ -709,7 +523,6 @@
                     ],
                     optionalOptions: [
                         { name: "Batata frita", price: 5.90 },
-                        { name: "Molho especial", price: 1.50 },
                         { name: "Cebola caramelizada", price: 2.00 }
                     ]
                 }
@@ -727,15 +540,13 @@
                             options: [
                                 { name: "Margherita", price: 0 },
                                 { name: "Calabresa", price: 2.00 },
-                                { name: "Portuguesa", price: 3.00 },
-                                { name: "Frango com Catupiry", price: 4.00 }
+                                { name: "Portuguesa", price: 3.00 }
                             ]
                         }
                     ],
                     optionalOptions: [
                         { name: "Borda recheada", price: 5.00 },
-                        { name: "Queijo extra", price: 3.00 },
-                        { name: "Azeitona", price: 2.00 }
+                        { name: "Queijo extra", price: 3.00 }
                     ]
                 },
                 { 
@@ -744,7 +555,6 @@
                     description: "Pizza tradicional com molho de tomate, queijo mussarela e orégano", 
                     price: 35.90, 
                     icon: "🍕",
-                    badge: { type: "promocao", text: "Promoção" },
                     requiredOptions: [
                         {
                             name: "Sabor",
@@ -752,16 +562,13 @@
                                 { name: "Margherita", price: 0 },
                                 { name: "Calabresa", price: 3.00 },
                                 { name: "Portuguesa", price: 4.00 },
-                                { name: "Frango com Catupiry", price: 5.00 },
                                 { name: "Quatro Queijos", price: 6.00 }
                             ]
                         }
                     ],
                     optionalOptions: [
                         { name: "Borda recheada", price: 7.00 },
-                        { name: "Queijo extra", price: 4.00 },
-                        { name: "Azeitona", price: 2.50 },
-                        { name: "Rúcula", price: 3.00 }
+                        { name: "Queijo extra", price: 4.00 }
                     ]
                 },
                 { 
@@ -770,7 +577,6 @@
                     description: "Pizza tradicional com molho de tomate, queijo mussarela e orégano", 
                     price: 45.90, 
                     icon: "🍕",
-                    badge: { type: "preferido", text: "Preferido" },
                     requiredOptions: [
                         {
                             name: "Sabor",
@@ -778,18 +584,13 @@
                                 { name: "Margherita", price: 0 },
                                 { name: "Calabresa", price: 4.00 },
                                 { name: "Portuguesa", price: 5.00 },
-                                { name: "Frango com Catupiry", price: 6.00 },
-                                { name: "Quatro Queijos", price: 7.00 },
-                                { name: "Especial da Casa", price: 8.00 }
+                                { name: "Quatro Queijos", price: 7.00 }
                             ]
                         }
                     ],
                     optionalOptions: [
                         { name: "Borda recheada", price: 9.00 },
-                        { name: "Queijo extra", price: 5.00 },
-                        { name: "Azeitona", price: 3.00 },
-                        { name: "Rúcula", price: 3.50 },
-                        { name: "Tomate seco", price: 4.00 }
+                        { name: "Queijo extra", price: 5.00 }
                     ]
                 }
             ]
@@ -822,25 +623,21 @@
             const toastIcon = document.getElementById('toast-icon');
             const toastMessage = document.getElementById('toast-message');
             
-            // Set message
             toastMessage.textContent = message;
             
-            // Configure appearance based on type
             if (type === 'success') {
-                toastContent.className = 'flex items-center space-x-3 px-6 py-4 rounded-2xl shadow-xl backdrop-blur-sm border bg-gradient-to-r from-emerald-50 to-green-50 border-emerald-200 text-emerald-800';
-                toastIcon.className = 'fas fa-check text-base text-emerald-600';
+                toastContent.className = 'flex items-center space-x-3 px-4 py-3 rounded-lg shadow-lg border bg-green-50 border-green-200 text-green-800';
+                toastIcon.className = 'fas fa-check-circle text-lg text-green-600';
             } else if (type === 'error') {
-                toastContent.className = 'flex items-center space-x-3 px-6 py-4 rounded-2xl shadow-xl backdrop-blur-sm border bg-gradient-to-r from-red-50 to-rose-50 border-red-200 text-red-800';
-                toastIcon.className = 'fas fa-times text-base text-red-600';
+                toastContent.className = 'flex items-center space-x-3 px-4 py-3 rounded-lg shadow-lg border bg-red-50 border-red-200 text-red-800';
+                toastIcon.className = 'fas fa-exclamation-circle text-lg text-red-600';
             }
             
-            // Show toast with slide in from left animation
             toast.style.transform = 'translateX(0)';
             toast.style.opacity = '1';
             
-            // Hide toast after 3 seconds
             setTimeout(() => {
-                toast.style.transform = 'translateX(-200px)';
+                toast.style.transform = 'translateX(-300px)';
                 toast.style.opacity = '0';
             }, 3000);
         }
@@ -850,7 +647,6 @@
             const searchInput = document.getElementById('search-input');
             state.currentSearchTerm = searchInput.value.trim().toLowerCase();
             
-            // Reset to "Todos" when searching
             if (state.currentSearchTerm) {
                 state.activeCategory = 'Todos';
             }
@@ -864,19 +660,6 @@
             state.activeCategory = categoryName;
             renderCategoryNavigation();
             renderMenuCategories();
-            
-            // Scroll to top of menu when filtering
-            if (categoryName !== 'Todos') {
-                const menuElement = document.getElementById('menu-categories');
-                if (menuElement) {
-                    const headerHeight = 140; // Approximate height of sticky headers
-                    const elementPosition = menuElement.offsetTop - headerHeight;
-                    window.scrollTo({
-                        top: elementPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }
         }
 
         // Render functions
@@ -884,17 +667,15 @@
             const container = document.getElementById('category-nav');
             container.innerHTML = '';
             
-            // Always show "Todos" button first
             const allButton = document.createElement('button');
-            allButton.className = `category-btn px-2 py-1 text-xs font-medium whitespace-nowrap flex items-center space-x-1 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
-            allButton.innerHTML = `<span class="text-xs">✨</span><span>Todos</span>`;
+            allButton.className = `category-btn px-4 py-2 text-sm font-medium whitespace-nowrap rounded-lg ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
+            allButton.textContent = 'Todos';
             allButton.onclick = () => selectCategory('Todos');
             container.appendChild(allButton);
             
             Object.keys(menuData).forEach(categoryName => {
                 let itemsToShow = menuData[categoryName];
                 
-                // Filter items based on search term
                 if (state.currentSearchTerm) {
                     itemsToShow = itemsToShow.filter(item => 
                         item.name.toLowerCase().includes(state.currentSearchTerm) ||
@@ -902,12 +683,10 @@
                     );
                 }
                 
-                // Only show category button if it has items to display
                 if (itemsToShow.length > 0) {
-                    const categoryIcon = categoryName === 'Hambúrgueres' ? '🍔' : '🍕';
                     const button = document.createElement('button');
-                    button.className = `category-btn px-2 py-1 text-xs font-medium whitespace-nowrap flex items-center space-x-1 ${state.activeCategory === categoryName ? 'active' : ''}`;
-                    button.innerHTML = `<span class="text-xs">${categoryIcon}</span><span>${categoryName}</span>`;
+                    button.className = `category-btn px-4 py-2 text-sm font-medium whitespace-nowrap rounded-lg ${state.activeCategory === categoryName ? 'active' : ''}`;
+                    button.textContent = categoryName;
                     button.onclick = () => selectCategory(categoryName);
                     container.appendChild(button);
                 }
@@ -919,14 +698,12 @@
             container.innerHTML = '';
             
             Object.keys(menuData).forEach(categoryName => {
-                // Skip category if filtering and it's not the selected one
                 if (state.activeCategory && state.activeCategory !== 'Todos' && state.activeCategory !== categoryName) {
                     return;
                 }
                 
                 let itemsToShow = menuData[categoryName];
                 
-                // Filter items based on search term
                 if (state.currentSearchTerm) {
                     itemsToShow = itemsToShow.filter(item => 
                         item.name.toLowerCase().includes(state.currentSearchTerm) ||
@@ -934,7 +711,6 @@
                     );
                 }
                 
-                // Only show category if it has items to display
                 if (itemsToShow.length > 0) {
                     const categorySection = createCategorySection(categoryName, itemsToShow);
                     container.appendChild(categorySection);
@@ -945,18 +721,13 @@
         function createCategorySection(categoryName, items) {
             const section = document.createElement('div');
             section.className = 'mb-8';
-            section.id = `category-${categoryName.toLowerCase().replace(/\s+/g, '-')}`;
-            
-            const categoryIcon = categoryName === 'Hambúrgueres' ? '🍔' : '🍕';
             
             section.innerHTML = `
                 <div class="mb-6">
-                    <div class="flex items-center mb-4">
-                        <h2 class="text-xl font-semibold text-slate-800 mr-4">${categoryIcon} ${categoryName}</h2>
-                        <div class="flex-1 h-px bg-gradient-to-r from-amber-300 to-transparent opacity-60"></div>
-                    </div>
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-1">${categoryName}</h2>
+                    <div class="w-12 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="items-${categoryName.toLowerCase()}">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="items-${categoryName.toLowerCase()}">
                 </div>
             `;
             
@@ -970,38 +741,21 @@
 
         function createItemElement(item) {
             const itemElement = document.createElement('div');
-            itemElement.className = 'bg-white rounded-xl shadow-sm premium-card cursor-pointer fade-in border border-slate-100';
+            itemElement.className = 'bg-white rounded-xl shadow-sm card-hover cursor-pointer fade-in border border-gray-100';
 
             itemElement.innerHTML = `
-                <div class="p-3">
-                    <!-- Mobile Layout -->
-                    <div class="sm:hidden flex space-x-2.5">
-                        <div class="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <span class="text-xl">${item.icon}</span>
+                <div class="p-4">
+                    <div class="flex space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl">${item.icon}</span>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <div class="mb-0.5">
-                                <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
-                                <span class="text-slate-300 mx-1.5">•</span>
-                                <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
-                                ${item.badge ? `<span class="text-slate-300 mx-1.5">•</span><span class="text-xs font-semibold px-1 py-0.5 rounded-full border ${item.badge.type === 'promocao' ? 'text-red-600 border-red-600' : item.badge.type === 'preferido' ? 'text-purple-600 border-purple-600' : 'text-green-600 border-green-600'}">${item.badge.text}</span>` : ''}
+                            <div class="flex items-start justify-between mb-2">
+                                <h3 class="font-semibold text-gray-900 truncate">${item.name}</h3>
+                                <span class="text-lg font-bold text-orange-600 ml-2">R$ ${formatPrice(item.price)}</span>
                             </div>
-                            <p class="text-slate-600 text-sm leading-relaxed">${item.description}</p>
+                            <p class="text-gray-600 text-sm leading-relaxed line-clamp-2">${item.description}</p>
                         </div>
-                    </div>
-                    
-                    <!-- Desktop Layout -->
-                    <div class="hidden sm:block">
-                        <div class="w-full aspect-[5/2] bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg overflow-hidden mb-2.5 flex items-center justify-center">
-                            <span class="text-3xl">${item.icon}</span>
-                        </div>
-                        <div class="mb-1.5">
-                            <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
-                            <span class="text-slate-300 mx-1.5">•</span>
-                            <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
-                            ${item.badge ? `<span class="text-slate-300 mx-1.5">•</span><span class="text-xs font-semibold px-1 py-0.5 rounded-full border ${item.badge.type === 'promocao' ? 'text-red-600 border-red-600' : item.badge.type === 'preferido' ? 'text-purple-600 border-purple-600' : 'text-green-600 border-green-600'}">${item.badge.text}</span>` : ''}
-                        </div>
-                        <p class="text-slate-600 text-sm leading-relaxed">${item.description}</p>
                     </div>
                 </div>
             `;
@@ -1020,24 +774,22 @@
             modal.classList.remove('opacity-0');
             content.style.transform = 'translateY(0)';
             
-            // Populate opening hours
             populateOpeningHours();
         }
 
         function populateOpeningHours() {
             const container = document.getElementById('opening-hours');
             const today = new Date();
-            const days = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            const days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
             
-            // Opening hours for each day (0 = Sunday, 6 = Saturday)
             const hours = {
-                0: '12h às 22h', // Sunday
-                1: 'Fechado', // Monday
-                2: '18h às 23h', // Tuesday
-                3: '18h às 23h', // Wednesday
-                4: '18h às 23h', // Thursday
-                5: '18h às 00h', // Friday
-                6: '12h às 00h'  // Saturday
+                0: '12h às 22h',
+                1: 'Fechado',
+                2: '18h às 23h',
+                3: '18h às 23h',
+                4: '18h às 23h',
+                5: '18h às 00h',
+                6: '12h às 00h'
             };
             
             container.innerHTML = '';
@@ -1053,17 +805,13 @@
                 else dayLabel = days[dayOfWeek];
                 
                 const isToday = i === 0;
-                const currentHour = today.getHours();
-                const isOpen = currentHour >= 18 && currentHour < 23;
                 
                 const hourElement = document.createElement('div');
-                hourElement.className = `flex items-center justify-between py-2 px-3 rounded-lg ${isToday ? 'bg-orange-50 border border-orange-100' : 'bg-slate-50'}`;
+                hourElement.className = `flex items-center justify-between py-2 px-3 rounded-lg ${isToday ? 'bg-orange-50 border border-orange-200' : 'bg-gray-50'}`;
                 
                 hourElement.innerHTML = `
-                    <div class="flex items-center space-x-3">
-                        <span class="text-sm font-medium text-slate-900">${dayLabel}</span>
-                    </div>
-                    <span class="text-sm text-slate-600">${hours[dayOfWeek]}</span>
+                    <span class="font-medium text-gray-900">${dayLabel}</span>
+                    <span class="text-gray-600">${hours[dayOfWeek]}</span>
                 `;
                 
                 container.appendChild(hourElement);
@@ -1108,20 +856,17 @@
         function updateCartDisplay() {
             const cartItems = document.getElementById('cart-items');
             const cartTotal = document.getElementById('cart-total');
-            const cartFooter = document.getElementById('cart-footer');
             const checkoutBtn = document.getElementById('checkout-btn');
             
             if (state.cart.length === 0) {
                 cartItems.innerHTML = `
                     <div class="text-center py-12">
-                        <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-shopping-cart text-slate-400 text-xl"></i>
+                        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-shopping-cart text-gray-400 text-xl"></i>
                         </div>
-                        <p class="text-slate-500 text-sm">Seu carrinho está vazio</p>
-                        <p class="text-slate-400 text-xs mt-1">Adicione alguns itens deliciosos!</p>
+                        <p class="text-gray-500">Seu carrinho está vazio</p>
                     </div>
                 `;
-                // Footer sempre visível
                 checkoutBtn.disabled = true;
             } else {
                 let total = 0;
@@ -1130,89 +875,27 @@
                 state.cart.forEach((item, index) => {
                     total += item.price * item.quantity;
                     
-                    // Build configuration text
-                    let configText = '';
-                    
-                    // Add required options to config text
-                    if (state.currentProduct && state.currentProduct.requiredOptions) {
-                        const product = menuData[Object.keys(menuData).find(cat => 
-                            menuData[cat].some(p => p.id === item.id)
-                        )].find(p => p.id === item.id);
-                        
-                        if (product && product.requiredOptions) {
-                            product.requiredOptions.forEach((optionGroup, groupIndex) => {
-                                const selectedOptionIndex = item.selectedRequiredOptions[groupIndex];
-                                if (selectedOptionIndex !== undefined) {
-                                    const selectedOption = optionGroup.options[selectedOptionIndex];
-                                    if (configText) configText += ' • ';
-                                    configText += selectedOption.name;
-                                }
-                            });
-                        }
-                    }
-                    
-                    // Add optional options to config text
-                    if (item.selectedOptionalOptions) {
-                        const product = menuData[Object.keys(menuData).find(cat => 
-                            menuData[cat].some(p => p.id === item.id)
-                        )].find(p => p.id === item.id);
-                        
-                        if (product && product.optionalOptions) {
-                            Object.keys(item.selectedOptionalOptions).forEach(optionIndex => {
-                                const quantity = item.selectedOptionalOptions[optionIndex];
-                                if (quantity > 0) {
-                                    const option = product.optionalOptions[optionIndex];
-                                    if (configText) configText += ' • ';
-                                    configText += `${option.name}${quantity > 1 ? ` (${quantity}x)` : ''}`;
-                                }
-                            });
-                        }
-                    }
-                    
                     const itemElement = document.createElement('div');
-                    itemElement.className = 'flex items-start space-x-3 py-3 border-b border-slate-100 last:border-b-0 cursor-pointer hover:bg-slate-50 transition-colors rounded-lg';
-                    itemElement.onclick = () => editCartItem(index);
+                    itemElement.className = 'flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0';
                     itemElement.innerHTML = `
-                        <!-- Product Image -->
-                        <div class="w-14 h-14 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <span class="text-xl">${item.icon}</span>
-                        </div>
-                        
-                        <!-- Product Details -->
-                        <div class="flex-1 min-w-0">
-                            <!-- Main product info -->
-                            <div class="flex items-center space-x-1.5 mb-0.5">
-                                <span class="text-xs font-semibold text-slate-900">${item.quantity}</span>
-                                <span class="text-slate-400">•</span>
-                                <span class="text-xs font-semibold text-slate-900">${item.name}</span>
-                                <span class="text-slate-400">•</span>
-                                <span class="text-xs font-semibold text-slate-900">R$ ${formatPrice(item.price)}</span>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-sm font-semibold text-white bg-gradient-to-br from-orange-500 to-orange-600 rounded-full w-6 h-6 flex items-center justify-center">${item.quantity}</span>
+                            <div>
+                                <span class="font-medium text-gray-900">${item.name}</span>
+                                <div class="text-sm text-gray-500">R$ ${formatPrice(item.price)} cada</div>
                             </div>
-                            
-                            <!-- Configuration -->
-                            ${configText ? `<p class="text-xs text-slate-400 leading-relaxed">${configText}</p>` : ''}
                         </div>
-                        
-                        <!-- Actions -->
-                        <div class="flex flex-col items-end space-y-1.5">
-                            <!-- Remove button -->
-                            <button onclick="event.stopPropagation(); removeFromCart(${index})" class="flex items-center space-x-1.5 px-2.5 py-1 border border-red-200 rounded-lg hover:bg-red-50 transition-colors group">
-                                <i class="fas fa-trash text-red-500 text-xs"></i>
-                                <span class="text-xs font-medium text-red-500">Remover</span>
+                        <div class="flex items-center space-x-2">
+                            <span class="font-semibold text-gray-900">R$ ${formatPrice(item.price * item.quantity)}</span>
+                            <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 p-1 rounded transition-colors">
+                                <i class="fas fa-trash text-sm"></i>
                             </button>
-                            
-                            <!-- Total value -->
-                            <div class="text-right">
-                                <span class="text-xs text-slate-500">Valor: </span>
-                                <span class="text-xs font-bold text-orange-600">R$ ${formatPrice(item.price * item.quantity)}</span>
-                            </div>
                         </div>
                     `;
                     cartItems.appendChild(itemElement);
                 });
                 
                 cartTotal.textContent = `R$ ${formatPrice(total)}`;
-                // Footer sempre visível
                 checkoutBtn.disabled = false;
             }
         }
@@ -1222,67 +905,6 @@
             updateCartDisplay();
             updateCartCount();
             showToast('Produto removido do carrinho', 'error');
-        }
-
-        function editCartItem(index) {
-            const cartItem = state.cart[index];
-            
-            // Find the original product data
-            const product = findProductById(cartItem.id);
-            if (!product) return;
-            
-            // Store the cart item index for updating later
-            state.editingCartIndex = index;
-            
-            // Set up the modal with the cart item's configuration
-            state.currentProduct = product;
-            state.modalQuantity = cartItem.quantity;
-            state.selectedRequiredOptions = {...cartItem.selectedRequiredOptions};
-            state.selectedOptionalOptions = {...cartItem.selectedOptionalOptions};
-            
-            const modal = document.getElementById('product-modal');
-            const content = document.getElementById('product-modal-content');
-            
-            // Populate modal content
-            document.getElementById('product-icon').textContent = product.icon;
-            document.getElementById('product-name').textContent = product.name;
-            document.getElementById('product-description').textContent = product.description;
-            document.getElementById('modal-quantity').textContent = state.modalQuantity;
-            
-            // Show/hide badge in header
-            const badgeHeader = document.getElementById('product-badge-header');
-            const badgeSeparator = document.getElementById('product-badge-separator');
-            if (product.badge) {
-                badgeHeader.textContent = product.badge.text;
-                badgeHeader.className = `text-base font-semibold px-1.5 py-0.5 rounded-full ${product.badge.type === 'promocao' ? 'text-red-600' : product.badge.type === 'preferido' ? 'text-purple-600' : 'text-green-600'}`;
-                badgeHeader.classList.remove('hidden');
-                badgeSeparator.classList.remove('hidden');
-            } else {
-                badgeHeader.classList.add('hidden');
-                badgeSeparator.classList.add('hidden');
-            }
-            
-            // Populate required options with saved selections
-            populateRequiredOptionsWithSelection(product);
-            
-            // Populate optional options with saved selections
-            populateOptionalOptionsWithSelection(product);
-            
-            // Update total price
-            updateModalTotalPrice();
-            
-            // Show modal
-            modal.classList.remove('pointer-events-none');
-            modal.classList.remove('opacity-0');
-            content.style.transform = 'translateY(0)';
-        }
-
-        function findProductById(id) {
-            for (const categoryName of Object.keys(menuData)) {
-                const product = menuData[categoryName].find(p => p.id === id);
-                if (product) return product;
-            }
-            return null;
         }
 
         function updateCartCount() {
@@ -1305,35 +927,15 @@
             const modal = document.getElementById('product-modal');
             const content = document.getElementById('product-modal-content');
             
-            // Populate modal content
             document.getElementById('product-icon').textContent = product.icon;
             document.getElementById('product-name').textContent = product.name;
             document.getElementById('product-description').textContent = product.description;
             document.getElementById('modal-quantity').textContent = state.modalQuantity;
             
-            // Show/hide badge in header
-            const badgeHeader = document.getElementById('product-badge-header');
-            const badgeSeparator = document.getElementById('product-badge-separator');
-            if (product.badge) {
-                badgeHeader.textContent = product.badge.text;
-                badgeHeader.className = `text-base font-semibold px-1.5 py-0.5 rounded-full ${product.badge.type === 'promocao' ? 'text-red-600' : product.badge.type === 'preferido' ? 'text-purple-600' : 'text-green-600'}`;
-                badgeHeader.classList.remove('hidden');
-                badgeSeparator.classList.remove('hidden');
-            } else {
-                badgeHeader.classList.add('hidden');
-                badgeSeparator.classList.add('hidden');
-            }
-            
-            // Populate required options
             populateRequiredOptions(product);
-            
-            // Populate optional options
             populateOptionalOptions(product);
-            
-            // Update total price
             updateModalTotalPrice();
             
-            // Show modal
             modal.classList.remove('pointer-events-none');
             modal.classList.remove('opacity-0');
             content.style.transform = 'translateY(0)';
@@ -1345,9 +947,6 @@
             
             modal.classList.add('opacity-0');
             content.style.transform = 'translateY(100%)';
-            
-            // Clear editing state
-            state.editingCartIndex = undefined;
             
             setTimeout(() => {
                 modal.classList.add('pointer-events-none');
@@ -1367,7 +966,7 @@
                 groupElement.className = 'space-y-3';
                 
                 groupElement.innerHTML = `
-                    <h3 class="text-base font-semibold text-slate-900">${optionGroup.name} <span class="text-red-500">*</span></h3>
+                    <h3 class="font-semibold text-gray-900">${optionGroup.name}</h3>
                     <div class="space-y-2" id="required-group-${groupIndex}">
                     </div>
                 `;
@@ -1376,66 +975,11 @@
                 
                 optionGroup.options.forEach((option, optionIndex) => {
                     const optionElement = document.createElement('div');
-                    optionElement.className = 'flex items-center justify-between p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
-                    
-                    const priceText = option.price > 0 ? ` (+R$ ${formatPrice(option.price)})` : '';
+                    optionElement.className = 'flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
                     
                     optionElement.innerHTML = `
-                        <div class="flex items-center space-x-3">
-                            <input type="radio" name="required-${groupIndex}" value="${optionIndex}" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500" onchange="selectRequiredOption(${groupIndex}, ${optionIndex})">
-                            <span class="text-sm font-medium text-slate-900">${option.name}</span>
-                        </div>
-                        ${option.price > 0 ? `<span class="text-sm font-medium text-orange-600">${priceText}</span>` : ''}
-                    `;
-                    
-                    optionElement.onclick = (e) => {
-                        if (e.target.type !== 'radio') {
-                            const radio = optionElement.querySelector('input[type="radio"]');
-                            radio.checked = true;
-                            selectRequiredOption(groupIndex, optionIndex);
-                        }
-                    };
-                    
-                    optionsContainer.appendChild(optionElement);
-                });
-                
-                container.appendChild(groupElement);
-            });
-        }
-
-        function populateRequiredOptionsWithSelection(product) {
-            const container = document.getElementById('required-options-container');
-            container.innerHTML = '';
-            
-            if (!product.requiredOptions || product.requiredOptions.length === 0) {
-                return;
-            }
-            
-            product.requiredOptions.forEach((optionGroup, groupIndex) => {
-                const groupElement = document.createElement('div');
-                groupElement.className = 'space-y-3';
-                
-                groupElement.innerHTML = `
-                    <h3 class="text-base font-semibold text-slate-900">${optionGroup.name} <span class="text-red-500">*</span></h3>
-                    <div class="space-y-2" id="required-group-${groupIndex}">
-                    </div>
-                `;
-                
-                const optionsContainer = groupElement.querySelector(`#required-group-${groupIndex}`);
-                
-                optionGroup.options.forEach((option, optionIndex) => {
-                    const optionElement = document.createElement('div');
-                    optionElement.className = 'flex items-center justify-between p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
-                    
-                    const priceText = option.price > 0 ? ` (+R$ ${formatPrice(option.price)})` : '';
-                    const isSelected = state.selectedRequiredOptions[groupIndex] === optionIndex;
-                    
-                    optionElement.innerHTML = `
-                        <div class="flex items-center space-x-3">
-                            <input type="radio" name="required-${groupIndex}" value="${optionIndex}" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500" onchange="selectRequiredOption(${groupIndex}, ${optionIndex})" ${isSelected ? 'checked' : ''}>
-                            <span class="text-sm font-medium text-slate-900">${option.name}</span>
-                        </div>
-                        ${option.price > 0 ? `<span class="text-sm font-medium text-orange-600">${priceText}</span>` : ''}
+                        <input type="radio" name="required-${groupIndex}" value="${optionIndex}" class="mr-3" onchange="selectRequiredOption(${groupIndex}, ${optionIndex})">
+                        <span class="font-medium text-gray-900">${option.name}${option.price > 0 ? ` (+R$ ${formatPrice(option.price)})` : ''}</span>
                     `;
                     
                     optionElement.onclick = (e) => {
@@ -1465,7 +1009,7 @@
             groupElement.className = 'space-y-3';
             
             groupElement.innerHTML = `
-                <h3 class="text-base font-semibold text-slate-900">Opcionais</h3>
+                <h3 class="font-semibold text-gray-900">Adicionais</h3>
                 <div class="space-y-2" id="optional-options">
                 </div>
             `;
@@ -1474,81 +1018,21 @@
             
             product.optionalOptions.forEach((option, optionIndex) => {
                 const optionElement = document.createElement('div');
-                optionElement.className = 'flex items-center justify-between p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
+                optionElement.className = 'flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
                 
                 optionElement.innerHTML = `
-                    <div class="flex items-center space-x-3">
-                        <input type="checkbox" id="optional-checkbox-${optionIndex}" class="option-checkbox" onchange="toggleOptional(${optionIndex})">
-                        <span class="text-sm font-medium text-slate-900">${option.name} • <span class="text-orange-600">R$ ${formatPrice(option.price)}</span></span>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="optional-checkbox-${optionIndex}" class="mr-3" onchange="toggleOptional(${optionIndex})">
+                        <span class="font-medium text-gray-900">${option.name} (+R$ ${formatPrice(option.price)})</span>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 hidden">
-                            <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
-                                <i class="fas fa-minus text-slate-600 text-xs"></i>
-                            </button>
-                            <span id="optional-quantity-${optionIndex}" class="text-sm font-semibold text-slate-900 min-w-[1rem] text-center">1</span>
-                            <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-7 h-7 rounded-full bg-orange-600 hover:bg-orange-700 flex items-center justify-center transition-colors">
-                                <i class="fas fa-plus text-white text-xs"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-                
-                optionElement.onclick = (e) => {
-                    if (e.target.type !== 'checkbox' && !e.target.closest('button')) {
-                        const checkbox = optionElement.querySelector('input[type="checkbox"]');
-                        checkbox.checked = !checkbox.checked;
-                        toggleOptional(optionIndex);
-                    }
-                };
-                
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            container.appendChild(groupElement);
-        }
-
-        function populateOptionalOptionsWithSelection(product) {
-            const container = document.getElementById('optional-options-container');
-            container.innerHTML = '';
-            
-            if (!product.optionalOptions || product.optionalOptions.length === 0) {
-                return;
-            }
-            
-            const groupElement = document.createElement('div');
-            groupElement.className = 'space-y-3';
-            
-            groupElement.innerHTML = `
-                <h3 class="text-base font-semibold text-slate-900">Opcionais</h3>
-                <div class="space-y-2" id="optional-options">
-                </div>
-            `;
-            
-            const optionsContainer = groupElement.querySelector('#optional-options');
-            
-            product.optionalOptions.forEach((option, optionIndex) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'flex items-center justify-between p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
-                
-                const savedQuantity = state.selectedOptionalOptions[optionIndex] || 0;
-                const isSelected = savedQuantity > 0;
-                
-                optionElement.innerHTML = `
-                    <div class="flex items-center space-x-3">
-                        <input type="checkbox" id="optional-checkbox-${optionIndex}" class="option-checkbox" onchange="toggleOptional(${optionIndex})" ${isSelected ? 'checked' : ''}>
-                        <span class="text-sm font-medium text-slate-900">${option.name} • <span class="text-orange-600">R$ ${formatPrice(option.price)}</span></span>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 ${isSelected ? '' : 'hidden'}">
-                            <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors">
-                                <i class="fas fa-minus text-slate-600 text-xs"></i>
-                            </button>
-                            <span id="optional-quantity-${optionIndex}" class="text-sm font-semibold text-slate-900 min-w-[1rem] text-center">${savedQuantity || 1}</span>
-                            <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-7 h-7 rounded-full bg-orange-600 hover:bg-orange-700 flex items-center justify-center transition-colors">
-                                <i class="fas fa-plus text-white text-xs"></i>
-                            </button>
-                        </div>
+                    <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 hidden">
+                        <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-6 h-6 rounded bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                            <i class="fas fa-minus text-gray-600 text-xs"></i>
+                        </button>
+                        <span id="optional-quantity-${optionIndex}" class="font-semibold text-gray-900 min-w-[1rem] text-center">1</span>
+                        <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-6 h-6 rounded btn-primary flex items-center justify-center transition-colors">
+                            <i class="fas fa-plus text-white text-xs"></i>
+                        </button>
                     </div>
                 `;
                 
@@ -1576,12 +1060,10 @@
             const multiplier = document.getElementById(`optional-multiplier-${optionIndex}`);
             
             if (checkbox.checked) {
-                // Show multiplier and set quantity to 1
                 multiplier.classList.remove('hidden');
                 state.selectedOptionalOptions[optionIndex] = 1;
                 document.getElementById(`optional-quantity-${optionIndex}`).textContent = '1';
             } else {
-                // Hide multiplier and set quantity to 0
                 multiplier.classList.add('hidden');
                 state.selectedOptionalOptions[optionIndex] = 0;
             }
@@ -1600,7 +1082,6 @@
                 document.getElementById(`optional-quantity-${optionIndex}`).textContent = newQuantity;
                 updateModalTotalPrice();
             } else if (newQuantity === 0) {
-                // Uncheck the checkbox and hide multiplier
                 const checkbox = document.getElementById(`optional-checkbox-${optionIndex}`);
                 const multiplier = document.getElementById(`optional-multiplier-${optionIndex}`);
                 checkbox.checked = false;
@@ -1624,7 +1105,6 @@
             
             let unitPrice = state.currentProduct.price;
             
-            // Add required options prices
             if (state.currentProduct.requiredOptions) {
                 state.currentProduct.requiredOptions.forEach((optionGroup, groupIndex) => {
                     const selectedOptionIndex = state.selectedRequiredOptions[groupIndex];
@@ -1634,7 +1114,6 @@
                 });
             }
             
-            // Add optional options prices
             if (state.currentProduct.optionalOptions) {
                 state.currentProduct.optionalOptions.forEach((option, optionIndex) => {
                     const quantity = state.selectedOptionalOptions[optionIndex] || 0;
@@ -1642,10 +1121,8 @@
                 });
             }
             
-            // Calculate total price (unit price * quantity)
             const totalPrice = unitPrice * state.modalQuantity;
             
-            // Update both unit price and total price displays
             document.getElementById('modal-unit-price').textContent = `R$ ${formatPrice(unitPrice)}`;
             document.getElementById('modal-total-price').textContent = `R$ ${formatPrice(totalPrice)}`;
         }
@@ -1653,20 +1130,17 @@
         function addToCart() {
             if (!state.currentProduct) return;
             
-            // Check if all required options are selected
             if (state.currentProduct.requiredOptions) {
                 for (let i = 0; i < state.currentProduct.requiredOptions.length; i++) {
                     if (state.selectedRequiredOptions[i] === undefined) {
-                        showToast('Por favor, selecione todas as opções obrigatórias', 'error');
+                        showToast('Selecione todas as opções obrigatórias', 'error');
                         return;
                     }
                 }
             }
             
-            // Calculate final unit price
             let finalPrice = state.currentProduct.price;
             
-            // Add required options prices
             if (state.currentProduct.requiredOptions) {
                 state.currentProduct.requiredOptions.forEach((optionGroup, groupIndex) => {
                     const selectedOptionIndex = state.selectedRequiredOptions[groupIndex];
@@ -1676,7 +1150,6 @@
                 });
             }
             
-            // Add optional options prices
             if (state.currentProduct.optionalOptions) {
                 state.currentProduct.optionalOptions.forEach((option, optionIndex) => {
                     const quantity = state.selectedOptionalOptions[optionIndex] || 0;
@@ -1684,7 +1157,6 @@
                 });
             }
             
-            // Create cart item
             const cartItem = {
                 id: state.currentProduct.id,
                 name: state.currentProduct.name,
@@ -1695,19 +1167,9 @@
                 selectedOptionalOptions: {...state.selectedOptionalOptions}
             };
             
-            // Check if we're editing an existing item
-            if (state.editingCartIndex !== undefined) {
-                // Update existing item
-                state.cart[state.editingCartIndex] = cartItem;
-                state.editingCartIndex = undefined;
-                showToast('Produto atualizado no carrinho!');
-            } else {
-                // Add new item to cart
-                state.cart.push(cartItem);
-                showToast('Produto adicionado ao carrinho!');
-            }
+            state.cart.push(cartItem);
+            showToast('Produto adicionado ao carrinho!');
             
-            // Update UI
             updateCartCount();
             updateCartDisplay();
             closeProductModal();
@@ -1723,10 +1185,8 @@
             const modal = document.getElementById('checkout-modal');
             const content = document.getElementById('checkout-modal-content');
             
-            // Populate order summary
             populateCheckoutOrderSummary();
             
-            // Show modal
             modal.classList.remove('pointer-events-none');
             modal.classList.remove('opacity-0');
             content.style.transform = 'translateY(0)';
@@ -1749,14 +1209,11 @@
             radio.checked = true;
             
             const addressField = document.getElementById('address-field');
-            const deliveryFeeRow = document.getElementById('delivery-fee-row');
             
             if (method === 'delivery') {
                 addressField.classList.remove('hidden');
-                deliveryFeeRow.style.display = 'flex';
             } else {
                 addressField.classList.add('hidden');
-                deliveryFeeRow.style.display = 'none';
             }
             
             updateCheckoutTotal();
@@ -1784,81 +1241,44 @@
             state.cart.forEach(item => {
                 subtotal += item.price * item.quantity;
                 
-                // Build configuration text
-                let configText = '';
-                
-                // Add required options to config text
-                const product = findProductById(item.id);
-                if (product && product.requiredOptions) {
-                    product.requiredOptions.forEach((optionGroup, groupIndex) => {
-                        const selectedOptionIndex = item.selectedRequiredOptions[groupIndex];
-                        if (selectedOptionIndex !== undefined) {
-                            const selectedOption = optionGroup.options[selectedOptionIndex];
-                            if (configText) configText += ' • ';
-                            configText += selectedOption.name;
-                        }
-                    });
-                }
-                
-                // Add optional options to config text
-                if (item.selectedOptionalOptions && product && product.optionalOptions) {
-                    Object.keys(item.selectedOptionalOptions).forEach(optionIndex => {
-                        const quantity = item.selectedOptionalOptions[optionIndex];
-                        if (quantity > 0) {
-                            const option = product.optionalOptions[optionIndex];
-                            if (configText) configText += ' • ';
-                            configText += `${option.name}${quantity > 1 ? ` (${quantity}x)` : ''}`;
-                        }
-                    });
-                }
-                
                 const itemElement = document.createElement('div');
-                itemElement.className = 'flex items-start justify-between mb-2';
+                itemElement.className = 'flex items-center justify-between mb-2';
                 itemElement.innerHTML = `
                     <div class="flex-1">
-                        <div class="flex items-center space-x-1.5 mb-0.5">
-                            <span class="text-xs font-semibold text-slate-900">${item.quantity} • ${item.name}</span>
-                        </div>
-                        ${configText ? `<p class="text-xs text-slate-500">${configText}</p>` : ''}
+                        <span class="font-medium text-gray-900">${item.quantity}x ${item.name}</span>
                     </div>
-                    <span class="text-xs font-semibold text-slate-900">R$ ${formatPrice(item.price * item.quantity)}</span>
+                    <span class="font-semibold text-gray-900">R$ ${formatPrice(item.price * item.quantity)}</span>
                 `;
                 container.appendChild(itemElement);
             });
             
-            // Add delivery fee if applicable
             const deliveryRadio = document.getElementById('delivery-delivery');
             let total = subtotal;
             if (deliveryRadio && deliveryRadio.checked) {
                 total += 5.00;
                 const deliveryElement = document.createElement('div');
-                deliveryElement.className = 'flex items-start justify-between mb-2';
+                deliveryElement.className = 'flex items-center justify-between mb-2';
                 deliveryElement.innerHTML = `
-                    <div class="flex-1">
-                        <span class="text-xs font-semibold text-slate-900">Taxa de entrega</span>
-                    </div>
-                    <span class="text-xs font-semibold text-slate-900">R$ 5,00</span>
+                    <span class="font-medium text-gray-900">Taxa de entrega</span>
+                    <span class="font-semibold text-gray-900">R$ 5,00</span>
                 `;
                 container.appendChild(deliveryElement);
             }
             
-            // Add total with divider
             const totalElement = document.createElement('div');
-            totalElement.className = 'flex items-center justify-between pt-2.5 border-t border-slate-200';
+            totalElement.className = 'flex items-center justify-between pt-3 border-t border-orange-300';
             totalElement.innerHTML = `
-                <span class="text-xs font-semibold text-slate-900">Total</span>
-                <span class="text-xs font-semibold text-orange-600" id="checkout-final-total">R$ ${formatPrice(total)}</span>
+                <span class="text-lg font-semibold text-gray-900">Total</span>
+                <span class="text-xl font-bold text-orange-600" id="checkout-final-total">R$ ${formatPrice(total)}</span>
             `;
             container.appendChild(totalElement);
         }
 
         function updateCheckoutTotal() {
-            // Recalculate and repopulate the entire summary
             populateCheckoutOrderSummary();
         }
 
         function confirmOrder() {
-            // Validate required fields
             const customerName = document.getElementById('customer-name').value.trim();
             const customerPhone = document.getElementById('customer-phone').value.trim();
             const deliveryMethod = document.querySelector('input[name="delivery-method"]:checked');
@@ -1875,16 +1295,15 @@
             }
             
             if (!deliveryMethod) {
-                showToast('Por favor, selecione como deseja receber', 'error');
+                showToast('Selecione o tipo de entrega', 'error');
                 return;
             }
             
             if (!paymentMethod) {
-                showToast('Por favor, selecione a forma de pagamento', 'error');
+                showToast('Selecione a forma de pagamento', 'error');
                 return;
             }
             
-            // Validate address for delivery
             if (deliveryMethod.value === 'delivery') {
                 const address = document.getElementById('delivery-address').value.trim();
                 if (!address) {
@@ -1893,39 +1312,15 @@
                 }
             }
             
-            // Collect order data
-            const orderData = {
-                customer: {
-                    name: customerName,
-                    phone: customerPhone
-                },
-                delivery: {
-                    method: deliveryMethod.value,
-                    address: deliveryMethod.value === 'delivery' ? document.getElementById('delivery-address').value.trim() : null
-                },
-                payment: {
-                    method: paymentMethod.value,
-                    cashChange: paymentMethod.value === 'cash' ? document.getElementById('cash-change').value.trim() : null
-                },
-                items: state.cart,
-                observations: document.getElementById('order-observations').value.trim(),
-                total: document.getElementById('checkout-final-total').textContent
-            };
+            showToast('Pedido confirmado com sucesso!');
             
-            // Simulate order confirmation
-            showToast('Pedido confirmado com sucesso! 🎉');
-            
-            // Clear cart and close modals
             state.cart = [];
             updateCartCount();
             updateCartDisplay();
             closeCheckoutModal();
             closeCartModal();
             
-            // Reset form
             resetCheckoutForm();
-            
-            console.log('Pedido confirmado:', orderData);
         }
 
         function resetCheckoutForm() {
@@ -1935,14 +1330,11 @@
             document.getElementById('cash-change').value = '';
             document.getElementById('order-observations').value = '';
             
-            // Uncheck all radio buttons
             document.querySelectorAll('input[name="delivery-method"]').forEach(radio => radio.checked = false);
             document.querySelectorAll('input[name="payment-method"]').forEach(radio => radio.checked = false);
             
-            // Hide conditional fields
             document.getElementById('address-field').classList.add('hidden');
             document.getElementById('cash-change-field').classList.add('hidden');
-            document.getElementById('delivery-fee-row').style.display = 'none';
         }
 
         // Close modals when clicking outside
@@ -1966,16 +1358,14 @@
             }
         });
 
-        // Initialize the app
+        // Initialize
         function init() {
-            // Set "Todos" as active by default
             state.activeCategory = 'Todos';
             renderCategoryNavigation();
             renderMenuCategories();
         }
 
-        // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9771278c942be0e7',t:'MTc1NjUyNDA0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9776a3efc1d3cad2',t:'MTc1NjU4MTU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
