@@ -455,65 +455,65 @@
                 <div class="px-6 py-6 space-y-6">
                     
                     <!-- Customer Info -->
-                    <div class="space-y-4">
-                        <h3 class="text-base font-semibold text-slate-900 flex items-center">
-                            <i class="fas fa-user text-orange-600 mr-2"></i>
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-semibold text-slate-900 flex items-center">
+                            <i class="fas fa-user text-orange-600 mr-1.5 text-xs"></i>
                             Seus dados
                         </h3>
                         
-                        <div class="space-y-3">
+                        <div class="space-y-2.5">
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1">Nome completo *</label>
-                                <input type="text" id="customer-name" placeholder="João Da Silva" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm">
+                                <label class="block text-xs font-medium text-slate-700 mb-0.5">Nome completo *</label>
+                                <input type="text" id="customer-name" placeholder="João Da Silva" class="w-full px-2.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs">
                             </div>
                             
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 mb-1">Telefone para contato *</label>
-                                <input type="tel" id="customer-phone" placeholder="(11) 98411-2233" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm" oninput="formatPhoneNumber(this)">
+                                <label class="block text-xs font-medium text-slate-700 mb-0.5">Telefone para contato *</label>
+                                <input type="tel" id="customer-phone" placeholder="(11) 98411-2233" class="w-full px-2.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs" oninput="formatPhoneNumber(this)">
                             </div>
                         </div>
                     </div>
 
                     <!-- Delivery Method -->
-                    <div class="space-y-4">
-                        <h3 class="text-base font-semibold text-slate-900 flex items-center">
-                            <i class="fas fa-truck text-orange-600 mr-2"></i>
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-semibold text-slate-900 flex items-center">
+                            <i class="fas fa-truck text-orange-600 mr-1.5 text-xs"></i>
                             Como deseja receber?
                         </h3>
                         
-                        <div class="space-y-2">
-                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('delivery')">
-                                <input type="radio" name="delivery-method" value="delivery" id="delivery-delivery" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-3 flex-1">
+                        <div class="space-y-1.5">
+                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('delivery')">
+                                <input type="radio" name="delivery-method" value="delivery" id="delivery-delivery" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-2.5 flex-1">
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <span class="text-sm font-medium text-slate-900">Entrega • <span class="text-slate-500">Receba em casa</span></span>
+                                            <span class="text-xs font-medium text-slate-900">Entrega • <span class="text-slate-500">Receba em casa</span></span>
                                         </div>
-                                        <span class="text-sm font-medium text-orange-600">+ R$ 5,00</span>
+                                        <span class="text-xs font-medium text-orange-600">+ R$ 5,00</span>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('pickup')">
-                                <input type="radio" name="delivery-method" value="pickup" id="delivery-pickup" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-3 flex-1">
+                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('pickup')">
+                                <input type="radio" name="delivery-method" value="pickup" id="delivery-pickup" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-2.5 flex-1">
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <span class="text-sm font-medium text-slate-900">Retirada • <span class="text-slate-500">Retire no balcão</span></span>
+                                            <span class="text-xs font-medium text-slate-900">Retirada • <span class="text-slate-500">Retire no balcão</span></span>
                                         </div>
-                                        <span class="text-sm font-medium text-green-600">Grátis</span>
+                                        <span class="text-xs font-medium text-green-600">Grátis</span>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('dine-in')">
-                                <input type="radio" name="delivery-method" value="dine-in" id="delivery-dine-in" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-3 flex-1">
+                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('dine-in')">
+                                <input type="radio" name="delivery-method" value="dine-in" id="delivery-dine-in" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-2.5 flex-1">
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <span class="text-sm font-medium text-slate-900">No local • <span class="text-slate-500">Comer no restaurante</span></span>
+                                            <span class="text-xs font-medium text-slate-900">No local • <span class="text-slate-500">Comer no restaurante</span></span>
                                         </div>
-                                        <span class="text-sm font-medium text-green-600">Grátis</span>
+                                        <span class="text-xs font-medium text-green-600">Grátis</span>
                                     </div>
                                 </div>
                             </div>
@@ -521,86 +521,86 @@
                         
                         <!-- Address field (shown only for delivery) -->
                         <div id="address-field" class="hidden">
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Endereço para entrega *</label>
-                            <textarea id="delivery-address" placeholder="Rua, número, bairro, complemento..." class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm resize-none" rows="2"></textarea>
+                            <label class="block text-xs font-medium text-slate-700 mb-0.5">Endereço para entrega *</label>
+                            <textarea id="delivery-address" placeholder="Rua, número, bairro, complemento..." class="w-full px-2.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs resize-none" rows="2"></textarea>
                         </div>
                     </div>
 
                     <!-- Payment Method -->
-                    <div class="space-y-4">
-                        <h3 class="text-base font-semibold text-slate-900 flex items-center">
-                            <i class="fas fa-credit-card text-orange-600 mr-2"></i>
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-semibold text-slate-900 flex items-center">
+                            <i class="fas fa-credit-card text-orange-600 mr-1.5 text-xs"></i>
                             Como deseja pagar?
                         </h3>
                         
-                        <div class="space-y-2">
-                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('pix')">
-                                <input type="radio" name="payment-method" value="pix" id="payment-pix" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-3 flex-1">
-                                    <span class="text-sm font-medium text-slate-900">Pix automatizado • <span class="text-slate-500">Pagamento instantâneo</span></span>
+                        <div class="space-y-1.5">
+                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('pix')">
+                                <input type="radio" name="payment-method" value="pix" id="payment-pix" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-2.5 flex-1">
+                                    <span class="text-xs font-medium text-slate-900">Pix automatizado • <span class="text-slate-500">Pagamento instantâneo</span></span>
                                 </div>
                             </div>
                             
-                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('card-online')">
-                                <input type="radio" name="payment-method" value="card-online" id="payment-card-online" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-3 flex-1">
-                                    <span class="text-sm font-medium text-slate-900">Cartão online • <span class="text-slate-500">Débito ou crédito</span></span>
+                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('card-online')">
+                                <input type="radio" name="payment-method" value="card-online" id="payment-card-online" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-2.5 flex-1">
+                                    <span class="text-xs font-medium text-slate-900">Cartão online • <span class="text-slate-500">Débito ou crédito</span></span>
                                 </div>
                             </div>
                             
-                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('cash')">
-                                <input type="radio" name="payment-method" value="cash" id="payment-cash" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-3 flex-1">
-                                    <span class="text-sm font-medium text-slate-900">Dinheiro • <span class="text-slate-500">Pagamento na entrega/retirada</span></span>
+                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('cash')">
+                                <input type="radio" name="payment-method" value="cash" id="payment-cash" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-2.5 flex-1">
+                                    <span class="text-xs font-medium text-slate-900">Dinheiro • <span class="text-slate-500">Pagamento na entrega/retirada</span></span>
                                 </div>
                             </div>
                             
-                            <div class="flex items-center p-3 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('card-machine')">
-                                <input type="radio" name="payment-method" value="card-machine" id="payment-card-machine" class="w-4 h-4 text-orange-600 border-slate-300 focus:ring-orange-500">
-                                <div class="ml-3 flex-1">
-                                    <span class="text-sm font-medium text-slate-900">Maquininha • <span class="text-slate-500">Cartão na entrega/retirada</span></span>
+                            <div class="flex items-center p-2.5 border border-slate-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('card-machine')">
+                                <input type="radio" name="payment-method" value="card-machine" id="payment-card-machine" class="w-3.5 h-3.5 text-orange-600 border-slate-300 focus:ring-orange-500">
+                                <div class="ml-2.5 flex-1">
+                                    <span class="text-xs font-medium text-slate-900">Maquininha • <span class="text-slate-500">Cartão na entrega/retirada</span></span>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Cash change field (shown only for cash payment) -->
                         <div id="cash-change-field" class="hidden">
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Troco para quanto?</label>
-                            <input type="text" id="cash-change" placeholder="Ex: R$ 50,00" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm">
-                            <p class="text-xs text-slate-500 mt-1">Deixe em branco se não precisar de troco</p>
+                            <label class="block text-xs font-medium text-slate-700 mb-0.5">Troco para quanto?</label>
+                            <input type="text" id="cash-change" placeholder="Ex: R$ 50,00" class="w-full px-2.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs">
+                            <p class="text-xs text-slate-500 mt-0.5">Deixe em branco se não precisar de troco</p>
                         </div>
                     </div>
 
                     <!-- Order Summary -->
-                    <div class="space-y-4">
-                        <h3 class="text-base font-semibold text-slate-900 flex items-center">
-                            <i class="fas fa-receipt text-orange-600 mr-2"></i>
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-semibold text-slate-900 flex items-center">
+                            <i class="fas fa-receipt text-orange-600 mr-1.5 text-xs"></i>
                             Resumo do pedido
                         </h3>
                         
-                        <div class="bg-slate-50 rounded-lg p-4" id="checkout-order-summary">
+                        <div class="bg-slate-50 rounded-lg p-3" id="checkout-order-summary">
                             <!-- Order items will be populated here -->
                         </div>
                     </div>
 
                     <!-- Observations -->
-                    <div class="space-y-4">
-                        <h3 class="text-base font-semibold text-slate-900 flex items-center">
-                            <i class="fas fa-comment text-orange-600 mr-2"></i>
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-semibold text-slate-900 flex items-center">
+                            <i class="fas fa-comment text-orange-600 mr-1.5 text-xs"></i>
                             Observações
                         </h3>
                         
                         <div>
-                            <textarea id="order-observations" placeholder="Alguma observação especial? (opcional)" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm resize-none" rows="3"></textarea>
+                            <textarea id="order-observations" placeholder="Alguma observação especial? (opcional)" class="w-full px-2.5 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs resize-none" rows="2"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Fixed Footer -->
-            <div class="px-6 py-4 border-t border-slate-100 bg-white sticky bottom-0">
-                <button onclick="confirmOrder()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 rounded-lg transition-colors">
-                    <i class="fas fa-check mr-2"></i>
+            <div class="px-5 py-3 border-t border-slate-100 bg-white sticky bottom-0">
+                <button onclick="confirmOrder()" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2.5 rounded-lg transition-colors text-sm">
+                    <i class="fas fa-check mr-1.5 text-xs"></i>
                     Confirmar Pedido
                 </button>
             </div>
@@ -608,10 +608,10 @@
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-6 left-6 transform translate-x-[-200px] opacity-0 transition-all duration-500 ease-out z-50">
-        <div id="toast-content" class="flex items-center space-x-3 px-6 py-4 rounded-2xl shadow-xl backdrop-blur-sm border">
-            <i id="toast-icon" class="text-base"></i>
-            <span id="toast-message" class="font-medium text-sm whitespace-nowrap">Produto adicionado ao carrinho!</span>
+    <div id="toast" class="fixed bottom-5 left-5 transform translate-x-[-200px] opacity-0 transition-all duration-500 ease-out z-50">
+        <div id="toast-content" class="flex items-center space-x-2.5 px-4 py-3 rounded-2xl shadow-xl backdrop-blur-sm border">
+            <i id="toast-icon" class="text-sm"></i>
+            <span id="toast-message" class="font-medium text-xs whitespace-nowrap">Produto adicionado ao carrinho!</span>
         </div>
     </div>
 
@@ -961,19 +961,19 @@
             itemElement.className = 'bg-white rounded-xl shadow-sm premium-card cursor-pointer fade-in border border-slate-100';
 
             itemElement.innerHTML = `
-                <div class="p-4 relative">
+                <div class="p-3 relative">
                     ${item.badge ? `<div class="badge badge-${item.badge.type}">${item.badge.text}</div>` : ''}
                     
                     <!-- Mobile Layout -->
-                    <div class="sm:hidden flex space-x-3">
-                        <div class="w-20 h-20 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <span class="text-2xl">${item.icon}</span>
+                    <div class="sm:hidden flex space-x-2.5">
+                        <div class="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-xl">${item.icon}</span>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <div class="mb-1">
-                                <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
-                                <span class="text-slate-300 mx-2">•</span>
-                                <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                            <div class="mb-0.5">
+                                <h3 class="text-xs font-semibold inline text-slate-900">${item.name}</h3>
+                                <span class="text-slate-300 mx-1.5">•</span>
+                                <span class="text-xs font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
                             </div>
                             <p class="text-slate-600 text-xs leading-relaxed">${item.description}</p>
                         </div>
@@ -981,13 +981,13 @@
                     
                     <!-- Desktop Layout -->
                     <div class="hidden sm:block">
-                        <div class="w-full aspect-[5/2] bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg overflow-hidden mb-3 flex items-center justify-center relative">
-                            <span class="text-4xl">${item.icon}</span>
+                        <div class="w-full aspect-[5/2] bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg overflow-hidden mb-2.5 flex items-center justify-center relative">
+                            <span class="text-3xl">${item.icon}</span>
                         </div>
-                        <div class="mb-2">
-                            <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
-                            <span class="text-slate-300 mx-2">•</span>
-                            <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                        <div class="mb-1.5">
+                            <h3 class="text-xs font-semibold inline text-slate-900">${item.name}</h3>
+                            <span class="text-slate-300 mx-1.5">•</span>
+                            <span class="text-xs font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
                         </div>
                         <p class="text-slate-600 text-xs leading-relaxed">${item.description}</p>
                     </div>
@@ -1158,23 +1158,23 @@
                     }
                     
                     const itemElement = document.createElement('div');
-                    itemElement.className = 'flex items-start space-x-4 py-4 border-b border-slate-100 last:border-b-0 cursor-pointer hover:bg-slate-50 transition-colors rounded-lg';
+                    itemElement.className = 'flex items-start space-x-3 py-3 border-b border-slate-100 last:border-b-0 cursor-pointer hover:bg-slate-50 transition-colors rounded-lg';
                     itemElement.onclick = () => editCartItem(index);
                     itemElement.innerHTML = `
                         <!-- Product Image -->
-                        <div class="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <span class="text-2xl">${item.icon}</span>
+                        <div class="w-14 h-14 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-xl">${item.icon}</span>
                         </div>
                         
                         <!-- Product Details -->
                         <div class="flex-1 min-w-0">
                             <!-- Main product info -->
-                            <div class="flex items-center space-x-2 mb-1">
-                                <span class="text-sm font-semibold text-slate-900">${item.quantity}</span>
+                            <div class="flex items-center space-x-1.5 mb-0.5">
+                                <span class="text-xs font-semibold text-slate-900">${item.quantity}</span>
                                 <span class="text-slate-400">•</span>
-                                <span class="text-sm font-semibold text-slate-900">${item.name}</span>
+                                <span class="text-xs font-semibold text-slate-900">${item.name}</span>
                                 <span class="text-slate-400">•</span>
-                                <span class="text-sm font-semibold text-slate-900">R$ ${formatPrice(item.price)}</span>
+                                <span class="text-xs font-semibold text-slate-900">R$ ${formatPrice(item.price)}</span>
                             </div>
                             
                             <!-- Configuration -->
@@ -1182,9 +1182,9 @@
                         </div>
                         
                         <!-- Actions -->
-                        <div class="flex flex-col items-end space-y-2">
+                        <div class="flex flex-col items-end space-y-1.5">
                             <!-- Remove button -->
-                            <button onclick="event.stopPropagation(); removeFromCart(${index})" class="flex items-center space-x-2 px-3 py-1.5 border border-red-200 rounded-lg hover:bg-red-50 transition-colors group">
+                            <button onclick="event.stopPropagation(); removeFromCart(${index})" class="flex items-center space-x-1.5 px-2.5 py-1 border border-red-200 rounded-lg hover:bg-red-50 transition-colors group">
                                 <i class="fas fa-trash text-red-500 text-xs"></i>
                                 <span class="text-xs font-medium text-red-500">Remover</span>
                             </button>
@@ -1192,7 +1192,7 @@
                             <!-- Total value -->
                             <div class="text-right">
                                 <span class="text-xs text-slate-500">Valor: </span>
-                                <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price * item.quantity)}</span>
+                                <span class="text-xs font-bold text-orange-600">R$ ${formatPrice(item.price * item.quantity)}</span>
                             </div>
                         </div>
                     `;
@@ -1795,15 +1795,15 @@
                 }
                 
                 const itemElement = document.createElement('div');
-                itemElement.className = 'flex items-start justify-between mb-3';
+                itemElement.className = 'flex items-start justify-between mb-2';
                 itemElement.innerHTML = `
                     <div class="flex-1">
-                        <div class="flex items-center space-x-2 mb-1">
-                            <span class="text-sm font-semibold text-slate-900">${item.quantity} • ${item.name}</span>
+                        <div class="flex items-center space-x-1.5 mb-0.5">
+                            <span class="text-xs font-semibold text-slate-900">${item.quantity} • ${item.name}</span>
                         </div>
                         ${configText ? `<p class="text-xs text-slate-500">${configText}</p>` : ''}
                     </div>
-                    <span class="text-sm font-semibold text-slate-900">R$ ${formatPrice(item.price * item.quantity)}</span>
+                    <span class="text-xs font-semibold text-slate-900">R$ ${formatPrice(item.price * item.quantity)}</span>
                 `;
                 container.appendChild(itemElement);
             });
@@ -1814,22 +1814,22 @@
             if (deliveryRadio && deliveryRadio.checked) {
                 total += 5.00;
                 const deliveryElement = document.createElement('div');
-                deliveryElement.className = 'flex items-start justify-between mb-3';
+                deliveryElement.className = 'flex items-start justify-between mb-2';
                 deliveryElement.innerHTML = `
                     <div class="flex-1">
-                        <span class="text-sm font-semibold text-slate-900">Taxa de entrega</span>
+                        <span class="text-xs font-semibold text-slate-900">Taxa de entrega</span>
                     </div>
-                    <span class="text-sm font-semibold text-slate-900">R$ 5,00</span>
+                    <span class="text-xs font-semibold text-slate-900">R$ 5,00</span>
                 `;
                 container.appendChild(deliveryElement);
             }
             
             // Add total with divider
             const totalElement = document.createElement('div');
-            totalElement.className = 'flex items-center justify-between pt-3 border-t border-slate-200';
+            totalElement.className = 'flex items-center justify-between pt-2.5 border-t border-slate-200';
             totalElement.innerHTML = `
-                <span class="text-sm font-semibold text-slate-900">Total</span>
-                <span class="text-sm font-semibold text-orange-600" id="checkout-final-total">R$ ${formatPrice(total)}</span>
+                <span class="text-xs font-semibold text-slate-900">Total</span>
+                <span class="text-xs font-semibold text-orange-600" id="checkout-final-total">R$ ${formatPrice(total)}</span>
             `;
             container.appendChild(totalElement);
         }
@@ -1959,5 +1959,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97709e16470aca9b',t:'MTc1NjUxODQxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9770b3cd93e6df36',t:'MTc1NjUxOTMwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
