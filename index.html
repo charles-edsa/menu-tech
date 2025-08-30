@@ -379,7 +379,11 @@
             <!-- Fixed Header -->
             <div class="px-5 py-2.5 border-b border-slate-100 bg-white sticky top-0 z-10 rounded-t-3xl">
                 <div class="flex items-center justify-between">
-                    <h2 id="product-name" class="text-base font-semibold text-slate-900">Nome do Produto</h2>
+                    <div class="flex items-center">
+                        <h2 id="product-name" class="text-base font-semibold text-slate-900">Nome do Produto</h2>
+                        <span id="product-badge-separator" class="text-slate-300 mx-1.5 hidden">•</span>
+                        <span id="product-badge-header" class="text-base font-semibold px-1.5 py-0.5 rounded border hidden"></span>
+                    </div>
                     <button onclick="closeProductModal()" class="p-1.5 hover:bg-slate-100 rounded-lg transition-colors">
                         <i class="fas fa-times text-slate-600 text-lg"></i>
                     </button>
@@ -391,9 +395,8 @@
                 
                 <!-- Product Image -->
                 <div class="px-5 pt-5 pb-3">
-                    <div class="w-full h-40 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center relative">
+                    <div class="w-full h-40 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center">
                         <span id="product-icon" class="text-5xl">🍔</span>
-                        <div id="product-modal-badge" class="badge" style="display: none;"></div>
                     </div>
                 </div>
 
@@ -981,7 +984,7 @@
                                 <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
                                 <span class="text-slate-300 mx-1.5">•</span>
                                 <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
-                                ${item.badge ? `<span class="text-slate-300 mx-1.5">•</span><span class="text-xs font-semibold ${item.badge.type === 'promocao' ? 'text-red-600' : item.badge.type === 'preferido' ? 'text-purple-600' : 'text-green-600'}">${item.badge.text}</span>` : ''}
+                                ${item.badge ? `<span class="text-slate-300 mx-1.5">•</span><span class="text-sm font-semibold px-1.5 py-0.5 rounded-full border ${item.badge.type === 'promocao' ? 'text-red-600 border-red-600' : item.badge.type === 'preferido' ? 'text-purple-600 border-purple-600' : 'text-green-600 border-green-600'}">${item.badge.text}</span>` : ''}
                             </div>
                             <p class="text-slate-600 text-sm leading-relaxed">${item.description}</p>
                         </div>
@@ -996,7 +999,7 @@
                             <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
                             <span class="text-slate-300 mx-1.5">•</span>
                             <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
-                            ${item.badge ? `<span class="text-slate-300 mx-1.5">•</span><span class="text-xs font-semibold ${item.badge.type === 'promocao' ? 'text-red-600' : item.badge.type === 'preferido' ? 'text-purple-600' : 'text-green-600'}">${item.badge.text}</span>` : ''}
+                            ${item.badge ? `<span class="text-slate-300 mx-1.5">•</span><span class="text-sm font-semibold px-1.5 py-0.5 rounded-full border ${item.badge.type === 'promocao' ? 'text-red-600 border-red-600' : item.badge.type === 'preferido' ? 'text-purple-600 border-purple-600' : 'text-green-600 border-green-600'}">${item.badge.text}</span>` : ''}
                         </div>
                         <p class="text-slate-600 text-sm leading-relaxed">${item.description}</p>
                     </div>
@@ -1246,14 +1249,17 @@
             document.getElementById('product-description').textContent = product.description;
             document.getElementById('modal-quantity').textContent = state.modalQuantity;
             
-            // Show/hide badge in modal
-            const modalBadge = document.getElementById('product-modal-badge');
+            // Show/hide badge in header
+            const badgeHeader = document.getElementById('product-badge-header');
+            const badgeSeparator = document.getElementById('product-badge-separator');
             if (product.badge) {
-                modalBadge.className = `badge badge-${product.badge.type}`;
-                modalBadge.textContent = product.badge.text;
-                modalBadge.style.display = 'block';
+                badgeHeader.textContent = product.badge.text;
+                badgeHeader.className = `text-base font-semibold px-1.5 py-0.5 rounded-full ${product.badge.type === 'promocao' ? 'text-red-600' : product.badge.type === 'preferido' ? 'text-purple-600' : 'text-green-600'}`;
+                badgeHeader.classList.remove('hidden');
+                badgeSeparator.classList.remove('hidden');
             } else {
-                modalBadge.style.display = 'none';
+                badgeHeader.classList.add('hidden');
+                badgeSeparator.classList.add('hidden');
             }
             
             // Populate required options with saved selections
@@ -1305,14 +1311,17 @@
             document.getElementById('product-description').textContent = product.description;
             document.getElementById('modal-quantity').textContent = state.modalQuantity;
             
-            // Show/hide badge in modal
-            const modalBadge = document.getElementById('product-modal-badge');
+            // Show/hide badge in header
+            const badgeHeader = document.getElementById('product-badge-header');
+            const badgeSeparator = document.getElementById('product-badge-separator');
             if (product.badge) {
-                modalBadge.className = `badge badge-${product.badge.type}`;
-                modalBadge.textContent = product.badge.text;
-                modalBadge.style.display = 'block';
+                badgeHeader.textContent = product.badge.text;
+                badgeHeader.className = `text-base font-semibold px-1.5 py-0.5 rounded-full ${product.badge.type === 'promocao' ? 'text-red-600' : product.badge.type === 'preferido' ? 'text-purple-600' : 'text-green-600'}`;
+                badgeHeader.classList.remove('hidden');
+                badgeSeparator.classList.remove('hidden');
             } else {
-                modalBadge.style.display = 'none';
+                badgeHeader.classList.add('hidden');
+                badgeSeparator.classList.add('hidden');
             }
             
             // Populate required options
@@ -1968,5 +1977,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9770f84e530ccb1b',t:'MTc1NjUyMjExNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97711eece633e0e7',t:'MTc1NjUyMzY5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
