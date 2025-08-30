@@ -83,7 +83,7 @@
             transition: all 0.2s ease;
             scroll-snap-align: start;
             border-radius: 9999px;
-            font-size: 0.6875rem;
+            font-size: 0.625rem;
         }
         
         .category-btn.active {
@@ -167,10 +167,10 @@
     <!-- Status Bar -->
     <div class="bg-gradient-to-r from-emerald-50 to-green-50 border-b border-emerald-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-center py-2.5">
-                <div class="flex items-center space-x-2">
-                    <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
-                    <span class="text-sm text-emerald-700 font-medium">Aberto agora - Pedidos até 23h</span>
+            <div class="flex items-center justify-center py-1.5">
+                <div class="flex items-center space-x-1.5">
+                    <div class="w-1 h-1 bg-emerald-500 rounded-full"></div>
+                    <span class="text-xs text-emerald-700 font-medium">Aberto agora - Pedidos até 23h</span>
                 </div>
             </div>
         </div>
@@ -191,27 +191,27 @@
                     <i class="fas fa-chevron-right text-slate-400 text-xs ml-1"></i>
                 </button>
                 
-                <button onclick="openCartModal()" class="relative btn-primary px-3 py-1.5 rounded-lg text-base font-medium shadow-sm">
-                    <i class="fas fa-shopping-cart mr-1 text-sm"></i>
+                <button onclick="openCartModal()" class="relative btn-primary px-2.5 py-1 rounded-lg text-sm font-medium shadow-sm">
+                    <i class="fas fa-shopping-cart mr-1 text-xs"></i>
                     Carrinho
-                    <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-sm rounded-full w-4 h-4 flex items-center justify-center hidden font-semibold">0</span>
+                    <span id="cart-count" class="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-xs rounded-full w-3.5 h-3.5 flex items-center justify-center hidden font-semibold">0</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Search Bar -->
-    <div class="bg-white border-b border-slate-100 px-4 py-2.5 sticky top-12 z-30">
+    <div class="bg-white border-b border-slate-100 px-4 py-2 sticky top-12 z-30">
         <div class="max-w-7xl mx-auto">
             <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
-                    <i class="fas fa-search text-slate-400 text-sm"></i>
+                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-slate-400 text-xs"></i>
                 </div>
                 <input 
                     type="text" 
                     id="search-input"
                     placeholder="Buscar hambúrguer, pizza..." 
-                    class="w-full pl-8 pr-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm bg-slate-50/50"
+                    class="w-full pl-7 pr-2.5 py-1.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-xs bg-slate-50/50"
                     oninput="handleSearch()"
                 >
             </div>
@@ -221,7 +221,7 @@
     <!-- Category Navigation -->
     <div class="bg-white border-b border-slate-100 sticky top-24 z-20">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex space-x-1 py-2.5 overflow-x-auto scrollbar-hide" id="category-nav">
+            <div class="flex space-x-1 py-2 overflow-x-auto scrollbar-hide" id="category-nav">
                 <!-- Category buttons will be populated by JavaScript -->
             </div>
         </div>
@@ -874,7 +874,7 @@
             
             // Always show "Todos" button first
             const allButton = document.createElement('button');
-            allButton.className = `category-btn px-3 py-1.5 text-sm font-medium whitespace-nowrap flex items-center space-x-1.5 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
+            allButton.className = `category-btn px-2.5 py-1 text-sm font-medium whitespace-nowrap flex items-center space-x-1 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
             allButton.innerHTML = `<span>✨</span><span>Todos</span>`;
             allButton.onclick = () => selectCategory('Todos');
             container.appendChild(allButton);
@@ -894,7 +894,7 @@
                 if (itemsToShow.length > 0) {
                     const categoryIcon = categoryName === 'Hambúrgueres' ? '🍔' : '🍕';
                     const button = document.createElement('button');
-                    button.className = `category-btn px-3 py-1.5 text-sm font-medium whitespace-nowrap flex items-center space-x-1.5 ${state.activeCategory === categoryName ? 'active' : ''}`;
+                    button.className = `category-btn px-2.5 py-1 text-sm font-medium whitespace-nowrap flex items-center space-x-1 ${state.activeCategory === categoryName ? 'active' : ''}`;
                     button.innerHTML = `<span>${categoryIcon}</span><span>${categoryName}</span>`;
                     button.onclick = () => selectCategory(categoryName);
                     container.appendChild(button);
@@ -1959,5 +1959,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9770de1a409dcb1b',t:'MTc1NjUyMTA0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9770e387b44bcb1b',t:'MTc1NjUyMTI2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
