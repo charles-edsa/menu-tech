@@ -83,7 +83,7 @@
             transition: all 0.2s ease;
             scroll-snap-align: start;
             border-radius: 9999px;
-            font-size: 0.8125rem;
+            font-size: 0.875rem;
         }
         
         .category-btn.active {
@@ -158,8 +158,8 @@
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-center text-white px-4">
                 <div class="text-3xl sm:text-4xl mb-2">🍽️</div>
-                <h1 class="text-lg sm:text-xl font-semibold mb-1">Restaurante Sabor</h1>
-                <p class="text-xs text-slate-200">Sabores únicos, experiências inesquecíveis</p>
+                <h1 class="text-xl font-semibold mb-1">Restaurante Sabor</h1>
+                <p class="text-sm text-slate-200">Sabores únicos, experiências inesquecíveis</p>
             </div>
         </div>
     </div>
@@ -170,7 +170,7 @@
             <div class="flex items-center justify-center py-2.5">
                 <div class="flex items-center space-x-2">
                     <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
-                    <span class="text-xs text-emerald-700 font-medium">Aberto agora - Pedidos até 23h</span>
+                    <span class="text-sm text-emerald-700 font-medium">Aberto agora - Pedidos até 23h</span>
                 </div>
             </div>
         </div>
@@ -185,16 +185,16 @@
                         <i class="fas fa-utensils text-white text-xs"></i>
                     </div>
                     <div class="text-left">
-                        <h1 class="text-sm font-semibold text-slate-900">Restaurante Sabor</h1>
-                        <p class="text-xs text-slate-500">Delivery • Local • Retirada</p>
+                        <h1 class="text-base font-semibold text-slate-900">Restaurante Sabor</h1>
+                        <p class="text-sm text-slate-500">Delivery • Local • Retirada</p>
                     </div>
                     <i class="fas fa-chevron-right text-slate-400 text-xs ml-1"></i>
                 </button>
                 
-                <button onclick="openCartModal()" class="relative btn-primary px-3 py-1.5 rounded-lg text-sm font-medium shadow-sm">
-                    <i class="fas fa-shopping-cart mr-1 text-xs"></i>
+                <button onclick="openCartModal()" class="relative btn-primary px-3 py-1.5 rounded-lg text-base font-medium shadow-sm">
+                    <i class="fas fa-shopping-cart mr-1 text-sm"></i>
                     Carrinho
-                    <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center hidden font-semibold">0</span>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-sm rounded-full w-4 h-4 flex items-center justify-center hidden font-semibold">0</span>
                 </button>
             </div>
         </div>
@@ -205,13 +205,13 @@
         <div class="max-w-7xl mx-auto">
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
-                    <i class="fas fa-search text-slate-400 text-xs"></i>
+                    <i class="fas fa-search text-slate-400 text-sm"></i>
                 </div>
                 <input 
                     type="text" 
                     id="search-input"
                     placeholder="Buscar hambúrguer, pizza..." 
-                    class="w-full pl-8 pr-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm bg-slate-50/50"
+                    class="w-full pl-8 pr-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-base bg-slate-50/50"
                     oninput="handleSearch()"
                 >
             </div>
@@ -242,22 +242,22 @@
             <div class="px-5 py-2.5 border-b border-slate-100 bg-white rounded-t-3xl">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-2.5">
-                        <h2 class="text-base font-semibold text-slate-900">Restaurante Sabor</h2>
+                        <h2 class="text-xl font-semibold text-slate-900">Restaurante Sabor</h2>
                         <span class="text-slate-400">•</span>
                         <div class="flex items-center space-x-1.5">
                             <a href="#" class="w-7 h-7 border border-slate-200 rounded-lg flex items-center justify-center hover:border-pink-300 hover:bg-pink-50 transition-all group">
-                                <i class="fab fa-instagram text-slate-600 group-hover:text-pink-600 text-xs transition-colors"></i>
+                                <i class="fab fa-instagram text-slate-600 group-hover:text-pink-600 text-sm transition-colors"></i>
                             </a>
                             <a href="#" class="w-7 h-7 border border-slate-200 rounded-lg flex items-center justify-center hover:border-blue-300 hover:bg-blue-50 transition-all group">
-                                <i class="fab fa-facebook-f text-slate-600 group-hover:text-blue-600 text-xs transition-colors"></i>
+                                <i class="fab fa-facebook-f text-slate-600 group-hover:text-blue-600 text-sm transition-colors"></i>
                             </a>
                             <a href="#" class="w-7 h-7 border border-slate-200 rounded-lg flex items-center justify-center hover:border-green-300 hover:bg-green-50 transition-all group">
-                                <i class="fab fa-whatsapp text-slate-600 group-hover:text-green-600 text-xs transition-colors"></i>
+                                <i class="fab fa-whatsapp text-slate-600 group-hover:text-green-600 text-sm transition-colors"></i>
                             </a>
                         </div>
                     </div>
                     <button onclick="closeProfileModal()" class="p-1.5 hover:bg-slate-100 rounded-lg transition-colors">
-                        <i class="fas fa-times text-slate-600 text-base"></i>
+                        <i class="fas fa-times text-slate-600 text-lg"></i>
                     </button>
                 </div>
             </div>
@@ -273,21 +273,21 @@
                             </div>
                             <div class="flex-1">
                                 <div class="flex items-center space-x-1 mb-1">
-                                    <span class="text-yellow-400 text-base">★</span>
-                                    <span class="text-yellow-400 text-base">★</span>
-                                    <span class="text-yellow-400 text-base">★</span>
-                                    <span class="text-yellow-400 text-base">★</span>
-                                    <span class="text-yellow-400 text-base">★</span>
-                                    <span class="text-sm font-semibold text-slate-900 ml-1.5">4.8</span>
+                                    <span class="text-yellow-400 text-lg">★</span>
+                                    <span class="text-yellow-400 text-lg">★</span>
+                                    <span class="text-yellow-400 text-lg">★</span>
+                                    <span class="text-yellow-400 text-lg">★</span>
+                                    <span class="text-yellow-400 text-lg">★</span>
+                                    <span class="text-base font-semibold text-slate-900 ml-1.5">4.8</span>
                                 </div>
-                                <p class="text-xs text-slate-500">1.247 avaliações</p>
+                                <p class="text-sm text-slate-500">1.247 avaliações</p>
                             </div>
                         </div>
 
                         <!-- About Section -->
                         <div>
-                            <h3 class="text-sm font-semibold text-slate-900 mb-2.5">Sobre nós</h3>
-                            <p class="text-sm text-slate-600 leading-relaxed">
+                            <h3 class="text-base font-semibold text-slate-900 mb-2.5">Sobre nós</h3>
+                            <p class="text-base text-slate-600 leading-relaxed">
                                 Há mais de 15 anos servindo os melhores hambúrgueres e pizzas da cidade. Nossa paixão pela gastronomia e ingredientes frescos nos tornou referência em sabor e qualidade. Cada prato é preparado com carinho e dedicação para proporcionar uma experiência única aos nossos clientes.
                             </p>
                         </div>
@@ -372,7 +372,7 @@
                 <div class="flex items-center justify-between">
                     <h2 id="product-name" class="text-base font-semibold text-slate-900">Nome do Produto</h2>
                     <button onclick="closeProductModal()" class="p-1.5 hover:bg-slate-100 rounded-lg transition-colors">
-                        <i class="fas fa-times text-slate-600 text-base"></i>
+                        <i class="fas fa-times text-slate-600 text-lg"></i>
                     </button>
                 </div>
             </div>
@@ -445,7 +445,7 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-base font-semibold text-slate-900">Finalizar Pedido</h2>
                     <button onclick="closeCheckoutModal()" class="p-1.5 hover:bg-slate-100 rounded-lg transition-colors">
-                        <i class="fas fa-times text-slate-600 text-base"></i>
+                        <i class="fas fa-times text-slate-600 text-lg"></i>
                     </button>
                 </div>
             </div>
@@ -940,7 +940,7 @@
             section.innerHTML = `
                 <div class="mb-6">
                     <div class="flex items-center mb-4">
-                        <h2 class="text-lg font-semibold text-slate-800 mr-4">${categoryIcon} ${categoryName}</h2>
+                        <h2 class="text-xl font-semibold text-slate-800 mr-4">${categoryIcon} ${categoryName}</h2>
                         <div class="flex-1 h-px bg-gradient-to-r from-amber-300 to-transparent opacity-60"></div>
                     </div>
                 </div>
@@ -971,11 +971,11 @@
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="mb-0.5">
-                                <h3 class="text-xs font-semibold inline text-slate-900">${item.name}</h3>
+                                <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
                                 <span class="text-slate-300 mx-1.5">•</span>
-                                <span class="text-xs font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                                <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
                             </div>
-                            <p class="text-slate-600 text-xs leading-relaxed">${item.description}</p>
+                            <p class="text-slate-600 text-sm leading-relaxed">${item.description}</p>
                         </div>
                     </div>
                     
@@ -985,11 +985,11 @@
                             <span class="text-3xl">${item.icon}</span>
                         </div>
                         <div class="mb-1.5">
-                            <h3 class="text-xs font-semibold inline text-slate-900">${item.name}</h3>
+                            <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
                             <span class="text-slate-300 mx-1.5">•</span>
-                            <span class="text-xs font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                            <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
                         </div>
-                        <p class="text-slate-600 text-xs leading-relaxed">${item.description}</p>
+                        <p class="text-slate-600 text-sm leading-relaxed">${item.description}</p>
                     </div>
                 </div>
             `;
@@ -1959,5 +1959,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9770b3cd93e6df36',t:'MTc1NjUxOTMwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9770c55301abdf56',t:'MTc1NjUyMDAyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
