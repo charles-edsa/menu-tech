@@ -83,7 +83,7 @@
             transition: all 0.2s ease;
             scroll-snap-align: start;
             border-radius: 9999px;
-            font-size: 0.75rem;
+            font-size: 0.6875rem;
         }
         
         .category-btn.active {
@@ -874,7 +874,7 @@
             
             // Always show "Todos" button first
             const allButton = document.createElement('button');
-            allButton.className = `category-btn px-4 py-2 text-sm font-medium whitespace-nowrap flex items-center space-x-2 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
+            allButton.className = `category-btn px-3 py-1.5 text-sm font-medium whitespace-nowrap flex items-center space-x-1.5 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
             allButton.innerHTML = `<span>✨</span><span>Todos</span>`;
             allButton.onclick = () => selectCategory('Todos');
             container.appendChild(allButton);
@@ -894,7 +894,7 @@
                 if (itemsToShow.length > 0) {
                     const categoryIcon = categoryName === 'Hambúrgueres' ? '🍔' : '🍕';
                     const button = document.createElement('button');
-                    button.className = `category-btn px-4 py-2 text-sm font-medium whitespace-nowrap flex items-center space-x-2 ${state.activeCategory === categoryName ? 'active' : ''}`;
+                    button.className = `category-btn px-3 py-1.5 text-sm font-medium whitespace-nowrap flex items-center space-x-1.5 ${state.activeCategory === categoryName ? 'active' : ''}`;
                     button.innerHTML = `<span>${categoryIcon}</span><span>${categoryName}</span>`;
                     button.onclick = () => selectCategory(categoryName);
                     container.appendChild(button);
@@ -1959,5 +1959,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9770dadcd395cb1b',t:'MTc1NjUyMDkwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9770de1a409dcb1b',t:'MTc1NjUyMTA0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
