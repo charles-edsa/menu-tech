@@ -83,7 +83,7 @@
             transition: all 0.2s ease;
             scroll-snap-align: start;
             border-radius: 9999px;
-            font-size: 0.5rem;
+            font-size: 0.625rem;
         }
         
         .category-btn.active {
@@ -121,45 +121,42 @@
 
         .badge {
             position: absolute;
-            top: 6px;
-            right: 6px;
-            padding: 3px 10px;
-            border-radius: 16px;
+            top: 8px;
+            right: 8px;
+            padding: 3px 8px;
+            border-radius: 6px;
             font-size: 9px;
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.5px;
             z-index: 10;
-            backdrop-filter: blur(12px);
-            border: 1.5px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
-            transform: rotate(-2deg);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             transition: all 0.2s ease;
         }
 
         .badge:hover {
-            transform: rotate(0deg) scale(1.05);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .badge-promocao {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 50%, #d63031 100%);
+            background: linear-gradient(135deg, #ef4444, #dc2626);
             color: white;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .badge-preferido {
-            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 50%, #5f3dc4 100%);
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
             color: white;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .badge-sugestao {
-            background: linear-gradient(135deg, #00b894 0%, #00a085 50%, #00875f 100%);
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
@@ -886,7 +883,7 @@
             
             // Always show "Todos" button first
             const allButton = document.createElement('button');
-            allButton.className = `category-btn px-2 py-0.5 text-xs font-medium whitespace-nowrap flex items-center space-x-0.5 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
+            allButton.className = `category-btn px-2 py-1 text-xs font-medium whitespace-nowrap flex items-center space-x-1 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
             allButton.innerHTML = `<span class="text-xs">✨</span><span>Todos</span>`;
             allButton.onclick = () => selectCategory('Todos');
             container.appendChild(allButton);
@@ -906,7 +903,7 @@
                 if (itemsToShow.length > 0) {
                     const categoryIcon = categoryName === 'Hambúrgueres' ? '🍔' : '🍕';
                     const button = document.createElement('button');
-                    button.className = `category-btn px-2 py-0.5 text-xs font-medium whitespace-nowrap flex items-center space-x-0.5 ${state.activeCategory === categoryName ? 'active' : ''}`;
+                    button.className = `category-btn px-2 py-1 text-xs font-medium whitespace-nowrap flex items-center space-x-1 ${state.activeCategory === categoryName ? 'active' : ''}`;
                     button.innerHTML = `<span class="text-xs">${categoryIcon}</span><span>${categoryName}</span>`;
                     button.onclick = () => selectCategory(categoryName);
                     container.appendChild(button);
@@ -973,9 +970,7 @@
             itemElement.className = 'bg-white rounded-xl shadow-sm premium-card cursor-pointer fade-in border border-slate-100';
 
             itemElement.innerHTML = `
-                <div class="p-3 relative">
-                    ${item.badge ? `<div class="badge badge-${item.badge.type}">${item.badge.text}</div>` : ''}
-                    
+                <div class="p-3">
                     <!-- Mobile Layout -->
                     <div class="sm:hidden flex space-x-2.5">
                         <div class="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -986,6 +981,7 @@
                                 <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
                                 <span class="text-slate-300 mx-1.5">•</span>
                                 <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                                ${item.badge ? `<span class="text-slate-300 mx-1.5">•</span><span class="text-xs font-semibold ${item.badge.type === 'promocao' ? 'text-red-600' : item.badge.type === 'preferido' ? 'text-purple-600' : 'text-green-600'}">${item.badge.text}</span>` : ''}
                             </div>
                             <p class="text-slate-600 text-sm leading-relaxed">${item.description}</p>
                         </div>
@@ -993,13 +989,14 @@
                     
                     <!-- Desktop Layout -->
                     <div class="hidden sm:block">
-                        <div class="w-full aspect-[5/2] bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg overflow-hidden mb-2.5 flex items-center justify-center relative">
+                        <div class="w-full aspect-[5/2] bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg overflow-hidden mb-2.5 flex items-center justify-center">
                             <span class="text-3xl">${item.icon}</span>
                         </div>
                         <div class="mb-1.5">
                             <h3 class="text-sm font-semibold inline text-slate-900">${item.name}</h3>
                             <span class="text-slate-300 mx-1.5">•</span>
                             <span class="text-sm font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                            ${item.badge ? `<span class="text-slate-300 mx-1.5">•</span><span class="text-xs font-semibold ${item.badge.type === 'promocao' ? 'text-red-600' : item.badge.type === 'preferido' ? 'text-purple-600' : 'text-green-600'}">${item.badge.text}</span>` : ''}
                         </div>
                         <p class="text-slate-600 text-sm leading-relaxed">${item.description}</p>
                     </div>
@@ -1971,5 +1968,5 @@
         // Start the app when page loads
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9770eeac6799cb1b',t:'MTc1NjUyMTcxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9770f84e530ccb1b',t:'MTc1NjUyMjExNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
