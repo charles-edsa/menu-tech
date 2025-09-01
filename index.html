@@ -211,7 +211,7 @@
                             type="text" 
                             id="search-input"
                             placeholder="Buscar..." 
-                            class="w-64 pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm"
+                            class="w-64 pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm"
                             oninput="handleSearch()"
                         >
                     </div>
@@ -232,20 +232,20 @@
         <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="profile-modal-content" style="max-height: 80vh;">
             
             <!-- Header -->
-            <div class="px-6 py-4 border-b border-gray-200">
+            <div class="px-6 py-3 border-b border-gray-200">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
                         <h2 class="text-xl font-semibold text-gray-900">Restaurante Sabor</h2>
                         <span class="text-gray-400">•</span>
-                        <div class="flex items-center space-x-2">
-                            <button class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                                <i class="fab fa-instagram text-gray-600 text-sm"></i>
+                        <div class="flex items-center space-x-3 mr-4">
+                            <button class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <i class="fab fa-instagram text-gray-600 text-base"></i>
                             </button>
-                            <button class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                                <i class="fab fa-facebook-f text-gray-600 text-sm"></i>
+                            <button class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <i class="fab fa-facebook-f text-gray-600 text-base"></i>
                             </button>
-                            <button class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                                <i class="fab fa-whatsapp text-gray-600 text-sm"></i>
+                            <button class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <i class="fab fa-whatsapp text-gray-600 text-base"></i>
                             </button>
                         </div>
                     </div>
@@ -377,7 +377,7 @@
     <div id="cart-modal" class="fixed inset-0 bg-black/50 z-[100] opacity-0 pointer-events-none transition-all duration-300">
         <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="cart-modal-content" style="max-height: 80vh;">
             <!-- Header -->
-            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+            <div class="flex items-center justify-between px-6 py-3 border-b border-gray-200">
                 <h2 class="text-xl font-semibold text-gray-900">Seu Carrinho</h2>
                 <button onclick="closeCartModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                     <i class="fas fa-times text-gray-500"></i>
@@ -385,22 +385,22 @@
             </div>
             
             <!-- Items -->
-            <div id="cart-items" class="px-6 py-4 overflow-y-auto" style="max-height: calc(80vh - 160px);">
-                <div class="text-center py-12">
-                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-shopping-cart text-gray-400 text-xl"></i>
+            <div id="cart-items" class="px-4 py-3 overflow-y-auto" style="max-height: calc(80vh - 140px);">
+                <div class="text-center py-8">
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i class="fas fa-shopping-cart text-gray-400 text-lg"></i>
                     </div>
-                    <p class="text-gray-500">Seu carrinho está vazio</p>
+                    <p class="text-gray-500 text-sm">Seu carrinho está vazio</p>
                 </div>
             </div>
             
             <!-- Footer -->
-            <div class="px-6 py-4 border-t border-gray-200" id="cart-footer">
-                <div class="flex justify-between items-center mb-4">
+            <div class="px-4 py-3 border-t border-gray-200" id="cart-footer">
+                <div class="flex justify-between items-center mb-3">
                     <span class="font-semibold text-gray-900">Total</span>
-                    <span class="text-xl font-bold text-gray-900" id="cart-total">R$ 0,00</span>
+                    <span class="text-lg font-bold text-gray-900" id="cart-total">R$ 0,00</span>
                 </div>
-                <button id="checkout-btn" class="w-full btn-primary text-white font-medium py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed" disabled onclick="openCheckoutModal()">
+                <button id="checkout-btn" class="w-full btn-primary text-white font-medium py-2.5 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed" disabled onclick="openCheckoutModal()">
                     Finalizar Pedido
                 </button>
             </div>
@@ -412,7 +412,7 @@
         <div class="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300 flex flex-col" id="product-modal-content" style="max-height: 90vh;">
             
             <!-- Header -->
-            <div class="px-6 py-4 border-b border-gray-200 flex-shrink-0">
+            <div class="px-6 py-3 border-b border-gray-200 flex-shrink-0">
                 <div class="flex items-center justify-between">
                     <h2 id="product-name" class="text-xl font-semibold text-gray-900">Nome do Produto</h2>
                     <button onclick="closeProductModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
@@ -425,24 +425,24 @@
             <div class="overflow-y-auto flex-1 min-h-0">
                 
                 <!-- Product Image -->
-                <div class="px-6 pt-4 pb-3">
-                    <div class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center">
-                        <span id="product-icon" class="text-4xl">🍔</span>
+                <div class="px-4 pt-3 pb-2">
+                    <div class="w-full h-24 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center">
+                        <span id="product-icon" class="text-3xl">🍔</span>
                     </div>
                 </div>
 
                 <!-- Description -->
-                <div class="px-6 pb-4">
+                <div class="px-4 pb-3">
                     <p id="product-description" class="text-gray-600 leading-relaxed text-sm">Descrição do produto...</p>
                 </div>
 
                 <!-- Required Options -->
-                <div id="required-options-container" class="px-6 space-y-4">
+                <div id="required-options-container" class="px-4 space-y-3">
                     <!-- Required options will be populated by JavaScript -->
                 </div>
 
                 <!-- Optional Options -->
-                <div id="optional-options-container" class="px-6 mt-4 pb-6">
+                <div id="optional-options-container" class="px-4 mt-3 pb-4">
                     <!-- Optional options will be populated by JavaScript -->
                 </div>
             </div>
@@ -484,7 +484,7 @@
         <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="checkout-modal-content" style="max-height: 85vh;">
             
             <!-- Header -->
-            <div class="px-6 py-4 border-b border-gray-200">
+            <div class="px-6 py-3 border-b border-gray-200">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold text-gray-900">Finalizar Pedido</h2>
                     <button onclick="closeCheckoutModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
@@ -494,112 +494,99 @@
             </div>
 
             <!-- Content -->
-            <div class="overflow-y-auto" style="max-height: calc(75vh - 180px);">
-                <div class="px-6 py-4 space-y-6">
+            <div class="overflow-y-auto" style="max-height: calc(75vh - 160px);">
+                <div class="px-4 py-3 space-y-4">
                     
                     <!-- Customer Info -->
-                    <div class="space-y-3">
-                        <h3 class="font-semibold text-gray-900">Seus dados</h3>
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-gray-900 text-sm">Seus dados</h3>
                         
-                        <div class="space-y-3">
-                            <input type="text" id="customer-name" placeholder="Nome completo" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
-                            <input type="tel" id="customer-phone" placeholder="Telefone para contato" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" oninput="formatPhoneNumber(this)">
+                        <div class="space-y-2">
+                            <input type="text" id="customer-name" placeholder="Nome completo" class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm">
+                            <input type="tel" id="customer-phone" placeholder="Telefone para contato" class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm" oninput="formatPhoneNumber(this)">
                         </div>
                     </div>
 
                     <!-- Delivery Method -->
-                    <div class="space-y-3">
-                        <h3 class="font-semibold text-gray-900">Tipo de entrega</h3>
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-gray-900 text-sm">Tipo de entrega</h3>
                         
-                        <div class="space-y-2">
-                            <div class="p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer delivery-option" onclick="selectDeliveryMethod('delivery')">
+                        <div class="space-y-1.5">
+                            <div class="p-2.5 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer delivery-option" onclick="selectDeliveryMethod('delivery')">
                                 <input type="radio" name="delivery-method" value="delivery" id="delivery-delivery" class="hidden">
-                                <div class="flex items-center justify-between">
-                                    <span class="font-medium text-gray-900">Delivery</span>
-                                    <span class="font-semibold text-gray-900">+ R$ 5,00</span>
-                                </div>
+                                <span class="font-medium text-gray-900 text-sm">Delivery</span>
                             </div>
                             
-                            <div class="p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer delivery-option" onclick="selectDeliveryMethod('pickup')">
+                            <div class="p-2.5 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer delivery-option" onclick="selectDeliveryMethod('pickup')">
                                 <input type="radio" name="delivery-method" value="pickup" id="delivery-pickup" class="hidden">
-                                <div class="flex items-center justify-between">
-                                    <span class="font-medium text-gray-900">Retirada no local</span>
-                                    <span class="font-semibold text-green-600">Grátis</span>
-                                </div>
+                                <span class="font-medium text-gray-900 text-sm">Retirada no local</span>
                             </div>
                             
-                            <div class="p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer delivery-option" onclick="selectDeliveryMethod('dine-in')">
+                            <div class="p-2.5 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer delivery-option" onclick="selectDeliveryMethod('dine-in')">
                                 <input type="radio" name="delivery-method" value="dine-in" id="delivery-dine-in" class="hidden">
-                                <div class="flex items-center justify-between">
-                                    <span class="font-medium text-gray-900">Consumir no local</span>
-                                    <span class="font-semibold text-green-600">Grátis</span>
-                                </div>
+                                <span class="font-medium text-gray-900 text-sm">Consumir no local</span>
                             </div>
                         </div>
                         
                         <!-- Address field -->
                         <div id="address-field" class="hidden">
-                            <textarea id="delivery-address" placeholder="Endereço completo com número, bairro e ponto de referência..." class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none" rows="3"></textarea>
+                            <textarea id="delivery-address" placeholder="Endereço completo com número, bairro e ponto de referência..." class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none text-sm" rows="2.5"></textarea>
                         </div>
                     </div>
 
                     <!-- Payment Method -->
-                    <div class="space-y-3">
-                        <h3 class="font-semibold text-gray-900">Forma de pagamento</h3>
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-gray-900 text-sm">Forma de pagamento</h3>
                         
-                        <div class="space-y-2">
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('pix')">
+                        <div class="space-y-1.5">
+                            <div class="flex items-center p-2.5 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('pix')">
                                 <input type="radio" name="payment-method" value="pix" id="payment-pix" class="hidden">
-                                <i class="fas fa-qrcode text-orange-600 mr-3"></i>
-                                <span class="font-medium text-gray-900">Pix</span>
+                                <span class="font-medium text-gray-900 text-sm">Pix instantâneo</span>
                             </div>
                             
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('card')">
+                            <div class="flex items-center p-2.5 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('card')">
                                 <input type="radio" name="payment-method" value="card" id="payment-card" class="hidden">
-                                <i class="fas fa-credit-card text-orange-600 mr-3"></i>
-                                <span class="font-medium text-gray-900">Cartão de Crédito/Débito</span>
+                                <span class="font-medium text-gray-900 text-sm">Cartão online</span>
                             </div>
                             
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('machine')">
+                            <div class="flex items-center p-2.5 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('machine')">
                                 <input type="radio" name="payment-method" value="machine" id="payment-machine" class="hidden">
-                                <i class="fas fa-credit-card text-orange-600 mr-3"></i>
-                                <span class="font-medium text-gray-900">Maquininha de cartão</span>
+                                <span class="font-medium text-gray-900 text-sm">Maquininha de cartão</span>
                             </div>
                             
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('cash')">
+                            <div class="flex items-center p-2.5 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('cash')">
                                 <input type="radio" name="payment-method" value="cash" id="payment-cash" class="hidden">
-                                <i class="fas fa-money-bill-wave text-orange-600 mr-3"></i>
-                                <span class="font-medium text-gray-900">Dinheiro</span>
+                                <span class="font-medium text-gray-900 text-sm">Dinheiro em espécie</span>
                             </div>
                         </div>
                         
                         <!-- Cash change field -->
                         <div id="cash-change-field" class="hidden">
-                            <input type="text" id="cash-change" placeholder="Precisa de troco? (Ex: 50,00)" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" oninput="formatCashChange(this)" maxlength="6">
+                            <input type="text" id="cash-change" placeholder="Precisa de troco? (Ex: 50,00)" class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm" oninput="formatCashChange(this)" maxlength="6">
                         </div>
                     </div>
 
                     <!-- Order Summary -->
-                    <div class="space-y-3">
-                        <h3 class="font-semibold text-gray-900">Resumo do pedido</h3>
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-gray-900 text-sm">Resumo do pedido</h3>
                         
-                        <div class="bg-orange-50 rounded-lg p-4 border border-orange-200" id="checkout-order-summary">
+                        <div class="bg-orange-50 rounded-lg p-3 border border-orange-200" id="checkout-order-summary">
                             <!-- Order items will be populated here -->
                         </div>
                     </div>
 
                     <!-- Observations -->
-                    <div class="space-y-3">
-                        <h3 class="font-semibold text-gray-900">Observações</h3>
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-gray-900 text-sm">Observações</h3>
                         
-                        <textarea id="order-observations" placeholder="Alguma observação especial? (opcional)" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none" rows="3"></textarea>
+                        <textarea id="order-observations" placeholder="Alguma observação especial? (opcional)" class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none text-sm" rows="2.5"></textarea>
                     </div>
                 </div>
             </div>
 
             <!-- Footer -->
-            <div class="px-6 py-4 border-t border-gray-200">
-                <button onclick="confirmOrder()" class="w-full btn-primary text-white font-medium py-3 rounded-lg transition-all shadow-lg">
+            <div class="px-4 py-3 border-t border-gray-200">
+                <button onclick="confirmOrder()" class="w-full btn-primary text-white font-medium py-2.5 rounded-lg transition-all shadow-lg text-sm">
                     <i class="fas fa-check mr-2"></i>
                     Confirmar Pedido
                 </button>
@@ -1113,32 +1100,32 @@
                     }
                     
                     const itemElement = document.createElement('div');
-                    itemElement.className = 'flex space-x-3 py-4 border-b border-gray-100 last:border-b-0 cursor-pointer hover:bg-gray-50 transition-colors';
+                    itemElement.className = 'flex space-x-3 py-3 border-b border-gray-100 last:border-b-0 cursor-pointer hover:bg-gray-50 transition-colors';
                     itemElement.innerHTML = `
                         <!-- Product Image -->
-                        <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <span class="text-2xl">${item.icon}</span>
+                        <div class="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-lg">${item.icon}</span>
                         </div>
                         
                         <!-- Product Info -->
                         <div class="flex-1 min-w-0">
-                            <div class="flex items-center space-x-2 mb-1">
-                                <span class="font-medium text-black">${item.quantity}</span>
-                                <span class="text-black">•</span>
-                                <span class="font-medium text-black">${item.name}</span>
-                                <span class="text-black">•</span>
-                                <span class="font-medium text-black">R$ ${formatPrice(item.price)}</span>
+                            <div class="flex items-center space-x-1.5 mb-1">
+                                <span class="font-medium text-black text-sm">${item.quantity}</span>
+                                <span class="text-black text-sm">•</span>
+                                <span class="font-medium text-black text-sm">${item.name}</span>
+                                <span class="text-black text-sm">•</span>
+                                <span class="font-medium text-black text-sm">R$ ${formatPrice(item.price)}</span>
                             </div>
-                            ${configText ? `<div class="text-sm text-gray-600 leading-relaxed">${configText}</div>` : ''}
+                            ${configText ? `<div class="text-xs text-gray-600 leading-relaxed">${configText}</div>` : ''}
                         </div>
                         
                         <!-- Remove Button and Total -->
-                        <div class="flex flex-col items-end space-y-2">
-                            <button onclick="removeFromCart(${index})" class="flex items-center space-x-1 px-2 py-1 border border-red-300 rounded text-red-600 hover:bg-red-50 transition-colors">
-                                <span class="text-sm">Remover</span>
+                        <div class="flex flex-col items-end space-y-1.5">
+                            <button onclick="removeFromCart(${index})" class="flex items-center space-x-1 px-1.5 py-0.5 border border-red-300 rounded text-red-600 hover:bg-red-50 transition-colors">
+                                <span class="text-xs">Remover</span>
                                 <i class="fas fa-trash text-xs"></i>
                             </button>
-                            <span class="font-semibold text-orange-600">R$ ${formatPrice(item.price * item.quantity)}</span>
+                            <span class="font-semibold text-orange-600 text-sm">R$ ${formatPrice(item.price * item.quantity)}</span>
                         </div>
                     `;
                     
@@ -1319,7 +1306,7 @@
                 
                 optionGroup.options.forEach((option, optionIndex) => {
                     const optionElement = document.createElement('div');
-                    optionElement.className = 'flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
+                    optionElement.className = 'flex items-center p-2.5 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
                     
                     optionElement.innerHTML = `
                         <input type="radio" name="required-${groupIndex}" value="${optionIndex}" class="hidden" onchange="selectRequiredOption(${groupIndex}, ${optionIndex})">
@@ -1362,7 +1349,7 @@
             
             product.optionalOptions.forEach((option, optionIndex) => {
                 const optionElement = document.createElement('div');
-                optionElement.className = 'flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
+                optionElement.className = 'flex items-center justify-between p-2.5 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
                 
                 optionElement.innerHTML = `
                     <div class="flex items-center">
@@ -1843,5 +1830,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97870bd956ed98a5',t:'MTc1Njc1MzYwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97872db6b26dff2c',t:'MTc1Njc1NDk4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
