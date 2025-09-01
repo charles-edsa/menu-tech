@@ -127,7 +127,7 @@
     </div>
 
     <!-- Header -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-4xl mx-auto px-4 sm:px-6">
             <div class="flex justify-between items-center h-16">
                 <button onclick="openProfileModal()" class="flex items-center space-x-3 hover:bg-gray-50 rounded-lg p-2 transition-colors">
@@ -152,7 +152,7 @@
     </header>
 
     <!-- Search Bar -->
-    <div class="bg-white border-b border-gray-200 px-4 py-4 sticky top-16 z-30">
+    <div class="bg-white border-b border-gray-200 px-4 py-4 sticky top-16 z-40">
         <div class="max-w-4xl mx-auto">
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -170,7 +170,7 @@
     </div>
 
     <!-- Category Navigation -->
-    <div class="bg-white sticky top-28 z-50">
+    <div class="bg-white border-b border-gray-100 sticky top-28 z-30">
         <div class="max-w-4xl mx-auto px-4">
             <div class="flex space-x-2 py-4 overflow-x-auto scrollbar-hide" id="category-nav">
                 <!-- Category buttons will be populated by JavaScript -->
@@ -179,14 +179,14 @@
     </div>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 py-6">
+    <main class="max-w-4xl mx-auto px-4 py-6" style="padding-top: 1.5rem;">
         <div id="menu-categories">
             <!-- Categories will be populated by JavaScript -->
         </div>
     </main>
 
     <!-- Profile Modal -->
-    <div id="profile-modal" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-all duration-300">
+    <div id="profile-modal" class="fixed inset-0 bg-black/50 z-60 opacity-0 pointer-events-none transition-all duration-300">
         <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="profile-modal-content" style="max-height: 80vh;">
             
             <!-- Header -->
@@ -277,7 +277,7 @@
     </div>
 
     <!-- Cart Modal -->
-    <div id="cart-modal" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-all duration-300">
+    <div id="cart-modal" class="fixed inset-0 bg-black/50 z-60 opacity-0 pointer-events-none transition-all duration-300">
         <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="cart-modal-content" style="max-height: 80vh;">
             <!-- Header -->
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
@@ -311,11 +311,11 @@
     </div>
 
     <!-- Product Modal -->
-    <div id="product-modal" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="product-modal-content" style="max-height: 85vh;">
+    <div id="product-modal" class="fixed inset-0 bg-black/50 z-60 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="product-modal-content" style="max-height: 70vh;">
             
             <!-- Header -->
-            <div class="px-6 py-4 border-b border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200 flex-shrink-0">
                 <div class="flex items-center justify-between">
                     <h2 id="product-name" class="text-xl font-semibold text-gray-900">Nome do Produto</h2>
                     <button onclick="closeProductModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
@@ -325,37 +325,37 @@
             </div>
 
             <!-- Content -->
-            <div class="overflow-y-auto" style="max-height: calc(85vh - 180px);">
+            <div class="overflow-y-auto flex-1" style="max-height: calc(70vh - 160px);">
                 
                 <!-- Product Image -->
                 <div class="px-6 pt-4 pb-3">
-                    <div class="w-full h-40 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center">
-                        <span id="product-icon" class="text-5xl">🍔</span>
+                    <div class="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center">
+                        <span id="product-icon" class="text-4xl">🍔</span>
                     </div>
                 </div>
 
                 <!-- Description -->
                 <div class="px-6 pb-4">
-                    <p id="product-description" class="text-gray-600 leading-relaxed">Descrição do produto...</p>
+                    <p id="product-description" class="text-gray-600 leading-relaxed text-sm">Descrição do produto...</p>
                 </div>
 
                 <!-- Required Options -->
-                <div id="required-options-container" class="px-6 space-y-6">
+                <div id="required-options-container" class="px-6 space-y-4">
                     <!-- Required options will be populated by JavaScript -->
                 </div>
 
                 <!-- Optional Options -->
-                <div id="optional-options-container" class="px-6 mt-6 pb-6">
+                <div id="optional-options-container" class="px-6 mt-4 pb-6">
                     <!-- Optional options will be populated by JavaScript -->
                 </div>
             </div>
 
             <!-- Footer -->
-            <div class="px-6 py-4 border-t border-gray-200">
-                <div class="flex items-center justify-between mb-4">
+            <div class="px-6 py-4 border-t border-gray-200 flex-shrink-0 bg-white">
+                <div class="flex items-center justify-between mb-3">
                     <!-- Quantity -->
                     <div class="flex items-center space-x-3">
-                        <span class="text-gray-600 font-medium">Quantidade</span>
+                        <span class="text-gray-600 font-medium text-sm">Quantidade</span>
                         <div class="flex items-center space-x-2">
                             <button onclick="updateQuantity(-1)" class="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
                                 <i class="fas fa-minus text-gray-600 text-sm"></i>
@@ -369,7 +369,7 @@
                     
                     <!-- Price -->
                     <div class="text-right">
-                        <span class="text-sm text-gray-500">Preço unitário</span>
+                        <span class="text-xs text-gray-500">Preço unitário</span>
                         <div id="modal-unit-price" class="text-lg font-semibold text-gray-900">R$ 0,00</div>
                     </div>
                 </div>
@@ -382,7 +382,7 @@
     </div>
 
     <!-- Checkout Modal -->
-    <div id="checkout-modal" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-all duration-300">
+    <div id="checkout-modal" class="fixed inset-0 bg-black/50 z-60 opacity-0 pointer-events-none transition-all duration-300">
         <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="checkout-modal-content" style="max-height: 85vh;">
             
             <!-- Header -->
@@ -396,7 +396,7 @@
             </div>
 
             <!-- Content -->
-            <div class="overflow-y-auto" style="max-height: calc(85vh - 180px);">
+            <div class="overflow-y-auto" style="max-height: calc(75vh - 180px);">
                 <div class="px-6 py-4 space-y-6">
                     
                     <!-- Customer Info -->
@@ -502,7 +502,7 @@
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-6 left-6 transform translate-x-[-300px] opacity-0 transition-all duration-300 z-50">
+    <div id="toast" class="fixed bottom-6 left-6 transform translate-x-[-300px] opacity-0 transition-all duration-300 z-70">
         <div id="toast-content" class="flex items-center space-x-3 px-4 py-3 rounded-lg shadow-lg border">
             <i id="toast-icon" class="text-lg"></i>
             <span id="toast-message" class="font-medium">Produto adicionado!</span>
@@ -1438,5 +1438,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97849dc62020caa3',t:'MTc1NjcyODEyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978503d2f010cae4',t:'MTc1NjczMjMwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
