@@ -99,13 +99,55 @@
         }
 
         /* Custom radio and checkbox styles */
-        input[type="radio"], input[type="checkbox"] {
-            accent-color: #f97316;
+        .custom-radio, .custom-checkbox {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            flex-shrink: 0;
         }
-
-        input[type="radio"]:focus, input[type="checkbox"]:focus {
-            outline: 2px solid #f97316;
-            outline-offset: 2px;
+        
+        .custom-radio {
+            border-radius: 50%;
+        }
+        
+        .custom-checkbox {
+            border-radius: 6px;
+        }
+        
+        .custom-radio:hover, .custom-checkbox:hover {
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+        }
+        
+        .custom-radio:checked, .custom-checkbox:checked {
+            border-color: #f97316;
+            background: #f97316;
+        }
+        
+        .custom-radio:checked::after {
+            content: '';
+        }
+        
+        .custom-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        .custom-radio:focus, .custom-checkbox:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
         }
     </style>
 </head>
@@ -115,7 +157,6 @@
         <!-- Content -->
         <div class="relative z-10 h-full flex flex-col justify-center items-center text-white px-4">
             <h1 class="text-2xl font-semibold text-center mb-1">Restaurante Sabor</h1>
-            <p class="text-gray-300 text-sm text-center">Gastronomia de qualidade desde 2008</p>
         </div>
     </div>
 
@@ -311,20 +352,20 @@
 
     <!-- Product Modal -->
     <div id="product-modal" class="fixed inset-0 bg-black/50 z-60 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="product-modal-content" style="max-height: 70vh;">
+        <div class="fixed inset-x-0 bottom-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300 flex flex-col" id="product-modal-content" style="max-height: 90vh;">
             
             <!-- Header -->
             <div class="px-6 py-4 border-b border-gray-200 flex-shrink-0">
                 <div class="flex items-center justify-between">
                     <h2 id="product-name" class="text-xl font-semibold text-gray-900">Nome do Produto</h2>
-                    <button onclick="closeProductModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <button onclick="closeProductModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors z-10 relative">
                         <i class="fas fa-times text-gray-500"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Content -->
-            <div class="overflow-y-auto flex-1" style="max-height: calc(70vh - 160px);">
+            <div class="overflow-y-auto flex-1 min-h-0">
                 
                 <!-- Product Image -->
                 <div class="px-6 pt-4 pb-3">
@@ -1048,7 +1089,7 @@
                     optionElement.className = 'flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
                     
                     optionElement.innerHTML = `
-                        <input type="radio" name="required-${groupIndex}" value="${optionIndex}" class="mr-3" onchange="selectRequiredOption(${groupIndex}, ${optionIndex})">
+                        <input type="radio" name="required-${groupIndex}" value="${optionIndex}" class="hidden" onchange="selectRequiredOption(${groupIndex}, ${optionIndex})">
                         <span class="font-medium text-gray-900">${option.name}${option.price > 0 ? ` (+R$ ${formatPrice(option.price)})` : ''}</span>
                     `;
                     
@@ -1092,7 +1133,7 @@
                 
                 optionElement.innerHTML = `
                     <div class="flex items-center">
-                        <input type="checkbox" id="optional-checkbox-${optionIndex}" class="mr-3" onchange="toggleOptional(${optionIndex})">
+                        <input type="checkbox" id="optional-checkbox-${optionIndex}" class="custom-checkbox mr-3" onchange="toggleOptional(${optionIndex})">
                         <span class="font-medium text-gray-900">${option.name} (+R$ ${formatPrice(option.price)})</span>
                     </div>
                     <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 hidden">
@@ -1122,6 +1163,21 @@
 
         function selectRequiredOption(groupIndex, optionIndex) {
             state.selectedRequiredOptions[groupIndex] = optionIndex;
+            
+            // Update visual selection for the group
+            const groupContainer = document.getElementById(`required-group-${groupIndex}`);
+            const allOptions = groupContainer.querySelectorAll('.flex.items-center');
+            
+            allOptions.forEach((option, index) => {
+                if (index === optionIndex) {
+                    option.classList.remove('border-gray-200', 'hover:border-orange-300', 'hover:bg-orange-50');
+                    option.classList.add('border-orange-500', 'bg-orange-50');
+                } else {
+                    option.classList.remove('border-orange-500', 'bg-orange-50');
+                    option.classList.add('border-gray-200', 'hover:border-orange-300', 'hover:bg-orange-50');
+                }
+            });
+            
             updateModalTotalPrice();
         }
 
@@ -1437,5 +1493,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978561ac96ebcaee',t:'MTc1NjczNjE0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9785a47e3127cb54',t:'MTc1NjczODg4Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
