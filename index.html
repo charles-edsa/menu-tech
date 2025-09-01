@@ -154,10 +154,7 @@
 <body class="bg-gray-50 min-h-screen">
     <!-- Hero Section with Cover Image -->
     <div class="relative h-32 bg-gray-900 overflow-hidden">
-        <!-- Content -->
-        <div class="relative z-10 h-full flex flex-col justify-center items-center text-white px-4">
-            <h1 class="text-2xl font-semibold text-center mb-1">Restaurante Sabor</h1>
-        </div>
+        <!-- Empty cover image section -->
     </div>
 
     <!-- Status Bar -->
@@ -392,28 +389,29 @@
 
             <!-- Footer -->
             <div class="px-6 py-4 border-t border-gray-200 flex-shrink-0 bg-white">
-                <div class="flex items-center justify-between mb-3">
+                <div class="flex items-end justify-between mb-3">
                     <!-- Quantity -->
-                    <div class="flex items-center space-x-3">
+                    <div class="space-y-2">
                         <span class="text-gray-600 font-medium text-sm">Quantidade</span>
                         <div class="flex items-center space-x-2">
-                            <button onclick="updateQuantity(-1)" class="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                                <i class="fas fa-minus text-gray-600 text-sm"></i>
+                            <button onclick="updateQuantity(-1)" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <i class="fas fa-minus text-gray-600 text-xs"></i>
                             </button>
                             <span id="modal-quantity" class="text-lg font-semibold text-gray-900 min-w-[2rem] text-center">1</span>
-                            <button onclick="updateQuantity(1)" class="w-8 h-8 rounded-lg btn-primary flex items-center justify-center transition-colors">
-                                <i class="fas fa-plus text-white text-sm"></i>
+                            <button onclick="updateQuantity(1)" class="w-8 h-8 rounded-full btn-primary flex items-center justify-center transition-colors">
+                                <i class="fas fa-plus text-white text-xs"></i>
                             </button>
                         </div>
                     </div>
                     
                     <!-- Price -->
-                    <div class="text-right">
+                    <div class="text-right space-y-2">
                         <span class="text-xs text-gray-500">Preço unitário</span>
-                        <div id="modal-unit-price" class="text-lg font-semibold text-gray-900">R$ 0,00</div>
+                        <div id="modal-unit-price" class="text-lg font-semibold text-orange-600">R$ 0,00</div>
                     </div>
                 </div>
                 <button onclick="addToCart()" class="w-full btn-primary text-white font-medium py-3 rounded-lg transition-all">
+                    <i class="fas fa-shopping-cart mr-2"></i>
                     <span>Adicionar ao Carrinho • </span>
                     <span id="modal-total-price" class="font-semibold">R$ 0,00</span>
                 </button>
@@ -1134,14 +1132,14 @@
                 optionElement.innerHTML = `
                     <div class="flex items-center">
                         <input type="checkbox" id="optional-checkbox-${optionIndex}" class="custom-checkbox mr-3" onchange="toggleOptional(${optionIndex})">
-                        <span class="font-medium text-gray-900">${option.name} (+R$ ${formatPrice(option.price)})</span>
+                        <span class="font-medium text-gray-900">${option.name} <span class="text-gray-400">•</span> <span class="text-orange-600">R$ ${formatPrice(option.price)}</span></span>
                     </div>
                     <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 hidden">
-                        <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-6 h-6 rounded bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                        <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
                             <i class="fas fa-minus text-gray-600 text-xs"></i>
                         </button>
                         <span id="optional-quantity-${optionIndex}" class="font-semibold text-gray-900 min-w-[1rem] text-center">1</span>
-                        <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-6 h-6 rounded btn-primary flex items-center justify-center transition-colors">
+                        <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-6 h-6 rounded-full btn-primary flex items-center justify-center transition-colors">
                             <i class="fas fa-plus text-white text-xs"></i>
                         </button>
                     </div>
@@ -1493,5 +1491,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9785b4f9a04eca62',t:'MTc1NjczOTU1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9785db71c7bb0a7a',t:'MTc1Njc0MTEzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
