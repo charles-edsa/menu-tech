@@ -448,7 +448,7 @@
                         
                         <div class="space-y-3">
                             <input type="text" id="customer-name" placeholder="Nome completo" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
-                            <input type="tel" id="customer-phone" placeholder="Telefone" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" oninput="formatPhoneNumber(this)">
+                            <input type="tel" id="customer-phone" placeholder="Telefone para contato" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" oninput="formatPhoneNumber(this)">
                         </div>
                     </div>
 
@@ -457,25 +457,27 @@
                         <h3 class="font-semibold text-gray-900">Tipo de entrega</h3>
                         
                         <div class="space-y-2">
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('delivery')">
-                                <input type="radio" name="delivery-method" value="delivery" id="delivery-delivery" class="mr-3">
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <span class="font-medium text-gray-900">Delivery</span>
-                                        <span class="font-semibold text-gray-900">+ R$ 5,00</span>
-                                    </div>
-                                    <p class="text-sm text-gray-500">Entrega em até 45 minutos</p>
+                            <div class="p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer delivery-option" onclick="selectDeliveryMethod('delivery')">
+                                <input type="radio" name="delivery-method" value="delivery" id="delivery-delivery" class="hidden">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium text-gray-900">Delivery</span>
+                                    <span class="font-semibold text-gray-900">+ R$ 5,00</span>
                                 </div>
                             </div>
                             
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectDeliveryMethod('pickup')">
-                                <input type="radio" name="delivery-method" value="pickup" id="delivery-pickup" class="mr-3">
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <span class="font-medium text-gray-900">Retirada no local</span>
-                                        <span class="font-semibold text-green-600">Grátis</span>
-                                    </div>
-                                    <p class="text-sm text-gray-500">Pronto em 30 minutos</p>
+                            <div class="p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer delivery-option" onclick="selectDeliveryMethod('pickup')">
+                                <input type="radio" name="delivery-method" value="pickup" id="delivery-pickup" class="hidden">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium text-gray-900">Retirada no local</span>
+                                    <span class="font-semibold text-green-600">Grátis</span>
+                                </div>
+                            </div>
+                            
+                            <div class="p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer delivery-option" onclick="selectDeliveryMethod('dine-in')">
+                                <input type="radio" name="delivery-method" value="dine-in" id="delivery-dine-in" class="hidden">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-medium text-gray-900">Consumir no local</span>
+                                    <span class="font-semibold text-green-600">Grátis</span>
                                 </div>
                             </div>
                         </div>
@@ -491,20 +493,26 @@
                         <h3 class="font-semibold text-gray-900">Forma de pagamento</h3>
                         
                         <div class="space-y-2">
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('pix')">
-                                <input type="radio" name="payment-method" value="pix" id="payment-pix" class="mr-3">
+                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('pix')">
+                                <input type="radio" name="payment-method" value="pix" id="payment-pix" class="hidden">
                                 <i class="fas fa-qrcode text-orange-600 mr-3"></i>
                                 <span class="font-medium text-gray-900">Pix</span>
                             </div>
                             
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('card')">
-                                <input type="radio" name="payment-method" value="card" id="payment-card" class="mr-3">
+                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('card')">
+                                <input type="radio" name="payment-method" value="card" id="payment-card" class="hidden">
                                 <i class="fas fa-credit-card text-orange-600 mr-3"></i>
                                 <span class="font-medium text-gray-900">Cartão de Crédito/Débito</span>
                             </div>
                             
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer" onclick="selectPaymentMethod('cash')">
-                                <input type="radio" name="payment-method" value="cash" id="payment-cash" class="mr-3">
+                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('machine')">
+                                <input type="radio" name="payment-method" value="machine" id="payment-machine" class="hidden">
+                                <i class="fas fa-credit-card text-orange-600 mr-3"></i>
+                                <span class="font-medium text-gray-900">Maquininha de cartão</span>
+                            </div>
+                            
+                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer payment-option" onclick="selectPaymentMethod('cash')">
+                                <input type="radio" name="payment-method" value="cash" id="payment-cash" class="hidden">
                                 <i class="fas fa-money-bill-wave text-orange-600 mr-3"></i>
                                 <span class="font-medium text-gray-900">Dinheiro</span>
                             </div>
@@ -512,7 +520,7 @@
                         
                         <!-- Cash change field -->
                         <div id="cash-change-field" class="hidden">
-                            <input type="text" id="cash-change" placeholder="Troco para quanto? (Ex: R$ 50,00)" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
+                            <input type="text" id="cash-change" placeholder="Precisa de troco? (Ex: 50,00)" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" oninput="formatCashChange(this)" maxlength="6">
                         </div>
                     </div>
 
@@ -719,6 +727,20 @@
                 } else {
                     value = value.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
                 }
+            }
+            
+            input.value = value;
+        }
+
+        function formatCashChange(input) {
+            let value = input.value.replace(/\D/g, '');
+            
+            if (value.length > 5) {
+                value = value.substring(0, 5);
+            }
+            
+            if (value.length > 2) {
+                value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
             }
             
             input.value = value;
@@ -1498,6 +1520,16 @@
             const radio = document.getElementById(`delivery-${method}`);
             radio.checked = true;
             
+            // Update visual selection
+            document.querySelectorAll('.delivery-option').forEach(option => {
+                option.classList.remove('border-orange-500', 'bg-orange-50');
+                option.classList.add('border-gray-200');
+            });
+            
+            const selectedOption = radio.closest('.delivery-option');
+            selectedOption.classList.remove('border-gray-200');
+            selectedOption.classList.add('border-orange-500', 'bg-orange-50');
+            
             const addressField = document.getElementById('address-field');
             
             if (method === 'delivery') {
@@ -1512,6 +1544,16 @@
         function selectPaymentMethod(method) {
             const radio = document.getElementById(`payment-${method}`);
             radio.checked = true;
+            
+            // Update visual selection
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('border-orange-500', 'bg-orange-50');
+                option.classList.add('border-gray-200');
+            });
+            
+            const selectedOption = radio.closest('.payment-option');
+            selectedOption.classList.remove('border-gray-200');
+            selectedOption.classList.add('border-orange-500', 'bg-orange-50');
             
             const cashChangeField = document.getElementById('cash-change-field');
             
@@ -1535,7 +1577,7 @@
                 itemElement.className = 'flex items-center justify-between mb-2';
                 itemElement.innerHTML = `
                     <div class="flex-1">
-                        <span class="font-medium text-gray-900">${item.quantity}x ${item.name}</span>
+                        <span class="font-medium text-gray-900">${item.quantity} • ${item.name}</span>
                     </div>
                     <span class="font-semibold text-gray-900">R$ ${formatPrice(item.price * item.quantity)}</span>
                 `;
@@ -1657,5 +1699,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9786d4fb11526d4e',t:'MTc1Njc1MTM1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9786f65507b164c6',t:'MTc1Njc1MjcyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
