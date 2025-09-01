@@ -126,34 +126,31 @@
         </div>
     </div>
 
-    <!-- Header -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6">
-            <div class="flex justify-between items-center h-16">
-                <button onclick="openProfileModal()" class="flex items-center space-x-3 hover:bg-gray-50 rounded-lg p-2 transition-colors">
-                    <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
+    <!-- Search Bar with Categories -->
+    <div class="bg-white border-b border-gray-200 px-4 py-4">
+        <div class="max-w-4xl mx-auto space-y-4">
+            <!-- First Row: Profile Button and Cart Button -->
+            <div class="flex items-center justify-between">
+                <!-- Profile Button -->
+                <button onclick="openProfileModal()" class="flex items-center space-x-2 px-3 py-2 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-all duration-200 transform hover:scale-105">
+                    <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-utensils text-white text-sm"></i>
                     </div>
                     <div class="text-left">
-                        <h2 class="text-lg font-semibold text-gray-900">Menu Digital</h2>
-                        <div class="flex items-center space-x-1 text-xs text-gray-500">
-                            <span>Delivery • Retirada • No local</span>
-                        </div>
+                        <div class="text-gray-900 font-semibold text-sm">Restaurante Sabor</div>
+                        <div class="text-gray-600 text-xs">Delivery • Retirada • No local</div>
                     </div>
                 </button>
                 
-                <button onclick="openCartModal()" class="relative btn-primary px-4 py-2 rounded-lg text-white font-medium text-sm shadow-lg">
+                <!-- Cart Button -->
+                <button onclick="openCartModal()" class="relative btn-primary px-4 py-3 rounded-xl text-white font-medium text-sm shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
                     <i class="fas fa-shopping-cart mr-2"></i>
                     Carrinho
                     <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium">0</span>
                 </button>
             </div>
-        </div>
-    </header>
-
-    <!-- Search Bar -->
-    <div class="bg-white border-b border-gray-200 px-4 py-4 sticky top-16 z-40">
-        <div class="max-w-4xl mx-auto">
+            
+            <!-- Second Row: Search Input -->
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <i class="fas fa-search text-gray-400"></i>
@@ -166,20 +163,16 @@
                     oninput="handleSearch()"
                 >
             </div>
-        </div>
-    </div>
-
-    <!-- Category Navigation -->
-    <div class="bg-white border-b border-gray-100 sticky top-28 z-30">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="flex space-x-2 py-4 overflow-x-auto scrollbar-hide" id="category-nav">
+            
+            <!-- Third Row: Category Navigation -->
+            <div class="flex space-x-2 overflow-x-auto scrollbar-hide" id="category-nav">
                 <!-- Category buttons will be populated by JavaScript -->
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 py-6" style="padding-top: 1.5rem;">
+    <main class="max-w-4xl mx-auto px-4 py-6">
         <div id="menu-categories">
             <!-- Categories will be populated by JavaScript -->
         </div>
@@ -1438,5 +1431,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978503d2f010cae4',t:'MTc1NjczMjMwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97854ba8b4f7648d',t:'MTc1NjczNTI0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
