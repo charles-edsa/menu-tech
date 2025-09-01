@@ -78,18 +78,7 @@
             border-color: rgba(249, 115, 22, 0.3);
         }
         
-        .category-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            right: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #f97316, #ea580c);
-            border-radius: 2px 2px 0 0;
-            box-shadow: 0 -2px 8px rgba(249, 115, 22, 0.3);
-        }
+
         
         .category-btn:not(.active) {
             background: rgba(255, 255, 255, 0.7);
@@ -204,12 +193,18 @@
             <div class="px-6 py-4 border-b border-gray-200">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
-                            <i class="fas fa-utensils text-white"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-semibold text-gray-900">Restaurante Sabor</h2>
-                            <p class="text-sm text-gray-500">Gastronomia de qualidade</p>
+                        <h2 class="text-xl font-semibold text-gray-900">Restaurante Sabor</h2>
+                        <span class="text-gray-400">•</span>
+                        <div class="flex items-center space-x-2">
+                            <button class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center hover:shadow-lg transition-all duration-200 transform hover:scale-105">
+                                <i class="fab fa-instagram text-white text-sm"></i>
+                            </button>
+                            <button class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center hover:shadow-lg transition-all duration-200 transform hover:scale-105">
+                                <i class="fab fa-facebook-f text-white text-sm"></i>
+                            </button>
+                            <button class="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center hover:shadow-lg transition-all duration-200 transform hover:scale-105">
+                                <i class="fab fa-whatsapp text-white text-sm"></i>
+                            </button>
                         </div>
                     </div>
                     <button onclick="closeProfileModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
@@ -222,13 +217,20 @@
             <div class="overflow-y-auto px-6 py-4" style="max-height: calc(80vh - 100px);">
                 <div class="space-y-6">
                     
-                    <!-- Rating -->
-                    <div class="flex items-center space-x-2">
-                        <div class="flex items-center">
-                            <span class="text-yellow-400">★★★★★</span>
+                    <!-- Logo and Rating -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-utensils text-white text-2xl"></i>
                         </div>
-                        <span class="font-semibold text-gray-900">4.8</span>
-                        <span class="text-gray-500">• 1.247 avaliações</span>
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <div class="flex items-center">
+                                    <span class="text-yellow-400 text-lg">★★★★★</span>
+                                </div>
+                                <span class="font-semibold text-gray-900 text-lg">4.8</span>
+                            </div>
+                            <p class="text-gray-500 text-sm">1.247 avaliações</p>
+                        </div>
                     </div>
 
                     <!-- About -->
@@ -237,6 +239,28 @@
                         <p class="text-gray-600 leading-relaxed">
                             Há mais de 15 anos servindo os melhores hambúrgueres e pizzas da cidade. Nossa paixão pela gastronomia e ingredientes frescos nos tornou referência em sabor e qualidade.
                         </p>
+                    </div>
+
+                    <!-- Restaurant Photos -->
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-3">Nosso estabelecimento</h3>
+                        <div class="flex space-x-3 overflow-x-auto scrollbar-hide pb-2">
+                            <div class="w-32 h-24 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                <span class="text-2xl">🏪</span>
+                            </div>
+                            <div class="w-32 h-24 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                <span class="text-2xl">🍽️</span>
+                            </div>
+                            <div class="w-32 h-24 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                <span class="text-2xl">👨‍🍳</span>
+                            </div>
+                            <div class="w-32 h-24 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                <span class="text-2xl">🌟</span>
+                            </div>
+                            <div class="w-32 h-24 bg-gradient-to-br from-red-100 to-red-200 rounded-lg flex-shrink-0 flex items-center justify-center">
+                                <span class="text-2xl">🎉</span>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Hours -->
@@ -714,8 +738,8 @@
             container.innerHTML = '';
             
             const allButton = document.createElement('button');
-            allButton.className = `category-btn px-6 py-3 text-sm whitespace-nowrap flex items-center space-x-2 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
-            allButton.innerHTML = `<span class="text-sm">${categoryIcons['Todos']}</span><span>Todos</span>`;
+            allButton.className = `category-btn px-4 py-3 text-sm whitespace-nowrap flex items-center ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
+            allButton.innerHTML = `<span>Todos</span>`;
             allButton.onclick = () => selectCategory('Todos');
             container.appendChild(allButton);
             
@@ -731,8 +755,8 @@
                 
                 if (itemsToShow.length > 0) {
                     const button = document.createElement('button');
-                    button.className = `category-btn px-6 py-3 text-sm whitespace-nowrap flex items-center space-x-2 ${state.activeCategory === categoryName ? 'active' : ''}`;
-                    button.innerHTML = `<span class="text-sm">${categoryIcons[categoryName] || '🍽️'}</span><span>${categoryName}</span>`;
+                    button.className = `category-btn px-4 py-3 text-sm whitespace-nowrap flex items-center ${state.activeCategory === categoryName ? 'active' : ''}`;
+                    button.innerHTML = `<span>${categoryName}</span>`;
                     button.onclick = () => selectCategory(categoryName);
                     container.appendChild(button);
                 }
@@ -771,7 +795,7 @@
             section.innerHTML = `
                 <div class="mb-6">
                     <h2 class="text-2xl font-semibold text-gray-900 mb-1">${categoryName}</h2>
-                    <div class="w-12 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
+                    <div class="w-full h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="items-${categoryName.toLowerCase()}">
                 </div>
@@ -1414,5 +1438,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9776d20cb43abdb3',t:'MTc1NjU4MzQ2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97847f8c11a56d60',t:'MTc1NjcyNjg4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
