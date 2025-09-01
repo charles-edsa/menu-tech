@@ -283,6 +283,61 @@
                         </p>
                     </div>
 
+                    <!-- Location -->
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-3">Nossa localização</h3>
+                        <div class="space-y-3">
+                            <!-- Interactive Map -->
+                            <div class="relative h-48 bg-gray-100 rounded-lg overflow-hidden border border-gray-200 cursor-pointer hover:shadow-lg transition-shadow" onclick="openDirections()">
+                                <div id="restaurant-map" class="w-full h-full relative">
+                                    <!-- Map placeholder with interactive elements -->
+                                    <div class="absolute inset-0 bg-gradient-to-br from-green-100 via-blue-100 to-green-200"></div>
+                                    
+                                    <!-- Streets overlay -->
+                                    <svg class="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 300 200">
+                                        <path d="M0 80 L300 80" stroke="#666" stroke-width="2"/>
+                                        <path d="M0 120 L300 120" stroke="#666" stroke-width="2"/>
+                                        <path d="M80 0 L80 200" stroke="#666" stroke-width="2"/>
+                                        <path d="M150 0 L150 200" stroke="#666" stroke-width="2"/>
+                                        <path d="M220 0 L220 200" stroke="#666" stroke-width="2"/>
+                                    </svg>
+                                    
+                                    <!-- Restaurant marker -->
+                                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                        <div class="relative">
+                                            <!-- Pulsing circle -->
+                                            <div class="absolute inset-0 w-8 h-8 bg-orange-500 rounded-full animate-ping opacity-75"></div>
+                                            <!-- Main marker -->
+                                            <div class="relative w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+                                                <i class="fas fa-utensils text-white text-xs"></i>
+                                            </div>
+                                            <!-- Tooltip -->
+                                            <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+                                                Restaurante Sabor
+                                                <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-900"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Map controls -->
+                                    <div class="absolute top-3 right-3 flex flex-col space-y-1">
+                                        <button class="w-8 h-8 bg-white rounded shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors" onclick="event.stopPropagation(); zoomMap('in')">
+                                            <i class="fas fa-plus text-gray-600 text-xs"></i>
+                                        </button>
+                                        <button class="w-8 h-8 bg-white rounded shadow-md flex items-center justify-center hover:bg-gray-50 transition-colors" onclick="event.stopPropagation(); zoomMap('out')">
+                                            <i class="fas fa-minus text-gray-600 text-xs"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Map attribution -->
+                                    <div class="absolute bottom-2 left-2 text-xs text-gray-500 bg-white/80 px-2 py-1 rounded">
+                                        📍 Clique para abrir no Google Maps
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Restaurant Photos -->
                     <div>
                         <h3 class="font-semibold text-gray-900 mb-3">Nosso estabelecimento</h3>
@@ -1690,6 +1745,95 @@
             }
         });
 
+        // Map functions
+        function zoomMap(direction) {
+            const map = document.getElementById('restaurant-map');
+            const currentScale = map.style.transform ? parseFloat(map.style.transform.match(/scale\(([^)]+)\)/)?.[1] || 1) : 1;
+            
+            let newScale = currentScale;
+            if (direction === 'in' && currentScale < 2) {
+                newScale = currentScale + 0.2;
+            } else if (direction === 'out' && currentScale > 0.6) {
+                newScale = currentScale - 0.2;
+            }
+            
+            map.style.transform = `scale(${newScale})`;
+            map.style.transformOrigin = 'center';
+            
+            // Visual feedback
+            const button = event.target.closest('button');
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        function openDirections() {
+            const address = "Rua das Flores, 123 - Centro, São Paulo, SP";
+            const encodedAddress = encodeURIComponent(address);
+            
+            // Try to open in Google Maps app first, fallback to web
+            const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
+            
+            // Open in new tab/window
+            window.open(googleMapsUrl, '_blank');
+            
+            showToast('Abrindo direções no Google Maps...');
+        }
+
+        function callRestaurant() {
+            const phoneNumber = "tel:+5511999999999";
+            
+            // Try to initiate phone call
+            window.location.href = phoneNumber;
+            
+            showToast('Iniciando chamada...');
+        }
+
+        function shareLocation() {
+            const address = "Restaurante Sabor - Rua das Flores, 123 - Centro, São Paulo, SP";
+            const mapsUrl = "https://www.google.com/maps/search/Rua+das+Flores,+123+-+Centro,+São+Paulo,+SP";
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Restaurante Sabor',
+                    text: address,
+                    url: mapsUrl
+                }).then(() => {
+                    showToast('Localização compartilhada!');
+                }).catch(() => {
+                    fallbackShare(address, mapsUrl);
+                });
+            } else {
+                fallbackShare(address, mapsUrl);
+            }
+        }
+
+        function fallbackShare(address, mapsUrl) {
+            const shareText = `${address}\n${mapsUrl}`;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareText).then(() => {
+                    showToast('Endereço copiado para a área de transferência!');
+                }).catch(() => {
+                    showToast('Não foi possível compartilhar a localização', 'error');
+                });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = shareText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('Endereço copiado para a área de transferência!');
+                } catch (err) {
+                    showToast('Não foi possível compartilhar a localização', 'error');
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
         // Initialize
         function init() {
             state.activeCategory = 'Todos';
@@ -1699,5 +1843,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9786f65507b164c6',t:'MTc1Njc1MjcyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97870bd956ed98a5',t:'MTc1Njc1MzYwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
