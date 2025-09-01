@@ -181,10 +181,15 @@
                 </button>
                 
                 <!-- Cart Button -->
-                <button onclick="openCartModal()" class="relative btn-primary px-4 py-3 rounded-xl text-white font-medium text-sm shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-                    <i class="fas fa-shopping-cart mr-2"></i>
-                    Carrinho
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium">0</span>
+                <button onclick="openCartModal()" class="relative btn-primary px-3 py-2 rounded-lg text-white font-medium text-sm shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
+                    <div class="text-left">
+                        <div class="flex items-center space-x-2 text-white font-semibold text-sm">
+                            <i class="fas fa-shopping-cart text-sm"></i>
+                            <span>Carrinho</span>
+                        </div>
+                        <div id="cart-total-subtitle" class="text-white/80 text-xs">Total: R$ 0,00</div>
+                    </div>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-white text-orange-600 text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium border border-orange-200">0</span>
                 </button>
             </div>
             
@@ -1160,11 +1165,21 @@
 
         function updateCartCount() {
             const cartCount = document.getElementById('cart-count');
+            const cartTotalSubtitle = document.getElementById('cart-total-subtitle');
+            
             if (state.cart.length > 0) {
                 cartCount.textContent = state.cart.length;
                 cartCount.classList.remove('hidden');
+                
+                // Calculate total for subtitle
+                let total = 0;
+                state.cart.forEach(item => {
+                    total += item.price * item.quantity;
+                });
+                cartTotalSubtitle.textContent = `Total: R$ ${formatPrice(total)}`;
             } else {
                 cartCount.classList.add('hidden');
+                cartTotalSubtitle.textContent = 'Total: R$ 0,00';
             }
         }
 
@@ -1642,5 +1657,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97864eaec0166d4e',t:'MTc1Njc0NTg1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9786c1c7b5096d4e',t:'MTc1Njc1MDU2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
