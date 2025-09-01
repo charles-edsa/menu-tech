@@ -233,14 +233,14 @@
                         <h2 class="text-xl font-semibold text-gray-900">Restaurante Sabor</h2>
                         <span class="text-gray-400">•</span>
                         <div class="flex items-center space-x-2">
-                            <button class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center hover:shadow-lg transition-all duration-200 transform hover:scale-105">
-                                <i class="fab fa-instagram text-white text-sm"></i>
+                            <button class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <i class="fab fa-instagram text-gray-600 text-sm"></i>
                             </button>
-                            <button class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center hover:shadow-lg transition-all duration-200 transform hover:scale-105">
-                                <i class="fab fa-facebook-f text-white text-sm"></i>
+                            <button class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <i class="fab fa-facebook-f text-gray-600 text-sm"></i>
                             </button>
-                            <button class="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center hover:shadow-lg transition-all duration-200 transform hover:scale-105">
-                                <i class="fab fa-whatsapp text-white text-sm"></i>
+                            <button class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <i class="fab fa-whatsapp text-gray-600 text-sm"></i>
                             </button>
                         </div>
                     </div>
@@ -261,10 +261,10 @@
                         </div>
                         <div>
                             <div class="flex items-center space-x-2 mb-1">
+                                <span class="font-semibold text-gray-900 text-lg">4.8</span>
                                 <div class="flex items-center">
                                     <span class="text-yellow-400 text-lg">★★★★★</span>
                                 </div>
-                                <span class="font-semibold text-gray-900 text-lg">4.8</span>
                             </div>
                             <p class="text-gray-500 text-sm">1.247 avaliações</p>
                         </div>
@@ -556,7 +556,8 @@
             modalQuantity: 1,
             selectedRequiredOptions: {},
             selectedOptionalOptions: {},
-            activeCategory: null
+            activeCategory: null,
+            editingCartIndex: null
         };
 
         // Menu data
@@ -854,14 +855,14 @@
             itemElement.innerHTML = `
                 <div class="p-4">
                     <div class="flex space-x-4">
-                        <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <span class="text-2xl">${item.icon}</span>
+                        <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-3xl">${item.icon}</span>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <div class="flex items-center space-x-2 mb-1">
-                                <h3 class="font-semibold text-gray-900">${item.name}</h3>
-                                <span class="text-gray-400">•</span>
-                                <span class="text-lg font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                            <div class="flex items-start space-x-2 mb-1">
+                                <h3 class="font-semibold text-gray-900 text-sm leading-relaxed">${item.name}</h3>
+                                <span class="text-gray-400 text-sm">•</span>
+                                <span class="text-sm font-bold text-orange-600 leading-relaxed">R$ ${formatPrice(item.price)}</span>
                             </div>
                             <p class="text-gray-600 text-sm leading-relaxed line-clamp-2">${item.description}</p>
                         </div>
@@ -984,23 +985,88 @@
                 state.cart.forEach((item, index) => {
                     total += item.price * item.quantity;
                     
+                    // Build configuration text
+                    let configText = '';
+                    
+                    // Find the original product data
+                    let originalProduct = null;
+                    Object.values(menuData).forEach(category => {
+                        const found = category.find(p => p.id === item.id);
+                        if (found) originalProduct = found;
+                    });
+                    
+                    // Add required options
+                    if (originalProduct && originalProduct.requiredOptions && item.selectedRequiredOptions) {
+                        Object.keys(item.selectedRequiredOptions).forEach(groupIndex => {
+                            const optionIndex = item.selectedRequiredOptions[groupIndex];
+                            const optionGroup = originalProduct.requiredOptions[groupIndex];
+                            if (optionGroup && optionGroup.options[optionIndex]) {
+                                const option = optionGroup.options[optionIndex];
+                                configText += `${option.name}, `;
+                            }
+                        });
+                    }
+                    
+                    // Add optional options
+                    if (originalProduct && originalProduct.optionalOptions && item.selectedOptionalOptions) {
+                        Object.keys(item.selectedOptionalOptions).forEach(optionIndex => {
+                            const quantity = item.selectedOptionalOptions[optionIndex];
+                            if (quantity > 0) {
+                                const option = originalProduct.optionalOptions[optionIndex];
+                                if (option) {
+                                    if (quantity > 1) {
+                                        configText += `${quantity}x ${option.name}`;
+                                    } else {
+                                        configText += `${option.name}`;
+                                    }
+                                    configText += ', ';
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Remove trailing comma and space
+                    if (configText.endsWith(', ')) {
+                        configText = configText.slice(0, -2);
+                    }
+                    
                     const itemElement = document.createElement('div');
-                    itemElement.className = 'flex items-center justify-between py-3 border-b border-gray-100 last:border-b-0';
+                    itemElement.className = 'flex space-x-3 py-4 border-b border-gray-100 last:border-b-0 cursor-pointer hover:bg-gray-50 transition-colors';
                     itemElement.innerHTML = `
-                        <div class="flex items-center space-x-3">
-                            <span class="text-sm font-semibold text-white bg-gradient-to-br from-orange-500 to-orange-600 rounded-full w-6 h-6 flex items-center justify-center">${item.quantity}</span>
-                            <div>
-                                <span class="font-medium text-gray-900">${item.name}</span>
-                                <div class="text-sm text-gray-500">R$ ${formatPrice(item.price)} cada</div>
-                            </div>
+                        <!-- Product Image -->
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl">${item.icon}</span>
                         </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="font-semibold text-gray-900">R$ ${formatPrice(item.price * item.quantity)}</span>
-                            <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 p-1 rounded transition-colors">
-                                <i class="fas fa-trash text-sm"></i>
+                        
+                        <!-- Product Info -->
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="font-medium text-black">${item.quantity}</span>
+                                <span class="text-black">•</span>
+                                <span class="font-medium text-black">${item.name}</span>
+                                <span class="text-black">•</span>
+                                <span class="font-medium text-black">R$ ${formatPrice(item.price)}</span>
+                            </div>
+                            ${configText ? `<div class="text-sm text-gray-600 leading-relaxed">${configText}</div>` : ''}
+                        </div>
+                        
+                        <!-- Remove Button and Total -->
+                        <div class="flex flex-col items-end space-y-2">
+                            <button onclick="removeFromCart(${index})" class="flex items-center space-x-1 px-2 py-1 border border-red-300 rounded text-red-600 hover:bg-red-50 transition-colors">
+                                <span class="text-sm">Remover</span>
+                                <i class="fas fa-trash text-xs"></i>
                             </button>
+                            <span class="font-semibold text-orange-600">R$ ${formatPrice(item.price * item.quantity)}</span>
                         </div>
                     `;
+                    
+                    // Add click event to edit item (but not on remove button)
+                    itemElement.onclick = (e) => {
+                        if (!e.target.closest('button')) {
+                            editCartItem(index);
+                        }
+                    };
+                    
                     cartItems.appendChild(itemElement);
                 });
                 
@@ -1014,6 +1080,82 @@
             updateCartDisplay();
             updateCartCount();
             showToast('Produto removido do carrinho', 'error');
+        }
+
+        function editCartItem(index) {
+            const cartItem = state.cart[index];
+            
+            // Find the original product data
+            let originalProduct = null;
+            Object.values(menuData).forEach(category => {
+                const found = category.find(p => p.id === cartItem.id);
+                if (found) originalProduct = found;
+            });
+            
+            if (!originalProduct) {
+                showToast('Produto não encontrado', 'error');
+                return;
+            }
+            
+            // Set editing mode
+            state.editingCartIndex = index;
+            state.currentProduct = originalProduct;
+            state.modalQuantity = cartItem.quantity;
+            state.selectedRequiredOptions = {...cartItem.selectedRequiredOptions};
+            state.selectedOptionalOptions = {...cartItem.selectedOptionalOptions};
+            
+            // Open product modal with existing data
+            const modal = document.getElementById('product-modal');
+            const content = document.getElementById('product-modal-content');
+            
+            document.getElementById('product-icon').textContent = originalProduct.icon;
+            document.getElementById('product-name').textContent = originalProduct.name;
+            document.getElementById('product-description').textContent = originalProduct.description;
+            document.getElementById('modal-quantity').textContent = state.modalQuantity;
+            
+            populateRequiredOptions(originalProduct);
+            populateOptionalOptions(originalProduct);
+            
+            // Pre-select the existing options
+            preselectExistingOptions();
+            
+            updateModalTotalPrice();
+            
+            modal.classList.remove('pointer-events-none');
+            modal.classList.remove('opacity-0');
+            content.style.transform = 'translateY(0)';
+        }
+
+        function preselectExistingOptions() {
+            // Pre-select required options
+            if (state.selectedRequiredOptions) {
+                Object.keys(state.selectedRequiredOptions).forEach(groupIndex => {
+                    const optionIndex = state.selectedRequiredOptions[groupIndex];
+                    const radio = document.querySelector(`input[name="required-${groupIndex}"][value="${optionIndex}"]`);
+                    if (radio) {
+                        radio.checked = true;
+                        selectRequiredOption(parseInt(groupIndex), parseInt(optionIndex));
+                    }
+                });
+            }
+            
+            // Pre-select optional options
+            if (state.selectedOptionalOptions) {
+                Object.keys(state.selectedOptionalOptions).forEach(optionIndex => {
+                    const quantity = state.selectedOptionalOptions[optionIndex];
+                    if (quantity > 0) {
+                        const checkbox = document.getElementById(`optional-checkbox-${optionIndex}`);
+                        const multiplier = document.getElementById(`optional-multiplier-${optionIndex}`);
+                        const quantitySpan = document.getElementById(`optional-quantity-${optionIndex}`);
+                        
+                        if (checkbox) {
+                            checkbox.checked = true;
+                            multiplier.classList.remove('hidden');
+                            quantitySpan.textContent = quantity;
+                        }
+                    }
+                });
+            }
         }
 
         function updateCartCount() {
@@ -1032,6 +1174,7 @@
             state.modalQuantity = 1;
             state.selectedRequiredOptions = {};
             state.selectedOptionalOptions = {};
+            state.editingCartIndex = null; // Reset editing mode
             
             const modal = document.getElementById('product-modal');
             const content = document.getElementById('product-modal-content');
@@ -1291,8 +1434,16 @@
                 selectedOptionalOptions: {...state.selectedOptionalOptions}
             };
             
-            state.cart.push(cartItem);
-            showToast('Produto adicionado ao carrinho!');
+            if (state.editingCartIndex !== null) {
+                // Update existing item
+                state.cart[state.editingCartIndex] = cartItem;
+                showToast('Produto atualizado no carrinho!');
+                state.editingCartIndex = null;
+            } else {
+                // Add new item
+                state.cart.push(cartItem);
+                showToast('Produto adicionado ao carrinho!');
+            }
             
             updateCartCount();
             updateCartDisplay();
@@ -1491,5 +1642,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9785db71c7bb0a7a',t:'MTc1Njc0MTEzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9786196315a2e12d',t:'MTc1Njc0MzY3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
