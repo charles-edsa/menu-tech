@@ -394,11 +394,11 @@
                     <div class="space-y-2">
                         <span class="text-gray-600 font-medium text-sm">Quantidade</span>
                         <div class="flex items-center space-x-2">
-                            <button onclick="updateQuantity(-1)" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                            <button onclick="updateQuantity(-1)" class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
                                 <i class="fas fa-minus text-gray-600 text-xs"></i>
                             </button>
                             <span id="modal-quantity" class="text-lg font-semibold text-gray-900 min-w-[2rem] text-center">1</span>
-                            <button onclick="updateQuantity(1)" class="w-8 h-8 rounded-full btn-primary flex items-center justify-center transition-colors">
+                            <button onclick="updateQuantity(1)" class="w-7 h-7 rounded-full btn-primary flex items-center justify-center transition-colors">
                                 <i class="fas fa-plus text-white text-xs"></i>
                             </button>
                         </div>
@@ -406,7 +406,7 @@
                     
                     <!-- Price -->
                     <div class="text-right space-y-2">
-                        <span class="text-xs text-gray-500">Preço unitário</span>
+                        <span class="text-gray-600 font-medium text-sm">Preço unitário</span>
                         <div id="modal-unit-price" class="text-lg font-semibold text-orange-600">R$ 0,00</div>
                     </div>
                 </div>
@@ -1231,7 +1231,7 @@
                     
                     optionElement.innerHTML = `
                         <input type="radio" name="required-${groupIndex}" value="${optionIndex}" class="hidden" onchange="selectRequiredOption(${groupIndex}, ${optionIndex})">
-                        <span class="font-medium text-gray-900">${option.name}${option.price > 0 ? ` (+R$ ${formatPrice(option.price)})` : ''}</span>
+                        <span class="font-medium text-gray-900">${option.name}${option.price > 0 ? ` <span class="text-gray-300">•</span> <span class="text-orange-600">R$ ${formatPrice(option.price)}</span>` : ''}</span>
                     `;
                     
                     optionElement.onclick = (e) => {
@@ -1275,7 +1275,7 @@
                 optionElement.innerHTML = `
                     <div class="flex items-center">
                         <input type="checkbox" id="optional-checkbox-${optionIndex}" class="custom-checkbox mr-3" onchange="toggleOptional(${optionIndex})">
-                        <span class="font-medium text-gray-900">${option.name} <span class="text-gray-400">•</span> <span class="text-orange-600">R$ ${formatPrice(option.price)}</span></span>
+                        <span class="font-medium text-gray-900">${option.name} <span class="text-gray-300">•</span> <span class="text-orange-600">R$ ${formatPrice(option.price)}</span></span>
                     </div>
                     <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 hidden">
                         <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
@@ -1642,5 +1642,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9786196315a2e12d',t:'MTc1Njc0MzY3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97864eaec0166d4e',t:'MTc1Njc0NTg1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
