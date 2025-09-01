@@ -150,23 +150,29 @@
                 </button>
             </div>
             
-            <!-- Second Row: Search Input -->
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i class="fas fa-search text-gray-400"></i>
+            <!-- Second Row: Category Navigation with Search -->
+            <div class="flex items-center">
+                <!-- Categories Container -->
+                <div class="flex space-x-2 overflow-x-auto scrollbar-hide" id="category-nav-container">
+                    <!-- Category buttons will be populated by JavaScript -->
+                    <div class="flex space-x-2" id="category-nav">
+                        <!-- Category buttons will be populated by JavaScript -->
+                    </div>
+                    
+                    <!-- Search Input - appears at the end when scrolling -->
+                    <div class="relative flex-shrink-0 ml-3">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input 
+                            type="text" 
+                            id="search-input"
+                            placeholder="Buscar..." 
+                            class="w-64 pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm"
+                            oninput="handleSearch()"
+                        >
+                    </div>
                 </div>
-                <input 
-                    type="text" 
-                    id="search-input"
-                    placeholder="Buscar no cardápio..." 
-                    class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
-                    oninput="handleSearch()"
-                >
-            </div>
-            
-            <!-- Third Row: Category Navigation -->
-            <div class="flex space-x-2 overflow-x-auto scrollbar-hide" id="category-nav">
-                <!-- Category buttons will be populated by JavaScript -->
             </div>
         </div>
     </div>
@@ -731,7 +737,7 @@
             container.innerHTML = '';
             
             const allButton = document.createElement('button');
-            allButton.className = `category-btn px-4 py-3 text-sm whitespace-nowrap flex items-center ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
+            allButton.className = `category-btn px-4 py-3 text-sm whitespace-nowrap flex items-center flex-shrink-0 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
             allButton.innerHTML = `<span>Todos</span>`;
             allButton.onclick = () => selectCategory('Todos');
             container.appendChild(allButton);
@@ -748,7 +754,7 @@
                 
                 if (itemsToShow.length > 0) {
                     const button = document.createElement('button');
-                    button.className = `category-btn px-4 py-3 text-sm whitespace-nowrap flex items-center ${state.activeCategory === categoryName ? 'active' : ''}`;
+                    button.className = `category-btn px-4 py-3 text-sm whitespace-nowrap flex items-center flex-shrink-0 ${state.activeCategory === categoryName ? 'active' : ''}`;
                     button.innerHTML = `<span>${categoryName}</span>`;
                     button.onclick = () => selectCategory(categoryName);
                     container.appendChild(button);
@@ -1431,5 +1437,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97854ba8b4f7648d',t:'MTc1NjczNTI0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'978561ac96ebcaee',t:'MTc1NjczNjE0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
