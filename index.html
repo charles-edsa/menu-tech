@@ -77,8 +77,8 @@
         /* Custom radio and checkbox styles */
         .custom-radio, .custom-checkbox {
             appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             border: 2px solid #e5e7eb;
             background: white;
             cursor: pointer;
@@ -92,12 +92,12 @@
         }
         
         .custom-checkbox {
-            border-radius: 6px;
+            border-radius: 4px;
         }
         
         .custom-radio:hover, .custom-checkbox:hover {
             border-color: #f97316;
-            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+            box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.1);
         }
         
         .custom-radio:checked, .custom-checkbox:checked {
@@ -107,6 +107,14 @@
         
         .custom-radio:checked::after {
             content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
         }
         
         .custom-checkbox:checked::after {
@@ -116,14 +124,14 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: bold;
             line-height: 1;
         }
         
         .custom-radio:focus, .custom-checkbox:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+            box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
         }
     </style>
 </head>
@@ -399,20 +407,38 @@
             <!-- Content -->
             <div class="overflow-y-auto flex-1 min-h-0">
                 
-                <!-- Product Card Style Section -->
+                <!-- Product Photos Section -->
                 <div class="px-4 pt-4 pb-4">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                        <div class="flex space-x-4">
-                            <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <span id="product-icon" class="text-3xl">🍔</span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-start space-x-2 mb-2">
-                                    <span class="text-sm font-bold text-orange-600 leading-relaxed" id="modal-base-price">R$ 0,00</span>
-                                </div>
-                                <p id="product-description" class="text-gray-600 text-sm leading-relaxed">Descrição do produto...</p>
-                            </div>
+                    <!-- Main Photo -->
+                    <div class="relative h-48 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl overflow-hidden mb-3">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span id="product-icon" class="text-6xl">🍔</span>
                         </div>
+                        <!-- Photo indicator -->
+                        <div class="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded-full">
+                            1/3
+                        </div>
+                    </div>
+                    
+                    <!-- Photo Gallery -->
+                    <div class="flex space-x-2 mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0 border-2 border-orange-300">
+                            <span class="text-lg" id="product-icon-thumb1">🍔</span>
+                        </div>
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-200 opacity-70">
+                            <span class="text-lg" id="product-icon-thumb2">📸</span>
+                        </div>
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-200 opacity-70">
+                            <span class="text-lg" id="product-icon-thumb3">🍽️</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Info -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+                        <div class="flex items-start justify-between mb-2">
+                            <span class="text-lg font-bold text-orange-600" id="modal-base-price">R$ 0,00</span>
+                        </div>
+                        <p id="product-description" class="text-gray-600 text-sm leading-relaxed">Descrição do produto...</p>
                     </div>
                 </div>
 
@@ -434,12 +460,12 @@
                     <div class="space-y-2">
                         <span class="text-gray-600 font-medium text-sm">Quantidade</span>
                         <div class="flex items-center space-x-2">
-                            <button onclick="updateQuantity(-1)" class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                                <i class="fas fa-minus text-gray-600 text-xs"></i>
+                            <button onclick="updateQuantity(-1)" class="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <i class="fas fa-minus text-gray-600" style="font-size: 10px;"></i>
                             </button>
                             <span id="modal-quantity" class="text-lg font-semibold text-gray-900 min-w-[2rem] text-center">1</span>
-                            <button onclick="updateQuantity(1)" class="w-7 h-7 rounded-full btn-primary flex items-center justify-center transition-colors">
-                                <i class="fas fa-plus text-white text-xs"></i>
+                            <button onclick="updateQuantity(1)" class="w-6 h-6 rounded-full btn-primary flex items-center justify-center transition-colors">
+                                <i class="fas fa-plus text-white" style="font-size: 10px;"></i>
                             </button>
                         </div>
                     </div>
@@ -1360,6 +1386,9 @@
             const content = document.getElementById('product-modal-content');
             
             document.getElementById('product-icon').textContent = product.icon;
+            document.getElementById('product-icon-thumb1').textContent = product.icon;
+            document.getElementById('product-icon-thumb2').textContent = '📸';
+            document.getElementById('product-icon-thumb3').textContent = '🍽️';
             document.getElementById('product-name').textContent = product.name;
             document.getElementById('product-description').textContent = product.description;
             document.getElementById('modal-quantity').textContent = state.modalQuantity;
@@ -1408,10 +1437,10 @@
                 
                 optionGroup.options.forEach((option, optionIndex) => {
                     const optionElement = document.createElement('div');
-                    optionElement.className = 'flex items-center p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
+                    optionElement.className = 'flex items-center p-3 hover:bg-orange-50 transition-all cursor-pointer border-b border-gray-100 last:border-b-0';
                     
                     optionElement.innerHTML = `
-                        <input type="radio" name="required-${groupIndex}" value="${optionIndex}" class="hidden" onchange="selectRequiredOption(${groupIndex}, ${optionIndex})">
+                        <input type="radio" name="required-${groupIndex}" value="${optionIndex}" class="custom-radio mr-3" onchange="selectRequiredOption(${groupIndex}, ${optionIndex})">
                         <span class="font-medium text-gray-900 text-sm">${option.name}${option.price > 0 ? ` <span class="text-gray-400">•</span> <span class="text-orange-600 font-bold">+R$ ${formatPrice(option.price)}</span>` : ''}</span>
                     `;
                     
@@ -1451,7 +1480,7 @@
             
             product.optionalOptions.forEach((option, optionIndex) => {
                 const optionElement = document.createElement('div');
-                optionElement.className = 'flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition-all cursor-pointer';
+                optionElement.className = 'flex items-center justify-between p-3 hover:bg-orange-50 transition-all cursor-pointer border-b border-gray-100 last:border-b-0';
                 
                 optionElement.innerHTML = `
                     <div class="flex items-center">
@@ -1459,12 +1488,12 @@
                         <span class="font-medium text-gray-900 text-sm">${option.name} <span class="text-gray-400">•</span> <span class="text-orange-600 font-bold">+R$ ${formatPrice(option.price)}</span></span>
                     </div>
                     <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 hidden">
-                        <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                            <i class="fas fa-minus text-gray-600 text-xs"></i>
+                        <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                            <i class="fas fa-minus text-gray-600" style="font-size: 10px;"></i>
                         </button>
                         <span id="optional-quantity-${optionIndex}" class="font-semibold text-gray-900 min-w-[1.5rem] text-center">1</span>
-                        <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-7 h-7 rounded-full btn-primary flex items-center justify-center transition-colors">
-                            <i class="fas fa-plus text-white text-xs"></i>
+                        <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-6 h-6 rounded-full btn-primary flex items-center justify-center transition-colors">
+                            <i class="fas fa-plus text-white" style="font-size: 10px;"></i>
                         </button>
                     </div>
                 `;
@@ -1485,21 +1514,6 @@
 
         function selectRequiredOption(groupIndex, optionIndex) {
             state.selectedRequiredOptions[groupIndex] = optionIndex;
-            
-            // Update visual selection for the group
-            const groupContainer = document.getElementById(`required-group-${groupIndex}`);
-            const allOptions = groupContainer.querySelectorAll('.flex.items-center');
-            
-            allOptions.forEach((option, index) => {
-                if (index === optionIndex) {
-                    option.classList.remove('border-gray-200', 'hover:border-orange-300', 'hover:bg-orange-50');
-                    option.classList.add('border-orange-500', 'bg-orange-50');
-                } else {
-                    option.classList.remove('border-orange-500', 'bg-orange-50');
-                    option.classList.add('border-gray-200', 'hover:border-orange-300', 'hover:bg-orange-50');
-                }
-            });
-            
             updateModalTotalPrice();
         }
 
@@ -1963,5 +1977,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f8e54444036505',t:'MTc1Nzk0NzM5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f8fab8d5648b79',t:'MTc1Nzk0ODI3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
