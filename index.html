@@ -157,43 +157,11 @@
         <!-- Empty cover image section -->
     </div>
 
-    <!-- Status Bar -->
-    <div class="bg-green-50 border-b border-green-200 py-2 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-4 flex items-center justify-center">
-            <span class="text-sm text-green-700">Aberto • Pedidos até 23h</span>
-        </div>
-    </div>
 
-    <!-- Search Bar with Categories -->
-    <div class="bg-white border-b border-gray-200 px-4 py-4 sticky top-8 z-40">
-        <div class="max-w-4xl mx-auto space-y-4">
-            <!-- First Row: Profile Button and Cart Button -->
-            <div class="flex items-center justify-between">
-                <!-- Profile Button -->
-                <button onclick="openProfileModal()" class="flex items-center space-x-2 px-3 py-2 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-all duration-200 transform hover:scale-105">
-                    <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-utensils text-white text-sm"></i>
-                    </div>
-                    <div class="text-left">
-                        <div class="text-gray-900 font-semibold text-sm">Restaurante Sabor</div>
-                        <div class="text-gray-600 text-xs">Delivery • Retirada • No local</div>
-                    </div>
-                </button>
-                
-                <!-- Cart Button -->
-                <button onclick="openCartModal()" class="relative btn-primary px-3 py-2 rounded-lg text-white font-medium text-sm shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-                    <div class="text-left">
-                        <div class="flex items-center space-x-2 text-white font-semibold text-sm">
-                            <i class="fas fa-shopping-cart text-sm"></i>
-                            <span>Carrinho</span>
-                        </div>
-                        <div id="cart-total-subtitle" class="text-white/80 text-xs">Total: R$ 0,00</div>
-                    </div>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-white text-orange-600 text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium border border-orange-200">0</span>
-                </button>
-            </div>
-            
-            <!-- Second Row: Category Navigation with Search -->
+
+    <!-- Categories and Search Bar -->
+    <div class="bg-white border-b border-gray-200 px-4 py-4 sticky top-0 z-40">
+        <div class="max-w-4xl mx-auto">
             <div class="flex items-center">
                 <!-- Categories Container -->
                 <div class="flex space-x-2 overflow-x-auto scrollbar-hide" id="category-nav-container">
@@ -221,11 +189,41 @@
     </div>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 py-6">
+    <main class="max-w-4xl mx-auto px-4 py-6 pb-20">
         <div id="menu-categories">
             <!-- Categories will be populated by JavaScript -->
         </div>
     </main>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3 z-50">
+        <div class="max-w-4xl mx-auto flex items-center justify-around">
+            <!-- Profile Button -->
+            <button onclick="openProfileModal()" class="flex flex-col items-center space-y-1 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-utensils text-white text-sm"></i>
+                </div>
+                <span class="text-xs text-gray-600 font-medium">Perfil</span>
+            </button>
+            
+            <!-- Login Button -->
+            <button onclick="openLoginModal()" class="flex flex-col items-center space-y-1 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-user text-gray-600 text-sm"></i>
+                </div>
+                <span class="text-xs text-gray-600 font-medium">Entrar</span>
+            </button>
+            
+            <!-- Cart Button -->
+            <button onclick="openCartModal()" class="relative flex flex-col items-center space-y-1 px-3 py-2 rounded-lg hover:bg-orange-50 transition-colors">
+                <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-shopping-cart text-white text-sm"></i>
+                </div>
+                <span class="text-xs text-gray-600 font-medium">Carrinho</span>
+                <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium">0</span>
+            </button>
+        </div>
+    </div>
 
     <!-- Profile Modal -->
     <div id="profile-modal" class="fixed inset-0 bg-black/50 z-[100] opacity-0 pointer-events-none transition-all duration-300">
@@ -901,7 +899,19 @@
             const section = document.createElement('div');
             section.className = 'mb-8';
             
+            // Add status indicator to the first category only
+            const isFirstCategory = document.getElementById('menu-categories').children.length === 0;
+            const statusIndicator = isFirstCategory ? `
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-2 px-3 py-2 bg-green-50 border border-green-200 rounded-lg">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-sm text-green-700 font-medium">Aberto • Pedidos até 23h</span>
+                    </div>
+                </div>
+            ` : '';
+            
             section.innerHTML = `
+                ${statusIndicator}
                 <div class="mb-6">
                     <h2 class="text-2xl font-semibold text-gray-900 mb-1">${categoryName}</h2>
                     <div class="w-full h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
@@ -1230,21 +1240,12 @@
 
         function updateCartCount() {
             const cartCount = document.getElementById('cart-count');
-            const cartTotalSubtitle = document.getElementById('cart-total-subtitle');
             
             if (state.cart.length > 0) {
                 cartCount.textContent = state.cart.length;
                 cartCount.classList.remove('hidden');
-                
-                // Calculate total for subtitle
-                let total = 0;
-                state.cart.forEach(item => {
-                    total += item.price * item.quantity;
-                });
-                cartTotalSubtitle.textContent = `Total: R$ ${formatPrice(total)}`;
             } else {
                 cartCount.classList.add('hidden');
-                cartTotalSubtitle.textContent = 'Total: R$ 0,00';
             }
         }
 
@@ -1822,6 +1823,11 @@
             }
         }
 
+        // Login modal functions
+        function openLoginModal() {
+            showToast('Funcionalidade de login em desenvolvimento', 'error');
+        }
+
         // Initialize
         function init() {
             state.activeCategory = 'Todos';
@@ -1831,5 +1837,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97e40fe5a549cabf',t:'MTc1NzcyODk0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f83aa6e4afdf4a',t:'MTc1Nzk0MDQwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
