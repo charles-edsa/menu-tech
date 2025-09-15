@@ -410,34 +410,32 @@
                 <!-- Product Photos Section -->
                 <div class="px-4 pt-4 pb-4">
                     <!-- Main Photo -->
-                    <div class="relative h-48 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl overflow-hidden mb-3">
-                        <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="relative h-48 rounded-xl overflow-hidden mb-3" id="main-photo-container">
+                        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-100 to-orange-200" id="main-photo-background">
                             <span id="product-icon" class="text-6xl">🍔</span>
                         </div>
+                        
+                        <!-- Navigation arrows -->
+                        <button onclick="previousPhoto()" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition-colors" id="prev-photo-btn">
+                            <i class="fas fa-chevron-left text-sm"></i>
+                        </button>
+                        <button onclick="nextPhoto()" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition-colors" id="next-photo-btn">
+                            <i class="fas fa-chevron-right text-sm"></i>
+                        </button>
+                        
                         <!-- Photo indicator -->
-                        <div class="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded-full">
+                        <div class="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded-full" id="photo-indicator">
                             1/3
                         </div>
                     </div>
                     
                     <!-- Photo Gallery -->
-                    <div class="flex space-x-2 mb-4">
-                        <div class="w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0 border-2 border-orange-300">
-                            <span class="text-lg" id="product-icon-thumb1">🍔</span>
-                        </div>
-                        <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-200 opacity-70">
-                            <span class="text-lg" id="product-icon-thumb2">📸</span>
-                        </div>
-                        <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center flex-shrink-0 border border-gray-200 opacity-70">
-                            <span class="text-lg" id="product-icon-thumb3">🍽️</span>
-                        </div>
+                    <div class="flex space-x-2 mb-4" id="photo-gallery">
+                        <!-- Thumbnails will be populated by JavaScript -->
                     </div>
                     
-                    <!-- Product Info -->
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                        <div class="flex items-start justify-between mb-2">
-                            <span class="text-lg font-bold text-orange-600" id="modal-base-price">R$ 0,00</span>
-                        </div>
+                    <!-- Product Description -->
+                    <div class="mb-4">
                         <p id="product-description" class="text-gray-600 text-sm leading-relaxed">Descrição do produto...</p>
                     </div>
                 </div>
@@ -619,7 +617,7 @@
 
             <!-- Content -->
             <div class="overflow-y-auto px-4 py-4" style="max-height: calc(80vh - 100px);">
-                <div class="space-y-3">
+                <div class="space-y-4">
                     
                     <!-- Promotion 1 -->
                     <div class="bg-white rounded-xl shadow-sm card-hover cursor-pointer border border-gray-100">
@@ -632,16 +630,9 @@
                                     <div class="flex items-start space-x-2 mb-1">
                                         <h3 class="font-semibold text-gray-900 text-sm leading-relaxed">Combo X-Tudo</h3>
                                         <span class="text-gray-400 text-sm">•</span>
-                                        <span class="text-orange-600 text-xs font-bold">30% OFF</span>
+                                        <span class="text-sm font-bold text-orange-600 leading-relaxed">R$ 25,06</span>
                                     </div>
-                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-2">X-Tudo + Batata Frita + Refrigerante</p>
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center space-x-2">
-                                            <span class="text-gray-400 line-through text-sm">R$ 35,80</span>
-                                            <span class="text-orange-600 font-bold text-sm">R$ 25,06</span>
-                                        </div>
-                                        <span class="text-xs text-gray-500">Até 31/12</span>
-                                    </div>
+                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2">X-Tudo + Batata Frita + Refrigerante (30% OFF)</p>
                                 </div>
                             </div>
                         </div>
@@ -658,13 +649,9 @@
                                     <div class="flex items-start space-x-2 mb-1">
                                         <h3 class="font-semibold text-gray-900 text-sm leading-relaxed">Pizza em Dobro</h3>
                                         <span class="text-gray-400 text-sm">•</span>
-                                        <span class="text-orange-600 text-xs font-bold">2ª GRÁTIS</span>
+                                        <span class="text-sm font-bold text-orange-600 leading-relaxed">R$ 45,90</span>
                                     </div>
-                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-2">Compre uma pizza grande e ganhe outra média</p>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-orange-600 font-bold text-sm">A partir de R$ 45,90</span>
-                                        <span class="text-xs text-gray-500">Ter a qui</span>
-                                    </div>
+                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2">Compre uma pizza grande e ganhe outra média</p>
                                 </div>
                             </div>
                         </div>
@@ -681,13 +668,9 @@
                                     <div class="flex items-start space-x-2 mb-1">
                                         <h3 class="font-semibold text-gray-900 text-sm leading-relaxed">Primeira Compra</h3>
                                         <span class="text-gray-400 text-sm">•</span>
-                                        <span class="text-orange-600 text-xs font-bold">15% OFF</span>
+                                        <span class="text-sm font-bold text-orange-600 leading-relaxed">15% OFF</span>
                                     </div>
-                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-2">Desconto especial para novos clientes</p>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-orange-600 font-bold text-sm">Em todo o cardápio</span>
-                                        <span class="text-xs text-gray-500">BEMVINDO15</span>
-                                    </div>
+                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2">Desconto especial para novos clientes em todo o cardápio</p>
                                 </div>
                             </div>
                         </div>
@@ -704,13 +687,9 @@
                                     <div class="flex items-start space-x-2 mb-1">
                                         <h3 class="font-semibold text-gray-900 text-sm leading-relaxed">Happy Hour</h3>
                                         <span class="text-gray-400 text-sm">•</span>
-                                        <span class="text-orange-600 text-xs font-bold">GRÁTIS</span>
+                                        <span class="text-sm font-bold text-orange-600 leading-relaxed">GRÁTIS</span>
                                     </div>
-                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-2">Refrigerante grátis em pedidos acima de R$ 30</p>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-orange-600 font-bold text-sm">Das 15h às 18h</span>
-                                        <span class="text-xs text-gray-500">Seg a sex</span>
-                                    </div>
+                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2">Refrigerante grátis em pedidos acima de R$ 30 (15h às 18h)</p>
                                 </div>
                             </div>
                         </div>
@@ -748,7 +727,8 @@
             selectedRequiredOptions: {},
             selectedOptionalOptions: {},
             activeCategory: null,
-            editingCartIndex: null
+            editingCartIndex: null,
+            currentPhotoIndex: 0
         };
 
         // Menu data
@@ -760,6 +740,11 @@
                     description: "Hambúrguer bovino, queijo, alface, tomate, cebola e maionese", 
                     price: 18.90, 
                     icon: "🥗",
+                    photos: [
+                        { icon: "🥗", gradient: "from-green-100 to-green-200" },
+                        { icon: "🍔", gradient: "from-orange-100 to-orange-200" },
+                        { icon: "🥬", gradient: "from-emerald-100 to-emerald-200" }
+                    ],
                     requiredOptions: [
                         {
                             name: "Ponto da Carne",
@@ -782,6 +767,11 @@
                     description: "Hambúrguer bovino, queijo, bacon crocante, alface, tomate e maionese", 
                     price: 22.90, 
                     icon: "🥓",
+                    photos: [
+                        { icon: "🥓", gradient: "from-red-100 to-red-200" },
+                        { icon: "🍔", gradient: "from-orange-100 to-orange-200" },
+                        { icon: "🧀", gradient: "from-yellow-100 to-yellow-200" }
+                    ],
                     requiredOptions: [
                         {
                             name: "Ponto da Carne",
@@ -804,6 +794,11 @@
                     description: "Hambúrguer bovino, queijo, bacon, ovo, alface, tomate, cebola e maionese", 
                     price: 26.90, 
                     icon: "🍔",
+                    photos: [
+                        { icon: "🍔", gradient: "from-orange-100 to-orange-200" },
+                        { icon: "🥓", gradient: "from-red-100 to-red-200" },
+                        { icon: "🥚", gradient: "from-yellow-100 to-yellow-200" }
+                    ],
                     requiredOptions: [
                         {
                             name: "Ponto da Carne",
@@ -827,6 +822,11 @@
                     description: "Pizza tradicional com molho de tomate, queijo mussarela e orégano", 
                     price: 25.90, 
                     icon: "🍕",
+                    photos: [
+                        { icon: "🍕", gradient: "from-red-100 to-red-200" },
+                        { icon: "🧀", gradient: "from-yellow-100 to-yellow-200" },
+                        { icon: "🍅", gradient: "from-red-100 to-orange-200" }
+                    ],
                     requiredOptions: [
                         {
                             name: "Sabor",
@@ -848,6 +848,11 @@
                     description: "Pizza tradicional com molho de tomate, queijo mussarela e orégano", 
                     price: 35.90, 
                     icon: "🍕",
+                    photos: [
+                        { icon: "🍕", gradient: "from-red-100 to-red-200" },
+                        { icon: "🌶️", gradient: "from-red-100 to-orange-200" },
+                        { icon: "🧄", gradient: "from-gray-100 to-gray-200" }
+                    ],
                     requiredOptions: [
                         {
                             name: "Sabor",
@@ -870,6 +875,11 @@
                     description: "Pizza tradicional com molho de tomate, queijo mussarela e orégano", 
                     price: 45.90, 
                     icon: "🍕",
+                    photos: [
+                        { icon: "🍕", gradient: "from-red-100 to-red-200" },
+                        { icon: "🥩", gradient: "from-red-100 to-red-300" },
+                        { icon: "🌿", gradient: "from-green-100 to-green-200" }
+                    ],
                     requiredOptions: [
                         {
                             name: "Sabor",
@@ -1308,16 +1318,17 @@
             state.modalQuantity = cartItem.quantity;
             state.selectedRequiredOptions = {...cartItem.selectedRequiredOptions};
             state.selectedOptionalOptions = {...cartItem.selectedOptionalOptions};
+            state.currentPhotoIndex = 0; // Reset photo index
             
             // Open product modal with existing data
             const modal = document.getElementById('product-modal');
             const content = document.getElementById('product-modal-content');
             
-            document.getElementById('product-icon').textContent = originalProduct.icon;
             document.getElementById('product-name').textContent = originalProduct.name;
             document.getElementById('product-description').textContent = originalProduct.description;
             document.getElementById('modal-quantity').textContent = state.modalQuantity;
             
+            populateProductPhotos(originalProduct);
             populateRequiredOptions(originalProduct);
             populateOptionalOptions(originalProduct);
             
@@ -1381,19 +1392,16 @@
             state.selectedRequiredOptions = {};
             state.selectedOptionalOptions = {};
             state.editingCartIndex = null; // Reset editing mode
+            state.currentPhotoIndex = 0; // Reset photo index
             
             const modal = document.getElementById('product-modal');
             const content = document.getElementById('product-modal-content');
             
-            document.getElementById('product-icon').textContent = product.icon;
-            document.getElementById('product-icon-thumb1').textContent = product.icon;
-            document.getElementById('product-icon-thumb2').textContent = '📸';
-            document.getElementById('product-icon-thumb3').textContent = '🍽️';
             document.getElementById('product-name').textContent = product.name;
             document.getElementById('product-description').textContent = product.description;
             document.getElementById('modal-quantity').textContent = state.modalQuantity;
-            document.getElementById('modal-base-price').textContent = `R$ ${formatPrice(product.price)}`;
             
+            populateProductPhotos(product);
             populateRequiredOptions(product);
             populateOptionalOptions(product);
             updateModalTotalPrice();
@@ -1413,6 +1421,86 @@
             setTimeout(() => {
                 modal.classList.add('pointer-events-none');
             }, 300);
+        }
+
+        function populateProductPhotos(product) {
+            const photos = product.photos || [{ icon: product.icon, gradient: "from-orange-100 to-orange-200" }];
+            
+            // Update main photo
+            updateMainPhoto(photos[state.currentPhotoIndex]);
+            
+            // Update photo indicator
+            document.getElementById('photo-indicator').textContent = `${state.currentPhotoIndex + 1}/${photos.length}`;
+            
+            // Populate thumbnail gallery
+            const gallery = document.getElementById('photo-gallery');
+            gallery.innerHTML = '';
+            
+            photos.forEach((photo, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `w-16 h-16 bg-gradient-to-br ${photo.gradient} rounded-lg flex items-center justify-center flex-shrink-0 cursor-pointer transition-all ${
+                    index === state.currentPhotoIndex ? 'border-2 border-orange-500 opacity-100' : 'border border-gray-200 opacity-70 hover:opacity-90'
+                }`;
+                thumbnail.innerHTML = `<span class="text-lg">${photo.icon}</span>`;
+                thumbnail.onclick = () => selectPhoto(index);
+                gallery.appendChild(thumbnail);
+            });
+            
+            // Show/hide navigation arrows
+            const prevBtn = document.getElementById('prev-photo-btn');
+            const nextBtn = document.getElementById('next-photo-btn');
+            
+            if (photos.length <= 1) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+            }
+        }
+
+        function updateMainPhoto(photo) {
+            const background = document.getElementById('main-photo-background');
+            const icon = document.getElementById('product-icon');
+            
+            background.className = `absolute inset-0 flex items-center justify-center bg-gradient-to-br ${photo.gradient}`;
+            icon.textContent = photo.icon;
+        }
+
+        function selectPhoto(index) {
+            if (!state.currentProduct || !state.currentProduct.photos) return;
+            
+            state.currentPhotoIndex = index;
+            const photos = state.currentProduct.photos;
+            
+            updateMainPhoto(photos[index]);
+            document.getElementById('photo-indicator').textContent = `${index + 1}/${photos.length}`;
+            
+            // Update thumbnail selection
+            const thumbnails = document.querySelectorAll('#photo-gallery > div');
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.className = thumb.className.replace('border border-gray-200 opacity-70 hover:opacity-90', 'border-2 border-orange-500 opacity-100');
+                } else {
+                    thumb.className = thumb.className.replace('border-2 border-orange-500 opacity-100', 'border border-gray-200 opacity-70 hover:opacity-90');
+                }
+            });
+        }
+
+        function previousPhoto() {
+            if (!state.currentProduct || !state.currentProduct.photos) return;
+            
+            const photos = state.currentProduct.photos;
+            const newIndex = state.currentPhotoIndex > 0 ? state.currentPhotoIndex - 1 : photos.length - 1;
+            selectPhoto(newIndex);
+        }
+
+        function nextPhoto() {
+            if (!state.currentProduct || !state.currentProduct.photos) return;
+            
+            const photos = state.currentProduct.photos;
+            const newIndex = state.currentPhotoIndex < photos.length - 1 ? state.currentPhotoIndex + 1 : 0;
+            selectPhoto(newIndex);
         }
 
         function populateRequiredOptions(product) {
@@ -1977,5 +2065,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f8fab8d5648b79',t:'MTc1Nzk0ODI3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f907aa3006af70',t:'MTc1Nzk0ODgwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
