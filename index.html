@@ -197,27 +197,27 @@
 
     <!-- Bottom Navigation Bar -->
     <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-50">
-        <div class="max-w-4xl mx-auto flex items-center justify-around">
+        <div class="max-w-4xl mx-auto grid grid-cols-4 gap-2">
             <!-- Profile Button -->
-            <button onclick="openProfileModal()" class="flex flex-col items-center space-y-1 px-3 py-1 rounded-lg hover:bg-gray-50 transition-colors">
+            <button onclick="openProfileModal()" class="flex flex-col items-center space-y-1 py-2 rounded-lg hover:bg-gray-50 transition-colors">
                 <i class="fas fa-utensils text-orange-500 text-lg"></i>
                 <span class="text-xs text-gray-600 font-medium">Perfil</span>
             </button>
             
             <!-- Login Button -->
-            <button onclick="openLoginModal()" class="flex flex-col items-center space-y-1 px-3 py-1 rounded-lg hover:bg-gray-50 transition-colors">
-                <i class="fas fa-user text-gray-500 text-lg"></i>
+            <button onclick="openLoginModal()" class="flex flex-col items-center space-y-1 py-2 rounded-lg hover:bg-green-50 transition-colors">
+                <i class="fas fa-user text-green-500 text-lg"></i>
                 <span class="text-xs text-gray-600 font-medium">Login</span>
             </button>
             
             <!-- Promotions Button -->
-            <button onclick="openPromotionsModal()" class="flex flex-col items-center space-y-1 px-3 py-1 rounded-lg hover:bg-red-50 transition-colors">
+            <button onclick="openPromotionsModal()" class="flex flex-col items-center space-y-1 py-2 rounded-lg hover:bg-red-50 transition-colors">
                 <i class="fas fa-tags text-red-500 text-lg"></i>
                 <span class="text-xs text-gray-600 font-medium">Promoções</span>
             </button>
             
             <!-- Cart Button -->
-            <button onclick="openCartModal()" class="relative flex flex-col items-center space-y-1 px-3 py-1 rounded-lg hover:bg-orange-50 transition-colors">
+            <button onclick="openCartModal()" class="relative flex flex-col items-center space-y-1 py-2 rounded-lg hover:bg-orange-50 transition-colors">
                 <i class="fas fa-shopping-cart text-orange-500 text-lg"></i>
                 <span class="text-xs text-gray-600 font-medium">Carrinho</span>
                 <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium">0</span>
@@ -615,95 +615,95 @@
                 <div class="space-y-3">
                     
                     <!-- Promotion 1 -->
-                    <div class="bg-white rounded-xl shadow-sm card-hover cursor-pointer border border-gray-100 p-4">
-                        <div class="flex space-x-4">
-                            <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <span class="text-3xl">🍔</span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-start justify-between mb-1">
-                                    <div class="flex items-center space-x-2">
-                                        <h3 class="font-semibold text-gray-900 text-sm">Combo X-Tudo</h3>
+                    <div class="bg-white rounded-xl shadow-sm card-hover cursor-pointer border border-gray-100">
+                        <div class="p-4">
+                            <div class="flex space-x-4">
+                                <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-3xl">🍔</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-start space-x-2 mb-1">
+                                        <h3 class="font-semibold text-gray-900 text-sm leading-relaxed">Combo X-Tudo</h3>
                                         <span class="text-gray-400 text-sm">•</span>
                                         <span class="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">30% OFF</span>
                                     </div>
-                                </div>
-                                <p class="text-gray-600 text-sm leading-relaxed mb-2">X-Tudo + Batata Frita + Refrigerante</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-2">
-                                        <span class="text-gray-400 line-through text-sm">R$ 35,80</span>
-                                        <span class="text-red-600 font-bold text-lg">R$ 25,06</span>
+                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-2">X-Tudo + Batata Frita + Refrigerante</p>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-gray-400 line-through text-sm">R$ 35,80</span>
+                                            <span class="text-red-600 font-bold text-sm">R$ 25,06</span>
+                                        </div>
+                                        <span class="text-xs text-gray-500">Até 31/12</span>
                                     </div>
-                                    <span class="text-xs text-gray-500">Até 31/12/2024</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Promotion 2 -->
-                    <div class="bg-white rounded-xl shadow-sm card-hover cursor-pointer border border-gray-100 p-4">
-                        <div class="flex space-x-4">
-                            <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <span class="text-3xl">🍕</span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-start justify-between mb-1">
-                                    <div class="flex items-center space-x-2">
-                                        <h3 class="font-semibold text-gray-900 text-sm">Pizza em Dobro</h3>
+                    <div class="bg-white rounded-xl shadow-sm card-hover cursor-pointer border border-gray-100">
+                        <div class="p-4">
+                            <div class="flex space-x-4">
+                                <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-3xl">🍕</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-start space-x-2 mb-1">
+                                        <h3 class="font-semibold text-gray-900 text-sm leading-relaxed">Pizza em Dobro</h3>
                                         <span class="text-gray-400 text-sm">•</span>
                                         <span class="bg-green-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">2ª GRÁTIS</span>
                                     </div>
-                                </div>
-                                <p class="text-gray-600 text-sm leading-relaxed mb-2">Compre uma pizza grande e ganhe outra média</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-green-600 font-bold text-lg">A partir de R$ 45,90</span>
-                                    <span class="text-xs text-gray-500">Ter a qui</span>
+                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-2">Compre uma pizza grande e ganhe outra média</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-green-600 font-bold text-sm">A partir de R$ 45,90</span>
+                                        <span class="text-xs text-gray-500">Ter a qui</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Promotion 3 -->
-                    <div class="bg-white rounded-xl shadow-sm card-hover cursor-pointer border border-gray-100 p-4">
-                        <div class="flex space-x-4">
-                            <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <span class="text-3xl">🎉</span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-start justify-between mb-1">
-                                    <div class="flex items-center space-x-2">
-                                        <h3 class="font-semibold text-gray-900 text-sm">Primeira Compra</h3>
+                    <div class="bg-white rounded-xl shadow-sm card-hover cursor-pointer border border-gray-100">
+                        <div class="p-4">
+                            <div class="flex space-x-4">
+                                <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-3xl">🎉</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-start space-x-2 mb-1">
+                                        <h3 class="font-semibold text-gray-900 text-sm leading-relaxed">Primeira Compra</h3>
                                         <span class="text-gray-400 text-sm">•</span>
                                         <span class="bg-purple-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">15% OFF</span>
                                     </div>
-                                </div>
-                                <p class="text-gray-600 text-sm leading-relaxed mb-2">Desconto especial para novos clientes</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-purple-600 font-bold text-lg">Em todo o cardápio</span>
-                                    <span class="text-xs text-gray-500">BEMVINDO15</span>
+                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-2">Desconto especial para novos clientes</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-purple-600 font-bold text-sm">Em todo o cardápio</span>
+                                        <span class="text-xs text-gray-500">BEMVINDO15</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Promotion 4 -->
-                    <div class="bg-white rounded-xl shadow-sm card-hover cursor-pointer border border-gray-100 p-4">
-                        <div class="flex space-x-4">
-                            <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <span class="text-3xl">🥤</span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-start justify-between mb-1">
-                                    <div class="flex items-center space-x-2">
-                                        <h3 class="font-semibold text-gray-900 text-sm">Happy Hour</h3>
+                    <div class="bg-white rounded-xl shadow-sm card-hover cursor-pointer border border-gray-100">
+                        <div class="p-4">
+                            <div class="flex space-x-4">
+                                <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-3xl">🥤</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-start space-x-2 mb-1">
+                                        <h3 class="font-semibold text-gray-900 text-sm leading-relaxed">Happy Hour</h3>
                                         <span class="text-gray-400 text-sm">•</span>
                                         <span class="bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full font-medium">GRÁTIS</span>
                                     </div>
-                                </div>
-                                <p class="text-gray-600 text-sm leading-relaxed mb-2">Refrigerante grátis em pedidos acima de R$ 30</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-blue-600 font-bold text-lg">Das 15h às 18h</span>
-                                    <span class="text-xs text-gray-500">Seg a sex</span>
+                                    <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-2">Refrigerante grátis em pedidos acima de R$ 30</p>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-blue-600 font-bold text-sm">Das 15h às 18h</span>
+                                        <span class="text-xs text-gray-500">Seg a sex</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1981,5 +1981,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f868feb6a964f6',t:'MTc1Nzk0MjMwNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f885f007886d51',t:'MTc1Nzk0MzQ5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
