@@ -55,14 +55,9 @@
             position: relative;
             background: transparent;
             border: none;
-            border-right: 1px solid #e5e7eb;
             border-radius: 0;
             color: #6b7280;
             font-weight: 500;
-        }
-        
-        .category-btn:last-child {
-            border-right: none;
         }
         
         .category-btn.active {
@@ -997,6 +992,7 @@
             allButton.onclick = () => selectCategory('Todos');
             container.appendChild(allButton);
             
+            let isFirstCategory = true;
             Object.keys(menuData).forEach(categoryName => {
                 let itemsToShow = menuData[categoryName];
                 
@@ -1008,11 +1004,21 @@
                 }
                 
                 if (itemsToShow.length > 0) {
+                    // Add separator dot before each category (except the first one)
+                    if (!isFirstCategory || container.children.length > 0) {
+                        const separator = document.createElement('span');
+                        separator.className = 'text-gray-400 text-sm flex items-center px-2';
+                        separator.textContent = '•';
+                        container.appendChild(separator);
+                    }
+                    
                     const button = document.createElement('button');
                     button.className = `category-btn px-4 py-3 text-sm whitespace-nowrap flex items-center flex-shrink-0 ${state.activeCategory === categoryName ? 'active' : ''}`;
                     button.innerHTML = `<span>${categoryName}</span>`;
                     button.onclick = () => selectCategory(categoryName);
                     container.appendChild(button);
+                    
+                    isFirstCategory = false;
                 }
             });
         }
@@ -2065,5 +2071,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f907aa3006af70',t:'MTc1Nzk0ODgwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f9160033968125',t:'MTc1Nzk0OTM5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
