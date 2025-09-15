@@ -212,7 +212,7 @@
             <div class="px-6 py-3 border-b border-gray-200">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
-                        <h2 class="text-xl font-semibold text-gray-900 leading-relaxed">Acompanhe-nos</h2>
+                        <h2 class="text-lg font-semibold text-gray-900 leading-relaxed">Acompanhe-nos</h2>
                         <span class="text-gray-400">•</span>
                         <div class="flex items-center space-x-3 mr-4">
                             <button class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
@@ -356,7 +356,7 @@
         <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="cart-modal-content" style="max-height: 80vh;">
             <!-- Header -->
             <div class="flex items-center justify-between px-6 py-3 border-b border-gray-200">
-                <h2 class="text-xl font-semibold text-gray-900 leading-relaxed">Seu Carrinho</h2>
+                <h2 class="text-lg font-semibold text-gray-900 leading-relaxed">Seu Carrinho</h2>
                 <button onclick="closeCartModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                     <i class="fas fa-times text-gray-500"></i>
                 </button>
@@ -395,7 +395,7 @@
             <!-- Header -->
             <div class="px-6 py-3 border-b border-gray-200 flex-shrink-0">
                 <div class="flex items-center justify-between">
-                    <h2 id="product-name" class="text-xl font-semibold text-gray-900 leading-relaxed">Nome do Produto</h2>
+                    <h2 id="product-name" class="text-lg font-semibold text-gray-900 leading-relaxed">Nome do Produto</h2>
                     <button onclick="closeProductModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                         <i class="fas fa-times text-gray-500"></i>
                     </button>
@@ -456,12 +456,12 @@
                     <div class="space-y-2">
                         <span class="text-gray-600 font-medium text-sm">Quantidade</span>
                         <div class="flex items-center space-x-2">
-                            <button onclick="updateQuantity(-1)" class="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                                <i class="fas fa-minus text-gray-600" style="font-size: 10px;"></i>
+                            <button onclick="updateQuantity(-1)" class="w-5 h-5 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <i class="fas fa-minus text-gray-600" style="font-size: 8px;"></i>
                             </button>
-                            <span id="modal-quantity" class="text-lg font-semibold text-gray-900 min-w-[2rem] text-center">1</span>
-                            <button onclick="updateQuantity(1)" class="w-6 h-6 rounded-full btn-primary flex items-center justify-center transition-colors">
-                                <i class="fas fa-plus text-white" style="font-size: 10px;"></i>
+                            <span id="modal-quantity" class="text-sm font-semibold text-gray-900 min-w-[1.5rem] text-center">1</span>
+                            <button onclick="updateQuantity(1)" class="w-5 h-5 rounded-full btn-primary flex items-center justify-center transition-colors">
+                                <i class="fas fa-plus text-white" style="font-size: 8px;"></i>
                             </button>
                         </div>
                     </div>
@@ -469,7 +469,7 @@
                     <!-- Price -->
                     <div class="text-right space-y-2">
                         <span class="text-gray-600 font-medium text-sm">Preço unitário</span>
-                        <div id="modal-unit-price" class="text-lg font-semibold text-orange-600">R$ 0,00</div>
+                        <div id="modal-unit-price" class="text-sm font-semibold text-gray-900">R$ 0,00</div>
                     </div>
                 </div>
                 <button onclick="addToCart()" class="w-full bg-white border border-gray-200 hover:border-orange-300 hover:bg-orange-50 text-gray-900 font-medium py-4 rounded-lg transition-all duration-200">
@@ -491,7 +491,7 @@
             <!-- Header -->
             <div class="px-6 py-3 border-b border-gray-200">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-semibold text-gray-900 leading-relaxed">Finalizar Pedido</h2>
+                    <h2 class="text-lg font-semibold text-gray-900 leading-relaxed">Finalizar Pedido</h2>
                     <button onclick="closeCheckoutModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                         <i class="fas fa-times text-gray-500"></i>
                     </button>
@@ -610,7 +610,7 @@
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
                         <i class="fas fa-tags text-red-500 text-xl"></i>
-                        <h2 class="text-xl font-semibold text-gray-900 leading-relaxed">Promoções</h2>
+                        <h2 class="text-lg font-semibold text-gray-900 leading-relaxed">Promoções</h2>
                     </div>
                     <button onclick="closePromotionsModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                         <i class="fas fa-times text-gray-500"></i>
@@ -1649,12 +1649,12 @@
                         <span class="font-medium text-gray-900 text-sm">${option.name} <span class="text-gray-400">•</span> <span class="text-orange-600 font-bold">+R$ ${formatPrice(option.price)}</span></span>
                     </div>
                     <div id="optional-multiplier-${optionIndex}" class="flex items-center space-x-2 hidden">
-                        <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-                            <i class="fas fa-minus text-gray-600" style="font-size: 10px;"></i>
+                        <button onclick="updateOptionalQuantity(${optionIndex}, -1)" class="w-5 h-5 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+                            <i class="fas fa-minus text-gray-600" style="font-size: 8px;"></i>
                         </button>
-                        <span id="optional-quantity-${optionIndex}" class="font-semibold text-gray-900 min-w-[1.5rem] text-center">1</span>
-                        <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-6 h-6 rounded-full btn-primary flex items-center justify-center transition-colors">
-                            <i class="fas fa-plus text-white" style="font-size: 10px;"></i>
+                        <span id="optional-quantity-${optionIndex}" class="text-sm font-semibold text-gray-900 min-w-[1.25rem] text-center">1</span>
+                        <button onclick="updateOptionalQuantity(${optionIndex}, 1)" class="w-5 h-5 rounded-full btn-primary flex items-center justify-center transition-colors">
+                            <i class="fas fa-plus text-white" style="font-size: 8px;"></i>
                         </button>
                     </div>
                 `;
@@ -2118,5 +2118,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f9928ea165df4f',t:'MTc1Nzk1NDQ5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f9a6d4a21e8125',t:'MTc1Nzk1NTMyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
