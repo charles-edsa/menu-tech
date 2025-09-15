@@ -705,10 +705,12 @@
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 translate-y-[-100px] opacity-0 transition-all duration-500 ease-out z-[110]">
-        <div id="toast-content" class="flex items-center space-x-2 px-4 py-2.5 rounded-full shadow-sm backdrop-blur-sm border">
-            <i id="toast-icon" class="text-sm"></i>
-            <span id="toast-message" class="font-medium text-sm">Produto adicionado!</span>
+    <div id="toast" class="fixed bottom-24 left-4 right-4 transform translate-y-[100px] opacity-0 transition-all duration-500 ease-out z-[110]">
+        <div class="max-w-4xl mx-auto">
+            <div id="toast-content" class="flex items-center space-x-2 px-4 py-3 rounded-lg shadow-lg backdrop-blur-sm border">
+                <i id="toast-icon" class="text-sm flex-shrink-0"></i>
+                <span id="toast-message" class="font-medium text-sm whitespace-nowrap overflow-hidden text-ellipsis">Produto adicionado!</span>
+            </div>
         </div>
     </div>
 
@@ -945,11 +947,11 @@
                 toastIcon.className = 'fas fa-exclamation text-sm text-red-500';
             }
             
-            toast.style.transform = 'translate(-50%, 0)';
+            toast.style.transform = 'translateY(0)';
             toast.style.opacity = '1';
             
             setTimeout(() => {
-                toast.style.transform = 'translate(-50%, -100px)';
+                toast.style.transform = 'translateY(100px)';
                 toast.style.opacity = '0';
             }, 2500);
         }
@@ -2071,5 +2073,5 @@
 
         document.addEventListener('DOMContentLoaded', init);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f9204546026454',t:'MTc1Nzk0OTgxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f9292af6ba6454',t:'MTc1Nzk1MDE3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
