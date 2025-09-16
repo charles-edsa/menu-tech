@@ -23,12 +23,12 @@
         }
         
         .card-hover {
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
         
         .card-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
         
         .btn-primary {
@@ -145,7 +145,7 @@
                 <!-- Categories Container -->
                 <div class="flex space-x-2 overflow-x-auto scrollbar-hide" id="category-nav-container">
                     <!-- Category buttons will be populated by JavaScript -->
-                    <div class="flex space-x-2" id="category-nav">
+                    <div class="flex space-x-1" id="category-nav">
                         <!-- Category buttons will be populated by JavaScript -->
                     </div>
                     
@@ -178,25 +178,25 @@
     <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-1 z-50">
         <div class="max-w-4xl mx-auto grid grid-cols-4 gap-2">
             <!-- Profile Button -->
-            <button onclick="openProfileModal()" class="flex flex-col items-center space-y-0.5 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
+            <button onclick="openProfileModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors active:bg-gray-100 touch-manipulation">
                 <i class="fas fa-utensils text-orange-500 text-lg"></i>
                 <span class="text-xs text-gray-600 font-medium">Perfil</span>
             </button>
             
             <!-- Login Button -->
-            <button onclick="openLoginModal()" class="flex flex-col items-center space-y-0.5 py-1.5 rounded-lg hover:bg-green-50 transition-colors">
+            <button onclick="openLoginModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-green-50 transition-colors active:bg-green-100 touch-manipulation">
                 <i class="fas fa-user text-green-500 text-lg"></i>
                 <span class="text-xs text-gray-600 font-medium">Login</span>
             </button>
             
             <!-- Promotions Button -->
-            <button onclick="openPromotionsModal()" class="flex flex-col items-center space-y-0.5 py-1.5 rounded-lg hover:bg-red-50 transition-colors">
+            <button onclick="openPromotionsModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-red-50 transition-colors active:bg-red-100 touch-manipulation">
                 <i class="fas fa-tags text-red-500 text-lg"></i>
                 <span class="text-xs text-gray-600 font-medium">Promoções</span>
             </button>
             
             <!-- Cart Button -->
-            <button onclick="openCartModal()" class="relative flex flex-col items-center space-y-0.5 py-1.5 rounded-lg hover:bg-orange-50 transition-colors">
+            <button onclick="openCartModal()" class="relative flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-orange-50 transition-colors active:bg-orange-100 touch-manipulation">
                 <i class="fas fa-shopping-cart text-orange-500 text-lg"></i>
                 <span class="text-xs text-gray-600 font-medium">Carrinho</span>
                 <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium">0</span>
@@ -374,14 +374,12 @@
             
             <!-- Footer -->
             <div class="px-4 py-3 border-t border-gray-200" id="cart-footer">
-                <div class="flex justify-between items-center mb-3">
-                    <span class="font-semibold text-gray-900">Total</span>
-                    <span class="text-lg font-bold text-gray-900" id="cart-total">R$ 0,00</span>
-                </div>
                 <button id="checkout-btn" class="w-full bg-white border border-gray-200 hover:border-orange-300 hover:bg-orange-50 text-gray-900 font-medium py-4 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-gray-200 disabled:hover:bg-white" disabled onclick="openCheckoutModal()">
                     <div class="flex items-center justify-center space-x-2">
                         <i class="fas fa-credit-card text-orange-500 text-sm"></i>
                         <span class="text-sm">Finalizar Pedido</span>
+                        <span class="text-gray-400">•</span>
+                        <span id="cart-total" class="text-sm font-bold text-orange-600">R$ 0,00</span>
                     </div>
                 </button>
             </div>
@@ -444,43 +442,47 @@
                 </div>
 
                 <!-- Optional Options -->
-                <div id="optional-options-container" class="px-4 mt-4 pb-4">
+                <div id="optional-options-container" class="px-4 mt-4">
                     <!-- Optional options will be populated by JavaScript -->
                 </div>
-            </div>
 
-            <!-- Footer -->
-            <div class="px-6 py-4 border-t border-gray-200 flex-shrink-0 bg-white">
-                <div class="flex items-end justify-between mb-3">
-                    <!-- Quantity -->
-                    <div class="space-y-2">
-                        <span class="text-gray-600 font-medium text-sm">Quantidade</span>
+                <!-- Quantity and Price Section -->
+                <div class="px-4 py-4 bg-white">
+                    <!-- Quantity Selector -->
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-gray-900 font-medium text-sm">Quantidade</span>
                         <div class="flex items-center space-x-2">
                             <button onclick="updateQuantity(-1)" class="w-5 h-5 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
                                 <i class="fas fa-minus text-gray-600" style="font-size: 8px;"></i>
                             </button>
-                            <span id="modal-quantity" class="text-sm font-semibold text-gray-900 min-w-[1.5rem] text-center">1</span>
+                            <span id="modal-quantity" class="text-sm font-semibold text-gray-900 min-w-[1.25rem] text-center">1</span>
                             <button onclick="updateQuantity(1)" class="w-5 h-5 rounded-full btn-primary flex items-center justify-center transition-colors">
                                 <i class="fas fa-plus text-white" style="font-size: 8px;"></i>
                             </button>
                         </div>
                     </div>
-                    
-                    <!-- Price -->
-                    <div class="text-right space-y-2">
-                        <span class="text-gray-600 font-medium text-sm">Preço unitário</span>
-                        <div id="modal-unit-price" class="text-sm font-semibold text-gray-900">R$ 0,00</div>
+
+                    <!-- Price Summary -->
+                    <div class="space-y-2 mb-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600 text-sm">Preço unitário</span>
+                            <span id="modal-unit-price" class="text-gray-900 font-medium text-sm">R$ 0,00</span>
+                        </div>
                     </div>
+
+                    <!-- Add to Cart Button -->
+                    <button onclick="addToCart()" class="w-full bg-white border border-gray-200 hover:border-orange-300 hover:bg-orange-50 text-gray-900 font-medium py-4 rounded-lg transition-all duration-200">
+                        <div class="flex items-center justify-center space-x-2">
+                            <i class="fas fa-shopping-cart text-orange-500 text-sm"></i>
+                            <span class="text-sm">Adicionar ao Carrinho</span>
+                            <span class="text-gray-400">•</span>
+                            <span id="modal-total-price" class="font-bold text-orange-600 text-sm">R$ 0,00</span>
+                        </div>
+                    </button>
                 </div>
-                <button onclick="addToCart()" class="w-full bg-white border border-gray-200 hover:border-orange-300 hover:bg-orange-50 text-gray-900 font-medium py-4 rounded-lg transition-all duration-200">
-                    <div class="flex items-center justify-center space-x-3">
-                        <i class="fas fa-shopping-cart text-orange-500 text-sm"></i>
-                        <span class="text-sm">Adicionar ao Carrinho</span>
-                        <span class="text-gray-400">•</span>
-                        <span id="modal-total-price" class="font-semibold text-orange-600 text-sm">R$ 0,00</span>
-                    </div>
-                </button>
             </div>
+
+
         </div>
     </div>
 
@@ -514,22 +516,34 @@
 
                     <!-- Delivery Method -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                        <h3 class="font-semibold text-gray-900 mb-3">Tipo de entrega</h3>
+                        <h3 class="font-semibold text-gray-900 mb-3">Formas de entrega</h3>
                         
                         <div class="space-y-2">
                             <div class="flex items-center p-3 hover:bg-orange-50 transition-all cursor-pointer border-b border-gray-100 last:border-b-0 delivery-option" onclick="selectDeliveryMethod('delivery')">
                                 <input type="radio" name="delivery-method" value="delivery" id="delivery-delivery" class="custom-radio mr-3">
-                                <span class="font-medium text-gray-900 text-sm">Delivery</span>
+                                <div>
+                                    <span class="font-medium text-gray-900 text-sm">Delivery</span>
+                                    <span class="text-gray-400 text-sm"> • </span>
+                                    <span class="text-gray-600 text-sm">Receba onde estiver</span>
+                                </div>
                             </div>
                             
                             <div class="flex items-center p-3 hover:bg-orange-50 transition-all cursor-pointer border-b border-gray-100 last:border-b-0 delivery-option" onclick="selectDeliveryMethod('pickup')">
                                 <input type="radio" name="delivery-method" value="pickup" id="delivery-pickup" class="custom-radio mr-3">
-                                <span class="font-medium text-gray-900 text-sm">Retirada no local</span>
+                                <div>
+                                    <span class="font-medium text-gray-900 text-sm">Retirada no local</span>
+                                    <span class="text-gray-400 text-sm"> • </span>
+                                    <span class="text-gray-600 text-sm">Busque no estabelecimento</span>
+                                </div>
                             </div>
                             
                             <div class="flex items-center p-3 hover:bg-orange-50 transition-all cursor-pointer border-b border-gray-100 last:border-b-0 delivery-option" onclick="selectDeliveryMethod('dine-in')">
                                 <input type="radio" name="delivery-method" value="dine-in" id="delivery-dine-in" class="custom-radio mr-3">
-                                <span class="font-medium text-gray-900 text-sm">Consumir no local</span>
+                                <div>
+                                    <span class="font-medium text-gray-900 text-sm">Consumir no local</span>
+                                    <span class="text-gray-400 text-sm"> • </span>
+                                    <span class="text-gray-600 text-sm">Sirva-se no estabelecimento</span>
+                                </div>
                             </div>
                         </div>
                         
@@ -546,22 +560,38 @@
                         <div class="space-y-2">
                             <div class="flex items-center p-3 hover:bg-orange-50 transition-all cursor-pointer border-b border-gray-100 last:border-b-0 payment-option" onclick="selectPaymentMethod('pix')">
                                 <input type="radio" name="payment-method" value="pix" id="payment-pix" class="custom-radio mr-3">
-                                <span class="font-medium text-gray-900 text-sm">Pix instantâneo</span>
+                                <div>
+                                    <span class="font-medium text-gray-900 text-sm">Pix automático</span>
+                                    <span class="text-gray-400 text-sm"> • </span>
+                                    <span class="text-gray-600 text-sm">Aprovação imediata</span>
+                                </div>
                             </div>
                             
                             <div class="flex items-center p-3 hover:bg-orange-50 transition-all cursor-pointer border-b border-gray-100 last:border-b-0 payment-option" onclick="selectPaymentMethod('card')">
                                 <input type="radio" name="payment-method" value="card" id="payment-card" class="custom-radio mr-3">
-                                <span class="font-medium text-gray-900 text-sm">Cartão online</span>
+                                <div>
+                                    <span class="font-medium text-gray-900 text-sm">Cartão online</span>
+                                    <span class="text-gray-400 text-sm"> • </span>
+                                    <span class="text-gray-600 text-sm">Seguro e instantâneo</span>
+                                </div>
                             </div>
                             
                             <div class="flex items-center p-3 hover:bg-orange-50 transition-all cursor-pointer border-b border-gray-100 last:border-b-0 payment-option" onclick="selectPaymentMethod('machine')">
                                 <input type="radio" name="payment-method" value="machine" id="payment-machine" class="custom-radio mr-3">
-                                <span class="font-medium text-gray-900 text-sm">Maquininha de cartão</span>
+                                <div>
+                                    <span class="font-medium text-gray-900 text-sm">Maquininha de cartão</span>
+                                    <span class="text-gray-400 text-sm"> • </span>
+                                    <span class="text-gray-600 text-sm">Débito ou crédito</span>
+                                </div>
                             </div>
                             
                             <div class="flex items-center p-3 hover:bg-orange-50 transition-all cursor-pointer border-b border-gray-100 last:border-b-0 payment-option" onclick="selectPaymentMethod('cash')">
                                 <input type="radio" name="payment-method" value="cash" id="payment-cash" class="custom-radio mr-3">
-                                <span class="font-medium text-gray-900 text-sm">Dinheiro em espécie</span>
+                                <div>
+                                    <span class="font-medium text-gray-900 text-sm">Dinheiro</span>
+                                    <span class="text-gray-400 text-sm"> • </span>
+                                    <span class="text-gray-600 text-sm">Em espécie</span>
+                                </div>
                             </div>
                         </div>
                         
@@ -575,7 +605,7 @@
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
                         <h3 class="font-semibold text-gray-900 mb-3">Resumo do pedido</h3>
                         
-                        <div class="bg-orange-50 rounded-lg p-3 border border-orange-200" id="checkout-order-summary">
+                        <div class="bg-gray-50 rounded-lg p-3 border border-gray-200" id="checkout-order-summary">
                             <!-- Order items will be populated here -->
                         </div>
                     </div>
@@ -804,8 +834,7 @@
                     icon: "🥗",
                     photos: [
                         { icon: "🥗", gradient: "from-green-100 to-green-200" },
-                        { icon: "🍔", gradient: "from-orange-100 to-orange-200" },
-                        { icon: "🥬", gradient: "from-emerald-100 to-emerald-200" }
+                        { icon: "🍔", gradient: "from-orange-100 to-orange-200" }
                     ],
                     requiredOptions: [
                         {
@@ -819,8 +848,7 @@
                     ],
                     optionalOptions: [
                         { name: "Bacon extra", price: 3.50 },
-                        { name: "Queijo extra", price: 2.50 },
-                        { name: "Batata frita", price: 5.90 }
+                        { name: "Queijo extra", price: 2.50 }
                     ]
                 },
                 { 
@@ -831,8 +859,7 @@
                     icon: "🥓",
                     photos: [
                         { icon: "🥓", gradient: "from-red-100 to-red-200" },
-                        { icon: "🍔", gradient: "from-orange-100 to-orange-200" },
-                        { icon: "🧀", gradient: "from-yellow-100 to-yellow-200" }
+                        { icon: "🍔", gradient: "from-orange-100 to-orange-200" }
                     ],
                     requiredOptions: [
                         {
@@ -846,8 +873,7 @@
                     ],
                     optionalOptions: [
                         { name: "Bacon extra", price: 3.50 },
-                        { name: "Queijo extra", price: 2.50 },
-                        { name: "Batata frita", price: 5.90 }
+                        { name: "Queijo extra", price: 2.50 }
                     ]
                 },
                 { 
@@ -858,8 +884,7 @@
                     icon: "🍔",
                     photos: [
                         { icon: "🍔", gradient: "from-orange-100 to-orange-200" },
-                        { icon: "🥓", gradient: "from-red-100 to-red-200" },
-                        { icon: "🥚", gradient: "from-yellow-100 to-yellow-200" }
+                        { icon: "🥓", gradient: "from-red-100 to-red-200" }
                     ],
                     requiredOptions: [
                         {
@@ -872,8 +897,7 @@
                         }
                     ],
                     optionalOptions: [
-                        { name: "Batata frita", price: 5.90 },
-                        { name: "Cebola caramelizada", price: 2.00 }
+                        { name: "Batata frita", price: 5.90 }
                     ]
                 }
             ],
@@ -885,9 +909,7 @@
                     price: 25.90, 
                     icon: "🍕",
                     photos: [
-                        { icon: "🍕", gradient: "from-red-100 to-red-200" },
-                        { icon: "🧀", gradient: "from-yellow-100 to-yellow-200" },
-                        { icon: "🍅", gradient: "from-red-100 to-orange-200" }
+                        { icon: "🍕", gradient: "from-red-100 to-red-200" }
                     ],
                     requiredOptions: [
                         {
@@ -900,8 +922,7 @@
                         }
                     ],
                     optionalOptions: [
-                        { name: "Borda recheada", price: 5.00 },
-                        { name: "Queijo extra", price: 3.00 }
+                        { name: "Borda recheada", price: 5.00 }
                     ]
                 },
                 { 
@@ -911,9 +932,7 @@
                     price: 35.90, 
                     icon: "🍕",
                     photos: [
-                        { icon: "🍕", gradient: "from-red-100 to-red-200" },
-                        { icon: "🌶️", gradient: "from-red-100 to-orange-200" },
-                        { icon: "🧄", gradient: "from-gray-100 to-gray-200" }
+                        { icon: "🍕", gradient: "from-red-100 to-red-200" }
                     ],
                     requiredOptions: [
                         {
@@ -921,14 +940,12 @@
                             options: [
                                 { name: "Margherita", price: 0 },
                                 { name: "Calabresa", price: 3.00 },
-                                { name: "Portuguesa", price: 4.00 },
-                                { name: "Quatro Queijos", price: 6.00 }
+                                { name: "Portuguesa", price: 4.00 }
                             ]
                         }
                     ],
                     optionalOptions: [
-                        { name: "Borda recheada", price: 7.00 },
-                        { name: "Queijo extra", price: 4.00 }
+                        { name: "Borda recheada", price: 7.00 }
                     ]
                 },
                 { 
@@ -938,9 +955,7 @@
                     price: 45.90, 
                     icon: "🍕",
                     photos: [
-                        { icon: "🍕", gradient: "from-red-100 to-red-200" },
-                        { icon: "🥩", gradient: "from-red-100 to-red-300" },
-                        { icon: "🌿", gradient: "from-green-100 to-green-200" }
+                        { icon: "🍕", gradient: "from-red-100 to-red-200" }
                     ],
                     requiredOptions: [
                         {
@@ -948,14 +963,12 @@
                             options: [
                                 { name: "Margherita", price: 0 },
                                 { name: "Calabresa", price: 4.00 },
-                                { name: "Portuguesa", price: 5.00 },
-                                { name: "Quatro Queijos", price: 7.00 }
+                                { name: "Portuguesa", price: 5.00 }
                             ]
                         }
                     ],
                     optionalOptions: [
-                        { name: "Borda recheada", price: 9.00 },
-                        { name: "Queijo extra", price: 5.00 }
+                        { name: "Borda recheada", price: 9.00 }
                     ]
                 }
             ]
@@ -1041,12 +1054,7 @@
             renderMenuCategories();
         }
 
-        // Category icons mapping
-        const categoryIcons = {
-            'Todos': '🍽️',
-            'Hambúrgueres': '🍔',
-            'Pizzas': '🍕'
-        };
+
 
         // Render functions
         function renderCategoryNavigation() {
@@ -1054,7 +1062,7 @@
             container.innerHTML = '';
             
             const allButton = document.createElement('button');
-            allButton.className = `category-btn px-4 py-3 text-sm whitespace-nowrap flex items-center flex-shrink-0 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
+            allButton.className = `category-btn px-3 py-3 text-sm whitespace-nowrap flex items-center flex-shrink-0 ${state.activeCategory === 'Todos' || state.activeCategory === null ? 'active' : ''}`;
             allButton.innerHTML = `<span>Todos</span>`;
             allButton.onclick = () => selectCategory('Todos');
             container.appendChild(allButton);
@@ -1074,13 +1082,13 @@
                     // Add separator dot before each category (except the first one)
                     if (!isFirstCategory || container.children.length > 0) {
                         const separator = document.createElement('span');
-                        separator.className = 'text-gray-400 text-sm flex items-center px-2';
+                        separator.className = 'text-gray-400 text-sm flex items-center px-1';
                         separator.textContent = '•';
                         container.appendChild(separator);
                     }
                     
                     const button = document.createElement('button');
-                    button.className = `category-btn px-4 py-3 text-sm whitespace-nowrap flex items-center flex-shrink-0 ${state.activeCategory === categoryName ? 'active' : ''}`;
+                    button.className = `category-btn px-3 py-3 text-sm whitespace-nowrap flex items-center flex-shrink-0 ${state.activeCategory === categoryName ? 'active' : ''}`;
                     button.innerHTML = `<span>${categoryName}</span>`;
                     button.onclick = () => selectCategory(categoryName);
                     container.appendChild(button);
@@ -1117,12 +1125,12 @@
         
         function createCategorySection(categoryName, items) {
             const section = document.createElement('div');
-            section.className = 'mb-8';
+            section.className = 'mb-12';
             
             section.innerHTML = `
                 <div class="mb-6">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-2 leading-relaxed">${categoryName}</h2>
-                    <div class="w-full h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2 leading-tight">${categoryName}</h2>
+                    <div class="w-full h-0.5 bg-orange-500 mb-4"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="items-${categoryName.toLowerCase()}">
                 </div>
@@ -1138,19 +1146,21 @@
 
         function createItemElement(item) {
             const itemElement = document.createElement('div');
-            itemElement.className = 'bg-white rounded-xl shadow-sm card-hover cursor-pointer fade-in border border-gray-100';
+            itemElement.className = 'bg-white rounded-xl shadow-sm card-hover cursor-pointer fade-in border border-gray-100 overflow-hidden';
 
             itemElement.innerHTML = `
                 <div class="p-4">
-                    <div class="flex space-x-4">
-                        <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <span class="text-3xl">${item.icon}</span>
+                    <div class="flex space-x-3">
+                        <div class="w-14 h-14 bg-gradient-to-br ${item.gradient || 'from-orange-100 to-orange-200'} rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-xl">${item.icon}</span>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <div class="flex items-start space-x-2 mb-1">
-                                <h3 class="font-semibold text-gray-900 text-sm leading-relaxed">${item.name}</h3>
-                                <span class="text-gray-400 text-sm">•</span>
-                                <span class="text-sm font-bold text-orange-600 leading-relaxed">R$ ${formatPrice(item.price)}</span>
+                            <div class="mb-2">
+                                <div class="flex items-center space-x-2 mb-1">
+                                    <h3 class="font-semibold text-gray-900 text-base leading-tight">${item.name}</h3>
+                                    <span class="text-gray-400">•</span>
+                                    <span class="text-base font-bold text-orange-600">R$ ${formatPrice(item.price)}</span>
+                                </div>
                             </div>
                             <p class="text-gray-600 text-sm leading-relaxed line-clamp-2">${item.description}</p>
                         </div>
@@ -1872,13 +1882,59 @@
             state.cart.forEach(item => {
                 subtotal += item.price * item.quantity;
                 
+                // Build configuration text
+                let configText = '';
+                
+                // Find the original product data
+                let originalProduct = null;
+                Object.values(menuData).forEach(category => {
+                    const found = category.find(p => p.id === item.id);
+                    if (found) originalProduct = found;
+                });
+                
+                // Add required options
+                if (originalProduct && originalProduct.requiredOptions && item.selectedRequiredOptions) {
+                    Object.keys(item.selectedRequiredOptions).forEach(groupIndex => {
+                        const optionIndex = item.selectedRequiredOptions[groupIndex];
+                        const optionGroup = originalProduct.requiredOptions[groupIndex];
+                        if (optionGroup && optionGroup.options[optionIndex]) {
+                            const option = optionGroup.options[optionIndex];
+                            configText += `${option.name}, `;
+                        }
+                    });
+                }
+                
+                // Add optional options
+                if (originalProduct && originalProduct.optionalOptions && item.selectedOptionalOptions) {
+                    Object.keys(item.selectedOptionalOptions).forEach(optionIndex => {
+                        const quantity = item.selectedOptionalOptions[optionIndex];
+                        if (quantity > 0) {
+                            const option = originalProduct.optionalOptions[optionIndex];
+                            if (option) {
+                                if (quantity > 1) {
+                                    configText += `${quantity}x ${option.name}`;
+                                } else {
+                                    configText += `${option.name}`;
+                                }
+                                configText += ', ';
+                            }
+                        }
+                    });
+                }
+                
+                // Remove trailing comma and space
+                if (configText.endsWith(', ')) {
+                    configText = configText.slice(0, -2);
+                }
+                
                 const itemElement = document.createElement('div');
                 itemElement.className = 'flex items-center justify-between mb-2';
                 itemElement.innerHTML = `
                     <div class="flex-1">
-                        <span class="font-medium text-gray-900">${item.quantity} • ${item.name}</span>
+                        <div class="font-medium text-gray-900 text-sm">${item.quantity} • ${item.name}</div>
+                        ${configText ? `<div class="text-xs text-gray-600 mt-0.5">${configText}</div>` : ''}
                     </div>
-                    <span class="font-semibold text-gray-900">R$ ${formatPrice(item.price * item.quantity)}</span>
+                    <span class="font-semibold text-gray-900 text-sm">R$ ${formatPrice(item.price * item.quantity)}</span>
                 `;
                 container.appendChild(itemElement);
             });
@@ -1890,17 +1946,17 @@
                 const deliveryElement = document.createElement('div');
                 deliveryElement.className = 'flex items-center justify-between mb-2';
                 deliveryElement.innerHTML = `
-                    <span class="font-medium text-gray-900">Taxa de entrega</span>
-                    <span class="font-semibold text-gray-900">R$ 5,00</span>
+                    <span class="font-medium text-gray-900 text-sm">Taxa de entrega</span>
+                    <span class="font-semibold text-gray-900 text-sm">R$ 5,00</span>
                 `;
                 container.appendChild(deliveryElement);
             }
             
             const totalElement = document.createElement('div');
-            totalElement.className = 'flex items-center justify-between pt-3 border-t border-orange-300';
+            totalElement.className = 'flex items-center justify-between pt-3 border-t border-gray-300';
             totalElement.innerHTML = `
-                <span class="text-lg font-semibold text-gray-900">Total</span>
-                <span class="text-xl font-bold text-orange-600" id="checkout-final-total">R$ ${formatPrice(total)}</span>
+                <span class="font-semibold text-gray-900 text-sm">Total</span>
+                <span class="font-bold text-orange-600 text-sm" id="checkout-final-total">R$ ${formatPrice(total)}</span>
             `;
             container.appendChild(totalElement);
         }
@@ -2051,72 +2107,19 @@
             showToast('Abrindo direções no Google Maps...');
         }
 
-        function callRestaurant() {
-            const phoneNumber = "tel:+5511999999999";
-            
-            // Try to initiate phone call
-            window.location.href = phoneNumber;
-            
-            showToast('Iniciando chamada...');
-        }
 
-        function shareLocation() {
-            const address = "Restaurante Sabor - Rua das Flores, 123 - Centro, São Paulo, SP";
-            const mapsUrl = "https://www.google.com/maps/search/Rua+das+Flores,+123+-+Centro,+São+Paulo,+SP";
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Restaurante Sabor',
-                    text: address,
-                    url: mapsUrl
-                }).then(() => {
-                    showToast('Localização compartilhada!');
-                }).catch(() => {
-                    fallbackShare(address, mapsUrl);
-                });
-            } else {
-                fallbackShare(address, mapsUrl);
-            }
-        }
-
-        function fallbackShare(address, mapsUrl) {
-            const shareText = `${address}\n${mapsUrl}`;
-            
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(shareText).then(() => {
-                    showToast('Endereço copiado para a área de transferência!');
-                }).catch(() => {
-                    showToast('Não foi possível compartilhar a localização', 'error');
-                });
-            } else {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = shareText;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    showToast('Endereço copiado para a área de transferência!');
-                } catch (err) {
-                    showToast('Não foi possível compartilhar a localização', 'error');
-                }
-                document.body.removeChild(textArea);
-            }
-        }
 
         // Login modal functions
         function openLoginModal() {
-            showToast('Funcionalidade de login em desenvolvimento', 'error');
+            showToast('Funcionalidade de login em desenvolvimento');
         }
 
         // Initialize
-        function init() {
+        document.addEventListener('DOMContentLoaded', () => {
             state.activeCategory = 'Todos';
             renderCategoryNavigation();
             renderMenuCategories();
-        }
-
-        document.addEventListener('DOMContentLoaded', init);
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f9a6d4a21e8125',t:'MTc1Nzk1NTMyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9800db4e66adcb18',t:'MTc1ODAzMDg3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
