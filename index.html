@@ -124,6 +124,14 @@
             outline: none;
             box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
         }
+        
+        .form-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .header-transition {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
     </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -148,12 +156,12 @@
    <div id="menu-categories"></div>
   </main>
   <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-1 z-50">
-   <div class="max-w-4xl mx-auto grid grid-cols-4 gap-2"><button onclick="openProfileModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors active:bg-gray-100 touch-manipulation"> <i class="fas fa-utensils text-orange-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Perfil</span> </button> <button onclick="showToast('Funcionalidade de login em desenvolvimento')" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-green-50 transition-colors active:bg-green-100 touch-manipulation"> <i class="fas fa-user text-green-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Login</span> </button> <button onclick="openPromotionsModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-red-50 transition-colors active:bg-red-100 touch-manipulation"> <i class="fas fa-tags text-red-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Promoções</span> </button> <button onclick="openCartModal()" class="relative flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-orange-50 transition-colors active:bg-orange-100 touch-manipulation"> <i class="fas fa-shopping-cart text-orange-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Carrinho</span> <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium">0</span> </button>
+   <div class="max-w-4xl mx-auto grid grid-cols-4 gap-2"><button onclick="openProfileModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors active:bg-gray-100 touch-manipulation"> <i class="fas fa-utensils text-orange-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Perfil</span> </button> <button onclick="openLoginModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-green-50 transition-colors active:bg-green-100 touch-manipulation"> <i class="fas fa-user text-green-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Login</span> </button> <button onclick="openPromotionsModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-red-50 transition-colors active:bg-red-100 touch-manipulation"> <i class="fas fa-tags text-red-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Promoções</span> </button> <button onclick="openCartModal()" class="relative flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-orange-50 transition-colors active:bg-orange-100 touch-manipulation"> <i class="fas fa-shopping-cart text-orange-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Carrinho</span> <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium">0</span> </button>
    </div>
   </div><!-- Profile Modal -->
   <div id="profile-modal" class="fixed inset-0 bg-black/50 z-[100] opacity-0 pointer-events-none transition-all duration-300">
-   <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="profile-modal-content" style="max-height: 80%;">
-    <div class="px-6 py-3 border-b border-gray-200">
+   <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300 flex flex-col" id="profile-modal-content" style="max-height: 85vh;">
+    <div class="px-6 py-3 border-b border-gray-200 flex-shrink-0">
      <div class="flex items-center justify-between">
       <div class="flex items-center space-x-3">
        <h2 class="text-lg font-semibold text-gray-900 leading-relaxed">Acompanhe-nos</h2><span class="text-gray-400">•</span>
@@ -162,7 +170,7 @@
       </div><button onclick="closeProfileModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors"> <i class="fas fa-times text-gray-500"></i> </button>
      </div>
     </div>
-    <div class="overflow-y-auto px-6 py-4" style="max-height: calc(80% - 100px);">
+    <div class="overflow-y-auto flex-1 px-6 py-4 scrollbar-hide" style="scroll-behavior: smooth;">
      <div class="space-y-6">
       <div class="flex items-center space-x-4">
        <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg"><i class="fas fa-utensils text-white text-2xl"></i>
@@ -226,18 +234,18 @@
    </div>
   </div><!-- Cart Modal -->
   <div id="cart-modal" class="fixed inset-0 bg-black/50 z-[100] opacity-0 pointer-events-none transition-all duration-300">
-   <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="cart-modal-content" style="max-height: 80%;">
-    <div class="flex items-center justify-between px-6 py-3 border-b border-gray-200">
+   <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300 flex flex-col" id="cart-modal-content" style="max-height: 85vh;">
+    <div class="flex items-center justify-between px-6 py-3 border-b border-gray-200 flex-shrink-0">
      <h2 class="text-lg font-semibold text-gray-900 leading-relaxed">Seu Carrinho</h2><button onclick="closeCartModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors"> <i class="fas fa-times text-gray-500"></i> </button>
     </div>
-    <div id="cart-items" class="px-4 py-3 overflow-y-auto" style="max-height: calc(80% - 140px);">
+    <div id="cart-items" class="px-4 py-3 overflow-y-auto flex-1 scrollbar-hide" style="scroll-behavior: smooth;">
      <div class="text-center py-8">
       <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2"><i class="fas fa-shopping-cart text-gray-400 text-lg"></i>
       </div>
       <p class="text-gray-500 text-sm">Seu carrinho está vazio</p>
      </div>
     </div>
-    <div class="px-4 py-3 border-t border-gray-200"><button id="checkout-btn" class="w-full bg-white border border-gray-200 hover:border-orange-300 hover:bg-orange-50 text-gray-900 font-medium py-4 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-gray-200 disabled:hover:bg-white" disabled onclick="openCheckoutModal()">
+    <div class="px-4 py-3 border-t border-gray-200 flex-shrink-0"><button id="checkout-btn" class="w-full bg-white border border-gray-200 hover:border-orange-300 hover:bg-orange-50 text-gray-900 font-medium py-4 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-gray-200 disabled:hover:bg-white" disabled onclick="openCheckoutModal()">
       <div class="flex items-center justify-center space-x-2"><i class="fas fa-credit-card text-orange-500 text-sm"></i> <span class="text-sm">Finalizar Pedido</span> <span class="text-gray-400">•</span> <span id="cart-total" class="text-sm font-bold text-orange-600">R$ 0,00</span>
       </div></button>
     </div>
@@ -282,13 +290,13 @@
    </div>
   </div><!-- Checkout Modal -->
   <div id="checkout-modal" class="fixed inset-0 bg-black/50 z-[100] opacity-0 pointer-events-none transition-all duration-300">
-   <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="checkout-modal-content" style="max-height: 85%;">
-    <div class="px-6 py-3 border-b border-gray-200">
+   <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300 flex flex-col" id="checkout-modal-content" style="max-height: 90vh;">
+    <div class="px-6 py-3 border-b border-gray-200 flex-shrink-0">
      <div class="flex items-center justify-between">
       <h2 class="text-lg font-semibold text-gray-900 leading-relaxed">Finalizar Pedido</h2><button onclick="closeCheckoutModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors"> <i class="fas fa-times text-gray-500"></i> </button>
      </div>
     </div>
-    <div class="overflow-y-auto" style="max-height: calc(75% - 160px);">
+    <div class="overflow-y-auto flex-1 scrollbar-hide" style="scroll-behavior: smooth;">
      <div class="px-4 py-4 space-y-4">
       <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
        <h3 class="font-semibold text-gray-900 mb-3">Seus dados</h3>
@@ -346,22 +354,136 @@
       </div>
      </div>
     </div>
-    <div class="px-4 py-3 border-t border-gray-200"><button onclick="confirmOrder()" class="w-full bg-white border border-gray-200 hover:border-green-300 hover:bg-green-50 text-gray-900 font-medium py-4 rounded-lg transition-all duration-200">
+    <div class="px-4 py-3 border-t border-gray-200 flex-shrink-0"><button onclick="confirmOrder()" class="w-full bg-white border border-gray-200 hover:border-green-300 hover:bg-green-50 text-gray-900 font-medium py-4 rounded-lg transition-all duration-200">
       <div class="flex items-center justify-center space-x-2"><i class="fas fa-check text-green-500 text-sm"></i> <span class="text-sm">Confirmar Pedido</span>
       </div></button>
     </div>
    </div>
+  </div><!-- Login Modal -->
+  <div id="login-modal" class="fixed inset-0 bg-black/50 z-[100] opacity-0 pointer-events-none transition-all duration-300">
+   <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300 flex flex-col" id="login-modal-content" style="max-height: 85vh;">
+    <div class="px-6 py-3 border-b border-gray-200 flex-shrink-0">
+     <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+       <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center"><i id="login-modal-icon" class="fas fa-user text-white text-sm header-transition"></i>
+       </div>
+       <h2 id="login-modal-title" class="text-lg font-semibold text-gray-900 leading-relaxed header-transition">Entrar</h2>
+      </div><button onclick="closeLoginModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors"> <i class="fas fa-times text-gray-500"></i> </button>
+     </div>
+    </div>
+    <div class="overflow-y-auto flex-1 scrollbar-hide" style="scroll-behavior: smooth;"><!-- Login Form -->
+     <div id="login-form-container" class="px-6 py-4 space-y-6 form-transition">
+      <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+       <div><label for="login-email" class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
+        <div class="relative">
+         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-envelope text-gray-400 text-sm"></i>
+         </div><input type="email" id="login-email" name="email" placeholder="seu@email.com" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required oninput="validateLoginField(this)">
+         <div class="absolute inset-y-0 right-0 pr-3 flex items-center"><i id="email-check" class="fas fa-check text-green-500 text-sm hidden"></i>
+         </div>
+        </div>
+       </div>
+       <div><label for="login-password" class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
+        <div class="relative">
+         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-lock text-gray-400 text-sm"></i>
+         </div><input type="password" id="login-password" name="password" placeholder="Sua senha" class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required oninput="validateLoginField(this)"> <button type="button" onclick="togglePasswordVisibility('login-password', 'password-toggle')" class="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-gray-600 transition-colors"> <i id="password-toggle" class="fas fa-eye text-gray-400 text-sm"></i> </button>
+         <div class="absolute inset-y-0 right-8 pr-3 flex items-center"><i id="password-check" class="fas fa-check text-green-500 text-sm hidden"></i>
+         </div>
+        </div>
+       </div><button type="submit" id="login-submit-btn" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium py-3 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+        <div class="flex items-center justify-center space-x-2"><i class="fas fa-sign-in-alt text-sm"></i> <span>Entrar</span>
+        </div></button>
+      </form><!-- Divider -->
+      <div class="relative">
+       <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gray-300"></div>
+       </div>
+       <div class="relative flex justify-center text-sm"><span class="px-4 bg-white text-gray-500 font-medium">ou continue com</span>
+       </div>
+      </div><!-- Social Login -->
+      <div class="space-y-3"><button onclick="handleSocialLogin('google')" class="w-full flex items-center justify-center space-x-3 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200 group">
+        <svg class="w-5 h-5" viewbox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" /> <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /> <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /> <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+        </svg><span class="text-gray-700 font-medium">Continuar com Google</span> </button> <button onclick="handleSocialLogin('facebook')" class="w-full flex items-center justify-center space-x-3 px-4 py-3 bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-lg transition-all duration-200"> <i class="fab fa-facebook-f text-lg"></i> <span class="font-medium">Continuar com Facebook</span> </button>
+      </div><!-- Additional Actions -->
+      <div class="pt-4 border-t border-gray-200">
+       <div class="flex flex-col space-y-3"><button onclick="showForgotPasswordForm()" class="text-sm text-green-600 hover:text-green-700 font-medium transition-colors text-center"> Esqueceu sua senha? </button> <button onclick="showCreateAccountForm()" class="text-sm text-gray-600 hover:text-gray-700 transition-colors text-center"> Não tem uma conta? <span class="font-medium text-green-600 hover:text-green-700">Criar conta</span> </button>
+       </div>
+      </div>
+     </div><!-- Forgot Password Form -->
+     <div id="forgot-password-form-container" class="px-6 py-4 space-y-6 form-transition hidden">
+      <div class="text-center mb-6">
+       <p class="text-gray-600 text-sm leading-relaxed">Digite seu e-mail para receber as instruções de recuperação de senha</p>
+      </div>
+      <form id="forgot-password-form" onsubmit="handlePasswordRecovery(event)" class="space-y-4">
+       <div><label for="recovery-email" class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
+        <div class="relative">
+         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-envelope text-gray-400 text-sm"></i>
+         </div><input type="email" id="recovery-email" name="email" placeholder="seu@email.com" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm" required>
+        </div>
+       </div><button type="submit" id="recovery-submit-btn" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 rounded-lg transition-all duration-200">
+        <div class="flex items-center justify-center space-x-2"><i class="fas fa-paper-plane text-sm"></i> <span>Enviar Link de Recuperação</span>
+        </div></button>
+      </form>
+      <div class="pt-4 border-t border-gray-200"><button onclick="showLoginForm()" class="w-full text-sm text-gray-600 hover:text-gray-700 font-medium transition-colors text-center py-2"> <i class="fas fa-arrow-left text-xs mr-2"></i> Voltar ao login </button>
+      </div>
+     </div><!-- Create Account Form -->
+     <div id="create-account-form-container" class="px-6 py-4 space-y-6 form-transition hidden">
+      <div class="text-center mb-6">
+       <p class="text-gray-600 text-sm leading-relaxed">Preencha os dados para criar sua conta</p>
+      </div>
+      <form id="create-account-form" onsubmit="handleAccountCreation(event)" class="space-y-4">
+       <div><label for="signup-name" class="block text-sm font-medium text-gray-700 mb-2">Nome completo</label>
+        <div class="relative">
+         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-user text-gray-400 text-sm"></i>
+         </div><input type="text" id="signup-name" name="name" placeholder="Seu nome completo" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required oninput="validateSignupField(this)">
+         <div class="absolute inset-y-0 right-0 pr-3 flex items-center"><i id="name-check" class="fas fa-check text-green-500 text-sm hidden"></i>
+         </div>
+        </div>
+       </div>
+       <div><label for="signup-email" class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
+        <div class="relative">
+         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-envelope text-gray-400 text-sm"></i>
+         </div><input type="email" id="signup-email" name="email" placeholder="seu@email.com" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required oninput="validateSignupField(this)">
+         <div class="absolute inset-y-0 right-0 pr-3 flex items-center"><i id="signup-email-check" class="fas fa-check text-green-500 text-sm hidden"></i>
+         </div>
+        </div>
+       </div>
+       <div><label for="signup-password" class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
+        <div class="relative">
+         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-lock text-gray-400 text-sm"></i>
+         </div><input type="password" id="signup-password" name="password" placeholder="Mínimo 6 caracteres" class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required minlength="6" oninput="validateSignupField(this)"> <button type="button" onclick="togglePasswordVisibility('signup-password', 'signup-password-toggle')" class="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-gray-600 transition-colors"> <i id="signup-password-toggle" class="fas fa-eye text-gray-400 text-sm"></i> </button>
+         <div class="absolute inset-y-0 right-8 pr-3 flex items-center"><i id="signup-password-check" class="fas fa-check text-green-500 text-sm hidden"></i>
+         </div>
+        </div>
+       </div>
+       <div><label for="signup-confirm-password" class="block text-sm font-medium text-gray-700 mb-2">Confirmar senha</label>
+        <div class="relative">
+         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-lock text-gray-400 text-sm"></i>
+         </div><input type="password" id="signup-confirm-password" name="confirmPassword" placeholder="Digite a senha novamente" class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required oninput="validateSignupField(this)"> <button type="button" onclick="togglePasswordVisibility('signup-confirm-password', 'signup-confirm-password-toggle')" class="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-gray-600 transition-colors"> <i id="signup-confirm-password-toggle" class="fas fa-eye text-gray-400 text-sm"></i> </button>
+         <div class="absolute inset-y-0 right-8 pr-3 flex items-center"><i id="confirm-password-check" class="fas fa-check text-green-500 text-sm hidden"></i>
+         </div>
+        </div>
+       </div>
+       <div class="flex items-start space-x-3"><input type="checkbox" id="terms-checkbox" class="custom-checkbox mt-1" required onchange="validateSignupForm()"> <label for="terms-checkbox" class="text-sm text-gray-600 leading-relaxed"> Aceito os <span class="text-green-600 font-medium hover:text-green-700 cursor-pointer">termos de uso</span> e <span class="text-green-600 font-medium hover:text-green-700 cursor-pointer">política de privacidade</span> </label>
+       </div><button type="submit" id="signup-submit-btn" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium py-3 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+        <div class="flex items-center justify-center space-x-2"><i class="fas fa-user-plus text-sm"></i> <span>Criar Conta</span>
+        </div></button>
+      </form>
+      <div class="pt-4 border-t border-gray-200"><button onclick="showLoginForm()" class="w-full text-sm text-gray-600 hover:text-gray-700 font-medium transition-colors text-center py-2"> <i class="fas fa-arrow-left text-xs mr-2"></i> Voltar ao login </button>
+      </div>
+     </div>
+    </div>
+   </div>
   </div><!-- Promotions Modal -->
   <div id="promotions-modal" class="fixed inset-0 bg-black/50 z-[100] opacity-0 pointer-events-none transition-all duration-300">
-   <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300" id="promotions-modal-content" style="max-height: 80%;">
-    <div class="px-6 py-3 border-b border-gray-200">
+   <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300 flex flex-col" id="promotions-modal-content" style="max-height: 85vh;">
+    <div class="px-6 py-3 border-b border-gray-200 flex-shrink-0">
      <div class="flex items-center justify-between">
       <div class="flex items-center space-x-3"><i class="fas fa-tags text-red-500 text-xl"></i>
        <h2 class="text-lg font-semibold text-gray-900 leading-relaxed">Promoções</h2>
       </div><button onclick="closePromotionsModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors"> <i class="fas fa-times text-gray-500"></i> </button>
      </div>
     </div>
-    <div class="overflow-y-auto px-6 py-4" style="max-height: calc(80% - 100px);">
+    <div class="overflow-y-auto flex-1 px-6 py-4 scrollbar-hide" style="scroll-behavior: smooth;">
      <div class="space-y-0">
       <div class="py-6 hover:bg-orange-50/30 transition-all cursor-pointer">
        <div class="space-y-2">
@@ -1646,6 +1768,11 @@
             if (e.target === promotionsModal) {
                 closePromotionsModal();
             }
+            
+            const loginModal = document.getElementById('login-modal');
+            if (e.target === loginModal) {
+                closeLoginModal();
+            }
         });
 
         function openDirections() {
@@ -1657,11 +1784,464 @@
             showToast('Abrindo direções no Google Maps...');
         }
 
+        // Login Modal Functions
+        function openLoginModal() {
+            const modal = document.getElementById('login-modal');
+            const content = document.getElementById('login-modal-content');
+            
+            modal.classList.remove('pointer-events-none');
+            modal.classList.remove('opacity-0');
+            content.style.transform = 'translateY(0)';
+            
+            // Show login form by default
+            showLoginForm();
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('login-modal');
+            const content = document.getElementById('login-modal-content');
+            
+            modal.classList.add('opacity-0');
+            content.style.transform = 'translateY(100%)';
+            
+            setTimeout(() => {
+                modal.classList.add('pointer-events-none');
+            }, 300);
+        }
+
+        function showLoginForm() {
+            // Smooth transition between forms
+            const loginContainer = document.getElementById('login-form-container');
+            const forgotContainer = document.getElementById('forgot-password-form-container');
+            const createContainer = document.getElementById('create-account-form-container');
+            
+            // Add fade out effect to current visible form
+            if (!forgotContainer.classList.contains('hidden')) {
+                forgotContainer.style.opacity = '0';
+                forgotContainer.style.transform = 'translateY(10px)';
+            }
+            if (!createContainer.classList.contains('hidden')) {
+                createContainer.style.opacity = '0';
+                createContainer.style.transform = 'translateY(10px)';
+            }
+            
+            setTimeout(() => {
+                // Hide all forms
+                forgotContainer.classList.add('hidden');
+                createContainer.classList.add('hidden');
+                
+                // Show login form with fade in effect
+                loginContainer.classList.remove('hidden');
+                loginContainer.style.opacity = '0';
+                loginContainer.style.transform = 'translateY(10px)';
+                
+                // Update header with smooth transition
+                const icon = document.getElementById('login-modal-icon');
+                const title = document.getElementById('login-modal-title');
+                
+                icon.style.transform = 'scale(0.8)';
+                title.style.opacity = '0.5';
+                
+                setTimeout(() => {
+                    icon.className = 'fas fa-user text-white text-sm';
+                    title.textContent = 'Entrar';
+                    
+                    icon.style.transform = 'scale(1)';
+                    title.style.opacity = '1';
+                }, 100);
+                
+                // Animate login form in
+                setTimeout(() => {
+                    loginContainer.style.opacity = '1';
+                    loginContainer.style.transform = 'translateY(0)';
+                }, 50);
+                
+                // Reset login form
+                document.getElementById('login-form').reset();
+                document.getElementById('login-submit-btn').disabled = true;
+                document.getElementById('email-check').classList.add('hidden');
+                document.getElementById('password-check').classList.add('hidden');
+                
+                // Reset field styles
+                const loginEmail = document.getElementById('login-email');
+                const loginPassword = document.getElementById('login-password');
+                loginEmail.classList.remove('border-red-300', 'border-green-300');
+                loginPassword.classList.remove('border-red-300', 'border-green-300');
+            }, 150);
+        }
+
+        function showForgotPasswordForm() {
+            // Smooth transition between forms
+            const loginContainer = document.getElementById('login-form-container');
+            const forgotContainer = document.getElementById('forgot-password-form-container');
+            const createContainer = document.getElementById('create-account-form-container');
+            
+            // Add fade out effect to current visible form
+            if (!loginContainer.classList.contains('hidden')) {
+                loginContainer.style.opacity = '0';
+                loginContainer.style.transform = 'translateY(10px)';
+            }
+            if (!createContainer.classList.contains('hidden')) {
+                createContainer.style.opacity = '0';
+                createContainer.style.transform = 'translateY(10px)';
+            }
+            
+            setTimeout(() => {
+                // Hide all forms
+                loginContainer.classList.add('hidden');
+                createContainer.classList.add('hidden');
+                
+                // Show forgot password form with fade in effect
+                forgotContainer.classList.remove('hidden');
+                forgotContainer.style.opacity = '0';
+                forgotContainer.style.transform = 'translateY(10px)';
+                
+                // Update header with smooth transition
+                const icon = document.getElementById('login-modal-icon');
+                const title = document.getElementById('login-modal-title');
+                
+                icon.style.transform = 'scale(0.8)';
+                title.style.opacity = '0.5';
+                
+                setTimeout(() => {
+                    icon.className = 'fas fa-key text-white text-sm';
+                    title.textContent = 'Recuperar Senha';
+                    
+                    icon.style.transform = 'scale(1)';
+                    title.style.opacity = '1';
+                }, 100);
+                
+                // Animate forgot password form in
+                setTimeout(() => {
+                    forgotContainer.style.opacity = '1';
+                    forgotContainer.style.transform = 'translateY(0)';
+                }, 50);
+                
+                // Reset forgot password form
+                document.getElementById('forgot-password-form').reset();
+            }, 150);
+        }
+
+        function showCreateAccountForm() {
+            // Smooth transition between forms
+            const loginContainer = document.getElementById('login-form-container');
+            const forgotContainer = document.getElementById('forgot-password-form-container');
+            const createContainer = document.getElementById('create-account-form-container');
+            
+            // Add fade out effect to current visible form
+            if (!loginContainer.classList.contains('hidden')) {
+                loginContainer.style.opacity = '0';
+                loginContainer.style.transform = 'translateY(10px)';
+            }
+            if (!forgotContainer.classList.contains('hidden')) {
+                forgotContainer.style.opacity = '0';
+                forgotContainer.style.transform = 'translateY(10px)';
+            }
+            
+            setTimeout(() => {
+                // Hide all forms
+                loginContainer.classList.add('hidden');
+                forgotContainer.classList.add('hidden');
+                
+                // Show create account form with fade in effect
+                createContainer.classList.remove('hidden');
+                createContainer.style.opacity = '0';
+                createContainer.style.transform = 'translateY(10px)';
+                
+                // Update header with smooth transition
+                const icon = document.getElementById('login-modal-icon');
+                const title = document.getElementById('login-modal-title');
+                
+                icon.style.transform = 'scale(0.8)';
+                title.style.opacity = '0.5';
+                
+                setTimeout(() => {
+                    icon.className = 'fas fa-user-plus text-white text-sm';
+                    title.textContent = 'Criar Conta';
+                    
+                    icon.style.transform = 'scale(1)';
+                    title.style.opacity = '1';
+                }, 100);
+                
+                // Animate create account form in
+                setTimeout(() => {
+                    createContainer.style.opacity = '1';
+                    createContainer.style.transform = 'translateY(0)';
+                    
+                    // Focus on first field after animation
+                    setTimeout(() => {
+                        document.getElementById('signup-name').focus();
+                    }, 100);
+                }, 50);
+                
+                // Reset create account form
+                document.getElementById('create-account-form').reset();
+                document.getElementById('signup-submit-btn').disabled = true;
+                
+                // Reset all validation indicators
+                const checkIcons = ['name-check', 'signup-email-check', 'signup-password-check', 'confirm-password-check'];
+                checkIcons.forEach(id => {
+                    document.getElementById(id).classList.add('hidden');
+                });
+                
+                // Reset field styles
+                const fields = ['signup-name', 'signup-email', 'signup-password', 'signup-confirm-password'];
+                fields.forEach(id => {
+                    const field = document.getElementById(id);
+                    field.classList.remove('border-red-300', 'border-green-300');
+                });
+            }, 150);
+        }
+
+        function validateLoginField(input) {
+            const emailInput = document.getElementById('login-email');
+            const passwordInput = document.getElementById('login-password');
+            const emailCheck = document.getElementById('email-check');
+            const passwordCheck = document.getElementById('password-check');
+            const submitBtn = document.getElementById('login-submit-btn');
+            
+            // Validate email
+            if (input.type === 'email') {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailRegex.test(input.value)) {
+                    input.classList.remove('border-red-300');
+                    input.classList.add('border-green-300');
+                    emailCheck.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-green-300');
+                    if (input.value.length > 0) {
+                        input.classList.add('border-red-300');
+                    }
+                    emailCheck.classList.add('hidden');
+                }
+            }
+            
+            // Validate password
+            if (input.type === 'password') {
+                if (input.value.length >= 6) {
+                    input.classList.remove('border-red-300');
+                    input.classList.add('border-green-300');
+                    passwordCheck.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-green-300');
+                    if (input.value.length > 0) {
+                        input.classList.add('border-red-300');
+                    }
+                    passwordCheck.classList.add('hidden');
+                }
+            }
+            
+            // Enable/disable submit button
+            const emailValid = emailInput.value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+            const passwordValid = passwordInput.value && passwordInput.value.length >= 6;
+            
+            submitBtn.disabled = !(emailValid && passwordValid);
+        }
+
+        function validateSignupField(input) {
+            const nameInput = document.getElementById('signup-name');
+            const emailInput = document.getElementById('signup-email');
+            const passwordInput = document.getElementById('signup-password');
+            const confirmPasswordInput = document.getElementById('signup-confirm-password');
+            
+            // Validate name
+            if (input.id === 'signup-name') {
+                const nameCheck = document.getElementById('name-check');
+                if (input.value.trim().length >= 2) {
+                    input.classList.remove('border-red-300');
+                    input.classList.add('border-green-300');
+                    nameCheck.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-green-300');
+                    if (input.value.length > 0) {
+                        input.classList.add('border-red-300');
+                    }
+                    nameCheck.classList.add('hidden');
+                }
+            }
+            
+            // Validate email
+            if (input.id === 'signup-email') {
+                const emailCheck = document.getElementById('signup-email-check');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailRegex.test(input.value)) {
+                    input.classList.remove('border-red-300');
+                    input.classList.add('border-green-300');
+                    emailCheck.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-green-300');
+                    if (input.value.length > 0) {
+                        input.classList.add('border-red-300');
+                    }
+                    emailCheck.classList.add('hidden');
+                }
+            }
+            
+            // Validate password
+            if (input.id === 'signup-password') {
+                const passwordCheck = document.getElementById('signup-password-check');
+                if (input.value.length >= 6) {
+                    input.classList.remove('border-red-300');
+                    input.classList.add('border-green-300');
+                    passwordCheck.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-green-300');
+                    if (input.value.length > 0) {
+                        input.classList.add('border-red-300');
+                    }
+                    passwordCheck.classList.add('hidden');
+                }
+                
+                // Re-validate confirm password if it has a value
+                if (confirmPasswordInput.value) {
+                    validateSignupField(confirmPasswordInput);
+                }
+            }
+            
+            // Validate confirm password
+            if (input.id === 'signup-confirm-password') {
+                const confirmPasswordCheck = document.getElementById('confirm-password-check');
+                if (input.value && input.value === passwordInput.value && input.value.length >= 6) {
+                    input.classList.remove('border-red-300');
+                    input.classList.add('border-green-300');
+                    confirmPasswordCheck.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-green-300');
+                    if (input.value.length > 0) {
+                        input.classList.add('border-red-300');
+                    }
+                    confirmPasswordCheck.classList.add('hidden');
+                }
+            }
+            
+            // Update submit button state
+            validateSignupForm();
+        }
+
+        function validateSignupForm() {
+            const nameInput = document.getElementById('signup-name');
+            const emailInput = document.getElementById('signup-email');
+            const passwordInput = document.getElementById('signup-password');
+            const confirmPasswordInput = document.getElementById('signup-confirm-password');
+            const termsCheckbox = document.getElementById('terms-checkbox');
+            const submitBtn = document.getElementById('signup-submit-btn');
+            
+            // Check all validation conditions
+            const nameValid = nameInput.value.trim().length >= 2;
+            const emailValid = emailInput.value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+            const passwordValid = passwordInput.value && passwordInput.value.length >= 6;
+            const confirmPasswordValid = confirmPasswordInput.value && confirmPasswordInput.value === passwordInput.value;
+            const termsValid = termsCheckbox.checked;
+            
+            submitBtn.disabled = !(nameValid && emailValid && passwordValid && confirmPasswordValid && termsValid);
+        }
+
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Simulate login process
+            const submitBtn = document.getElementById('login-submit-btn');
+            const originalContent = submitBtn.innerHTML;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <div class="flex items-center justify-center space-x-2">
+                    <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Entrando...</span>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalContent;
+                submitBtn.disabled = false;
+                closeLoginModal();
+                showToast(`Bem-vindo! Login realizado com sucesso.`);
+            }, 2000);
+        }
+
+        function handlePasswordRecovery(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('recovery-email').value;
+            
+            // Simulate recovery process
+            const submitBtn = document.getElementById('recovery-submit-btn');
+            const originalContent = submitBtn.innerHTML;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <div class="flex items-center justify-center space-x-2">
+                    <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Enviando...</span>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalContent;
+                submitBtn.disabled = false;
+                showToast(`Instruções enviadas para ${email}`);
+                showLoginForm();
+            }, 2000);
+        }
+
+        function handleAccountCreation(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            
+            // Simulate account creation process
+            const submitBtn = document.getElementById('signup-submit-btn');
+            const originalContent = submitBtn.innerHTML;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <div class="flex items-center justify-center space-x-2">
+                    <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Criando conta...</span>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalContent;
+                submitBtn.disabled = false;
+                closeLoginModal();
+                showToast(`Conta criada com sucesso! Bem-vindo, ${name}!`);
+            }, 2000);
+        }
+
+        function handleSocialLogin(provider) {
+            const providerNames = {
+                'google': 'Google',
+                'facebook': 'Facebook'
+            };
+            
+            showToast(`Login com ${providerNames[provider]} em desenvolvimento`);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             state.activeCategory = 'Todos';
             renderCategoryNavigation();
             renderMenuCategories();
         });
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99a0f7a5d043cb60',t:'MTc2MjM5NDExMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99a133242550e29d',t:'MTc2MjM5NjU0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
