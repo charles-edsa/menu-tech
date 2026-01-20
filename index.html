@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="h-full">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -137,7 +137,7 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
  </head>
- <body class="bg-gray-50 min-h-full">
+ <body class="bg-gray-50 h-full">
   <div class="relative h-32 bg-gray-900"></div>
   <div class="bg-white border-b border-gray-200 px-4 py-2 sticky top-0 z-40">
    <div class="max-w-4xl mx-auto">
@@ -236,7 +236,9 @@
   <div id="cart-modal" class="fixed inset-0 bg-black/50 z-[100] opacity-0 pointer-events-none transition-all duration-300">
    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300 flex flex-col" id="cart-modal-content" style="max-height: 85vh;">
     <div class="flex items-center justify-between px-6 py-3 border-b border-gray-200 flex-shrink-0">
-     <h2 class="text-lg font-semibold text-gray-900 leading-relaxed">Seu Carrinho</h2><button onclick="closeCartModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors"> <i class="fas fa-times text-gray-500"></i> </button>
+     <div class="flex items-center space-x-3"><i class="fas fa-shopping-cart text-orange-500 text-xl"></i>
+      <h2 class="text-lg font-semibold text-gray-900 leading-relaxed">Seu Carrinho</h2>
+     </div><button onclick="closeCartModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors"> <i class="fas fa-times text-gray-500"></i> </button>
     </div>
     <div id="cart-items" class="px-4 py-3 overflow-y-auto flex-1 scrollbar-hide" style="scroll-behavior: smooth;">
      <div class="text-center py-8">
@@ -364,172 +366,197 @@
    <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300 flex flex-col" id="history-modal-content" style="max-height: 85vh;">
     <div class="px-6 py-3 border-b border-gray-200 flex-shrink-0">
      <div class="flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-       <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center"><i id="history-modal-icon" class="fas fa-history text-white text-sm header-transition"></i>
-       </div>
-       <h2 id="history-modal-title" class="text-lg font-semibold text-gray-900 leading-relaxed header-transition">Histórico de Pedidos</h2>
+      <div class="flex items-center space-x-3"><i class="fas fa-history text-blue-500 text-xl"></i>
+       <h2 class="text-lg font-semibold text-gray-900 leading-relaxed">Histórico de Pedidos</h2>
       </div><button onclick="closeHistoryModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors"> <i class="fas fa-times text-gray-500"></i> </button>
      </div>
-    </div>
-    <div class="overflow-y-auto flex-1 scrollbar-hide" style="scroll-behavior: smooth;"><!-- Phone Input Screen -->
-     <div id="history-phone-screen" class="px-6 py-6 space-y-6 form-transition">
-      <div class="text-center mb-4">
-       <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fas fa-phone text-blue-600 text-2xl"></i>
+    </div><!-- Login Screen -->
+    <div id="history-login-screen" class="overflow-y-auto flex-1 scrollbar-hide px-6 py-8">
+     <div class="max-w-md mx-auto">
+      <div class="text-center mb-6">
+       <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fas fa-user text-blue-500 text-2xl"></i>
        </div>
-       <p class="text-gray-600 text-sm leading-relaxed">Digite seu telefone para visualizar seus pedidos</p>
+       <h3 class="text-lg font-semibold text-gray-900 mb-2">Acesse seu histórico</h3>
+       <p class="text-sm text-gray-600">Digite seu telefone para visualizar seus pedidos anteriores</p>
       </div>
-      <form id="history-phone-form" onsubmit="viewOrderHistory(event)" class="space-y-4">
-       <div><label for="history-phone" class="block text-sm font-medium text-gray-700 mb-2">Telefone</label>
-        <div class="relative">
-         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-phone text-gray-400 text-sm"></i>
-         </div><input type="tel" id="history-phone" name="phone" placeholder="(00) 00000-0000" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm" required oninput="formatPhoneNumber(this)">
-        </div>
-       </div><button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 rounded-lg transition-all duration-200">
-        <div class="flex items-center justify-center space-x-2"><i class="fas fa-search text-sm"></i> <span>Ver Meus Pedidos</span>
+      <div class="space-y-4">
+       <div><label for="history-phone" class="block text-sm font-medium text-gray-700 mb-2">Telefone</label> <input type="tel" id="history-phone" placeholder="(00) 00000-0000" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm" oninput="formatPhoneNumber(this)" maxlength="15">
+       </div><button onclick="loginWithPhone()" class="w-full bg-white border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-gray-900 font-medium py-3 rounded-lg transition-all duration-200">
+        <div class="flex items-center justify-center space-x-2"><i class="fas fa-sign-in-alt text-blue-500 text-sm"></i> <span class="text-sm">Acessar Histórico</span>
         </div></button>
-      </form><!-- Divider -->
-      <div class="relative">
-       <div class="absolute inset-0 flex items-center">
-        <div class="w-full border-t border-gray-300"></div>
-       </div>
-       <div class="relative flex justify-center text-sm"><span class="px-4 bg-white text-gray-500 font-medium">ou</span>
-       </div>
-      </div><!-- Login Option --> <button onclick="showLoginFromHistory()" class="w-full flex items-center justify-center space-x-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200"> <i class="fas fa-user text-gray-600"></i> <span class="text-gray-700 font-medium">Faça login</span> </button>
-     </div><!-- Orders List Screen (This Store) -->
-     <div id="history-orders-screen" class="px-6 py-4 space-y-4 form-transition hidden">
-      <div class="flex items-center justify-between mb-4"><button onclick="backToPhoneScreen()" class="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors"> <i class="fas fa-arrow-left text-sm"></i> <span class="text-sm font-medium">Voltar</span> </button> <button onclick="viewAllStoresOrders()" class="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg transition-all text-sm font-medium"> <i class="fas fa-store text-xs"></i> <span>Todas as Lojas</span> </button>
-      </div>
-      <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
-       <div class="flex items-center space-x-2"><i class="fas fa-store text-blue-600 text-sm"></i> <span class="text-sm font-medium text-blue-900">Pedidos no Restaurante Sabor</span>
-       </div>
-      </div>
-      <div id="store-orders-list" class="space-y-3"><!-- Orders will be populated here -->
-      </div>
-     </div><!-- Orders List Screen (All Stores) -->
-     <div id="history-all-stores-screen" class="px-6 py-4 space-y-4 form-transition hidden">
-      <div class="flex items-center justify-between mb-4"><button onclick="backToStoreOrders()" class="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors"> <i class="fas fa-arrow-left text-sm"></i> <span class="text-sm font-medium">Voltar</span> </button>
-      </div>
-      <div class="bg-purple-50 border border-purple-200 rounded-lg p-3 mb-4">
-       <div class="flex items-center space-x-2"><i class="fas fa-globe text-purple-600 text-sm"></i> <span class="text-sm font-medium text-purple-900">Pedidos em Todas as Lojas</span>
-       </div>
-      </div>
-      <div id="all-stores-orders-list" class="space-y-3"><!-- Orders will be populated here -->
-      </div>
-     </div>
-    </div>
-   </div>
-  </div><!-- Login Modal -->
-  <div id="login-modal" class="fixed inset-0 bg-black/50 z-[100] opacity-0 pointer-events-none transition-all duration-300">
-   <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300 flex flex-col" id="login-modal-content" style="max-height: 85vh;">
-    <div class="px-6 py-3 border-b border-gray-200 flex-shrink-0">
-     <div class="flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-       <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center"><i id="login-modal-icon" class="fas fa-user text-white text-sm header-transition"></i>
-       </div>
-       <h2 id="login-modal-title" class="text-lg font-semibold text-gray-900 leading-relaxed header-transition">Entrar</h2>
-      </div><button onclick="closeLoginModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors"> <i class="fas fa-times text-gray-500"></i> </button>
-     </div>
-    </div>
-    <div class="overflow-y-auto flex-1 scrollbar-hide" style="scroll-behavior: smooth;"><!-- Login Form -->
-     <div id="login-form-container" class="px-6 py-4 space-y-6 form-transition">
-      <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
-       <div><label for="login-email" class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
-        <div class="relative">
-         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-envelope text-gray-400 text-sm"></i>
-         </div><input type="email" id="login-email" name="email" placeholder="seu@email.com" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required oninput="validateLoginField(this)">
-         <div class="absolute inset-y-0 right-0 pr-3 flex items-center"><i id="email-check" class="fas fa-check text-green-500 text-sm hidden"></i>
-         </div>
+       <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+         <div class="w-full border-t border-gray-200"></div>
         </div>
+        <div class="relative flex justify-center text-xs"><span class="px-2 bg-white text-gray-500">ou</span>
+        </div>
+       </div><button onclick="showHistoryLoginForm()" class="w-full bg-white border border-gray-200 hover:border-orange-300 hover:bg-orange-50 text-gray-900 font-medium py-3 rounded-lg transition-all duration-200">
+        <div class="flex items-center justify-center space-x-2"><i class="fas fa-user-circle text-orange-500 text-sm"></i> <span class="text-sm">Faça Login</span>
+        </div></button>
+      </div>
+      <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+       <div class="flex items-start space-x-2"><i class="fas fa-info-circle text-blue-500 text-sm mt-0.5"></i>
+        <p class="text-xs text-blue-700 leading-relaxed">Seus dados estão seguros. Utilizamos seu telefone apenas para identificar seus pedidos anteriores.</p>
+       </div>
+      </div>
+     </div>
+    </div><!-- Login Form Screen -->
+    <div id="history-login-form" class="overflow-y-auto flex-1 scrollbar-hide px-6 py-8 hidden">
+     <div class="max-w-md mx-auto"><button onclick="showHistoryPhoneScreen()" class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"> <i class="fas fa-arrow-left text-sm"></i> <span class="text-sm">Voltar</span> </button>
+      <div class="text-center mb-6">
+       <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fas fa-user-circle text-orange-500 text-2xl"></i>
+       </div>
+       <h3 class="text-lg font-semibold text-gray-900 mb-2">Faça Login</h3>
+       <p class="text-sm text-gray-600">Entre com suas credenciais cadastradas</p>
+      </div>
+      <div class="space-y-4">
+       <div class="space-y-3"><button onclick="loginWithGoogle()" class="w-full bg-white border border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-medium py-3 rounded-lg transition-all duration-200">
+         <div class="flex items-center justify-center space-x-2"><i class="fab fa-google text-red-500 text-sm"></i> <span class="text-sm">Continuar com Google</span>
+         </div></button> <button onclick="loginWithFacebook()" class="w-full bg-white border border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-medium py-3 rounded-lg transition-all duration-200">
+         <div class="flex items-center justify-center space-x-2"><i class="fab fa-facebook text-blue-600 text-sm"></i> <span class="text-sm">Continuar com Facebook</span>
+         </div></button>
+       </div>
+       <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+         <div class="w-full border-t border-gray-200"></div>
+        </div>
+        <div class="relative flex justify-center text-xs"><span class="px-2 bg-white text-gray-500">ou</span>
+        </div>
+       </div>
+       <div><label for="login-phone" class="block text-sm font-medium text-gray-700 mb-2">Telefone</label> <input type="tel" id="login-phone" placeholder="(00) 00000-0000" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm" oninput="formatPhoneNumber(this)" maxlength="15">
        </div>
        <div><label for="login-password" class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
-        <div class="relative">
-         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-lock text-gray-400 text-sm"></i>
-         </div><input type="password" id="login-password" name="password" placeholder="Sua senha" class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required oninput="validateLoginField(this)"> <button type="button" onclick="togglePasswordVisibility('login-password', 'password-toggle')" class="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-gray-600 transition-colors"> <i id="password-toggle" class="fas fa-eye text-gray-400 text-sm"></i> </button>
-         <div class="absolute inset-y-0 right-8 pr-3 flex items-center"><i id="password-check" class="fas fa-check text-green-500 text-sm hidden"></i>
-         </div>
+        <div class="relative"><input type="password" id="login-password" placeholder="Digite sua senha" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all text-sm pr-10"> <button onclick="togglePasswordVisibility('login-password', 'password-icon')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"> <i id="password-icon" class="fas fa-eye text-sm"></i> </button>
         </div>
-       </div><button type="submit" id="login-submit-btn" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium py-3 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-        <div class="flex items-center justify-center space-x-2"><i class="fas fa-sign-in-alt text-sm"></i> <span>Entrar</span>
+       </div><button onclick="loginWithCredentials()" class="w-full bg-white border border-gray-200 hover:border-orange-300 hover:bg-orange-50 text-gray-900 font-medium py-3 rounded-lg transition-all duration-200">
+        <div class="flex items-center justify-center space-x-2"><i class="fas fa-sign-in-alt text-orange-500 text-sm"></i> <span class="text-sm">Entrar</span>
         </div></button>
-      </form><!-- Divider -->
-      <div class="relative">
-       <div class="absolute inset-0 flex items-center">
-        <div class="w-full border-t border-gray-300"></div>
+       <div class="text-center"><button onclick="showForgotPasswordScreen()" class="text-sm text-orange-600 hover:text-orange-700 font-medium transition-colors"> Esqueci minha senha </button>
        </div>
-       <div class="relative flex justify-center text-sm"><span class="px-4 bg-white text-gray-500 font-medium">ou continue com</span>
-       </div>
-      </div><!-- Social Login -->
-      <div class="space-y-3"><button onclick="handleSocialLogin('google')" class="w-full flex items-center justify-center space-x-3 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200 group">
-        <svg class="w-5 h-5" viewbox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" /> <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /> <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /> <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-        </svg><span class="text-gray-700 font-medium">Continuar com Google</span> </button> <button onclick="handleSocialLogin('facebook')" class="w-full flex items-center justify-center space-x-3 px-4 py-3 bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-lg transition-all duration-200"> <i class="fab fa-facebook-f text-lg"></i> <span class="font-medium">Continuar com Facebook</span> </button>
-      </div><!-- Additional Actions -->
-      <div class="pt-4 border-t border-gray-200">
-       <div class="flex flex-col space-y-3"><button onclick="showForgotPasswordForm()" class="text-sm text-green-600 hover:text-green-700 font-medium transition-colors text-center"> Esqueceu sua senha? </button>
-        <div class="text-center"><span class="text-sm text-gray-600">Não tem uma conta? </span> <button onclick="showCreateAccountForm()" class="text-sm font-medium text-green-600 hover:text-green-700 transition-colors"> Criar conta </button>
+       <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+         <div class="w-full border-t border-gray-200"></div>
         </div>
-       </div>
+        <div class="relative flex justify-center text-xs"><span class="px-2 bg-white text-gray-500">Não tem conta?</span>
+        </div>
+       </div><button onclick="showRegisterScreen()" class="w-full bg-white border border-gray-200 hover:border-green-300 hover:bg-green-50 text-gray-900 font-medium py-3 rounded-lg transition-all duration-200">
+        <div class="flex items-center justify-center space-x-2"><i class="fas fa-user-plus text-green-500 text-sm"></i> <span class="text-sm">Criar Nova Conta</span>
+        </div></button>
       </div>
-     </div><!-- Forgot Password Form -->
-     <div id="forgot-password-form-container" class="px-6 py-4 space-y-6 form-transition hidden">
+     </div>
+    </div><!-- Register Screen -->
+    <div id="history-register-screen" class="overflow-y-auto flex-1 scrollbar-hide px-6 py-8 hidden">
+     <div class="max-w-md mx-auto"><button onclick="showHistoryLoginForm()" class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"> <i class="fas fa-arrow-left text-sm"></i> <span class="text-sm">Voltar</span> </button>
       <div class="text-center mb-6">
-       <p class="text-gray-600 text-sm leading-relaxed">Digite seu e-mail para receber as instruções de recuperação de senha</p>
+       <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fas fa-user-plus text-green-500 text-2xl"></i>
+       </div>
+       <h3 class="text-lg font-semibold text-gray-900 mb-2">Criar Conta</h3>
+       <p class="text-sm text-gray-600">Preencha seus dados para cadastro</p>
       </div>
-      <form id="forgot-password-form" onsubmit="handlePasswordRecovery(event)" class="space-y-4">
-       <div><label for="recovery-email" class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
-        <div class="relative">
-         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-envelope text-gray-400 text-sm"></i>
-         </div><input type="email" id="recovery-email" name="email" placeholder="seu@email.com" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm" required>
+      <div class="space-y-4">
+       <div class="space-y-3"><button onclick="registerWithGoogle()" class="w-full bg-white border border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-medium py-3 rounded-lg transition-all duration-200">
+         <div class="flex items-center justify-center space-x-2"><i class="fab fa-google text-red-500 text-sm"></i> <span class="text-sm">Cadastrar com Google</span>
+         </div></button> <button onclick="registerWithFacebook()" class="w-full bg-white border border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-700 font-medium py-3 rounded-lg transition-all duration-200">
+         <div class="flex items-center justify-center space-x-2"><i class="fab fa-facebook text-blue-600 text-sm"></i> <span class="text-sm">Cadastrar com Facebook</span>
+         </div></button>
+       </div>
+       <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+         <div class="w-full border-t border-gray-200"></div>
         </div>
-       </div><button type="submit" id="recovery-submit-btn" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 rounded-lg transition-all duration-200">
-        <div class="flex items-center justify-center space-x-2"><i class="fas fa-paper-plane text-sm"></i> <span>Enviar Link de Recuperação</span>
+        <div class="relative flex justify-center text-xs"><span class="px-2 bg-white text-gray-500">ou</span>
+        </div>
+       </div>
+       <div><label for="register-name" class="block text-sm font-medium text-gray-700 mb-2">Nome completo</label> <input type="text" id="register-name" placeholder="Digite seu nome completo" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm">
+       </div>
+       <div><label for="register-phone" class="block text-sm font-medium text-gray-700 mb-2">Telefone</label> <input type="tel" id="register-phone" placeholder="(00) 00000-0000" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" oninput="formatPhoneNumber(this)" maxlength="15">
+       </div>
+       <div><label for="register-email" class="block text-sm font-medium text-gray-700 mb-2">E-mail</label> <input type="email" id="register-email" placeholder="seu@email.com" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm">
+       </div>
+       <div><label for="register-password" class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
+        <div class="relative"><input type="password" id="register-password" placeholder="Mínimo de 6 caracteres" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm pr-10"> <button onclick="togglePasswordVisibility('register-password', 'register-password-icon')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"> <i id="register-password-icon" class="fas fa-eye text-sm"></i> </button>
+        </div>
+       </div>
+       <div><label for="register-confirm-password" class="block text-sm font-medium text-gray-700 mb-2">Confirmar senha</label>
+        <div class="relative"><input type="password" id="register-confirm-password" placeholder="Digite a senha novamente" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm pr-10"> <button onclick="togglePasswordVisibility('register-confirm-password', 'register-confirm-password-icon')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"> <i id="register-confirm-password-icon" class="fas fa-eye text-sm"></i> </button>
+        </div>
+       </div><button onclick="createAccount()" class="w-full bg-white border border-gray-200 hover:border-green-300 hover:bg-green-50 text-gray-900 font-medium py-3 rounded-lg transition-all duration-200">
+        <div class="flex items-center justify-center space-x-2"><i class="fas fa-user-plus text-green-500 text-sm"></i> <span class="text-sm">Criar Conta</span>
         </div></button>
-      </form>
-      <div class="pt-4 border-t border-gray-200"><button onclick="showLoginForm()" class="w-full text-sm text-gray-600 hover:text-gray-700 font-medium transition-colors text-center py-2"> <i class="fas fa-arrow-left text-xs mr-2"></i> Voltar ao login </button>
+       <div class="text-center"><button onclick="showHistoryLoginForm()" class="text-sm text-gray-600 hover:text-gray-900 transition-colors"> Já tem conta? <span class="text-orange-600 font-medium">Faça login</span> </button>
+       </div>
       </div>
-     </div><!-- Create Account Form -->
-     <div id="create-account-form-container" class="px-6 py-4 space-y-6 form-transition hidden">
+      <div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-100">
+       <div class="flex items-start space-x-2"><i class="fas fa-info-circle text-green-500 text-sm mt-0.5"></i>
+        <p class="text-xs text-green-700 leading-relaxed">Com uma conta você pode acompanhar seus pedidos, salvar endereços e ter acesso a ofertas exclusivas.</p>
+       </div>
+      </div>
+     </div>
+    </div><!-- Forgot Password Screen -->
+    <div id="history-forgot-password-screen" class="overflow-y-auto flex-1 scrollbar-hide px-6 py-8 hidden">
+     <div class="max-w-md mx-auto"><button onclick="showHistoryLoginForm()" class="flex items-center space-x-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"> <i class="fas fa-arrow-left text-sm"></i> <span class="text-sm">Voltar</span> </button>
       <div class="text-center mb-6">
-       <p class="text-gray-600 text-sm leading-relaxed">Preencha os dados para criar sua conta</p>
+       <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fas fa-key text-blue-500 text-2xl"></i>
+       </div>
+       <h3 class="text-lg font-semibold text-gray-900 mb-2">Recuperar Senha</h3>
+       <p class="text-sm text-gray-600">Informe seu telefone para receber o código de recuperação</p>
       </div>
-      <form id="create-account-form" onsubmit="handleAccountCreation(event)" class="space-y-4">
-       <div><label for="signup-name" class="block text-sm font-medium text-gray-700 mb-2">Nome completo</label>
-        <div class="relative">
-         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-user text-gray-400 text-sm"></i>
-         </div><input type="text" id="signup-name" name="name" placeholder="Seu nome completo" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required oninput="validateSignupField(this)">
-         <div class="absolute inset-y-0 right-0 pr-3 flex items-center"><i id="name-check" class="fas fa-check text-green-500 text-sm hidden"></i>
-         </div>
-        </div>
-       </div>
-       <div><label for="signup-email" class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
-        <div class="relative">
-         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-envelope text-gray-400 text-sm"></i>
-         </div><input type="email" id="signup-email" name="email" placeholder="seu@email.com" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required oninput="validateSignupField(this)">
-         <div class="absolute inset-y-0 right-0 pr-3 flex items-center"><i id="signup-email-check" class="fas fa-check text-green-500 text-sm hidden"></i>
-         </div>
-        </div>
-       </div>
-       <div><label for="signup-password" class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
-        <div class="relative">
-         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-lock text-gray-400 text-sm"></i>
-         </div><input type="password" id="signup-password" name="password" placeholder="Mínimo 6 caracteres" class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required minlength="6" oninput="validateSignupField(this)"> <button type="button" onclick="togglePasswordVisibility('signup-password', 'signup-password-toggle')" class="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-gray-600 transition-colors"> <i id="signup-password-toggle" class="fas fa-eye text-gray-400 text-sm"></i> </button>
-         <div class="absolute inset-y-0 right-8 pr-3 flex items-center"><i id="signup-password-check" class="fas fa-check text-green-500 text-sm hidden"></i>
-         </div>
-        </div>
-       </div>
-       <div><label for="signup-confirm-password" class="block text-sm font-medium text-gray-700 mb-2">Confirmar senha</label>
-        <div class="relative">
-         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-lock text-gray-400 text-sm"></i>
-         </div><input type="password" id="signup-confirm-password" name="confirmPassword" placeholder="Digite a senha novamente" class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm" required oninput="validateSignupField(this)"> <button type="button" onclick="togglePasswordVisibility('signup-confirm-password', 'signup-confirm-password-toggle')" class="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-gray-600 transition-colors"> <i id="signup-confirm-password-toggle" class="fas fa-eye text-gray-400 text-sm"></i> </button>
-         <div class="absolute inset-y-0 right-8 pr-3 flex items-center"><i id="confirm-password-check" class="fas fa-check text-green-500 text-sm hidden"></i>
-         </div>
-        </div>
-       </div>
-       <div class="flex items-start space-x-3"><input type="checkbox" id="terms-checkbox" class="custom-checkbox mt-1" required onchange="validateSignupForm()"> <label for="terms-checkbox" class="text-sm text-gray-600 leading-relaxed"> Aceito os <span class="text-green-600 font-medium hover:text-green-700 cursor-pointer">termos de uso</span> e <span class="text-green-600 font-medium hover:text-green-700 cursor-pointer">política de privacidade</span> </label>
-       </div><button type="submit" id="signup-submit-btn" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium py-3 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-        <div class="flex items-center justify-center space-x-2"><i class="fas fa-user-plus text-sm"></i> <span>Criar Conta</span>
+      <div class="space-y-4">
+       <div><label for="forgot-phone" class="block text-sm font-medium text-gray-700 mb-2">Telefone</label> <input type="tel" id="forgot-phone" placeholder="(00) 00000-0000" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm" oninput="formatPhoneNumber(this)" maxlength="15">
+       </div><button onclick="sendRecoveryCode()" class="w-full bg-white border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-gray-900 font-medium py-3 rounded-lg transition-all duration-200">
+        <div class="flex items-center justify-center space-x-2"><i class="fas fa-paper-plane text-blue-500 text-sm"></i> <span class="text-sm">Enviar Código</span>
         </div></button>
-      </form>
-      <div class="pt-4 border-t border-gray-200"><button onclick="showLoginForm()" class="w-full text-sm text-gray-600 hover:text-gray-700 font-medium transition-colors text-center py-2"> <i class="fas fa-arrow-left text-xs mr-2"></i> Voltar ao login </button>
+      </div>
+      <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+       <div class="flex items-start space-x-2"><i class="fas fa-info-circle text-blue-500 text-sm mt-0.5"></i>
+        <p class="text-xs text-blue-700 leading-relaxed">Você receberá um código via SMS para criar uma nova senha. O código expira em 15 minutos.</p>
+       </div>
+      </div>
+     </div>
+    </div><!-- History List Screen -->
+    <div id="history-list-screen" class="overflow-y-auto flex-1 scrollbar-hide px-6 py-4 hidden">
+     <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
+      <div class="flex items-center space-x-2"><i class="fas fa-user-circle text-gray-600 text-sm"></i>
+       <div class="flex items-center space-x-1"><span id="logged-user-name" class="text-sm text-gray-900 font-semibold"></span> <span class="text-gray-400">•</span> <span id="logged-user-phone" class="text-sm text-gray-600 font-medium"></span>
+       </div>
+      </div><button onclick="logoutHistory()" class="text-sm text-orange-600 hover:text-orange-700 font-medium transition-colors"> Sair </button>
+     </div>
+     <div class="space-y-3" id="history-orders-list">
+      <div class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+       <div class="flex items-start justify-between mb-2">
+        <div>
+         <div class="flex items-center space-x-2 mb-1"><span class="font-semibold text-gray-900 text-sm">#1234</span> <span class="text-gray-400">•</span> <span class="text-xs px-2 py-1 rounded-full bg-green-100 text-green-700 font-medium">Entregue</span>
+         </div>
+         <p class="text-xs text-gray-600">28/12/2024 às 19:45</p>
+        </div><span class="font-bold text-orange-600 text-sm">R$ 68,80</span>
+       </div>
+       <div class="border-t border-gray-100 pt-2 mt-2">
+        <p class="text-xs text-gray-700">2x X-Bacon, 1x Pizza Grande</p>
+       </div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+       <div class="flex items-start justify-between mb-2">
+        <div>
+         <div class="flex items-center space-x-2 mb-1"><span class="font-semibold text-gray-900 text-sm">#1189</span> <span class="text-gray-400">•</span> <span class="text-xs px-2 py-1 rounded-full bg-green-100 text-green-700 font-medium">Entregue</span>
+         </div>
+         <p class="text-xs text-gray-600">20/12/2024 às 20:15</p>
+        </div><span class="font-bold text-orange-600 text-sm">R$ 32,80</span>
+       </div>
+       <div class="border-t border-gray-100 pt-2 mt-2">
+        <p class="text-xs text-gray-700">1x X-Tudo, 1x Batata Frita</p>
+       </div>
+      </div>
+      <div class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+       <div class="flex items-start justify-between mb-2">
+        <div>
+         <div class="flex items-center space-x-2 mb-1"><span class="font-semibold text-gray-900 text-sm">#1087</span> <span class="text-gray-400">•</span> <span class="text-xs px-2 py-1 rounded-full bg-green-100 text-green-700 font-medium">Entregue</span>
+         </div>
+         <p class="text-xs text-gray-600">15/12/2024 às 18:30</p>
+        </div><span class="font-bold text-orange-600 text-sm">R$ 35,90</span>
+       </div>
+       <div class="border-t border-gray-100 pt-2 mt-2">
+        <p class="text-xs text-gray-700">1x Pizza Média</p>
+       </div>
       </div>
      </div>
     </div>
@@ -544,7 +571,7 @@
       </div><button onclick="closePromotionsModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors"> <i class="fas fa-times text-gray-500"></i> </button>
      </div>
     </div>
-    <div class="overflow-y-auto flex-1 px-6 py-4 scrollbar-hide" style="scroll-behavior: smooth;">
+    <div class="overflow-y-auto flex-1 px-6 py-4 scrollbar-hide">
      <div class="space-y-0">
       <div class="py-6 hover:bg-orange-50/30 transition-all cursor-pointer">
        <div class="space-y-2">
@@ -621,7 +648,9 @@
             selectedOptionalOptions: {},
             activeCategory: null,
             editingCartIndex: null,
-            currentPhotoIndex: 0
+            currentPhotoIndex: 0,
+            loggedUserPhone: null,
+            loggedUserName: null
         };
 
         const menuData = {
@@ -1786,6 +1815,272 @@
             document.getElementById('cash-change-field').classList.add('hidden');
         }
 
+        function openHistoryModal() {
+            const modal = document.getElementById('history-modal');
+            const content = document.getElementById('history-modal-content');
+            
+            showHistoryPhoneScreen();
+            
+            modal.classList.remove('pointer-events-none');
+            modal.classList.remove('opacity-0');
+            content.style.transform = 'translateY(0)';
+        }
+
+        function closeHistoryModal() {
+            const modal = document.getElementById('history-modal');
+            const content = document.getElementById('history-modal-content');
+            
+            modal.classList.add('opacity-0');
+            content.style.transform = 'translateY(100%)';
+            
+            setTimeout(() => {
+                modal.classList.add('pointer-events-none');
+            }, 300);
+        }
+
+        function showHistoryPhoneScreen() {
+            document.getElementById('history-login-screen').classList.remove('hidden');
+            document.getElementById('history-login-form').classList.add('hidden');
+            document.getElementById('history-register-screen').classList.add('hidden');
+            document.getElementById('history-forgot-password-screen').classList.add('hidden');
+            document.getElementById('history-list-screen').classList.add('hidden');
+            
+            document.getElementById('history-phone').value = '';
+        }
+
+        function showHistoryLoginForm() {
+            document.getElementById('history-login-screen').classList.add('hidden');
+            document.getElementById('history-login-form').classList.remove('hidden');
+            document.getElementById('history-register-screen').classList.add('hidden');
+            document.getElementById('history-forgot-password-screen').classList.add('hidden');
+            document.getElementById('history-list-screen').classList.add('hidden');
+            
+            document.getElementById('login-phone').value = '';
+            document.getElementById('login-password').value = '';
+        }
+
+        function showRegisterScreen() {
+            document.getElementById('history-login-screen').classList.add('hidden');
+            document.getElementById('history-login-form').classList.add('hidden');
+            document.getElementById('history-register-screen').classList.remove('hidden');
+            document.getElementById('history-forgot-password-screen').classList.add('hidden');
+            document.getElementById('history-list-screen').classList.add('hidden');
+            
+            document.getElementById('register-name').value = '';
+            document.getElementById('register-phone').value = '';
+            document.getElementById('register-email').value = '';
+            document.getElementById('register-password').value = '';
+            document.getElementById('register-confirm-password').value = '';
+        }
+
+        function showForgotPasswordScreen() {
+            document.getElementById('history-login-screen').classList.add('hidden');
+            document.getElementById('history-login-form').classList.add('hidden');
+            document.getElementById('history-register-screen').classList.add('hidden');
+            document.getElementById('history-forgot-password-screen').classList.remove('hidden');
+            document.getElementById('history-list-screen').classList.add('hidden');
+            
+            document.getElementById('forgot-phone').value = '';
+        }
+
+        function showHistoryList(phone, name) {
+            document.getElementById('history-login-screen').classList.add('hidden');
+            document.getElementById('history-login-form').classList.add('hidden');
+            document.getElementById('history-register-screen').classList.add('hidden');
+            document.getElementById('history-forgot-password-screen').classList.add('hidden');
+            document.getElementById('history-list-screen').classList.remove('hidden');
+            
+            document.getElementById('logged-user-name').textContent = name;
+            document.getElementById('logged-user-phone').textContent = phone;
+        }
+
+        function loginWithPhone() {
+            const phone = document.getElementById('history-phone').value.trim();
+            
+            if (!phone) {
+                showToast('Por favor, informe seu telefone', 'error');
+                return;
+            }
+            
+            if (phone.length < 14) {
+                showToast('Por favor, informe um telefone válido', 'error');
+                return;
+            }
+            
+            // Simula busca do nome pelo telefone (em produção viria do backend)
+            const mockName = 'João Silva';
+            
+            state.loggedUserPhone = phone;
+            state.loggedUserName = mockName;
+            showHistoryList(phone, mockName);
+            showToast('Acesso realizado com sucesso!');
+        }
+
+        function loginWithCredentials() {
+            const phone = document.getElementById('login-phone').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            
+            if (!phone) {
+                showToast('Por favor, informe seu telefone', 'error');
+                return;
+            }
+            
+            if (phone.length < 14) {
+                showToast('Por favor, informe um telefone válido', 'error');
+                return;
+            }
+            
+            if (!password) {
+                showToast('Por favor, informe sua senha', 'error');
+                return;
+            }
+            
+            // Simula busca do nome pelo telefone (em produção viria do backend)
+            const mockName = 'João Silva';
+            
+            state.loggedUserPhone = phone;
+            state.loggedUserName = mockName;
+            showHistoryList(phone, mockName);
+            showToast('Login realizado com sucesso!');
+        }
+
+        function loginWithGoogle() {
+            // Simula login social com Google
+            const mockName = 'Maria Santos';
+            const mockPhone = '(11) 98765-4321';
+            
+            state.loggedUserPhone = mockPhone;
+            state.loggedUserName = mockName;
+            showHistoryList(mockPhone, mockName);
+            showToast('Login com Google realizado!');
+        }
+
+        function loginWithFacebook() {
+            // Simula login social com Facebook
+            const mockName = 'Carlos Oliveira';
+            const mockPhone = '(11) 91234-5678';
+            
+            state.loggedUserPhone = mockPhone;
+            state.loggedUserName = mockName;
+            showHistoryList(mockPhone, mockName);
+            showToast('Login com Facebook realizado!');
+        }
+
+        function registerWithGoogle() {
+            // Simula cadastro social com Google
+            const mockName = 'Fernanda Costa';
+            const mockPhone = '(11) 99876-5432';
+            
+            state.loggedUserPhone = mockPhone;
+            state.loggedUserName = mockName;
+            showHistoryList(mockPhone, mockName);
+            showToast('Conta criada com Google!');
+        }
+
+        function registerWithFacebook() {
+            // Simula cadastro social com Facebook
+            const mockName = 'Roberto Lima';
+            const mockPhone = '(11) 98123-4567';
+            
+            state.loggedUserPhone = mockPhone;
+            state.loggedUserName = mockName;
+            showHistoryList(mockPhone, mockName);
+            showToast('Conta criada com Facebook!');
+        }
+
+        function createAccount() {
+            const name = document.getElementById('register-name').value.trim();
+            const phone = document.getElementById('register-phone').value.trim();
+            const email = document.getElementById('register-email').value.trim();
+            const password = document.getElementById('register-password').value.trim();
+            const confirmPassword = document.getElementById('register-confirm-password').value.trim();
+            
+            if (!name) {
+                showToast('Por favor, informe seu nome', 'error');
+                return;
+            }
+            
+            if (!phone) {
+                showToast('Por favor, informe seu telefone', 'error');
+                return;
+            }
+            
+            if (phone.length < 14) {
+                showToast('Por favor, informe um telefone válido', 'error');
+                return;
+            }
+            
+            if (!email) {
+                showToast('Por favor, informe seu e-mail', 'error');
+                return;
+            }
+            
+            if (!email.includes('@') || !email.includes('.')) {
+                showToast('Por favor, informe um e-mail válido', 'error');
+                return;
+            }
+            
+            if (!password) {
+                showToast('Por favor, crie uma senha', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showToast('A senha deve ter no mínimo 6 caracteres', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showToast('As senhas não coincidem', 'error');
+                return;
+            }
+            
+            state.loggedUserPhone = phone;
+            state.loggedUserName = name;
+            showHistoryList(phone, name);
+            showToast('Conta criada com sucesso!');
+        }
+
+        function sendRecoveryCode() {
+            const phone = document.getElementById('forgot-phone').value.trim();
+            
+            if (!phone) {
+                showToast('Por favor, informe seu telefone', 'error');
+                return;
+            }
+            
+            if (phone.length < 14) {
+                showToast('Por favor, informe um telefone válido', 'error');
+                return;
+            }
+            
+            showToast('Código enviado via SMS!');
+            
+            setTimeout(() => {
+                showHistoryLoginForm();
+            }, 2000);
+        }
+
+        function logoutHistory() {
+            state.loggedUserPhone = null;
+            state.loggedUserName = null;
+            showHistoryPhoneScreen();
+            showToast('Você saiu do histórico');
+        }
+
+        function togglePasswordVisibility(inputId, iconId) {
+            const passwordInput = document.getElementById(inputId);
+            const passwordIcon = document.getElementById(iconId);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.className = 'fas fa-eye-slash text-sm';
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.className = 'fas fa-eye text-sm';
+            }
+        }
+
         function openPromotionsModal() {
             const modal = document.getElementById('promotions-modal');
             const content = document.getElementById('promotions-modal-content');
@@ -1814,7 +2109,6 @@
             const checkoutModal = document.getElementById('checkout-modal');
             const promotionsModal = document.getElementById('promotions-modal');
             const historyModal = document.getElementById('history-modal');
-            const loginModal = document.getElementById('login-modal');
             
             if (e.target === profileModal) {
                 closeProfileModal();
@@ -1834,9 +2128,6 @@
             if (e.target === historyModal) {
                 closeHistoryModal();
             }
-            if (e.target === loginModal) {
-                closeLoginModal();
-            }
         });
 
         function openDirections() {
@@ -1844,789 +2135,12 @@
             const encodedAddress = encodeURIComponent(address);
             const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
             
-            window.open(googleMapsUrl, '_blank');
+            window.open(googleMapsUrl, '_blank', 'noopener,noreferrer');
             showToast('Abrindo direções no Google Maps...');
         }
 
-        // Login Modal Functions
-        function openLoginModal() {
-            const modal = document.getElementById('login-modal');
-            const content = document.getElementById('login-modal-content');
-            
-            modal.classList.remove('pointer-events-none');
-            modal.classList.remove('opacity-0');
-            content.style.transform = 'translateY(0)';
-            
-            // Show login form by default
-            showLoginForm();
-        }
-
-        function closeLoginModal() {
-            const modal = document.getElementById('login-modal');
-            const content = document.getElementById('login-modal-content');
-            
-            modal.classList.add('opacity-0');
-            content.style.transform = 'translateY(100%)';
-            
-            setTimeout(() => {
-                modal.classList.add('pointer-events-none');
-            }, 300);
-        }
-
-        // History Modal Functions
-        function openHistoryModal() {
-            const modal = document.getElementById('history-modal');
-            const content = document.getElementById('history-modal-content');
-            
-            modal.classList.remove('pointer-events-none');
-            modal.classList.remove('opacity-0');
-            content.style.transform = 'translateY(0)';
-            
-            // Show phone screen by default
-            showPhoneScreen();
-        }
-
-        function closeHistoryModal() {
-            const modal = document.getElementById('history-modal');
-            const content = document.getElementById('history-modal-content');
-            
-            modal.classList.add('opacity-0');
-            content.style.transform = 'translateY(100%)';
-            
-            setTimeout(() => {
-                modal.classList.add('pointer-events-none');
-            }, 300);
-        }
-
-        function showPhoneScreen() {
-            const phoneScreen = document.getElementById('history-phone-screen');
-            const ordersScreen = document.getElementById('history-orders-screen');
-            const allStoresScreen = document.getElementById('history-all-stores-screen');
-            
-            phoneScreen.classList.remove('hidden');
-            ordersScreen.classList.add('hidden');
-            allStoresScreen.classList.add('hidden');
-            
-            // Reset form
-            document.getElementById('history-phone-form').reset();
-        }
-
-        function showLoginFromHistory() {
-            closeHistoryModal();
-            setTimeout(() => {
-                openLoginModal();
-            }, 300);
-        }
-
-        function viewOrderHistory(event) {
-            event.preventDefault();
-            
-            const phone = document.getElementById('history-phone').value;
-            
-            // Simulate loading orders
-            const phoneScreen = document.getElementById('history-phone-screen');
-            const ordersScreen = document.getElementById('history-orders-screen');
-            
-            // Fade out phone screen
-            phoneScreen.style.opacity = '0';
-            phoneScreen.style.transform = 'translateY(10px)';
-            
-            setTimeout(() => {
-                phoneScreen.classList.add('hidden');
-                ordersScreen.classList.remove('hidden');
-                
-                // Populate orders for this store
-                populateStoreOrders(phone);
-                
-                // Fade in orders screen
-                ordersScreen.style.opacity = '0';
-                ordersScreen.style.transform = 'translateY(10px)';
-                
-                setTimeout(() => {
-                    ordersScreen.style.opacity = '1';
-                    ordersScreen.style.transform = 'translateY(0)';
-                }, 50);
-            }, 150);
-        }
-
-        function backToPhoneScreen() {
-            const phoneScreen = document.getElementById('history-phone-screen');
-            const ordersScreen = document.getElementById('history-orders-screen');
-            
-            // Fade out orders screen
-            ordersScreen.style.opacity = '0';
-            ordersScreen.style.transform = 'translateY(10px)';
-            
-            setTimeout(() => {
-                ordersScreen.classList.add('hidden');
-                phoneScreen.classList.remove('hidden');
-                
-                // Fade in phone screen
-                phoneScreen.style.opacity = '0';
-                phoneScreen.style.transform = 'translateY(10px)';
-                
-                setTimeout(() => {
-                    phoneScreen.style.opacity = '1';
-                    phoneScreen.style.transform = 'translateY(0)';
-                }, 50);
-            }, 150);
-        }
-
-        function viewAllStoresOrders() {
-            const ordersScreen = document.getElementById('history-orders-screen');
-            const allStoresScreen = document.getElementById('history-all-stores-screen');
-            
-            // Fade out orders screen
-            ordersScreen.style.opacity = '0';
-            ordersScreen.style.transform = 'translateY(10px)';
-            
-            setTimeout(() => {
-                ordersScreen.classList.add('hidden');
-                allStoresScreen.classList.remove('hidden');
-                
-                // Populate orders for all stores
-                populateAllStoresOrders();
-                
-                // Fade in all stores screen
-                allStoresScreen.style.opacity = '0';
-                allStoresScreen.style.transform = 'translateY(10px)';
-                
-                setTimeout(() => {
-                    allStoresScreen.style.opacity = '1';
-                    allStoresScreen.style.transform = 'translateY(0)';
-                }, 50);
-            }, 150);
-        }
-
-        function backToStoreOrders() {
-            const ordersScreen = document.getElementById('history-orders-screen');
-            const allStoresScreen = document.getElementById('history-all-stores-screen');
-            
-            // Fade out all stores screen
-            allStoresScreen.style.opacity = '0';
-            allStoresScreen.style.transform = 'translateY(10px)';
-            
-            setTimeout(() => {
-                allStoresScreen.classList.add('hidden');
-                ordersScreen.classList.remove('hidden');
-                
-                // Fade in orders screen
-                ordersScreen.style.opacity = '0';
-                ordersScreen.style.transform = 'translateY(10px)';
-                
-                setTimeout(() => {
-                    ordersScreen.style.opacity = '1';
-                    ordersScreen.style.transform = 'translateY(0)';
-                }, 50);
-            }, 150);
-        }
-
-        function populateStoreOrders(phone) {
-            const container = document.getElementById('store-orders-list');
-            
-            // Sample orders data for this store
-            const orders = [
-                {
-                    id: '#1234',
-                    date: '28/12/2024',
-                    time: '19:45',
-                    status: 'Entregue',
-                    statusColor: 'green',
-                    items: ['2x X-Bacon', '1x Pizza Grande'],
-                    total: 68.80
-                },
-                {
-                    id: '#1189',
-                    date: '20/12/2024',
-                    time: '20:15',
-                    status: 'Entregue',
-                    statusColor: 'green',
-                    items: ['1x X-Tudo', '1x Batata Frita'],
-                    total: 32.80
-                },
-                {
-                    id: '#1087',
-                    date: '15/12/2024',
-                    time: '18:30',
-                    status: 'Entregue',
-                    statusColor: 'green',
-                    items: ['1x Pizza Média'],
-                    total: 35.90
-                }
-            ];
-            
-            container.innerHTML = '';
-            
-            if (orders.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-8">
-                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <i class="fas fa-receipt text-gray-400 text-lg"></i>
-                        </div>
-                        <p class="text-gray-500 text-sm">Nenhum pedido encontrado</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            orders.forEach(order => {
-                const orderElement = document.createElement('div');
-                orderElement.className = 'bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer';
-                
-                orderElement.innerHTML = `
-                    <div class="flex items-start justify-between mb-2">
-                        <div>
-                            <div class="flex items-center space-x-2 mb-1">
-                                <span class="font-semibold text-gray-900 text-sm">${order.id}</span>
-                                <span class="text-gray-400">•</span>
-                                <span class="text-xs px-2 py-1 rounded-full bg-${order.statusColor}-100 text-${order.statusColor}-700 font-medium">${order.status}</span>
-                            </div>
-                            <p class="text-xs text-gray-600">${order.date} às ${order.time}</p>
-                        </div>
-                        <span class="font-bold text-orange-600 text-sm">R$ ${formatPrice(order.total)}</span>
-                    </div>
-                    <div class="border-t border-gray-100 pt-2 mt-2">
-                        <p class="text-xs text-gray-700">${order.items.join(', ')}</p>
-                    </div>
-                `;
-                
-                container.appendChild(orderElement);
-            });
-        }
-
-        function populateAllStoresOrders() {
-            const container = document.getElementById('all-stores-orders-list');
-            
-            // Sample orders data for all stores
-            const orders = [
-                {
-                    id: '#1234',
-                    store: 'Restaurante Sabor',
-                    date: '28/12/2024',
-                    time: '19:45',
-                    status: 'Entregue',
-                    statusColor: 'green',
-                    items: ['2x X-Bacon', '1x Pizza Grande'],
-                    total: 68.80
-                },
-                {
-                    id: '#5678',
-                    store: 'Pizzaria Bella',
-                    date: '25/12/2024',
-                    time: '21:00',
-                    status: 'Entregue',
-                    statusColor: 'green',
-                    items: ['2x Pizza Família', '1x Refrigerante 2L'],
-                    total: 89.90
-                },
-                {
-                    id: '#1189',
-                    store: 'Restaurante Sabor',
-                    date: '20/12/2024',
-                    time: '20:15',
-                    status: 'Entregue',
-                    statusColor: 'green',
-                    items: ['1x X-Tudo', '1x Batata Frita'],
-                    total: 32.80
-                },
-                {
-                    id: '#4321',
-                    store: 'Burger House',
-                    date: '18/12/2024',
-                    time: '19:30',
-                    status: 'Entregue',
-                    statusColor: 'green',
-                    items: ['3x Smash Burger', '2x Milkshake'],
-                    total: 75.00
-                },
-                {
-                    id: '#1087',
-                    store: 'Restaurante Sabor',
-                    date: '15/12/2024',
-                    time: '18:30',
-                    status: 'Entregue',
-                    statusColor: 'green',
-                    items: ['1x Pizza Média'],
-                    total: 35.90
-                }
-            ];
-            
-            container.innerHTML = '';
-            
-            if (orders.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-8">
-                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                            <i class="fas fa-receipt text-gray-400 text-lg"></i>
-                        </div>
-                        <p class="text-gray-500 text-sm">Nenhum pedido encontrado</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            orders.forEach(order => {
-                const orderElement = document.createElement('div');
-                orderElement.className = 'bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer';
-                
-                orderElement.innerHTML = `
-                    <div class="flex items-start justify-between mb-2">
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-2 mb-1">
-                                <span class="font-semibold text-gray-900 text-sm">${order.id}</span>
-                                <span class="text-gray-400">•</span>
-                                <span class="text-xs px-2 py-1 rounded-full bg-${order.statusColor}-100 text-${order.statusColor}-700 font-medium">${order.status}</span>
-                            </div>
-                            <div class="flex items-center space-x-2 mb-1">
-                                <i class="fas fa-store text-gray-400 text-xs"></i>
-                                <p class="text-xs text-gray-700 font-medium">${order.store}</p>
-                            </div>
-                            <p class="text-xs text-gray-600">${order.date} às ${order.time}</p>
-                        </div>
-                        <span class="font-bold text-orange-600 text-sm">R$ ${formatPrice(order.total)}</span>
-                    </div>
-                    <div class="border-t border-gray-100 pt-2 mt-2">
-                        <p class="text-xs text-gray-700">${order.items.join(', ')}</p>
-                    </div>
-                `;
-                
-                container.appendChild(orderElement);
-            });
-        }
-
-        function showLoginForm() {
-            // Smooth transition between forms
-            const loginContainer = document.getElementById('login-form-container');
-            const forgotContainer = document.getElementById('forgot-password-form-container');
-            const createContainer = document.getElementById('create-account-form-container');
-            
-            // Add fade out effect to current visible form
-            if (!forgotContainer.classList.contains('hidden')) {
-                forgotContainer.style.opacity = '0';
-                forgotContainer.style.transform = 'translateY(10px)';
-            }
-            if (!createContainer.classList.contains('hidden')) {
-                createContainer.style.opacity = '0';
-                createContainer.style.transform = 'translateY(10px)';
-            }
-            
-            setTimeout(() => {
-                // Hide all forms
-                forgotContainer.classList.add('hidden');
-                createContainer.classList.add('hidden');
-                
-                // Show login form with fade in effect
-                loginContainer.classList.remove('hidden');
-                loginContainer.style.opacity = '0';
-                loginContainer.style.transform = 'translateY(10px)';
-                
-                // Update header with smooth transition
-                const icon = document.getElementById('login-modal-icon');
-                const title = document.getElementById('login-modal-title');
-                
-                icon.style.transform = 'scale(0.8)';
-                title.style.opacity = '0.5';
-                
-                setTimeout(() => {
-                    icon.className = 'fas fa-user text-white text-sm';
-                    title.textContent = 'Entrar';
-                    
-                    icon.style.transform = 'scale(1)';
-                    title.style.opacity = '1';
-                }, 100);
-                
-                // Animate login form in
-                setTimeout(() => {
-                    loginContainer.style.opacity = '1';
-                    loginContainer.style.transform = 'translateY(0)';
-                }, 50);
-                
-                // Reset login form
-                document.getElementById('login-form').reset();
-                document.getElementById('login-submit-btn').disabled = true;
-                document.getElementById('email-check').classList.add('hidden');
-                document.getElementById('password-check').classList.add('hidden');
-                
-                // Reset field styles
-                const loginEmail = document.getElementById('login-email');
-                const loginPassword = document.getElementById('login-password');
-                loginEmail.classList.remove('border-red-300', 'border-green-300');
-                loginPassword.classList.remove('border-red-300', 'border-green-300');
-            }, 150);
-        }
-
-        function showForgotPasswordForm() {
-            // Smooth transition between forms
-            const loginContainer = document.getElementById('login-form-container');
-            const forgotContainer = document.getElementById('forgot-password-form-container');
-            const createContainer = document.getElementById('create-account-form-container');
-            
-            // Add fade out effect to current visible form
-            if (!loginContainer.classList.contains('hidden')) {
-                loginContainer.style.opacity = '0';
-                loginContainer.style.transform = 'translateY(10px)';
-            }
-            if (!createContainer.classList.contains('hidden')) {
-                createContainer.style.opacity = '0';
-                createContainer.style.transform = 'translateY(10px)';
-            }
-            
-            setTimeout(() => {
-                // Hide all forms
-                loginContainer.classList.add('hidden');
-                createContainer.classList.add('hidden');
-                
-                // Show forgot password form with fade in effect
-                forgotContainer.classList.remove('hidden');
-                forgotContainer.style.opacity = '0';
-                forgotContainer.style.transform = 'translateY(10px)';
-                
-                // Update header with smooth transition
-                const icon = document.getElementById('login-modal-icon');
-                const title = document.getElementById('login-modal-title');
-                
-                icon.style.transform = 'scale(0.8)';
-                title.style.opacity = '0.5';
-                
-                setTimeout(() => {
-                    icon.className = 'fas fa-key text-white text-sm';
-                    title.textContent = 'Recuperar Senha';
-                    
-                    icon.style.transform = 'scale(1)';
-                    title.style.opacity = '1';
-                }, 100);
-                
-                // Animate forgot password form in
-                setTimeout(() => {
-                    forgotContainer.style.opacity = '1';
-                    forgotContainer.style.transform = 'translateY(0)';
-                }, 50);
-                
-                // Reset forgot password form
-                document.getElementById('forgot-password-form').reset();
-            }, 150);
-        }
-
-        function showCreateAccountForm() {
-            // Smooth transition between forms
-            const loginContainer = document.getElementById('login-form-container');
-            const forgotContainer = document.getElementById('forgot-password-form-container');
-            const createContainer = document.getElementById('create-account-form-container');
-            
-            // Add fade out effect to current visible form
-            if (!loginContainer.classList.contains('hidden')) {
-                loginContainer.style.opacity = '0';
-                loginContainer.style.transform = 'translateY(10px)';
-            }
-            if (!forgotContainer.classList.contains('hidden')) {
-                forgotContainer.style.opacity = '0';
-                forgotContainer.style.transform = 'translateY(10px)';
-            }
-            
-            setTimeout(() => {
-                // Hide all forms
-                loginContainer.classList.add('hidden');
-                forgotContainer.classList.add('hidden');
-                
-                // Show create account form with fade in effect
-                createContainer.classList.remove('hidden');
-                createContainer.style.opacity = '0';
-                createContainer.style.transform = 'translateY(10px)';
-                
-                // Update header with smooth transition
-                const icon = document.getElementById('login-modal-icon');
-                const title = document.getElementById('login-modal-title');
-                
-                icon.style.transform = 'scale(0.8)';
-                title.style.opacity = '0.5';
-                
-                setTimeout(() => {
-                    icon.className = 'fas fa-user-plus text-white text-sm';
-                    title.textContent = 'Criar Conta';
-                    
-                    icon.style.transform = 'scale(1)';
-                    title.style.opacity = '1';
-                }, 100);
-                
-                // Animate create account form in
-                setTimeout(() => {
-                    createContainer.style.opacity = '1';
-                    createContainer.style.transform = 'translateY(0)';
-                    
-                    // Focus on first field after animation
-                    setTimeout(() => {
-                        document.getElementById('signup-name').focus();
-                    }, 100);
-                }, 50);
-                
-                // Reset create account form
-                document.getElementById('create-account-form').reset();
-                document.getElementById('signup-submit-btn').disabled = true;
-                
-                // Reset all validation indicators
-                const checkIcons = ['name-check', 'signup-email-check', 'signup-password-check', 'confirm-password-check'];
-                checkIcons.forEach(id => {
-                    document.getElementById(id).classList.add('hidden');
-                });
-                
-                // Reset field styles
-                const fields = ['signup-name', 'signup-email', 'signup-password', 'signup-confirm-password'];
-                fields.forEach(id => {
-                    const field = document.getElementById(id);
-                    field.classList.remove('border-red-300', 'border-green-300');
-                });
-            }, 150);
-        }
-
-        function validateLoginField(input) {
-            const emailInput = document.getElementById('login-email');
-            const passwordInput = document.getElementById('login-password');
-            const emailCheck = document.getElementById('email-check');
-            const passwordCheck = document.getElementById('password-check');
-            const submitBtn = document.getElementById('login-submit-btn');
-            
-            // Validate email
-            if (input.type === 'email') {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (emailRegex.test(input.value)) {
-                    input.classList.remove('border-red-300');
-                    input.classList.add('border-green-300');
-                    emailCheck.classList.remove('hidden');
-                } else {
-                    input.classList.remove('border-green-300');
-                    if (input.value.length > 0) {
-                        input.classList.add('border-red-300');
-                    }
-                    emailCheck.classList.add('hidden');
-                }
-            }
-            
-            // Validate password
-            if (input.type === 'password') {
-                if (input.value.length >= 6) {
-                    input.classList.remove('border-red-300');
-                    input.classList.add('border-green-300');
-                    passwordCheck.classList.remove('hidden');
-                } else {
-                    input.classList.remove('border-green-300');
-                    if (input.value.length > 0) {
-                        input.classList.add('border-red-300');
-                    }
-                    passwordCheck.classList.add('hidden');
-                }
-            }
-            
-            // Enable/disable submit button
-            const emailValid = emailInput.value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
-            const passwordValid = passwordInput.value && passwordInput.value.length >= 6;
-            
-            submitBtn.disabled = !(emailValid && passwordValid);
-        }
-
-        function validateSignupField(input) {
-            const nameInput = document.getElementById('signup-name');
-            const emailInput = document.getElementById('signup-email');
-            const passwordInput = document.getElementById('signup-password');
-            const confirmPasswordInput = document.getElementById('signup-confirm-password');
-            
-            // Validate name
-            if (input.id === 'signup-name') {
-                const nameCheck = document.getElementById('name-check');
-                if (input.value.trim().length >= 2) {
-                    input.classList.remove('border-red-300');
-                    input.classList.add('border-green-300');
-                    nameCheck.classList.remove('hidden');
-                } else {
-                    input.classList.remove('border-green-300');
-                    if (input.value.length > 0) {
-                        input.classList.add('border-red-300');
-                    }
-                    nameCheck.classList.add('hidden');
-                }
-            }
-            
-            // Validate email
-            if (input.id === 'signup-email') {
-                const emailCheck = document.getElementById('signup-email-check');
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (emailRegex.test(input.value)) {
-                    input.classList.remove('border-red-300');
-                    input.classList.add('border-green-300');
-                    emailCheck.classList.remove('hidden');
-                } else {
-                    input.classList.remove('border-green-300');
-                    if (input.value.length > 0) {
-                        input.classList.add('border-red-300');
-                    }
-                    emailCheck.classList.add('hidden');
-                }
-            }
-            
-            // Validate password
-            if (input.id === 'signup-password') {
-                const passwordCheck = document.getElementById('signup-password-check');
-                if (input.value.length >= 6) {
-                    input.classList.remove('border-red-300');
-                    input.classList.add('border-green-300');
-                    passwordCheck.classList.remove('hidden');
-                } else {
-                    input.classList.remove('border-green-300');
-                    if (input.value.length > 0) {
-                        input.classList.add('border-red-300');
-                    }
-                    passwordCheck.classList.add('hidden');
-                }
-                
-                // Re-validate confirm password if it has a value
-                if (confirmPasswordInput.value) {
-                    validateSignupField(confirmPasswordInput);
-                }
-            }
-            
-            // Validate confirm password
-            if (input.id === 'signup-confirm-password') {
-                const confirmPasswordCheck = document.getElementById('confirm-password-check');
-                if (input.value && input.value === passwordInput.value && input.value.length >= 6) {
-                    input.classList.remove('border-red-300');
-                    input.classList.add('border-green-300');
-                    confirmPasswordCheck.classList.remove('hidden');
-                } else {
-                    input.classList.remove('border-green-300');
-                    if (input.value.length > 0) {
-                        input.classList.add('border-red-300');
-                    }
-                    confirmPasswordCheck.classList.add('hidden');
-                }
-            }
-            
-            // Update submit button state
-            validateSignupForm();
-        }
-
-        function validateSignupForm() {
-            const nameInput = document.getElementById('signup-name');
-            const emailInput = document.getElementById('signup-email');
-            const passwordInput = document.getElementById('signup-password');
-            const confirmPasswordInput = document.getElementById('signup-confirm-password');
-            const termsCheckbox = document.getElementById('terms-checkbox');
-            const submitBtn = document.getElementById('signup-submit-btn');
-            
-            // Check all validation conditions
-            const nameValid = nameInput.value.trim().length >= 2;
-            const emailValid = emailInput.value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
-            const passwordValid = passwordInput.value && passwordInput.value.length >= 6;
-            const confirmPasswordValid = confirmPasswordInput.value && confirmPasswordInput.value === passwordInput.value;
-            const termsValid = termsCheckbox.checked;
-            
-            submitBtn.disabled = !(nameValid && emailValid && passwordValid && confirmPasswordValid && termsValid);
-        }
-
-        function togglePasswordVisibility(inputId, iconId) {
-            const input = document.getElementById(inputId);
-            const icon = document.getElementById(iconId);
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-
-        function handleLogin(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            
-            // Simulate login process
-            const submitBtn = document.getElementById('login-submit-btn');
-            const originalContent = submitBtn.innerHTML;
-            
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `
-                <div class="flex items-center justify-center space-x-2">
-                    <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Entrando...</span>
-                </div>
-            `;
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = originalContent;
-                submitBtn.disabled = false;
-                closeLoginModal();
-                showToast(`Bem-vindo! Login realizado com sucesso.`);
-            }, 2000);
-        }
-
-        function handlePasswordRecovery(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('recovery-email').value;
-            
-            // Simulate recovery process
-            const submitBtn = document.getElementById('recovery-submit-btn');
-            const originalContent = submitBtn.innerHTML;
-            
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `
-                <div class="flex items-center justify-center space-x-2">
-                    <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Enviando...</span>
-                </div>
-            `;
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = originalContent;
-                submitBtn.disabled = false;
-                showToast(`Instruções enviadas para ${email}`);
-                showLoginForm();
-            }, 2000);
-        }
-
-        function handleAccountCreation(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('signup-name').value;
-            const email = document.getElementById('signup-email').value;
-            
-            // Simulate account creation process
-            const submitBtn = document.getElementById('signup-submit-btn');
-            const originalContent = submitBtn.innerHTML;
-            
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `
-                <div class="flex items-center justify-center space-x-2">
-                    <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Criando conta...</span>
-                </div>
-            `;
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = originalContent;
-                submitBtn.disabled = false;
-                closeLoginModal();
-                showToast(`Conta criada com sucesso! Bem-vindo, ${name}!`);
-            }, 2000);
-        }
-
-        function handleSocialLogin(provider) {
-            const providerNames = {
-                'google': 'Google',
-                'facebook': 'Facebook'
-            };
-            
-            showToast(`Login com ${providerNames[provider]} em desenvolvimento`);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            state.activeCategory = 'Todos';
-            renderCategoryNavigation();
-            renderMenuCategories();
-        });
+        renderCategoryNavigation();
+        renderMenuCategories();
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c0f7a1a33c691f8',t:'MTc2ODkyMTU5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c0fed4113bbe0fb',t:'MTc2ODkyNjMxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
