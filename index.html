@@ -156,7 +156,7 @@
    <div id="menu-categories"></div>
   </main>
   <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-1 z-50">
-   <div class="max-w-4xl mx-auto grid grid-cols-4 gap-2"><button onclick="openProfileModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors active:bg-gray-100 touch-manipulation"> <i class="fas fa-utensils text-orange-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Perfil</span> </button> <button onclick="openLoginModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-green-50 transition-colors active:bg-green-100 touch-manipulation"> <i class="fas fa-user text-green-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Login</span> </button> <button onclick="openPromotionsModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-red-50 transition-colors active:bg-red-100 touch-manipulation"> <i class="fas fa-tags text-red-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Promoções</span> </button> <button onclick="openCartModal()" class="relative flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-orange-50 transition-colors active:bg-orange-100 touch-manipulation"> <i class="fas fa-shopping-cart text-orange-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Carrinho</span> <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium">0</span> </button>
+   <div class="max-w-4xl mx-auto grid grid-cols-4 gap-2"><button onclick="openProfileModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors active:bg-gray-100 touch-manipulation"> <i class="fas fa-utensils text-orange-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Perfil</span> </button> <button onclick="openHistoryModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-blue-50 transition-colors active:bg-blue-100 touch-manipulation"> <i class="fas fa-history text-blue-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Histórico</span> </button> <button onclick="openPromotionsModal()" class="flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-red-50 transition-colors active:bg-red-100 touch-manipulation"> <i class="fas fa-tags text-red-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Promoções</span> </button> <button onclick="openCartModal()" class="relative flex flex-col items-center space-y-0.5 py-3 px-2 rounded-lg hover:bg-orange-50 transition-colors active:bg-orange-100 touch-manipulation"> <i class="fas fa-shopping-cart text-orange-500 text-lg"></i> <span class="text-xs text-gray-600 font-medium">Carrinho</span> <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden font-medium">0</span> </button>
    </div>
   </div><!-- Profile Modal -->
   <div id="profile-modal" class="fixed inset-0 bg-black/50 z-[100] opacity-0 pointer-events-none transition-all duration-300">
@@ -357,6 +357,65 @@
     <div class="px-4 py-3 border-t border-gray-200 flex-shrink-0"><button onclick="confirmOrder()" class="w-full bg-white border border-gray-200 hover:border-green-300 hover:bg-green-50 text-gray-900 font-medium py-4 rounded-lg transition-all duration-200">
       <div class="flex items-center justify-center space-x-2"><i class="fas fa-check text-green-500 text-sm"></i> <span class="text-sm">Confirmar Pedido</span>
       </div></button>
+    </div>
+   </div>
+  </div><!-- History Modal -->
+  <div id="history-modal" class="fixed inset-0 bg-black/50 z-[100] opacity-0 pointer-events-none transition-all duration-300">
+   <div class="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl transform translate-y-full transition-all duration-300 flex flex-col" id="history-modal-content" style="max-height: 85vh;">
+    <div class="px-6 py-3 border-b border-gray-200 flex-shrink-0">
+     <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+       <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center"><i id="history-modal-icon" class="fas fa-history text-white text-sm header-transition"></i>
+       </div>
+       <h2 id="history-modal-title" class="text-lg font-semibold text-gray-900 leading-relaxed header-transition">Histórico de Pedidos</h2>
+      </div><button onclick="closeHistoryModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors"> <i class="fas fa-times text-gray-500"></i> </button>
+     </div>
+    </div>
+    <div class="overflow-y-auto flex-1 scrollbar-hide" style="scroll-behavior: smooth;"><!-- Phone Input Screen -->
+     <div id="history-phone-screen" class="px-6 py-6 space-y-6 form-transition">
+      <div class="text-center mb-4">
+       <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fas fa-phone text-blue-600 text-2xl"></i>
+       </div>
+       <p class="text-gray-600 text-sm leading-relaxed">Digite seu telefone para visualizar seus pedidos</p>
+      </div>
+      <form id="history-phone-form" onsubmit="viewOrderHistory(event)" class="space-y-4">
+       <div><label for="history-phone" class="block text-sm font-medium text-gray-700 mb-2">Telefone</label>
+        <div class="relative">
+         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-phone text-gray-400 text-sm"></i>
+         </div><input type="tel" id="history-phone" name="phone" placeholder="(00) 00000-0000" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm" required oninput="formatPhoneNumber(this)">
+        </div>
+       </div><button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 rounded-lg transition-all duration-200">
+        <div class="flex items-center justify-center space-x-2"><i class="fas fa-search text-sm"></i> <span>Ver Meus Pedidos</span>
+        </div></button>
+      </form><!-- Divider -->
+      <div class="relative">
+       <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gray-300"></div>
+       </div>
+       <div class="relative flex justify-center text-sm"><span class="px-4 bg-white text-gray-500 font-medium">ou</span>
+       </div>
+      </div><!-- Login Option --> <button onclick="showLoginFromHistory()" class="w-full flex items-center justify-center space-x-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200"> <i class="fas fa-user text-gray-600"></i> <span class="text-gray-700 font-medium">Faça login</span> </button>
+     </div><!-- Orders List Screen (This Store) -->
+     <div id="history-orders-screen" class="px-6 py-4 space-y-4 form-transition hidden">
+      <div class="flex items-center justify-between mb-4"><button onclick="backToPhoneScreen()" class="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors"> <i class="fas fa-arrow-left text-sm"></i> <span class="text-sm font-medium">Voltar</span> </button> <button onclick="viewAllStoresOrders()" class="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg transition-all text-sm font-medium"> <i class="fas fa-store text-xs"></i> <span>Todas as Lojas</span> </button>
+      </div>
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+       <div class="flex items-center space-x-2"><i class="fas fa-store text-blue-600 text-sm"></i> <span class="text-sm font-medium text-blue-900">Pedidos no Restaurante Sabor</span>
+       </div>
+      </div>
+      <div id="store-orders-list" class="space-y-3"><!-- Orders will be populated here -->
+      </div>
+     </div><!-- Orders List Screen (All Stores) -->
+     <div id="history-all-stores-screen" class="px-6 py-4 space-y-4 form-transition hidden">
+      <div class="flex items-center justify-between mb-4"><button onclick="backToStoreOrders()" class="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors"> <i class="fas fa-arrow-left text-sm"></i> <span class="text-sm font-medium">Voltar</span> </button>
+      </div>
+      <div class="bg-purple-50 border border-purple-200 rounded-lg p-3 mb-4">
+       <div class="flex items-center space-x-2"><i class="fas fa-globe text-purple-600 text-sm"></i> <span class="text-sm font-medium text-purple-900">Pedidos em Todas as Lojas</span>
+       </div>
+      </div>
+      <div id="all-stores-orders-list" class="space-y-3"><!-- Orders will be populated here -->
+      </div>
+     </div>
     </div>
    </div>
   </div><!-- Login Modal -->
@@ -1754,6 +1813,8 @@
             const productModal = document.getElementById('product-modal');
             const checkoutModal = document.getElementById('checkout-modal');
             const promotionsModal = document.getElementById('promotions-modal');
+            const historyModal = document.getElementById('history-modal');
+            const loginModal = document.getElementById('login-modal');
             
             if (e.target === profileModal) {
                 closeProfileModal();
@@ -1770,8 +1831,9 @@
             if (e.target === promotionsModal) {
                 closePromotionsModal();
             }
-            
-            const loginModal = document.getElementById('login-modal');
+            if (e.target === historyModal) {
+                closeHistoryModal();
+            }
             if (e.target === loginModal) {
                 closeLoginModal();
             }
@@ -1809,6 +1871,327 @@
             setTimeout(() => {
                 modal.classList.add('pointer-events-none');
             }, 300);
+        }
+
+        // History Modal Functions
+        function openHistoryModal() {
+            const modal = document.getElementById('history-modal');
+            const content = document.getElementById('history-modal-content');
+            
+            modal.classList.remove('pointer-events-none');
+            modal.classList.remove('opacity-0');
+            content.style.transform = 'translateY(0)';
+            
+            // Show phone screen by default
+            showPhoneScreen();
+        }
+
+        function closeHistoryModal() {
+            const modal = document.getElementById('history-modal');
+            const content = document.getElementById('history-modal-content');
+            
+            modal.classList.add('opacity-0');
+            content.style.transform = 'translateY(100%)';
+            
+            setTimeout(() => {
+                modal.classList.add('pointer-events-none');
+            }, 300);
+        }
+
+        function showPhoneScreen() {
+            const phoneScreen = document.getElementById('history-phone-screen');
+            const ordersScreen = document.getElementById('history-orders-screen');
+            const allStoresScreen = document.getElementById('history-all-stores-screen');
+            
+            phoneScreen.classList.remove('hidden');
+            ordersScreen.classList.add('hidden');
+            allStoresScreen.classList.add('hidden');
+            
+            // Reset form
+            document.getElementById('history-phone-form').reset();
+        }
+
+        function showLoginFromHistory() {
+            closeHistoryModal();
+            setTimeout(() => {
+                openLoginModal();
+            }, 300);
+        }
+
+        function viewOrderHistory(event) {
+            event.preventDefault();
+            
+            const phone = document.getElementById('history-phone').value;
+            
+            // Simulate loading orders
+            const phoneScreen = document.getElementById('history-phone-screen');
+            const ordersScreen = document.getElementById('history-orders-screen');
+            
+            // Fade out phone screen
+            phoneScreen.style.opacity = '0';
+            phoneScreen.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                phoneScreen.classList.add('hidden');
+                ordersScreen.classList.remove('hidden');
+                
+                // Populate orders for this store
+                populateStoreOrders(phone);
+                
+                // Fade in orders screen
+                ordersScreen.style.opacity = '0';
+                ordersScreen.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    ordersScreen.style.opacity = '1';
+                    ordersScreen.style.transform = 'translateY(0)';
+                }, 50);
+            }, 150);
+        }
+
+        function backToPhoneScreen() {
+            const phoneScreen = document.getElementById('history-phone-screen');
+            const ordersScreen = document.getElementById('history-orders-screen');
+            
+            // Fade out orders screen
+            ordersScreen.style.opacity = '0';
+            ordersScreen.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                ordersScreen.classList.add('hidden');
+                phoneScreen.classList.remove('hidden');
+                
+                // Fade in phone screen
+                phoneScreen.style.opacity = '0';
+                phoneScreen.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    phoneScreen.style.opacity = '1';
+                    phoneScreen.style.transform = 'translateY(0)';
+                }, 50);
+            }, 150);
+        }
+
+        function viewAllStoresOrders() {
+            const ordersScreen = document.getElementById('history-orders-screen');
+            const allStoresScreen = document.getElementById('history-all-stores-screen');
+            
+            // Fade out orders screen
+            ordersScreen.style.opacity = '0';
+            ordersScreen.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                ordersScreen.classList.add('hidden');
+                allStoresScreen.classList.remove('hidden');
+                
+                // Populate orders for all stores
+                populateAllStoresOrders();
+                
+                // Fade in all stores screen
+                allStoresScreen.style.opacity = '0';
+                allStoresScreen.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    allStoresScreen.style.opacity = '1';
+                    allStoresScreen.style.transform = 'translateY(0)';
+                }, 50);
+            }, 150);
+        }
+
+        function backToStoreOrders() {
+            const ordersScreen = document.getElementById('history-orders-screen');
+            const allStoresScreen = document.getElementById('history-all-stores-screen');
+            
+            // Fade out all stores screen
+            allStoresScreen.style.opacity = '0';
+            allStoresScreen.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                allStoresScreen.classList.add('hidden');
+                ordersScreen.classList.remove('hidden');
+                
+                // Fade in orders screen
+                ordersScreen.style.opacity = '0';
+                ordersScreen.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    ordersScreen.style.opacity = '1';
+                    ordersScreen.style.transform = 'translateY(0)';
+                }, 50);
+            }, 150);
+        }
+
+        function populateStoreOrders(phone) {
+            const container = document.getElementById('store-orders-list');
+            
+            // Sample orders data for this store
+            const orders = [
+                {
+                    id: '#1234',
+                    date: '28/12/2024',
+                    time: '19:45',
+                    status: 'Entregue',
+                    statusColor: 'green',
+                    items: ['2x X-Bacon', '1x Pizza Grande'],
+                    total: 68.80
+                },
+                {
+                    id: '#1189',
+                    date: '20/12/2024',
+                    time: '20:15',
+                    status: 'Entregue',
+                    statusColor: 'green',
+                    items: ['1x X-Tudo', '1x Batata Frita'],
+                    total: 32.80
+                },
+                {
+                    id: '#1087',
+                    date: '15/12/2024',
+                    time: '18:30',
+                    status: 'Entregue',
+                    statusColor: 'green',
+                    items: ['1x Pizza Média'],
+                    total: 35.90
+                }
+            ];
+            
+            container.innerHTML = '';
+            
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-receipt text-gray-400 text-lg"></i>
+                        </div>
+                        <p class="text-gray-500 text-sm">Nenhum pedido encontrado</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            orders.forEach(order => {
+                const orderElement = document.createElement('div');
+                orderElement.className = 'bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer';
+                
+                orderElement.innerHTML = `
+                    <div class="flex items-start justify-between mb-2">
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="font-semibold text-gray-900 text-sm">${order.id}</span>
+                                <span class="text-gray-400">•</span>
+                                <span class="text-xs px-2 py-1 rounded-full bg-${order.statusColor}-100 text-${order.statusColor}-700 font-medium">${order.status}</span>
+                            </div>
+                            <p class="text-xs text-gray-600">${order.date} às ${order.time}</p>
+                        </div>
+                        <span class="font-bold text-orange-600 text-sm">R$ ${formatPrice(order.total)}</span>
+                    </div>
+                    <div class="border-t border-gray-100 pt-2 mt-2">
+                        <p class="text-xs text-gray-700">${order.items.join(', ')}</p>
+                    </div>
+                `;
+                
+                container.appendChild(orderElement);
+            });
+        }
+
+        function populateAllStoresOrders() {
+            const container = document.getElementById('all-stores-orders-list');
+            
+            // Sample orders data for all stores
+            const orders = [
+                {
+                    id: '#1234',
+                    store: 'Restaurante Sabor',
+                    date: '28/12/2024',
+                    time: '19:45',
+                    status: 'Entregue',
+                    statusColor: 'green',
+                    items: ['2x X-Bacon', '1x Pizza Grande'],
+                    total: 68.80
+                },
+                {
+                    id: '#5678',
+                    store: 'Pizzaria Bella',
+                    date: '25/12/2024',
+                    time: '21:00',
+                    status: 'Entregue',
+                    statusColor: 'green',
+                    items: ['2x Pizza Família', '1x Refrigerante 2L'],
+                    total: 89.90
+                },
+                {
+                    id: '#1189',
+                    store: 'Restaurante Sabor',
+                    date: '20/12/2024',
+                    time: '20:15',
+                    status: 'Entregue',
+                    statusColor: 'green',
+                    items: ['1x X-Tudo', '1x Batata Frita'],
+                    total: 32.80
+                },
+                {
+                    id: '#4321',
+                    store: 'Burger House',
+                    date: '18/12/2024',
+                    time: '19:30',
+                    status: 'Entregue',
+                    statusColor: 'green',
+                    items: ['3x Smash Burger', '2x Milkshake'],
+                    total: 75.00
+                },
+                {
+                    id: '#1087',
+                    store: 'Restaurante Sabor',
+                    date: '15/12/2024',
+                    time: '18:30',
+                    status: 'Entregue',
+                    statusColor: 'green',
+                    items: ['1x Pizza Média'],
+                    total: 35.90
+                }
+            ];
+            
+            container.innerHTML = '';
+            
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <i class="fas fa-receipt text-gray-400 text-lg"></i>
+                        </div>
+                        <p class="text-gray-500 text-sm">Nenhum pedido encontrado</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            orders.forEach(order => {
+                const orderElement = document.createElement('div');
+                orderElement.className = 'bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer';
+                
+                orderElement.innerHTML = `
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="font-semibold text-gray-900 text-sm">${order.id}</span>
+                                <span class="text-gray-400">•</span>
+                                <span class="text-xs px-2 py-1 rounded-full bg-${order.statusColor}-100 text-${order.statusColor}-700 font-medium">${order.status}</span>
+                            </div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <i class="fas fa-store text-gray-400 text-xs"></i>
+                                <p class="text-xs text-gray-700 font-medium">${order.store}</p>
+                            </div>
+                            <p class="text-xs text-gray-600">${order.date} às ${order.time}</p>
+                        </div>
+                        <span class="font-bold text-orange-600 text-sm">R$ ${formatPrice(order.total)}</span>
+                    </div>
+                    <div class="border-t border-gray-100 pt-2 mt-2">
+                        <p class="text-xs text-gray-700">${order.items.join(', ')}</p>
+                    </div>
+                `;
+                
+                container.appendChild(orderElement);
+            });
         }
 
         function showLoginForm() {
@@ -2245,5 +2628,5 @@
             renderMenuCategories();
         });
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99a53db385f4e29d',t:'MTc2MjQzODkyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c0f7a1a33c691f8',t:'MTc2ODkyMTU5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
